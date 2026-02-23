@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hiring | Lee Optimization Group</title>
+
+    <style>
+
+        
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        header {
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+        nav a {
+            margin-right: 15px;
+            text-decoration: none;
+            color: #007bff;
+        }
+        footer {
+            margin-top: 40px;
+            font-size: 0.9em;
+            color: #777;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+
+        h3 {
+            margin-top: 30px;
+            margin-bottom: 5px;   /* 제목 아래 간격 줄임 */
+        }
+
+        h3 + p {
+            margin-top: 0;        /* 제목 바로 다음 문단 위 간격 제거 */
+        }
+
+        p {
+            margin-top: 0;
+        }
+
+        a {
+            text-decoration: none;   /* 밑줄 제거 */
+            color: #007bff;          /* 링크 색상 (원하는 색으로) */
+        }
+
+        a:hover {
+            text-decoration: underline;  /* 마우스 올리면 밑줄 (선택사항) */
+        }
+
+        .research-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            margin-bottom: 35px;
+        }
+
+        .research-item img {
+            width: 130px;
+            height: 130px;
+            object-fit: cover;
+            border: 1px solid #333;
+            padding: 5px;
+        }
+
+        .research-text h3 {
+            margin: 0 0 8px 0;
+            font-size: 20px;
+        }
+
+        .research-text p {
+            margin: 0;
+            color: #444;
+        }
+
+        /* Colored tags */
+        .tag.red { color: #d64541; font-weight: 600; }
+        .tag.orange { color: #f39c12; font-weight: 600; }
+        .tag.green { color: #27ae60; font-weight: 600; }
+        .tag.blue { color: #2e6bd9; font-weight: 600; }
+
+        .logo-title {
+            display: flex;
+            align-items: center;
+        }
+
+        /* ===== Publications Style ===== */
+
+        .paper {
+            margin-bottom: 22px;
+        }
+
+        .paper-title {
+            font-weight: 600;
+            color: #1a5fb4;
+        }
+
+        .paper-authors {
+            font-size: 0.95em;
+            color: #555;
+        }
+
+        .paper-venue {
+            font-size: 0.9em;
+            color: #777;
+        }
+
+        .spotlight {
+            color: red;
+            font-weight: 600;
+        }
+
+        .section-title {
+            font-weight: 700;
+        }
+
+        .red { color: #d64541; font-weight: 600; }
+        .orange { color: #f39c12; font-weight: 600; }
+        .green { color: #27ae60; font-weight: 600; }
+        .blue { color: #2e6bd9; font-weight: 600; }
+
+        .section-text p {
+            margin: 0;
+            line-height: 1.7;
+        }
+
+        .section img {
+            width: 125px;      /* 🔥 여기서 크기 조절 */
+            height: auto;      /* 비율 유지 */
+            object-fit: contain;
+            border: 1.5px solid #000;
+        }
+
+        .section {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            margin-bottom: 45px;   /* 🔥 여기 늘리면 항목 사이 간격 커짐 */
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Lee Optimization Group</h1>
+        <!-- <div class="logo-title">
+            <img src="log_logo.png" alt="LOG Logo" class="logo">
+            <h1>Lee Optimization Group</h1>
+        </div> -->
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="research.html">Research</a>
+            <a href="group.html">Members</a>
+            <a href="hiring.html">Hiring</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <h2>Research Focus</h2>
+
+    <div class="section">
+        <img src="research_focus/opt-model.png" alt="Model Compression">
+        <div class="section-text">
+            <p>
+                <span class="section-title">Optimization</span> for 
+                <span class="red">Model Compression</span> 
+                As modern AI models, particularly deep neural networks, grow increasingly large and computationally demanding, model compression has become essential for enabling broader and more sustainable use of AI technologies.
+                We develop optimization methods to compress large models so that they can run more efficiently at training and inference without significantly compromising their performance.
+            </p>
+        </div>
+    </div>
+
+    <div class="section">
+        <img src="research_focus/opt-deep.jpeg" alt="Deep Learning">
+        <div class="section-text">
+            <p>
+                <span class="section-title">Optimization</span> for 
+                <span class="orange">Deep Learning</span> 
+                  Optimization has been central to the success of deep learning, yet there remain many challenges to address such as non-convexity, high dimensionality, and scalability. 
+                We study both theoretical foundations—such as convergence guarantees and generalization properties—and practical algorithms, including stochastic, adaptive, and second-order methods, so as to come up with efficient and principled optimization methods.
+            </p>
+        </div>
+    </div>
+
+    <div class="section">
+        <img src="research_focus/opt-collab.png" alt="Collaborative Learning">
+        <div class="section-text">
+            <p>
+                <span class="section-title">Optimization</span> for 
+                <span class="green">Collaborative Learning</span>
+                  Collaborative machine learning is a promising learning paradigm that allows participants to work together to train a model without necessarily sharing their raw data. 
+                However, frequent exchange of updates can overwhelm networks, especially with large models or slow connections. 
+                We address such a unique set of challenges due to its distributed and often decentralized nature by developing efficient and scalable solutions.
+            </p>
+        </div>
+    </div>
+
+    <div class="section">
+        <img src="research_focus/opt-applied.png" alt="Other Applications">
+        <div class="section-text">
+            <p>
+                <span class="section-title">Optimization</span> for 
+                <span class="blue">Other Applications</span> 
+                  Optimization is a versatile tool that can be applied to a wide range of machine learning applications.
+                We are currently focused on addressing challenges surrounding large language models, particularly those involving learning in black-box environments, continual adaptation, and multi-modal contexts.
+            </p>
+        </div>
+    </div>
+
+    <h2>Publications</h2>
+
+    <!-- ===== Papers Start ===== -->
+
+<div class="paper">
+    <div class="paper-title">
+    <a href="https://arxiv.org/abs/2510.01650" target="_blank">
+    The Unseen Frontier: Pushing the Limits of LLM Sparsity with Surrogate-Free ADMM
+    </a>
+    </div>
+    <div class="paper-authors">
+    Kwanhee Lee, Hyeondo Jang, Dongyeop Lee, Dan Alistarh, Namhoon Lee
+    </div>
+    <div class="paper-venue">ICLR 2026</div>
+    </div>
+    
+    <div class="paper">
+    <div class="paper-title">
+    <a href="https://arxiv.org/abs/2510.25798" target="_blank">
+    MemIEC: A Step Toward Continual and Compositional Knowledge Editing
+    </a>
+    </div>
+    <div class="paper-authors">
+    Jin Seong*, Jiyun Park*, Wencke Liermann, Hongseok Choi, Yoonji Nam, Hyun Kim, Soojong Lim, Namhoon Lee
+    </div>
+    <div class="paper-venue">NeurIPS 2025</div>
+    </div>
+    
+    <div class="paper">
+    <div class="paper-title">
+    <a href="https://arxiv.org/abs/2505.16705" target="_blank">
+    An Analysis of Concept Bottleneck Models: Measuring, Understanding, and Mitigating the Impact of Noisy Annotations
+    </a>
+    </div>
+    <div class="paper-authors">
+    Seonghwan Park, Jueun Mun, Donghyun Oh, Namhoon Lee
+    </div>
+    <div class="paper-venue">NeurIPS 2025</div>
+    </div>
+
+    <div class="paper">
+    <div class="paper-title">
+    <a href="https://arxiv.org/abs/2311.17539" target="_blank">
+    Critical Influence of Overparameterization on Sharpness-aware Minimization
+    </a>
+    </div>
+    <div class="paper-authors">
+    Sungbin Shin*, Dongyeop Lee*, Maksym Andriushchenko, Namhoon Lee
+    </div>
+    <div class="paper-venue">UAI 2025; ICML 2023 Workshop on High-dimensional Learning Dynamics</div>
+    </div>
+    
+    <div class="paper">
+    <div class="paper-title">
+    <a href="https://arxiv.org/abs/2506.06866" target="_blank">
+    SAFE: Finding Sparse and Flat Minima to Improve Pruning
+    </a>
+    </div>
+    <div class="paper-authors">
+    Dongyeop Lee, Kwanhee Lee, Jinseok Chung, Namhoon Lee
+    </div>
+    <div class="paper-venue">ICML 2025 <span class="spotlight">(Spotlight)</span></div>
+    </div>
+    
+    <div class="paper">
+    <div class="paper-title">
+    <a href="https://arxiv.org/abs/2502.18153" target="_blank">
+    SASSHA: Sharpness-aware Adaptive Second-order Optimization with Stable Hessian Approximation
+    </a>
+    </div>
+    <div class="paper-authors">
+    Dahun Shin*, Dongyeop Lee*, Jinseok Chung, Namhoon Lee
+    </div>
+    <div class="paper-venue">ICML 2025</div>
+    </div>
+    
+    <div class="paper">
+    <div class="paper-title">
+    <a href="https://arxiv.org/abs/2504.06838" target="_blank">
+    ZIP: An Efficient Zeroth-order Prompt Tuning for Black-box Vision-Language Models
+    </a>
+    </div>
+    <div class="paper-authors">
+    Seonghwan Park, Jaehyeon Jeong, Yongjun Kim, Jaeho Lee, Namhoon Lee
+    </div>
+    <div class="paper-venue">ICLR 2025</div>
+    </div>
+    
+    <div class="paper">
+    <div class="paper-title">
+    <a href="https://arxiv.org/abs/2406.15524" target="_blank">
+    Rethinking Pruning Large Language Models: Benefits and Pitfalls of Reconstruction Error Minimization
+    </a>
+    </div>
+    <div class="paper-authors">
+    Sungbin Shin, Wonpyo Park, Jaeho Lee, Namhoon Lee
+    </div>
+    <div class="paper-venue">EMNLP 2024</div>
+    </div>
+    
+    <div class="paper">
+    <div class="paper-title">
+    <a href="https://arxiv.org/abs/2302.10494" target="_blank">
+    The Role of Masking for Efficient Supervised Knowledge Distillation of Vision Transformers
+    </a>
+    </div>
+    <div class="paper-authors">
+    Seungwoo Son, Jegwang Ryu, Namhoon Lee, Jaeho Lee
+    </div>
+    <div class="paper-venue">ECCV 2024; ICLR 2023 Workshop</div>
+    </div>
+
+    <div class="paper">
+    <div class="paper-title">
+    <a href="https://opt-ml.org/papers.html" target="_blank">
+    Pruning Neural Networks with Velocity-Constrained Optimization
+    </a>
+    </div>
+    <div class="paper-authors">
+    Donghyun Oh*, Jinseok Chung*, Namhoon Lee
+    </div>
+    <div class="paper-venue">NeurIPS 2023 Workshop on Optimization for Machine Learning</div>
+    </div>
+
+    <div class="paper">
+    <div class="paper-title">
+    <a href="https://sites.google.com/view/hidimlearning/papers" target="_blank">
+    On the Effectiveness of Sharpness-Aware Minimization with Large Mini-batches
+    </a>
+    </div>
+    <div class="paper-authors">
+    Jinseok Chung, Seonghwan Park, Jaeho Lee, Namhoon Lee
+    </div>
+    <div class="paper-venue">ICML 2023 Workshop on High-dimensional Learning Dynamics</div>
+    </div>
+
+    <div class="paper">
+    <div class="paper-title">
+    <a href=https://fl-icml2023.github.io/" target="_blank">
+    FedFwd: Federated Learning without Backpropagation
+    </a>
+    </div>
+    <div class="paper-authors">
+    Seonghwan Park, Dahun Shin, Jinseok Chung, Namhoon Lee
+    </div>
+    <div class="paper-venue">
+    ICML 2023 Workshop on Federated Learning and Analytics in Practice
+    </div>
+    </div>
+    
+    
+    <div class="paper">
+    <div class="paper-title">
+    <a href="https://sites.google.com/view/aihci/papers" target="_blank">
+    Semi-Supervised Concept Bottleneck Models
+    </a>
+    </div>
+    <div class="paper-authors">
+    Jeeon Bae, Sungbin Shin, Namhoon Lee
+    </div>
+    <div class="paper-venue">
+    ICML 2023 Workshop on Artificial Intelligence and Human-Computer Interaction
+    </div>
+    </div>
+    
+    
+    <div class="paper">
+    <div class="paper-title">
+    <a href="https://arxiv.org/abs/2302.14260" target="_blank">
+    A Closer Look at the Intervention Procedure of Concept Bottleneck Models
+    </a>
+    </div>
+    <div class="paper-authors">
+    Sungbin Shin, Yohan Jo, Sungsoo Ahn, Namhoon Lee
+    </div>
+    <div class="paper-venue">
+    ICML 2023; NeurIPS 2022 Workshop on Trustworthy and Socially Responsible ML
+    </div>
+    </div>
+    
+    
+    <div class="paper">
+    <div class="paper-title">
+    <a href="https://openreview.net/forum?id=IcDTYTI0Nx" target="_blank">
+    Almost Sure Last Iterate Convergence of Sharpness-Aware Minimization
+    </a>
+    </div>
+    <div class="paper-authors">
+    Kyungchun Nam, Jinseok Chung, Namhoon Lee
+    </div>
+    <div class="paper-venue">
+    ICLR 2023 Tiny Papers
+    </div>
+    </div>
+    
+    
+    <div class="paper">
+    <div class="paper-title">
+    <a href="https://arxiv.org/abs/2304.14082" target="_blank">
+    JaxPruner: A Concise Library for Sparsity Research
+    </a>
+    </div>
+    <div class="paper-authors">
+    Joo Hyung Lee, Wonpyo Park, Nicole Mitchell, Jonathan Pilault, Johan Obando-Ceron,
+    Han-Byul Kim, Namhoon Lee, Elias Frantar, Yun Long, Amir Yazdanbakhsh,
+    Shivani Agrawal, Suvinay Subramanian, Xin Wang, Sheng-Chun Kao,
+    Xingyao Zhang, Trevor Gale, Aart Bik, Woohyun Han, Milen Ferez,
+    Zhonglin Han, Hong-Seok Kim, Yann Dauphin,
+    Gintare Karolina Dziugaite, Pablo Samuel Castro, Utku Evci
+    </div>
+    <div class="paper-venue">
+    CPAL 2024 <span class="spotlight">(Oral)</span>; ICLR 2023 Workshop on Sparsity in Neural Networks
+    </div>
+    </div>
+    
+    
+    <div class="paper">
+    <div class="paper-title">
+    <a href="https://arxiv.org/abs/2110.14678" target="_blank">
+    Meta-Learning Sparse Implicit Neural Representations
+    </a>
+    </div>
+    <div class="paper-authors">
+    Jaeho Lee*, Jihoon Tack*, Namhoon Lee, Jinwoo Shin
+    </div>
+    <div class="paper-venue">
+    NeurIPS 2021; SNN 2021
+    </div>
+    </div>
+    
+    
+    <div class="paper">
+    <div class="paper-title">
+    <a href="https://ora.ox.ac.uk/objects/uuid:000e9d44-0229-48a3-84b0-dc17a8e96ccf" target="_blank">
+    Toward Efficient Deep Learning with Sparse Neural Networks
+    </a>
+    </div>
+    <div class="paper-authors">
+    Namhoon Lee
+    </div>
+    <div class="paper-venue">
+    Ph.D. Thesis, University of Oxford
+    </div>
+    </div>
+    
+    
+    <div class="paper">
+    <div class="paper-title">
+    <a href="https://sites.google.com/view/sedl-workshop" target="_blank">
+    Optimal Mini-Batch Size for Stochastic Gradient Methods
+    </a>
+    </div>
+    <div class="paper-authors">
+    Namhoon Lee, Philip H. S. Torr, Richard Hartley
+    </div>
+    <div class="paper-venue">
+    ICLR 2021 Workshop on Science and Engineering of Deep Learning
+    </div>
+    </div>
+    
+    
+    <div class="paper">
+    <div class="paper-title">
+    <a href="https://arxiv.org/abs/2003.11316" target="_blank">
+    Understanding the Effects of Data Parallelism and Sparsity on Neural Network Training
+    </a>
+    </div>
+    <div class="paper-authors">
+    Namhoon Lee, Thalaiyasingam Ajanthan, Philip H. S. Torr, Martin Jaggi
+    </div>
+    <div class="paper-venue">
+    ICLR 2021
+    </div>
+    </div>
+    
+    
+    <div class="paper">
+    <div class="paper-title">
+    <a href="https://arxiv.org/abs/2003.11316" target="_blank">
+    Data Parallelism in Training Sparse Neural Networks
+    </a>
+    </div>
+    <div class="paper-authors">
+    Namhoon Lee, Philip H. S. Torr, Martin Jaggi
+    </div>
+    <div class="paper-venue">
+    ICLR 2020 Workshop on Practical ML
+    </div>
+    </div>
+
+    <div class="paper">
+    <div class="paper-title">
+    <a href="https://arxiv.org/abs/1906.06307" target="_blank">
+    A Signal Propagation Perspective for Pruning Neural Networks at Initialization
+    </a>
+    </div>
+    <div class="paper-authors">
+    Namhoon Lee, Thalaiyasingam Ajanthan, Stephen Gould, Philip H. S. Torr
+    </div>
+    <div class="paper-venue">
+    ICLR 2020 <span class="spotlight">(Spotlight)</span>
+    </div>
+    </div>
+    
+    <div class="paper">
+    <div class="paper-title">
+    <a href="https://arxiv.org/abs/1810.02340" target="_blank">
+    SNIP: Single-shot Network Pruning based on Connection Sensitivity
+    </a>
+    </div>
+    <div class="paper-authors">
+    Namhoon Lee, Thalaiyasingam Ajanthan, Philip H. S. Torr
+    </div>
+    <div class="paper-venue">ICLR 2019</div>
+    </div>
+
+    <div class="paper">
+    <div class="paper-title">
+    <a href="https://arxiv.org/abs/1804.02391" target="_blank">
+    Learn to Pay Attention
+    </a>
+    </div>
+    <div class="paper-authors">
+    Saumya Jetley, Nicholas Lord, Namhoon Lee, Philip H. S. Torr
+    </div>
+    <div class="paper-venue">
+    ICLR 2018
+    </div>
+    </div>
+
+    <div class="paper">
+    <div class="paper-title">
+    <a href="https://link.springer.com/article/10.1007/s11263-018-1077-3" target="_blank">
+    Synthesizing a Scene-Specific Pedestrian Detector and Pose Estimator for Static Video Surveillance
+    </a>
+    </div>
+    <div class="paper-authors">
+    Hironori Hattori*, Namhoon Lee*, Vishnu N. Boddeti, Fares Beainy,
+    Kris M. Kitani, Takeo Kanade
+    </div>
+    <div class="paper-venue">
+    IJCV 2018
+    </div>
+    </div>
+
+    <div class="paper">
+    <div class="paper-title">
+    <a href="#" target="_blank">
+    Forecasting Interactive Dynamics of Pedestrians with Fictitious Play
+    </a>
+    </div>
+    <div class="paper-authors">
+    Wei-Chiu Ma, De-An Huang, Namhoon Lee, Kris M. Kitani
+    </div>
+    <div class="paper-venue">
+    CVPR 2017
+    </div>
+    </div>
+    
+    <div class="paper">
+    <div class="paper-title">
+    <a href="https://arxiv.org/abs/1704.04394" target="_blank">
+    DESIRE: Distant Future Prediction in Dynamic Scenes with Interacting Agents
+    </a>
+    </div>
+    <div class="paper-authors">
+    Namhoon Lee, Wongun Choi, Paul Vernaza, Christopher B. Choy, Philip H. S. Torr, Manmohan Chandraker
+    </div>
+    <div class="paper-venue">
+    CVPR 2017 <span class="spotlight">(Spotlight)</span>
+    </div>
+    </div>
+
+    <div class="paper">
+    <div class="paper-title">
+    <a href="https://namhoonlee.github.io/doc/namhoonlee_msthesis2015_final.pdf" target="_blank">
+    Modeling of Dynamic Environments for Visual Forecasting of American Football Plays
+    </a>
+    </div>
+    <div class="paper-authors">
+    Namhoon Lee (committee: Kris M. Kitani, Martial Hebert, Sebastian Scherer)
+    </div>
+    <div class="paper-venue">
+    M.S. Thesis, Carnegie Mellon University, Dec 2015
+    </div>
+    </div>
+
+    <div class="paper">
+    <div class="paper-title">
+    <a href="https://arxiv.org/abs/1604.01431" target="_blank">
+    Forecasting Interactive Dynamics of Pedestrians with Fictitious Play
+    </a>
+    </div>
+    <div class="paper-authors">
+    Wei-Chiu Ma, De-An Huang, Namhoon Lee, Kris M. Kitani
+    </div>
+    <div class="paper-venue">
+    CVPR 2017
+    </div>
+    </div>
+    
+    
+    <div class="paper">
+    <div class="paper-title">
+    <a href="https://namhoonlee.github.io/doc/LK_WACV2016.pdf" target="_blank">
+    Predicting Wide Receiver Trajectories in American Football
+    </a>
+    </div>
+    <div class="paper-authors">
+    Namhoon Lee, Kris M. Kitani
+    </div>
+    <div class="paper-venue">
+    WACV 2016 <span class="spotlight">(Oral)</span>
+    </div>
+    </div>
+
+    
+
+</div>
+
+    
+</div>
+
+
+</body>
+</html>
