@@ -69,11 +69,10 @@
             height: 140px;
             object-fit: cover;
             border-radius: 12px;
-            border: 1px solid #ccc;
+            border: 1px solid black;
             margin-bottom: 8px;
         }
 
-        .member-item a,
         .member-item span {
             display: block;
             font-size: 0.95rem;
@@ -81,9 +80,30 @@
             color: #333;
         }
 
+        .member-item a {
+            color: #007bff;       /* 파란색 유지 */
+            text-decoration: none;
+        }
+
+        .member-item a:visited {
+            color: #007bff;       /* 방문해도 파란색 유지 */
+        }
+
         .member-item a:hover {
-            text-decoration: underline;
+            text-decoration: underline;  /* hover 시만 밑줄 */
+        }
+
+        .alumni a {
             color: #007bff;
+            text-decoration: none;
+        }
+
+        .alumni a:visited {
+            color: #007bff;
+        }
+
+        .alumni a:hover {
+            text-decoration: underline;
         }
 
     </style>
@@ -157,7 +177,7 @@
 
         <li class="member-item">
             <img src="group_profile/hyunjijung.png" alt="Hyunji Jung">
-            <span>Hyunji Jung</span>
+            <a href="https://www.linkedin.com/in/hyunji-jung-1121b5276/?locale=en">Hyunji Jung</a>
         </li>
 
         <li class="member-item">
@@ -186,7 +206,7 @@
     <h3>Alumni</h3>
     <p class="alumni">
         Dahun Shin (MS 2025); 
-        <a href="#">Seonghwan Park</a> (MS 2025); 
+        <a href="https://shpark97.github.io/">Seonghwan Park</a> (MS 2025); 
         Jaehyeon Jeong (MS 2026)
     </p>
 
