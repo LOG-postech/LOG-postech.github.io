@@ -33,6 +33,21 @@
             color: #777;
             border-top: 1px solid #eee;
             padding-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .footer-logos {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .footer-logos img {
+            height: 36px;
+            width: auto;
+            object-fit: contain;
         }
 
         h3 {
@@ -82,20 +97,20 @@
     <p><strong>Namhoon Lee</strong></p>
 
 
-    <p><span class="contact-label">Email:</span> 
+    <p><span class="contact-label">(Email)</span> 
         <a href="mailto:namhoon.lee@postech.ac.kr">
         namhoon.lee@postech.ac.kr
         </a>
     </p>
 
-    <p><span class="contact-label">Phone:</span> +82 (0)54 279 2393</p>
+    <p><span class="contact-label">(Phone)</span> +82 (0)54 279 2393</p>
 
-    <p><span class="contact-label">Office:</span> RIST 4, Room #4408</p>
+    <p><span class="contact-label">(Office)</span> RIST 4, Room #4408</p>
 
-    <br>
+    <!-- <br> -->
     <p><strong>Computational Optimization Lab</strong></p>
 
-    <p>Office: RIST 4, Room #4427</p>
+    <p>(Office) RIST 4, Room #4427</p>
 
     <br>
     <p>
@@ -105,6 +120,16 @@
     South Korea
     </p>
 </div>
+
+    <footer>
+        <p>&copy; 2026 LOG. All rights reserved.</p>
+        <div class="footer-logos">
+            <img src="logo/postech_logo.png" alt="POSTECH">
+            <img src="logo/gsai_logo.png" alt="GSAI">
+            <img src="logo/cs_logo.png" alt="CS">
+            <img src="logo/log_logo.png" alt="LOG">
+        </div>
+    </footer>
 
 </body>
 </html>

@@ -39,6 +39,21 @@
             color: #777;
             border-top: 1px solid #eee;
             padding-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .footer-logos {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .footer-logos img {
+            height: 36px;
+            width: auto;
+            object-fit: contain;
         }
 
         h2 {
@@ -216,6 +231,12 @@
 
 <footer>
     <p>&copy; 2026 LOG. All rights reserved.</p>
+    <div class="footer-logos">
+        <img src="logo/postech_logo.png" alt="POSTECH">
+        <img src="logo/gsai_logo.png" alt="GSAI">
+        <img src="logo/cs_logo.png" alt="CS">
+        <img src="logo/log_logo.png" alt="LOG">
+    </div>
 </footer>
 
 </body>
