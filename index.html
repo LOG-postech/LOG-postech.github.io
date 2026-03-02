@@ -31,6 +31,21 @@
             color: #777;
             border-top: 1px solid #eee;
             padding-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .footer-logos {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .footer-logos img {
+            height: 36px;
+            width: auto;
+            object-fit: contain;
         }
 
         h3 {
@@ -156,9 +171,15 @@
         </p> -->
         <h3>Recent News</h3>
         <ul>
+            
+            <li>
+                <strong>Nov 2025  </strong> 
+                 Our lab has been selected for the Young Investigator Infrastructure Support Program funded by National Research Foundation of Korea.
+            </li>
+
             <li>
                 <strong>Feb 2026  </strong> 
-                📃 Our new paper is now available on <a href="https://arxiv.org/abs/2602.18181v1" target="_blank">arXiv</a>! In this work, We propose SeedFlood, a decentralized LLM training framework with seed-reconstructible zeroth-order updates that achieves model-size–independent communication cost and perfect consensus.
+                📃 Our new paper is now available on <a href="https://arxiv.org/abs/2602.18181v1" target="_blank">arXiv</a>! In this work, We introduce SeedFlood, a decentralized LLM training framework that enables model-size–independent communication cost and perfect consensus.
             </li>
 
             <li>
@@ -196,11 +217,11 @@
                 </a>
             </li>
 
-            <li>
+            <!-- <li>
                 <strong>Nov 2025  </strong> 
                 🏆 Hyunji recived NRF Fellowship.
                 </a>
-            </li>
+            </li> -->
 
             <!-- <li>
                 <strong>Nov 2025  </strong> 
@@ -240,6 +261,12 @@
 
     <footer>
         <p>&copy; 2026 LOG. All rights reserved.</p>
+        <div class="footer-logos">
+            <img src="logo/postech_logo.png" alt="POSTECH">
+            <img src="logo/gsai_logo.png" alt="GSAI">
+            <img src="logo/cs_logo.png" alt="CS">
+            <img src="logo/log_logo.png" alt="LOG">
+        </div>
     </footer>
 
 </body>
