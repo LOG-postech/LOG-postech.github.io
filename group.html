@@ -6,6 +6,10 @@
     <title>Group | Lee Optimization Group</title>
 
     <style>
+        :root {
+            --position-font-size: 0.7rem;
+        }
+
         body {
             font-family: system-ui, -apple-system, sans-serif;
             line-height: 1.6;
@@ -97,6 +101,10 @@
             color: #333;
         }
 
+        .member-item .member-position {
+            font-size: var(--position-font-size, 0.8rem);
+        }
+
         .member-item a {
             color: #007bff;       /* 파란색 유지 */
             text-decoration: none;
@@ -123,6 +131,71 @@
             text-decoration: underline;
         }
 
+        /* ===== Gallery Preview ===== */
+
+        .gallery-preview {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 4px;
+            margin-bottom: 10px;
+        }
+
+        .gallery-preview-item {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #333;
+            aspect-ratio: 1;
+        }
+
+        .gallery-preview-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: opacity 0.2s;
+        }
+
+        .gallery-preview-item:hover img {
+            opacity: 0.85;
+        }
+
+        .gallery-preview-item .tooltip {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.65);
+            color: #fff;
+            font-size: 0.7em;
+            text-align: center;
+            padding: 4px 6px;
+            opacity: 0;
+            transition: opacity 0.2s;
+            pointer-events: none;
+        }
+
+        .gallery-preview-item:hover .tooltip {
+            opacity: 1;
+        }
+
+        .gallery-more {
+            font-size: 0.95em;
+            color: #555;
+        }
+
+        .gallery-more a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .gallery-more a:visited {
+            color: #007bff;
+        }
+
+        .gallery-more a:hover {
+            text-decoration: underline;
+        }
+
     </style>
 </head>
 
@@ -133,92 +206,134 @@
     <nav>
         <a href="index.html">Home</a>
         <a href="research.html">Research</a>
+        <a href="publications.html">Publications</a>
         <a href="group.html">Members</a>
         <a href="hiring.html">Hiring</a>
-        <a href="gallery.html">Gallery</a>
+        <!-- <a href="gallery.html">Gallery</a> -->
         <a href="contact.html">Contact</a>
     </nav>
 </header>
 
 <main>
     
-    <h2>Principal Investigator</h2>
+    <h2>Members</h2>
     <ul class="member-list">
+
         <li class="member-item">
             <img src="group_profile/namhoonlee.png" alt="Namhoon Lee">
             <a href="https://namhoonlee.github.io/">Namhoon Lee</a>
+            <span class="member-position">Principal Investigator</span>
         </li>
-    </ul>
 
-    <!-- Administrator -->
-    <h2>Administrator</h2>
-    <ul class="member-list">
         <li class="member-item">
             <img src="group_profile/damiso.png" alt="Dami So">
             <span>Dami So</span>
+            <span class="member-position">Administrator</span>
         </li>
-    </ul>
-
-    <!-- Graduate Students -->
-    <h2>Graduate Students</h2>
-    <ul class="member-list">
 
         <li class="member-item">
             <img src="group_profile/jinseokchung.png" alt="Jinseok Chung">
             <span>Jinseok Chung</span>
+            <span class="member-position">MS/PhD Student</span>
         </li>
 
         <li class="member-item">
             <img src="group_profile/donghyunoh.jpeg" alt="Donghyun Oh">
             <span>Donghyun Oh</span>
+            <span class="member-position">MS/PhD Student</span>
         </li>
 
         <li class="member-item">
             <img src="group_profile/sungbinshin.jpg" alt="Sungbin Shin">
             <a href="https://ssbin4.github.io">Sungbin Shin</a>
+            <span class="member-position">MS/PhD Student</span>
         </li>
 
         <li class="member-item">
             <img src="group_profile/dongyeoplee.jpg" alt="Dongyeop Lee">
             <a href="https://dongyeoplee2.github.io">Dongyeop Lee</a>
+            <span class="member-position">PhD Student</span>
         </li>
 
         <li class="member-item">
             <img src="group_profile/jihunkim.jpg" alt="Jihun Kim">
             <span>Jihun Kim</span>
+            <span class="member-position">MS Student</span>
         </li>
 
         <li class="member-item">
             <img src="group_profile/kwanheelee.jpg" alt="Kwanhee Lee">
             <a href="https://kwanhee-lee.github.io">Kwanhee Lee</a>
+            <span class="member-position">MS Student</span>
         </li>
 
         <li class="member-item">
             <img src="group_profile/hyunjijung.png" alt="Hyunji Jung">
             <a href="https://www.linkedin.com/in/hyunji-jung-1121b5276/?locale=en">Hyunji Jung</a>
+            <span class="member-position">MS Student</span>
         </li>
 
         <li class="member-item">
             <img src="group_profile/minkyoungsong.jpg" alt="Minkyung Song">
             <a href="https://smk2295.github.io/">Minkyoung Song</a>
+            <span class="member-position">MS Student</span>
         </li>
 
         <li class="member-item">
             <img src="group_profile/hyeondojang.jpg" alt="Hyeondo Jang">
             <a href="https://kr.linkedin.com/in/hyeondo-jang-83a801217">Hyeondo Jang</a>
+            <span class="member-position">MS Student</span>
         </li>
 
         <li class="member-item">
             <img src="group_profile/jiyunpark.jpg" alt="Jiyun Park">
             <span>Jiyun Park</span>
+            <span class="member-position">MS Student</span>
         </li>
 
         <li class="member-item">
             <img src="group_profile/doyoonkim.jpg" alt="Doyoon Kim">
             <a href="https://cosmos1030.github.io/">Doyoon Kim</a>
+            <span class="member-position">MS Student</span>
         </li>
 
     </ul>
+
+    <!-- Gallery Preview -->
+    <h3>Gallery</h3>
+    <p class="gallery-more">We also spend time together on various occasions. For more stories, check out <a href="gallery.html">here</a>!</p>
+    <div class="gallery-preview">
+        <div class="gallery-preview-item">
+            <a href="stories/26_bowling.png" target="_blank">
+                <img src="stories/26_bowling.png" alt="Bowling Night">
+                <span class="tooltip">Bowling Night</span>
+            </a>
+        </div>
+        <div class="gallery-preview-item">
+            <a href="stories/26_post-icml.jpeg" target="_blank">
+                <img src="stories/26_post-icml.jpeg" alt="post-ICML 2026">
+                <span class="tooltip">post-ICML 2026</span>
+            </a>
+        </div>
+        <div class="gallery-preview-item">
+            <a href="stories/25_yearendparty.png" target="_blank">
+                <img src="stories/25_yearendparty.png" alt="Year-end Party">
+                <span class="tooltip">Year-end Party</span>
+            </a>
+        </div>
+        <div class="gallery-preview-item">
+            <a href="stories/25_boardgame.jpeg" target="_blank">
+                <img src="stories/25_boardgame.jpeg" alt="Board Game Night">
+                <span class="tooltip">Board Game Night</span>
+            </a>
+        </div>
+        <div class="gallery-preview-item">
+            <a href="stories/25_openday.jpg" target="_blank">
+                <img src="stories/25_openday.jpg" alt="LOG Open Day">
+                <span class="tooltip">LOG Open Day</span>
+            </a>
+        </div>
+    </div>
 
     <!-- Alumni -->
     <h3>Alumni</h3>
