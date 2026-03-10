@@ -127,6 +127,29 @@
         .stories-gallery img:hover {
             transform: scale(1.05);
         }
+
+        .news-list {
+            margin: 0;
+            padding: 0;
+            margin-top: 14px;
+        }
+
+        .news-item {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 8px;
+            align-items: baseline;
+        }
+
+        .news-date {
+            min-width: 75px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .news-content {
+            flex: 1;
+        }
     </style>
 </head>
 <body>
@@ -176,67 +199,54 @@
             <a href="hiring.html">Hiring</a>.
         </p> -->
         <h3>Recent News</h3>
-        <ul>
-            
-            <li>
-                <strong>Feb 2026  </strong>
-                🤝 Our lab has been selected for the "Early-Career Researcher Infrastructure Support Program" (NRF) — one of the most competitive grants in Korea. With <em>500M KRW</em> in funding, we will build a high-performance compute infrastructure to power our research on extreme compression of hyperscale AI foundation models.
-            </li>
+        <div class="news-list">
 
-            <li>
-                <strong>Feb 2026  </strong> 
-                📃 Our new paper is now available on <a href="https://arxiv.org/abs/2602.18181v1" target="_blank">arXiv</a>! In this work, We introduce SeedFlood, a decentralized LLM training framework that enables model-size–independent communication cost and perfect consensus.
-            </li>
+            <div class="news-item">
+                <span class="news-date">Feb 2026</span>
+                <span class="news-content">🤝 Our lab has been selected for the "Early-Career Researcher Infrastructure Support Program" (NRF) — one of the most competitive grants in Korea. With <em>500M KRW</em> in funding, we will build a high-performance compute infrastructure to power our research on extreme compression of hyperscale AI foundation models.</span>
+            </div>
 
-            <li>
-                <strong>Feb 2026  </strong> 
-                📃 Our new paper is now available on <a href="https://www.arxiv.org/abs/2602.03515" target="_blank">arXiv</a>! In this work, we propose a basis rotation approach to effectively address the gradient staleness problem in asynchronous pipeline parallelism.
-            </li>
+            <div class="news-item">
+                <span class="news-date">Feb 2026</span>
+                <span class="news-content">📃 Our new paper is now available on <a href="https://arxiv.org/abs/2602.18181v1" target="_blank">arXiv</a>! In this work, We introduce SeedFlood, a decentralized LLM training framework that enables model-size–independent communication cost and perfect consensus.</span>
+            </div>
 
-            <li>
-                <strong>Feb 2026  </strong> 
-                ✈️ Kwanhee started as a visiting student researcher in the 
-                <a href="https://daslab.pages.ista.ac.at/" target="_blank">
-                Dan Alistarh Group</a>.
-            </li>
+            <div class="news-item">
+                <span class="news-date">Feb 2026</span>
+                <span class="news-content">📃 Our new paper is now available on <a href="https://www.arxiv.org/abs/2602.03515" target="_blank">arXiv</a>! In this work, we propose a basis rotation approach to effectively address the gradient staleness problem in asynchronous pipeline parallelism.</span>
+            </div>
 
-            <li>
-                <strong>Jan 2026  </strong> 
-                🎓 Our paper on extreme LLM sparsity
-                (<a href="https://arxiv.org/abs/2510.01650" target="_blank">ELSA</a>)
-                has been accepted to ICLR 2026.
-                </a>
-            </li>
-            
-            <li>
-                <strong>Nov 2025  </strong> 
-                🏆 Dongyeop recived the 
-                <a href="https://www.qualcomm.com/research/university-relations/innovation-fellowship/2025-south-korea" target="_blank">Qualcomm Innovation Fellowship Korea 2025</a>.
-                </a>
-            </li>
+            <div class="news-item">
+                <span class="news-date">Feb 2026</span>
+                <span class="news-content">✈️ Kwanhee started as a visiting student researcher in the <a href="https://daslab.pages.ista.ac.at/" target="_blank">Dan Alistarh Group</a>.</span>
+            </div>
 
-            <!-- <li>
-                <strong>Nov 2025  </strong> 
-                🏆 Our new paper on extreme LLM sparsity
-                (<a href="https://arxiv.org/abs/2510.01650" target="_blank">ELSA</a>)
-                won Best Paper Award at JKAIA 2025.
-                </a>
-            </li> -->
+            <div class="news-item">
+                <span class="news-date">Jan 2026</span>
+                <span class="news-content">🎓 Our paper on extreme LLM sparsity (<a href="https://arxiv.org/abs/2510.01650" target="_blank">ELSA</a>) has been accepted to ICLR 2026.</span>
+            </div>
 
-            <!-- <li>
-                <strong>Nov 2025  </strong> 
-                🏆 Hyunji recived NRF Fellowship.
-                </a>
-            </li> -->
+            <div class="news-item">
+                <span class="news-date">Nov 2025</span>
+                <span class="news-content">🏆 Dongyeop recived the <a href="https://www.qualcomm.com/research/university-relations/innovation-fellowship/2025-south-korea" target="_blank">Qualcomm Innovation Fellowship Korea 2025</a>.</span>
+            </div>
 
-            <!-- <li>
-                <strong>Nov 2025  </strong> 
-                🎓 We had 2 papers 
-                (<a href="https://arxiv.org/abs/2510.25798" target="_blank">MemEIC</a> and <a href="https://arxiv.org/abs/2505.16705" target="_blank">An Analysis of Impact of Noisy Annotations on Concept Bottleneck Models</a>)
-                accepted to NeurIPS 2025.
-            </li> -->
-        
-        </ul>
+            <!-- <div class="news-item">
+                <span class="news-date">Nov 2025</span>
+                <span class="news-content">🏆 Our new paper on extreme LLM sparsity (<a href="https://arxiv.org/abs/2510.01650" target="_blank">ELSA</a>) won Best Paper Award at JKAIA 2025.</span>
+            </div> -->
+
+            <!-- <div class="news-item">
+                <span class="news-date">Nov 2025</span>
+                <span class="news-content">🏆 Hyunji recived NRF Fellowship.</span>
+            </div> -->
+
+            <!-- <div class="news-item">
+                <span class="news-date">Nov 2025</span>
+                <span class="news-content">🎓 We had 2 papers (<a href="https://arxiv.org/abs/2510.25798" target="_blank">MemEIC</a> and <a href="https://arxiv.org/abs/2505.16705" target="_blank">An Analysis of Impact of Noisy Annotations on Concept Bottleneck Models</a>) accepted to NeurIPS 2025.</span>
+            </div> -->
+
+        </div>
 
         <!-- <section class="stories-section">
 
