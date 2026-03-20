@@ -110,11 +110,7 @@
 
         .menu-toggle {
             display: none;
-            position: fixed;
-            top: 16px;
-            right: 18px;
-            z-index: 1001;
-            background: #FAF8F5;
+                        background: #FAF8F5;
             border: 1px solid #e2e6f0;
             border-radius: 6px;
             font-size: 1.2em;
@@ -137,6 +133,11 @@
             header {
                 padding-bottom: 10px;
                 margin-bottom: 24px;
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                gap: 12px;
+                flex-wrap: nowrap;
             }
 
             .menu-toggle {
@@ -199,11 +200,11 @@
         .nav-drawer {
             position: fixed;
             top: 0;
-            right: -280px;
+            left: -280px;
             width: 240px;
             height: 100vh;
             background: #FAF8F5;
-            box-shadow: -4px 0 24px rgba(0,0,0,0.12);
+            box-shadow: 4px 0 24px rgba(0,0,0,0.12);
             z-index: 1000;
             transition: right 0.3s ease;
             padding: 64px 32px 40px;
@@ -213,7 +214,7 @@
         }
 
         .nav-drawer.open {
-            right: 0;
+            left: 0;
         }
 
         .nav-overlay.open {
@@ -250,8 +251,8 @@
 <div class="inner">
 
     <header>
-        <a href="index.html" class="lab-name">Lee Optimization Group</a>
         <button class="menu-toggle" aria-label="Menu">&#9776;</button>
+        <a href="index.html" class="lab-name">Lee Optimization Group</a>
         <nav>
             <a href="index.html">Home</a>
             <a href="research.html">Research</a>
