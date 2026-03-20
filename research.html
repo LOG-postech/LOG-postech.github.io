@@ -63,6 +63,10 @@
 
         nav a:hover { color: #1B3A8A; }
 
+        nav a.active { color: #1B3A8A; font-weight: 500; }
+        .nav-drawer a.active { color: #1B3A8A; font-weight: 500; }
+
+
         a { color: #1B3A8A; text-decoration: none; }
         a:hover { text-decoration: underline; }
 
@@ -180,7 +184,7 @@
                 display: flex;
                 flex-direction: row;
                 align-items: center;
-                gap: 12px;
+                justify-content: space-between;
                 flex-wrap: nowrap;
             }
 
@@ -295,11 +299,11 @@
 <div class="inner">
 
     <header>
-        <button class="menu-toggle" aria-label="Menu">&#9776;</button>
         <a href="index.html" class="lab-name">Lee Optimization Group</a>
+        <button class="menu-toggle" aria-label="Menu">&#9776;</button>
         <nav>
             <a href="index.html">Home</a>
-            <a href="research.html">Research</a>
+            <a href="research.html" class="active">Research</a>
             <a href="publications.html">Publications</a>
             <a href="group.html">Members</a>
             <a href="hiring.html">Hiring</a>
@@ -388,7 +392,7 @@
     <div class="nav-drawer" id="navDrawer">
         <button class="drawer-close" id="drawerClose">&#x2715;</button>
         <a href="index.html">Home</a>
-        <a href="research.html">Research</a>
+        <a href="research.html" class="active">Research</a>
         <a href="publications.html">Publications</a>
         <a href="group.html">Members</a>
         <a href="hiring.html">Hiring</a>
