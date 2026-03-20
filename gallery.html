@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=860">
+    <link rel="icon" href="logo/log_logo.png" type="image/png">
+    <title>Gallery | Lee Optimization Group</title>
+
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        header {
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+
+        nav a {
+            margin-right: 15px;
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            margin-top: 40px;
+            font-size: 0.9em;
+            color: #777;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .footer-logos {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .footer-logos img {
+            height: 36px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        /* Gallery grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 4px;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #333;
+            aspect-ratio: 1;
+        }
+
+        .gallery-item a {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: opacity 0.2s;
+        }
+
+        .gallery-item:hover img {
+            opacity: 0.85;
+        }
+
+        .gallery-item .tooltip {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.65);
+            color: #fff;
+            font-size: 0.7em;
+            text-align: center;
+            padding: 4px 6px;
+            opacity: 0;
+            transition: opacity 0.2s;
+            pointer-events: none;
+        }
+
+        .gallery-item:hover .tooltip {
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Lee Optimization Group</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="research.html">Research</a>
+            <a href="publications.html">Publications</a>
+            <a href="group.html">Members</a>
+            <a href="hiring.html">Hiring</a>
+            <!-- <a href="gallery.html">Gallery</a> -->
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+
+        <h2>Gallery</h2>
+        <p style="margin-bottom: 16px;">We also spend time together on various occasions.</p>
+
+        <div class="gallery-grid">
+
+            <div class="gallery-item">
+                <a href="stories/26_bowling.png" target="_blank">
+                    <img src="stories/26_bowling.png" alt="Bowling Night">
+                    <span class="tooltip">Bowling Night</span>
+                </a>
+            </div>
+
+            <div class="gallery-item">
+                <a href="stories/26_post-icml.jpeg" target="_blank">
+                    <img src="stories/26_post-icml.jpeg" alt="Post-ICML 2026">
+                    <span class="tooltip">post-ICML 2026</span>
+                </a>
+            </div>
+
+            <div class="gallery-item">
+                <a href="stories/25_yearendparty.png" target="_blank">
+                    <img src="stories/25_yearendparty.png" alt="Year-end Party">
+                    <span class="tooltip">Year-end Party</span>
+                </a>
+            </div>
+
+            <div class="gallery-item">
+                <a href="stories/25_boardgame.jpeg" target="_blank">
+                    <img src="stories/25_boardgame.jpeg" alt="Board Game Night">
+                    <span class="tooltip">Board Game Night</span>
+                </a>
+            </div>
+
+            <div class="gallery-item">
+                <a href="stories/25_openday.jpg" target="_blank">
+                    <img src="stories/25_openday.jpg" alt="LOG Open Day">
+                    <span class="tooltip">LOG Open Day</span>
+                </a>
+            </div>
+
+            <div class="gallery-item">
+                <a href="stories/25_readinggroup.jpeg" target="_blank">
+                    <img src="stories/25_readinggroup.jpeg" alt="Reading Group">
+                    <span class="tooltip">Reading Group</span>
+                </a>
+            </div>
+
+            <div class="gallery-item">
+                <a href="stories/25_icml.jpg" target="_blank">
+                    <img src="stories/25_icml.jpg" alt="ICML 2025">
+                    <span class="tooltip">ICML 2025</span>
+                </a>
+            </div>
+
+            <div class="gallery-item">
+                <a href="stories/25_postech.png" target="_blank">
+                    <img src="stories/25_postech.png" alt="POSTECH">
+                    <span class="tooltip">POSTECH</span>
+                </a>
+            </div>
+
+            <div class="gallery-item">
+                <a href="stories/25_noscreenday.jpg" target="_blank">
+                    <img src="stories/25_noscreenday.jpg" alt="No Screen Day">
+                    <span class="tooltip">No Screen Day</span>
+                </a>
+            </div>
+
+            <div class="gallery-item">
+                <a href="stories/25_iclr.jpeg" target="_blank">
+                    <img src="stories/25_iclr.jpeg" alt="ICLR 2025">
+                    <span class="tooltip">ICLR 2025</span>
+                </a>
+            </div>
+
+            <div class="gallery-item">
+                <a href="stories/24_effl-log.jpg" target="_blank">
+                    <img src="stories/24_effl-log.jpg" alt="EFFL and LOG Day">
+                    <span class="tooltip">EFFL and LOG Day</span>
+                </a>
+            </div>
+
+            <div class="gallery-item">
+                <a href="stories/24_logspringouting.JPG" target="_blank">
+                    <img src="stories/24_logspringouting.JPG" alt="LOG Spring Outing">
+                    <span class="tooltip">LOG Spring Outing</span>
+                </a>
+            </div>
+
+            <div class="gallery-item">
+                <a href="stories/24_logspring.JPG" target="_blank">
+                    <img src="stories/24_logspring.JPG" alt="LOG Spring Outing">
+                    <span class="tooltip">LOG Spring Outing</span>
+                </a>
+            </div>
+
+            <div class="gallery-item">
+                <a href="stories/24_logesports3.jpg" target="_blank">
+                    <img src="stories/24_logesports3.jpg" alt="LOG e-sports">
+                    <span class="tooltip">LOG e-sports</span>
+                </a>
+            </div>
+
+            <div class="gallery-item">
+                <a href="stories/24_logesports2.jpg" target="_blank">
+                    <img src="stories/24_logesports2.jpg" alt="LOG e-sports">
+                    <span class="tooltip">LOG e-sports</span>
+                </a>
+            </div>
+            
+            <div class="gallery-item">
+                <a href="stories/24_logesports.jpg" target="_blank">
+                    <img src="stories/24_logesports.jpg" alt="LOG e-sports">
+                    <span class="tooltip">LOG e-sports</span>
+                </a>
+            </div>
+
+            <div class="gallery-item">
+                <a href="stories/23_christmasparty.png" target="_blank">
+                    <img src="stories/23_christmasparty.png" alt="Christmas Party">
+                    <span class="tooltip">Christmas Party</span>
+                </a>
+            </div>
+
+            <div class="gallery-item">
+                <a href="stories/23_cake.png" target="_blank">
+                    <img src="stories/23_cake.png" alt="LOG Cake">
+                    <span class="tooltip">LOG Cake</span>
+                </a>
+            </div>
+
+            <div class="gallery-item">
+                <a href="stories/23_santa.JPG" target="_blank">
+                    <img src="stories/23_santa.JPG" alt="Santa Dongyeop">
+                    <span class="tooltip">Santa Dongyeop</span>
+                </a>
+            </div>
+
+            <div class="gallery-item">
+                <a href="stories/23_jkaia.jpg" target="_blank">
+                    <img src="stories/23_jkaia.jpg" alt="JKAIA Best Paper Award">
+                    <span class="tooltip">JKAIA Best Paper Award</span>
+                </a>
+            </div>
+
+            <div class="gallery-item">
+                <a href="stories/23_postech.JPG" target="_blank">
+                    <img src="stories/23_postech.JPG" alt="POSTECH">
+                    <span class="tooltip">POSTECH</span>
+                </a>
+            </div>
+
+            <div class="gallery-item">
+                <a href="stories/23_movienight.jpeg" target="_blank">
+                    <img src="stories/23_movienight.jpeg" alt="Movie Night">
+                    <span class="tooltip">Movie Night</span>
+                </a>
+            </div>
+
+            <div class="gallery-item">
+                <a href="stories/23_halonabeachcove.jpeg" target="_blank">
+                    <img src="stories/23_halonabeachcove.jpeg" alt="Halona Beach Cove, Hawaii">
+                    <span class="tooltip">Halona Beach Cove, Hawaii</span>
+                </a>
+            </div>
+
+            <div class="gallery-item">
+                <a href="stories/23_icml3.jpeg" target="_blank">
+                    <img src="stories/23_icml3.jpeg" alt="Makapu’u Lookout, Hawaii">
+                    <span class="tooltip">Makapu’u Lookout, Hawaii</span>
+                </a>
+            </div>
+
+            <div class="gallery-item">
+                <a href="stories/23_icml2.jpeg" target="_blank">
+                    <img src="stories/23_icml2.jpeg" alt="ICML 2023">
+                    <span class="tooltip">ICML 2023</span>
+                </a>
+            </div>
+
+            <div class="gallery-item">
+                <a href="stories/23_icml.jpeg" target="_blank">
+                    <img src="stories/23_icml.jpeg" alt="ICML 2023">
+                    <span class="tooltip">ICML 2023</span>
+                </a>
+            </div>
+
+            <div class="gallery-item">
+                <a href="stories/23_boardgame.png" target="_blank">
+                    <img src="stories/23_boardgame.png" alt="Board Game Night">
+                    <span class="tooltip">Board Game Night</span>
+                </a>
+            </div>
+
+            <div class="gallery-item">
+                <a href="stories/23_teachersday.png" target="_blank">
+                    <img src="stories/23_teachersday.png" alt="Teacher's Day">
+                    <span class="tooltip">Teacher's Day</span>
+                </a>
+            </div>
+
+            <div class="gallery-item">
+                <a href="stories/23_logday.jpeg" target="_blank">
+                    <img src="stories/23_logday.jpeg" alt="LOG Day">
+                    <span class="tooltip">LOG Day</span>
+                </a>
+            </div>
+
+            <div class="gallery-item">
+                <a href="stories/23_noscreenday.jpeg" target="_blank">
+                    <img src="stories/23_noscreenday.jpeg" alt="No Screen Day">
+                    <span class="tooltip">No Screen Day</span>
+                </a>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 LOG. All rights reserved.</p>
+        <div class="footer-logos">
+            <a href="https://www.postech.ac.kr" target="_blank"><img src="logo/postech_logo.png" alt="POSTECH"></a>
+            <a href="https://ai.postech.ac.kr" target="_blank"><img src="logo/gsai_logo.png" alt="GSAI"></a>
+            <a href="https://cse.postech.ac.kr" target="_blank"><img src="logo/cs_logo.png" alt="CS"></a>
+            <img src="logo/log_logo.png" alt="LOG">
+        </div>
+    </footer>
+
+</body>
+</html>
