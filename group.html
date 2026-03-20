@@ -2,80 +2,102 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="logo/log_logo.png" type="image/png">
     <title>Group | Lee Optimization Group</title>
-
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --position-font-size: 0.7rem;
-        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            font-family: system-ui, -apple-system, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-            color: #333;
+            font-family: 'Inter', system-ui, sans-serif;
+            color: #111;
+            background: #FAF8F5;
+            min-height: 100vh;
+        }
+
+        .top-rule {
+            height: 3px;
+            background: linear-gradient(90deg, #1B3A8A 0%, #3B6FD4 60%, #93A8D8 100%);
+        }
+
+        .inner {
             max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
+            margin: 0 auto;
+            padding: 48px 32px 60px;
         }
 
         header {
-            border-bottom: 1px solid #eee;
-            padding-bottom: 20px;
+            padding-bottom: 28px;
+            margin-bottom: 40px;
+            border-bottom: 1px solid #e2e6f0;
+        }
+
+        .lab-name, .lab-name:hover {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-size: 2.3em;
+            font-weight: 500;
+            color: #111;
+            letter-spacing: -0.01em;
+            line-height: 1;
+            display: block;
             margin-bottom: 20px;
+            text-decoration: none;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 24px;
         }
 
         nav a {
-            margin-right: 15px;
             text-decoration: none;
-            color: #007bff;
+            color: #6b7280;
+            font-size: 1em;
+            font-weight: 400;
+            letter-spacing: 0.01em;
+            transition: color 0.15s;
         }
 
-        nav a:hover {
-            text-decoration: underline;
-        }
+        nav a:hover { color: #1B3A8A; }
 
-        footer {
-            margin-top: 40px;
-            font-size: 0.9em;
-            color: #777;
-            border-top: 1px solid #eee;
-            padding-top: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .footer-logos {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .footer-logos img {
-            height: 36px;
-            width: auto;
-            object-fit: contain;
-        }
+        a { color: #1B3A8A; text-decoration: none; }
+        a:hover { text-decoration: underline; }
 
         h2 {
-            margin-top: 10px;
+            font-family: 'EB Garamond', Georgia, serif;
+            font-size: 1.25em;
+            font-weight: 500;
+            letter-spacing: 0;
+            color: #374151;
+            margin-bottom: 24px;
+            
         }
 
         h3 {
-            margin-top: 25px;
-            margin-bottom: 10px;
+            font-family: 'EB Garamond', Georgia, serif;
+            font-size: 1.25em;
+            font-weight: 500;
+            letter-spacing: 0;
+            color: #374151;
+            margin-top: 40px;
+            margin-bottom: 14px;
         }
 
-        /* ===== Members Grid Layout ===== */
+        p {
+            font-size: 0.88em;
+            line-height: 1.75;
+            color: #374151;
+            text-align: justify;
+        }
 
+        /* Member grid */
         .member-list {
             list-style: none;
             padding: 0;
             display: grid;
-            grid-template-columns: repeat(4, 1fr); /* 한 줄에 4명 */
+            grid-template-columns: repeat(4, 1fr);
             gap: 25px;
         }
 
@@ -90,60 +112,44 @@
             aspect-ratio: 1/1;
             object-fit: cover;
             border-radius: 12px;
-            border: 1px solid black;
+            border: 1px solid #d1d5db;
             margin-bottom: 8px;
         }
 
         .member-item span {
             display: block;
-            font-size: 0.95rem;
-            text-decoration: none;
-            color: #333;
+            font-size: 0.88rem;
+            color: #374151;
         }
 
         .member-item .member-position {
-            font-size: var(--position-font-size, 0.8rem);
+            font-size: 0.72rem;
+            color: #9ca3af;
+            margin-top: 2px;
         }
 
         .member-item a {
-            color: #007bff;       /* 파란색 유지 */
+            display: block;
+            font-size: 0.88rem;
+            color: #1B3A8A;
             text-decoration: none;
         }
 
-        .member-item a:visited {
-            color: #007bff;       /* 방문해도 파란색 유지 */
-        }
+        .member-item a:hover { text-decoration: underline; }
 
-        .member-item a:hover {
-            text-decoration: underline;  /* hover 시만 밑줄 */
-        }
-
-        .alumni a {
-            color: #007bff;
-            text-decoration: none;
-        }
-
-        .alumni a:visited {
-            color: #007bff;
-        }
-
-        .alumni a:hover {
-            text-decoration: underline;
-        }
-
-        /* ===== Gallery Preview ===== */
-
+        /* Gallery preview */
         .gallery-preview {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
             gap: 4px;
+            margin-top: 14px;
             margin-bottom: 10px;
         }
 
         .gallery-preview-item {
             position: relative;
             overflow: hidden;
-            border: 1px solid #333;
+            border: 1px solid #d1d5db;
             aspect-ratio: 1;
         }
 
@@ -155,9 +161,7 @@
             transition: opacity 0.2s;
         }
 
-        .gallery-preview-item:hover img {
-            opacity: 0.85;
-        }
+        .gallery-preview-item:hover img { opacity: 1; }
 
         .gallery-preview-item .tooltip {
             position: absolute;
@@ -174,187 +178,187 @@
             pointer-events: none;
         }
 
-        .gallery-preview-item:hover .tooltip {
+        .gallery-preview-item:hover .tooltip { opacity: 1; }
+
+        footer {
+            margin-top: 52px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e6f0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.75em;
+            color: #9ca3af;
+        }
+
+        .footer-logos {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .footer-logos img {
+            height: 28px;
+            width: auto;
+            object-fit: contain;
             opacity: 1;
         }
-
-        .gallery-more {
-            font-size: 0.95em;
-            color: #555;
-        }
-
-        .gallery-more a {
-            color: #007bff;
-            text-decoration: none;
-        }
-
-        .gallery-more a:visited {
-            color: #007bff;
-        }
-
-        .gallery-more a:hover {
-            text-decoration: underline;
-        }
-
     </style>
 </head>
-
 <body>
 
-<header>
-    <h1>Lee Optimization Group</h1>
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="research.html">Research</a>
-        <a href="publications.html">Publications</a>
-        <a href="group.html">Members</a>
-        <a href="hiring.html">Hiring</a>
-        <!-- <a href="gallery.html">Gallery</a> -->
-        <a href="contact.html">Contact</a>
-    </nav>
-</header>
+<div class="top-rule"></div>
+<div class="inner">
 
-<main>
-    
-    <h2>Members</h2>
-    <ul class="member-list">
+    <header>
+        <a href="index.html" class="lab-name">Lee Optimization Group</a>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="research.html">Research</a>
+            <a href="publications.html">Publications</a>
+            <a href="group.html">Members</a>
+            <a href="hiring.html">Hiring</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
 
-        <li class="member-item">
-            <img src="group_profile/namhoonlee.png" alt="Namhoon Lee">
-            <a href="https://namhoonlee.github.io/">Namhoon Lee</a>
-            <span class="member-position">Principal Investigator</span>
-        </li>
+    <main>
+        <h2>Members</h2>
+        <ul class="member-list">
 
-        <li class="member-item">
-            <img src="group_profile/damiso.png" alt="Dami So">
-            <span>Dami So</span>
-            <span class="member-position">Administrator</span>
-        </li>
+            <li class="member-item">
+                <img src="group_profile/namhoonlee.png" alt="Namhoon Lee">
+                <a href="https://namhoonlee.github.io/">Namhoon Lee</a>
+                <span class="member-position">Principal Investigator</span>
+            </li>
 
-        <li class="member-item">
-            <img src="group_profile/jinseokchung.png" alt="Jinseok Chung">
-            <span>Jinseok Chung</span>
-            <span class="member-position">MS/PhD Student</span>
-        </li>
+            <li class="member-item">
+                <img src="group_profile/damiso.png" alt="Dami So">
+                <span>Dami So</span>
+                <span class="member-position">Administrator</span>
+            </li>
 
-        <li class="member-item">
-            <img src="group_profile/donghyunoh.jpeg" alt="Donghyun Oh">
-            <span>Donghyun Oh</span>
-            <span class="member-position">MS/PhD Student</span>
-        </li>
+            <li class="member-item">
+                <img src="group_profile/jinseokchung.png" alt="Jinseok Chung">
+                <span>Jinseok Chung</span>
+                <span class="member-position">MS/PhD Student</span>
+            </li>
 
-        <li class="member-item">
-            <img src="group_profile/sungbinshin.jpg" alt="Sungbin Shin">
-            <a href="https://ssbin4.github.io">Sungbin Shin</a>
-            <span class="member-position">MS/PhD Student</span>
-        </li>
+            <li class="member-item">
+                <img src="group_profile/donghyunoh.jpeg" alt="Donghyun Oh">
+                <span>Donghyun Oh</span>
+                <span class="member-position">MS/PhD Student</span>
+            </li>
 
-        <li class="member-item">
-            <img src="group_profile/dongyeoplee.jpg" alt="Dongyeop Lee">
-            <a href="https://dongyeoplee2.github.io">Dongyeop Lee</a>
-            <span class="member-position">PhD Student</span>
-        </li>
+            <li class="member-item">
+                <img src="group_profile/sungbinshin.jpg" alt="Sungbin Shin">
+                <a href="https://ssbin4.github.io">Sungbin Shin</a>
+                <span class="member-position">MS/PhD Student</span>
+            </li>
 
-        <li class="member-item">
-            <img src="group_profile/jihunkim.jpg" alt="Jihun Kim">
-            <span>Jihun Kim</span>
-            <span class="member-position">MS Student</span>
-        </li>
+            <li class="member-item">
+                <img src="group_profile/dongyeoplee.jpg" alt="Dongyeop Lee">
+                <a href="https://dongyeoplee2.github.io">Dongyeop Lee</a>
+                <span class="member-position">PhD Student</span>
+            </li>
 
-        <li class="member-item">
-            <img src="group_profile/kwanheelee.jpg" alt="Kwanhee Lee">
-            <a href="https://kwanhee-lee.github.io">Kwanhee Lee</a>
-            <span class="member-position">MS Student</span>
-        </li>
+            <li class="member-item">
+                <img src="group_profile/jihunkim.jpg" alt="Jihun Kim">
+                <span>Jihun Kim</span>
+                <span class="member-position">MS/PhD Student</span>
+            </li>
 
-        <li class="member-item">
-            <img src="group_profile/hyunjijung.png" alt="Hyunji Jung">
-            <a href="https://www.linkedin.com/in/hyunji-jung-1121b5276/?locale=en">Hyunji Jung</a>
-            <span class="member-position">MS Student</span>
-        </li>
+            <li class="member-item">
+                <img src="group_profile/kwanheelee.jpg" alt="Kwanhee Lee">
+                <a href="https://kwanhee-lee.github.io">Kwanhee Lee</a>
+                <span class="member-position">MS Student</span>
+            </li>
 
-        <li class="member-item">
-            <img src="group_profile/minkyoungsong.jpg" alt="Minkyung Song">
-            <a href="https://smk2295.github.io/">Minkyoung Song</a>
-            <span class="member-position">MS Student</span>
-        </li>
+            <li class="member-item">
+                <img src="group_profile/hyunjijung.png" alt="Hyunji Jung">
+                <a href="https://www.linkedin.com/in/hyunji-jung-1121b5276/?locale=en">Hyunji Jung</a>
+                <span class="member-position">MS Student</span>
+            </li>
 
-        <li class="member-item">
-            <img src="group_profile/hyeondojang.jpg" alt="Hyeondo Jang">
-            <a href="https://kr.linkedin.com/in/hyeondo-jang-83a801217">Hyeondo Jang</a>
-            <span class="member-position">MS Student</span>
-        </li>
+            <li class="member-item">
+                <img src="group_profile/minkyoungsong.jpg" alt="Minkyung Song">
+                <a href="https://smk2295.github.io/">Minkyoung Song</a>
+                <span class="member-position">MS Student</span>
+            </li>
 
-        <li class="member-item">
-            <img src="group_profile/jiyunpark.jpg" alt="Jiyun Park">
-            <span>Jiyun Park</span>
-            <span class="member-position">MS Student</span>
-        </li>
+            <li class="member-item">
+                <img src="group_profile/hyeondojang.jpg" alt="Hyeondo Jang">
+                <a href="https://kr.linkedin.com/in/hyeondo-jang-83a801217">Hyeondo Jang</a>
+                <span class="member-position">MS Student</span>
+            </li>
 
-        <li class="member-item">
-            <img src="group_profile/doyoonkim.jpg" alt="Doyoon Kim">
-            <a href="https://cosmos1030.github.io/">Doyoon Kim</a>
-            <span class="member-position">MS Student</span>
-        </li>
+            <li class="member-item">
+                <img src="group_profile/jiyunpark.jpg" alt="Jiyun Park">
+                <span>Jiyun Park</span>
+                <span class="member-position">MS Student</span>
+            </li>
 
-    </ul>
+            <li class="member-item">
+                <img src="group_profile/doyoonkim.jpg" alt="Doyoon Kim">
+                <a href="https://cosmos1030.github.io/">Doyoon Kim</a>
+                <span class="member-position">MS Student</span>
+            </li>
 
-    <!-- Gallery Preview -->
-    <h3>Gallery</h3>
-    <p class="gallery-more">We also spend time together on various occasions. For more stories, check out <a href="gallery.html">here</a>!</p>
-    <div class="gallery-preview">
-        <div class="gallery-preview-item">
-            <a href="stories/26_bowling.png" target="_blank">
-                <img src="stories/26_bowling.png" alt="Bowling Night">
-                <span class="tooltip">Bowling Night</span>
-            </a>
+        </ul>
+
+        <h3>Gallery</h3>
+        <p>We also spend time together on various occasions. For more stories, check out <a href="gallery.html">here</a>!</p>
+        <div class="gallery-preview">
+            <div class="gallery-preview-item">
+                <a href="stories/26_bowling.png" target="_blank">
+                    <img src="stories/26_bowling.png" alt="Bowling Night">
+                    <span class="tooltip">Bowling Night</span>
+                </a>
+            </div>
+            <div class="gallery-preview-item">
+                <a href="stories/26_post-icml.jpeg" target="_blank">
+                    <img src="stories/26_post-icml.jpeg" alt="post-ICML 2026">
+                    <span class="tooltip">post-ICML 2026</span>
+                </a>
+            </div>
+            <div class="gallery-preview-item">
+                <a href="stories/25_yearendparty.png" target="_blank">
+                    <img src="stories/25_yearendparty.png" alt="Year-end Party">
+                    <span class="tooltip">Year-end Party</span>
+                </a>
+            </div>
+            <div class="gallery-preview-item">
+                <a href="stories/25_boardgame.jpeg" target="_blank">
+                    <img src="stories/25_boardgame.jpeg" alt="Board Game Night">
+                    <span class="tooltip">Board Game Night</span>
+                </a>
+            </div>
+            <div class="gallery-preview-item">
+                <a href="stories/25_openday.jpg" target="_blank">
+                    <img src="stories/25_openday.jpg" alt="LOG Open Day">
+                    <span class="tooltip">LOG Open Day</span>
+                </a>
+            </div>
         </div>
-        <div class="gallery-preview-item">
-            <a href="stories/26_post-icml.jpeg" target="_blank">
-                <img src="stories/26_post-icml.jpeg" alt="post-ICML 2026">
-                <span class="tooltip">post-ICML 2026</span>
-            </a>
-        </div>
-        <div class="gallery-preview-item">
-            <a href="stories/25_yearendparty.png" target="_blank">
-                <img src="stories/25_yearendparty.png" alt="Year-end Party">
-                <span class="tooltip">Year-end Party</span>
-            </a>
-        </div>
-        <div class="gallery-preview-item">
-            <a href="stories/25_boardgame.jpeg" target="_blank">
-                <img src="stories/25_boardgame.jpeg" alt="Board Game Night">
-                <span class="tooltip">Board Game Night</span>
-            </a>
-        </div>
-        <div class="gallery-preview-item">
-            <a href="stories/25_openday.jpg" target="_blank">
-                <img src="stories/25_openday.jpg" alt="LOG Open Day">
-                <span class="tooltip">LOG Open Day</span>
-            </a>
-        </div>
-    </div>
 
-    <!-- Alumni -->
-    <h3>Alumni</h3>
-    <p class="alumni">
-        Dahun Shin (MS 2025); 
-        <a href="https://shpark97.github.io/">Seonghwan Park</a> (MS 2025); 
-        Jaehyeon Jeong (MS 2026)
-    </p>
+        <h3>Alumni</h3>
+        <p>
+            Dahun Shin (MS 2025);
+            <a href="https://shpark97.github.io/">Seonghwan Park</a> (MS 2025);
+            Jaehyeon Jeong (MS 2026)
+        </p>
+    </main>
 
-</main>
+    <footer>
+        <span>&copy; 2026 LOG. All rights reserved.</span>
+        <div class="footer-logos">
+            <a href="https://www.postech.ac.kr" target="_blank"><img src="logo/postech_logo.png" alt="POSTECH"></a>
+            <a href="https://ai.postech.ac.kr" target="_blank"><img src="logo/gsai_logo.png" alt="GSAI"></a>
+            <a href="https://cse.postech.ac.kr" target="_blank"><img src="logo/cs_logo.png" alt="CS"></a>
+            <img src="logo/log_logo.png" alt="LOG">
+        </div>
+    </footer>
 
-<footer>
-    <p>&copy; 2026 LOG. All rights reserved.</p>
-    <div class="footer-logos">
-        <a href="https://www.postech.ac.kr" target="_blank"><img src="logo/postech_logo.png" alt="POSTECH"></a>
-        <a href="https://ai.postech.ac.kr" target="_blank"><img src="logo/gsai_logo.png" alt="GSAI"></a>
-        <a href="https://cse.postech.ac.kr" target="_blank"><img src="logo/cs_logo.png" alt="CS"></a>
-        <img src="logo/log_logo.png" alt="LOG">
-    </div>
-</footer>
-
+</div>
 </body>
 </html>
-

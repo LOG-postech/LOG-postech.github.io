@@ -2,116 +2,145 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="logo/log_logo.png" type="image/png">
-    <title>Hiring | Lee Optimization Group</title>
-
+    <title>Contact | Lee Optimization Group</title>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        
         body {
-            font-family: system-ui, -apple-system, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-            color: #333;
+            font-family: 'Inter', system-ui, sans-serif;
+            color: #111;
+            background: #FAF8F5;
+            min-height: 100vh;
+        }
+
+        .top-rule {
+            height: 3px;
+            background: linear-gradient(90deg, #1B3A8A 0%, #3B6FD4 60%, #93A8D8 100%);
+        }
+
+        .inner {
             max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
+            margin: 0 auto;
+            padding: 48px 32px 60px;
         }
+
         header {
-            border-bottom: 1px solid #eee;
-            padding-bottom: 20px;
+            padding-bottom: 28px;
+            margin-bottom: 40px;
+            border-bottom: 1px solid #e2e6f0;
+        }
+
+        .lab-name, .lab-name:hover {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-size: 2.3em;
+            font-weight: 500;
+            color: #111;
+            letter-spacing: -0.01em;
+            line-height: 1;
+            display: block;
             margin-bottom: 20px;
-        }
-        nav a {
-            margin-right: 15px;
             text-decoration: none;
-            color: #007bff;
         }
-        footer {
-            margin-top: 40px;
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #6b7280;
+            font-size: 1em;
+            font-weight: 400;
+            letter-spacing: 0.01em;
+            transition: color 0.15s;
+        }
+
+        nav a:hover { color: #1B3A8A; }
+
+        a { color: #1B3A8A; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        h2 {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-size: 1.25em;
+            font-weight: 500;
+            letter-spacing: 0;
+            color: #374151;
+            margin-bottom: 20px;
+            
+        }
+
+        p {
             font-size: 0.9em;
-            color: #777;
-            border-top: 1px solid #eee;
+            line-height: 1.9;
+            color: #374151;
+            text-align: justify;
+            margin-bottom: 0;
+        }
+
+        footer {
+            margin-top: 52px;
             padding-top: 20px;
+            border-top: 1px solid #e2e6f0;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            font-size: 0.75em;
+            color: #9ca3af;
         }
 
         .footer-logos {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
         }
 
         .footer-logos img {
-            height: 36px;
+            height: 28px;
             width: auto;
             object-fit: contain;
-        }
-
-        h3 {
-            margin-top: 30px;
-            margin-bottom: 5px;
-        }
-
-        h3 + p {
-            margin-top: 0;        /* 제목 바로 다음 문단 위 간격 제거 */
-        }
-
-        p {
-            margin-top: 0;
-        }
-
-        a {
-            text-decoration: none;   /* 밑줄 제거 */
-            color: #007bff;          /* 링크 색상 (원하는 색으로) */
-        }
-
-        a:hover {
-            text-decoration: underline;  /* 마우스 올리면 밑줄 (선택사항) */
-        }
-        .logo-title {
-            display: flex;
-            align-items: center;
+            opacity: 1;
         }
     </style>
 </head>
-
 <body>
 
-<header>
-    <h1>Lee Optimization Group</h1>
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="research.html">Research</a>
-        <a href="publications.html">Publications</a>
-        <a href="group.html">Members</a>
-        <a href="hiring.html">Hiring</a>
-        <!-- <a href="gallery.html">Gallery</a> -->
-        <a href="contact.html">Contact</a>
-    </nav>
-</header>
+<div class="top-rule"></div>
+<div class="inner">
 
-<h2>Contact</h2>
+    <header>
+        <a href="index.html" class="lab-name">Lee Optimization Group</a>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="research.html">Research</a>
+            <a href="publications.html">Publications</a>
+            <a href="group.html">Members</a>
+            <a href="hiring.html">Hiring</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
 
-<div class="contact-box">
-    <p><strong>Computational Optimization Lab</strong></p>
-
-    <p>(Office) RIST 4, Room #4427</p>
-
-    <br>
-    <p>
-    Department of Computer Science and Engineering<br>
-    Pohang University of Science and Technology (POSTECH)<br>
-    77 Cheongam-ro, Nam-gu, Pohang-si, Gyeongsangbuk-do (37673)<br>
-    South Korea
-    </p>
-</div>
+    <main>
+        <h2>Contact</h2>
+        <p>
+            <strong>Computational Optimization Lab</strong><br>
+            <br>
+            (Office) RIST 4, Room #4427<br>
+            <br>
+            Department of Computer Science and Engineering<br>
+            Pohang University of Science and Technology (POSTECH)<br>
+            77 Cheongam-ro, Nam-gu, Pohang-si, Gyeongsangbuk-do (37673)<br>
+            South Korea
+        </p>
+    </main>
 
     <footer>
-        <p>&copy; 2026 LOG. All rights reserved.</p>
+        <span>&copy; 2026 LOG. All rights reserved.</span>
         <div class="footer-logos">
             <a href="https://www.postech.ac.kr" target="_blank"><img src="logo/postech_logo.png" alt="POSTECH"></a>
             <a href="https://ai.postech.ac.kr" target="_blank"><img src="logo/gsai_logo.png" alt="GSAI"></a>
@@ -120,5 +149,6 @@
         </div>
     </footer>
 
+</div>
 </body>
 </html>

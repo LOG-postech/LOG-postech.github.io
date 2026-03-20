@@ -2,204 +2,213 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="logo/log_logo.png" type="image/png">
     <title>Lee Optimization Group</title>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
         body {
-            font-family: system-ui, -apple-system, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-            color: #333;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
+            font-family: 'Inter', system-ui, sans-serif;
+            color: #111;
+            background: #FAF8F5;
+            min-height: 100vh;
         }
+
+        .top-rule {
+            height: 3px;
+            background: linear-gradient(90deg, #1B3A8A 0%, #3B6FD4 60%, #93A8D8 100%);
+        }
+
+        .inner {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 48px 32px 60px;
+        }
+
         header {
-            border-bottom: 1px solid #eee;
-            padding-bottom: 20px;
+            padding-bottom: 28px;
+            margin-bottom: 40px;
+            border-bottom: 1px solid #e2e6f0;
+        }
+
+        .lab-name {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-size: 2.3em;
+            font-weight: 500;
+            color: #111;
+            letter-spacing: -0.01em;
+            line-height: 1;
+            display: block;
             margin-bottom: 20px;
         }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
         nav a {
-            margin-right: 15px;
             text-decoration: none;
-            color: #007bff;
-        }
-        footer {
-            margin-top: 40px;
-            font-size: 0.9em;
-            color: #777;
-            border-top: 1px solid #eee;
-            padding-top: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+            color: #6b7280;
+            font-size: 1em;
+            font-weight: 400;
+            letter-spacing: 0.01em;
+            transition: color 0.15s;
         }
 
-        .footer-logos {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
+        nav a:hover { color: #1B3A8A; }
 
-        .footer-logos img {
-            height: 36px;
-            width: auto;
-            object-fit: contain;
-        }
-
-        h3 {
-            margin-top: 30px;
-            margin-bottom: 8px;
-            border-bottom: 1px solid #ccc;
-            padding-bottom: 4px;
-        }
-
-        h3 + p {
-            margin-top: 0;        /* 제목 바로 다음 문단 위 간격 제거 */
-        }
-
-        p {
-            margin-top: 0;
-        }
-
-        a {
-            text-decoration: none;   /* 밑줄 제거 */
-            color: #007bff;          /* 링크 색상 (원하는 색으로) */
-        }
-
-        a:hover {
-            text-decoration: underline;  /* 마우스 올리면 밑줄 (선택사항) */
-        }
-        em {
-            text-decoration: underline;
-        }
-
-        .logo-title {
-            display: flex;
-            align-items: center;
-        }
-
-        .logo {
-            height: 70px;              /* 🔥 크기 키움 */
-            margin-right: 15px;
-            border: 1px solid #ddd;    /* 🔥 테두리 추가 */
-            padding: 5px;              /* 🔥 안쪽 여백 */
-            border-radius: 6px;        /* 🔥 살짝 둥글게 */
-        }
-
-        .intro-section {
-            margin-top: 20px;
-        }
-
-        .intro-image img {
+        main img.lab-photo {
             width: 100%;
             height: auto;
-            image-rendering: auto;
-            margin-bottom: 15px;
+            display: block;
+            margin-bottom: 24px;
         }
 
-        .intro-image {
-            text-align: center;
+        .intro {
+            font-size: 0.93em;
+            line-height: 1.8;
+            color: #374151;
+            margin-bottom: 40px;
+            text-align: justify;
         }
 
-        .stories-section {
-            margin-top: 60px;
-        }
+        .intro a { color: #1B3A8A; text-decoration: none; }
+        .intro a:hover { text-decoration: underline; }
 
-        .stories-desc {
-            margin-bottom: 25px;
-            color: #555;
-        }
-
-        .stories-gallery {
-            display: flex;
-            gap: 15px;
-            overflow-x: auto;   /* 🔥 화면 작으면 가로 스크롤 */
-        }
-
-        .stories-gallery img {
-            width: 200px;
-            height: 150px;
-            object-fit: cover;
-            border: 1px solid #333;
-            transition: 0.3s;
-        }
-
-        .stories-gallery img:hover {
-            transform: scale(1.05);
+        h3 {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-size: 1.25em;
+            font-weight: 500;
+            letter-spacing: 0;
+            color: #374151;
+            margin-bottom: 14px;
+            margin-top: 36px;
         }
 
         .news-list {
             margin: 0;
             padding: 0;
-            margin-top: 14px;
         }
 
         .news-item {
             display: flex;
-            gap: 16px;
-            margin-bottom: 8px;
+            gap: 20px;
             align-items: baseline;
+            margin-bottom: 10px;
         }
 
         .news-date {
-            min-width: 75px;
-            font-weight: bold;
+            font-size: 0.8em;
+            font-weight: 400;
+            color: #9ca3af;
+            min-width: 64px;
             flex-shrink: 0;
         }
 
         .news-content {
-            flex: 1;
+            font-size: 0.88em;
+            color: #374151;
+            line-height: 1.65;
+        }
+
+        .news-content a { color: #1B3A8A; text-decoration: none; }
+        .news-content a:hover { text-decoration: underline; }
+        .news-content em { font-style: normal; font-weight: 600; color: inherit; }
+
+        p.ack {
+            font-size: 0.88em;
+            color: #374151;
+            line-height: 1.65;
+            margin-top: 0;
+            text-align: justify;
+        }
+
+        .sponsor-logos {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+            background: #fff;
+            border-radius: 10px;
+            border: 1px solid #e8e4dd;
+            padding: 4px 16px;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .sponsor-card {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sponsor-card img {
+            width: 64px;
+            height: 64px;
+            object-fit: contain;
+        }
+
+        footer {
+            margin-top: 52px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e6f0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.75em;
+            color: #9ca3af;
+        }
+
+        .footer-logos {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .footer-logos img {
+            height: 28px;
+            width: auto;
+            object-fit: contain;
+            opacity: 1;
         }
     </style>
 </head>
 <body>
 
+<div class="top-rule"></div>
+<div class="inner">
+
     <header>
-        <h1>Lee Optimization Group</h1>
-        <!-- <div class="logo-title">
-            <img src="log_logo.png" alt="LOG Logo" class="logo">
-            <h1>Lee Optimization Group</h1>
-        </div> -->
+        <span class="lab-name">Lee Optimization Group</span>
         <nav>
             <a href="index.html">Home</a>
             <a href="research.html">Research</a>
             <a href="publications.html">Publications</a>
             <a href="group.html">Members</a>
             <a href="hiring.html">Hiring</a>
-            <!-- <a href="gallery.html">Gallery</a> -->
             <a href="contact.html">Contact</a>
         </nav>
     </header>
 
     <main>
-    <div class="intro-section">
+        <img src="lab_photo.png" alt="Lab Photo" class="lab-photo">
 
-        <div class="intro-image">
-            <img src="lab_photo.png" alt="Lab Photo">
-        </div>
-    
-        <div class="intro-text">
-            <p>
+        <p class="intro">
             We pursue research in machine learning and optimization.
-            To this end, we develop theories and algorithms using computational and mathematical tools. 
-            Our ultimate goal is to provide robust and provable solutions to challenging problems in artificial intelligence, particularly those in large-scale settings. 
+            To this end, we develop theories and algorithms using computational and mathematical tools.
+            Our ultimate goal is to provide robust and provable solutions to challenging problems in artificial intelligence, particularly those in large-scale settings.
             We are passionate about translating our findings into practical applications that can benefit society.
-            For further details on our research directions and ongoing projects, please refer to the 
+            For further details on our research directions and ongoing projects, please refer to the
             <a href="research.html">Research</a>.
-            </p>
-        </div>
-    
-    </div>
-        
-        
-        <!-- <h3>Hiring</h3>
-        <p>
-            We are actively recruiting talented and motivated students to join our research group.
-            For further information, please visit the 
-            <a href="hiring.html">Hiring</a>.
-        </p> -->
+        </p>
+
         <h3>Recent News</h3>
         <div class="news-list">
 
@@ -220,7 +229,7 @@
 
             <div class="news-item">
                 <span class="news-date">Feb 2026</span>
-                <span class="news-content">✈️ Kwanhee started as a visiting student researcher in the <a href="https://daslab.pages.ista.ac.at/" target="_blank">Dan Alistarh Group</a>.</span>
+                <span class="news-content">✈️ Kwanhee started as a visiting student researcher in the <a href="https://daslab.pages.ista.ac.at/" target="_blank">Dan Alistarh Group</a> at <a href="https://ist.ac.at/en/home/" target="_blank">ISTA</a>.</span>
             </div>
 
             <div class="news-item">
@@ -250,35 +259,26 @@
 
         </div>
 
-        <!-- <section class="stories-section">
-
-            <h3>Stories</h3>
-            <p class="stories-desc">
-                We spend time together on various occasions 
-                (see <a href="gallery.html">gallery</a> for more).
-            </p>
-        
-            <div class="stories-gallery">
-                <img src="stories/post-icml.jpeg" alt="Story 1">
-                <img src="stories/year-end-party.png" alt="Story 2">
-                <img src="stories/open_day.jpg" alt="Story 3">
-                <img src="stories/24_open_day.jpg" alt="Story 4">
-                <img src="stories/story5.jpg" alt="Story 5">
-                <img src="stories/story6.jpg" alt="Story 6">
-            </div>
-        
-        </section> -->
-
         <h3>Acknowledgements</h3>
-        <p>
+        <p class="ack">
             Our research is generously supported by multiple organizations including government agencies
             (NRF, IITP), industry (Google, Samsung, Naver, Intel), and academic institutions
             (POSTECH, Yonsei).
         </p>
+        <div class="sponsor-logos">
+            <div class="sponsor-card"><img src="logo/nrf_logo.jpg" alt="NRF" style="width:38px;height:38px;"></div>
+            <div class="sponsor-card"><img src="logo/iitp_logo.png" alt="IITP" style="width:52px;height:52px;"></div>
+            <div class="sponsor-card"><img src="logo/google_logo.svg" alt="Google"></div>
+            <div class="sponsor-card"><img src="logo/samsung_logo.svg" alt="Samsung"></div>
+            <div class="sponsor-card"><img src="logo/naver_logo.svg" alt="Naver" style="width:56px;height:56px;"></div>
+            <div class="sponsor-card"><img src="logo/intel_logo.svg" alt="Intel" style="width:42px;height:42px;"></div>
+            <div class="sponsor-card"><img src="logo/postech_logo.png" alt="POSTECH" style="width:84px;height:84px;"></div>
+            <div class="sponsor-card"><img src="logo/yonsei_logo.png" alt="Yonsei" style="width:38px;height:38px;"></div>
+        </div>
     </main>
 
     <footer>
-        <p>&copy; 2026 LOG. All rights reserved.</p>
+        <span>&copy; 2026 LOG. All rights reserved.</span>
         <div class="footer-logos">
             <a href="https://www.postech.ac.kr" target="_blank"><img src="logo/postech_logo.png" alt="POSTECH"></a>
             <a href="https://ai.postech.ac.kr" target="_blank"><img src="logo/gsai_logo.png" alt="GSAI"></a>
@@ -287,5 +287,6 @@
         </div>
     </footer>
 
+</div>
 </body>
 </html>
