@@ -152,14 +152,18 @@
 
         .menu-toggle {
             display: none;
-            background: none;
-            border: none;
-            font-size: 1.5em;
+            position: fixed;
+            top: 16px;
+            right: 18px;
+            z-index: 1001;
+            background: #FAF8F5;
+            border: 1px solid #e2e6f0;
+            border-radius: 6px;
+            font-size: 1.2em;
             cursor: pointer;
             color: #374151;
-            padding: 0;
+            padding: 4px 8px;
             line-height: 1;
-            margin-bottom: 4px;
         }
 
 
@@ -173,8 +177,20 @@
             }
 
             .menu-toggle {
-                display: block;
-            }
+            display: none;
+            position: fixed;
+            top: 16px;
+            right: 18px;
+            z-index: 1001;
+            background: #FAF8F5;
+            border: 1px solid #e2e6f0;
+            border-radius: 6px;
+            font-size: 1.2em;
+            cursor: pointer;
+            color: #374151;
+            padding: 4px 8px;
+            line-height: 1;
+        }
 
             nav {
                 display: none;
@@ -218,6 +234,62 @@
             .news-date {
                 font-size: 0.78em;
             }
+        }
+
+        /* Drawer */
+        .nav-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.3);
+            z-index: 999;
+        }
+
+        .nav-drawer {
+            position: fixed;
+            top: 0;
+            right: -280px;
+            width: 240px;
+            height: 100vh;
+            background: #FAF8F5;
+            box-shadow: -4px 0 24px rgba(0,0,0,0.12);
+            z-index: 1000;
+            transition: right 0.3s ease;
+            padding: 64px 32px 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .nav-drawer.open {
+            right: 0;
+        }
+
+        .nav-overlay.open {
+            display: block;
+        }
+
+        .drawer-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.4em;
+            cursor: pointer;
+            color: #374151;
+            line-height: 1;
+        }
+
+        .nav-drawer a {
+            text-decoration: none;
+            color: #374151;
+            font-size: 1.05em;
+            font-weight: 400;
+        }
+
+        .nav-drawer a:hover {
+            color: #1B3A8A;
         }
     </style>
 </head>
@@ -487,9 +559,36 @@
 
 </div>
 <script>
-    document.querySelector('.menu-toggle').addEventListener('click', function() {
-        document.querySelector('nav').classList.toggle('open');
-    });
+    var toggle = document.querySelector('.menu-toggle');
+    var drawer = document.getElementById('navDrawer');
+    var overlay = document.getElementById('navOverlay');
+    var close = document.getElementById('drawerClose');
+
+    function openDrawer() {
+        drawer.classList.add('open');
+        overlay.classList.add('open');
+    }
+    function closeDrawer() {
+        drawer.classList.remove('open');
+        overlay.classList.remove('open');
+    }
+
+    toggle.addEventListener('click', openDrawer);
+    close.addEventListener('click', closeDrawer);
+    overlay.addEventListener('click', closeDrawer);
 </script>
+
+
+    <div class="nav-overlay" id="navOverlay"></div>
+    <div class="nav-drawer" id="navDrawer">
+        <button class="drawer-close" id="drawerClose">&#x2715;</button>
+        <a href="index.html">Home</a>
+        <a href="research.html">Research</a>
+        <a href="publications.html">Publications</a>
+        <a href="group.html">Members</a>
+        <a href="hiring.html">Hiring</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
 </body>
 </html>
