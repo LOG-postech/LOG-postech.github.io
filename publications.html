@@ -150,6 +150,22 @@
             object-fit: contain;
             opacity: 1;
         }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5em;
+            cursor: pointer;
+            color: #374151;
+            padding: 0;
+            line-height: 1;
+            margin-bottom: 4px;
+        }
+
+        nav.collapsed {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -416,5 +432,16 @@
     </footer>
 
 </div>
+<script>
+    if (window.screen.width < 640) {
+        var toggle = document.querySelector('.menu-toggle');
+        var nav = document.querySelector('nav');
+        toggle.style.display = 'block';
+        nav.classList.add('collapsed');
+        toggle.addEventListener('click', function() {
+            nav.classList.toggle('collapsed');
+        });
+    }
+</script>
 </body>
 </html>
