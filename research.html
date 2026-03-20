@@ -404,7 +404,7 @@
         overlay.classList.remove('open');
     }
 
-    toggle.addEventListener('click', openDrawer);
+    toggle.addEventListener('click', function() { drawer.classList.contains('open') ? closeDrawer() : openDrawer(); });
     close.addEventListener('click', closeDrawer);
     overlay.addEventListener('click', closeDrawer);
 </script>
