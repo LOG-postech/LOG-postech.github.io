@@ -63,8 +63,8 @@
 
         nav a:hover { color: #1B3A8A; }
 
-        nav a.active { color: #1B3A8A; font-weight: 500; }
-        .nav-drawer a.active { color: #1B3A8A; font-weight: 500; }
+        nav a.active { color: #111; font-weight: 600; }
+        .nav-drawer a.active { color: #111; font-weight: 600; }
 
 
         a { color: #1B3A8A; text-decoration: none; }
@@ -246,11 +246,11 @@
         .nav-drawer {
             position: fixed;
             top: 0;
-            left: -280px;
+            right: -280px;
             width: 240px;
             height: 100vh;
             background: #FAF8F5;
-            box-shadow: 4px 0 24px rgba(0,0,0,0.12);
+            box-shadow: -4px 0 24px rgba(0,0,0,0.12);
             z-index: 1000;
             transition: right 0.3s ease;
             padding: 64px 32px 40px;
@@ -260,7 +260,7 @@
         }
 
         .nav-drawer.open {
-            left: 0;
+            right: 0;
         }
 
         .nav-overlay.open {
