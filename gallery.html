@@ -2,64 +2,83 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=860">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="logo/log_logo.png" type="image/png">
     <title>Gallery | Lee Optimization Group</title>
-
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
         body {
-            font-family: system-ui, -apple-system, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-            color: #333;
+            font-family: 'Inter', system-ui, sans-serif;
+            color: #111;
+            background: #FAF8F5;
+            min-height: 100vh;
+        }
+
+        .top-rule {
+            height: 3px;
+            background: linear-gradient(90deg, #1B3A8A 0%, #3B6FD4 60%, #93A8D8 100%);
+        }
+
+        .inner {
             max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
+            margin: 0 auto;
+            padding: clamp(24px, 5vw, 48px) clamp(16px, 4vw, 32px) clamp(36px, 5vw, 60px);
         }
 
         header {
-            border-bottom: 1px solid #eee;
-            padding-bottom: 20px;
+            padding-bottom: 28px;
+            margin-bottom: 40px;
+            border-bottom: 1px solid #e2e6f0;
+        }
+
+        .lab-name, .lab-name:hover {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-size: clamp(1.7em, 5vw, 2.6em);
+            font-weight: 500;
+            color: #111;
+            letter-spacing: -0.01em;
+            line-height: 1;
+            display: block;
             margin-bottom: 20px;
+            text-decoration: none;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: clamp(10px, 3vw, 24px);
         }
 
         nav a {
-            margin-right: 15px;
             text-decoration: none;
-            color: #007bff;
+            color: #6b7280;
+            font-size: 1em;
+            font-weight: 400;
+            letter-spacing: 0.01em;
+            transition: color 0.15s;
         }
 
-        nav a:hover {
-            text-decoration: underline;
+        nav a:hover { color: #1B3A8A; }
+
+        a { color: #1B3A8A; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        h2 {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-size: 1.3em;
+            font-weight: 500;
+            letter-spacing: 0;
+            color: #374151;
+            margin-bottom: 12px;
         }
 
-        footer {
-            margin-top: 40px;
+        p {
             font-size: 0.9em;
-            color: #777;
-            border-top: 1px solid #eee;
-            padding-top: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .footer-logos {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .footer-logos img {
-            height: 36px;
-            width: auto;
-            object-fit: contain;
-        }
-
-        a {
-            text-decoration: none;
-            color: #007bff;
+            line-height: 1.75;
+            color: #374151;
+            margin-bottom: 20px;
         }
 
         /* Gallery grid */
@@ -72,7 +91,7 @@
         .gallery-item {
             position: relative;
             overflow: hidden;
-            border: 1px solid #333;
+            border: 1px solid #d1d5db;
             aspect-ratio: 1;
         }
 
@@ -90,9 +109,7 @@
             transition: opacity 0.2s;
         }
 
-        .gallery-item:hover img {
-            opacity: 0.85;
-        }
+        .gallery-item:hover img { opacity: 0.85; }
 
         .gallery-item .tooltip {
             position: absolute;
@@ -109,31 +126,52 @@
             pointer-events: none;
         }
 
-        .gallery-item:hover .tooltip {
-            opacity: 1;
+        .gallery-item:hover .tooltip { opacity: 1; }
+
+        footer {
+            margin-top: 52px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e6f0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.75em;
+            color: #6b7280;
+        }
+
+        .footer-logos {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .footer-logos img {
+            height: 28px;
+            width: auto;
+            object-fit: contain;
+            opacity: 0.7;
         }
     </style>
 </head>
-
 <body>
 
+<div class="top-rule"></div>
+<div class="inner">
+
     <header>
-        <h1>Lee Optimization Group</h1>
+        <a href="index.html" class="lab-name">Lee Optimization Group</a>
         <nav>
             <a href="index.html">Home</a>
             <a href="research.html">Research</a>
             <a href="publications.html">Publications</a>
             <a href="group.html">Members</a>
             <a href="hiring.html">Hiring</a>
-            <!-- <a href="gallery.html">Gallery</a> -->
             <a href="contact.html">Contact</a>
         </nav>
     </header>
 
     <main>
-
         <h2>Gallery</h2>
-        <p style="margin-bottom: 16px;">We also spend time together on various occasions.</p>
 
         <div class="gallery-grid">
 
@@ -241,7 +279,7 @@
                     <span class="tooltip">LOG e-sports</span>
                 </a>
             </div>
-            
+
             <div class="gallery-item">
                 <a href="stories/24_logesports.jpg" target="_blank">
                     <img src="stories/24_logesports.jpg" alt="LOG e-sports">
@@ -300,8 +338,8 @@
 
             <div class="gallery-item">
                 <a href="stories/23_icml3.jpeg" target="_blank">
-                    <img src="stories/23_icml3.jpeg" alt="Makapu’u Lookout, Hawaii">
-                    <span class="tooltip">Makapu’u Lookout, Hawaii</span>
+                    <img src="stories/23_icml3.jpeg" alt="Makapu'u Lookout, Hawaii">
+                    <span class="tooltip">Makapu'u Lookout, Hawaii</span>
                 </a>
             </div>
 
@@ -346,12 +384,12 @@
                     <span class="tooltip">No Screen Day</span>
                 </a>
             </div>
-        </div>
 
+        </div>
     </main>
 
     <footer>
-        <p>&copy; 2026 LOG. All rights reserved.</p>
+        <span>&copy; 2026 LOG. All rights reserved.</span>
         <div class="footer-logos">
             <a href="https://www.postech.ac.kr" target="_blank"><img src="logo/postech_logo.png" alt="POSTECH"></a>
             <a href="https://ai.postech.ac.kr" target="_blank"><img src="logo/gsai_logo.png" alt="GSAI"></a>
@@ -360,5 +398,6 @@
         </div>
     </footer>
 
+</div>
 </body>
 </html>
