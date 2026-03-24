@@ -1,6 +1,10 @@
-# CLAUDE.md — Lee Optimization Group Homepage
+# CLAUDE.md
 
-This is a static HTML/CSS academic lab website for the **Lee Optimization Group (LOG)** at POSTECH.
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## Overview
+
+This is a static HTML/CSS academic lab website for the **Lee Optimization Group (LOG)** at POSTECH, deployed via GitHub Pages at `opt.postech.ac.kr`. There is no build step — edit HTML files directly and push to deploy.
 
 ## Pages
 
@@ -13,6 +17,18 @@ This is a static HTML/CSS academic lab website for the **Lee Optimization Group 
 | `hiring.html` | Open positions |
 | `contact.html` | Contact info |
 | `gallery.html` | Lab photos |
+
+## Architecture
+
+**CSS is inline per-page** — each HTML file contains a full `<style>` block in `<head>`. There is no shared stylesheet. When making a visual change that must apply site-wide (e.g., changing a font size or color), you must update every page's `<style>` block individually.
+
+**Asset directories:**
+- `logo/` — sponsor and collaborator logos (PNG/SVG); referenced in `index.html` and `research.html`
+- `research_focus/` — thumbnail images for research area cards in `research.html`
+- `stories/` — gallery photos for `gallery.html` (year-prefixed filenames, e.g., `25_iclr.jpeg`)
+- `group_profile/` — member headshots for `group.html` (filename = person's name slug)
+
+**Scratch files** (not published pages, do not modify unless explicitly asked): `index_v1.html`, `design_demo.html`, `font_compare.html`
 
 ## Design Conventions (must be preserved)
 
@@ -47,6 +63,8 @@ When adding or modifying any page, verify all of the following:
 - [ ] **Lab name font size is fixed at `2.3em`** — do not use `clamp()` with a viewport unit for `.lab-name`, and do not override it in media queries
 - [ ] **Body text is unified at `0.93em`** across all pages — `p`, `.intro`, and equivalent paragraph elements must use `0.93em`, matching `index.html`
 - [ ] **Logo card containers use `flex-wrap: wrap`** so logos reflow to multiple rows on narrow screens instead of shrinking — do not set `flex-wrap: nowrap` or force images to scale down inside logo cards (`.sponsor-logos`, `.collab-logos`)
+- [ ] **Members grid keeps fixed avatar size** — member photos must not shrink on small screens; reduce the number of columns instead (`4 → 3 → 2 → 1`) and keep visible spacing between cards
+- [ ] **Gallery page uses dynamic grid** — `.gallery-grid` should use `repeat(auto-fit, minmax(..., 1fr))` with consistent `gap`, so tile count adapts smoothly to viewport width
 
 ### Content
 - [ ] External links open in a new tab (`target="_blank"`) and have `rel="noopener"`
