@@ -45,6 +45,11 @@
             text-decoration: none;
         }
 
+        .lab-name:hover {
+            text-decoration: none;
+            color: #111;
+        }
+
         nav {
             display: flex;
             flex-wrap: wrap;
@@ -99,29 +104,45 @@
         }
 
         .section {
-            display: block;
+            display: grid;
+            grid-template-columns: 150px minmax(0, 1fr);
+            align-items: start;
+            column-gap: 22px;
+            row-gap: 10px;
             margin-bottom: 40px;
         }
 
-        .section::after {
-            content: "";
-            display: block;
-            clear: both;
-        }
-
         .section .section-text {
-            display: block;
+            min-width: 0;
         }
 
         .section img {
-            float: left;
-            width: 140px;
+            width: 150px;
             max-width: none;
             height: auto;
             object-fit: contain;
             border: 1.5px solid #b8bec8;
             border-radius: 6px;
+            margin-top: 4px;
+        }
+
+        .section.wrap-flow {
+            display: block;
+        }
+
+        .section.wrap-flow::after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+
+        .section.wrap-flow img {
+            float: left;
             margin: 4px 22px 10px 0;
+        }
+
+        .section.wrap-flow .section-text {
+            display: block;
         }
 
         .section-title { font-weight: 700; }
@@ -404,6 +425,46 @@
     toggle.addEventListener('click', function() { drawer.classList.contains('open') ? closeDrawer() : openDrawer(); });
     close.addEventListener('click', closeDrawer);
     overlay.addEventListener('click', closeDrawer);
+
+    function applyConditionalResearchWrap() {
+        var sections = document.querySelectorAll('.section');
+
+        sections.forEach(function(section) {
+            var image = section.querySelector('img');
+            var textBlock = section.querySelector('.section-text p');
+            if (!image || !textBlock) {
+                return;
+            }
+
+            section.classList.remove('wrap-flow');
+
+            var textStyle = window.getComputedStyle(textBlock);
+            var lineHeight = parseFloat(textStyle.lineHeight);
+            if (!lineHeight || Number.isNaN(lineHeight)) {
+                lineHeight = parseFloat(textStyle.fontSize) * 1.75;
+            }
+
+            var textHeight = textBlock.getBoundingClientRect().height;
+            var imageHeight = image.getBoundingClientRect().height;
+            var threshold = imageHeight + (2 * lineHeight);
+
+            if (textHeight > threshold) {
+                section.classList.add('wrap-flow');
+            }
+        });
+    }
+
+    var wrapResizeTimer;
+    function onWrapResize() {
+        window.clearTimeout(wrapResizeTimer);
+        wrapResizeTimer = window.setTimeout(applyConditionalResearchWrap, 80);
+    }
+
+    window.addEventListener('load', applyConditionalResearchWrap);
+    window.addEventListener('resize', onWrapResize);
+    if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(applyConditionalResearchWrap);
+    }
 </script>
 </body>
 </html>
