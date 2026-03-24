@@ -12,13 +12,24 @@
         body {
             font-family: 'Inter', system-ui, sans-serif;
             color: #111;
-            background: #FAF8F5;
+            background: #ffffff;
             min-height: 100vh;
         }
 
         .top-rule {
             height: 3px;
             background: linear-gradient(90deg, #1B3A8A 0%, #3B6FD4 60%, #93A8D8 100%);
+        }
+
+        .scroll-progress {
+            position: fixed;
+            top: 3px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #3B6FD4;
+            z-index: 1001;
+            transition: width 0.08s linear;
         }
 
         .inner {
@@ -33,15 +44,15 @@
             border-bottom: 1px solid #e2e6f0;
         }
 
-        .lab-name, .lab-name:hover {
+        .lab-name {
             font-family: 'EB Garamond', Georgia, serif;
-            font-size: 2.3em;
+            font-size: 2.8em;
             font-weight: 500;
             color: #111;
-            letter-spacing: -0.01em;
-            line-height: 1;
+            letter-spacing: 0;
+            line-height: 0.96;
             display: block;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             text-decoration: none;
         }
 
@@ -58,12 +69,22 @@
             font-size: 1em;
             font-weight: 400;
             letter-spacing: 0.01em;
-            transition: color 0.15s;
+            padding-bottom: 2px;
+            border-bottom: 1.5px dashed transparent;
+            transition: color 0.15s, border-color 0.15s;
         }
 
-        nav a:hover { color: #1B3A8A; }
+        nav a:hover {
+            color: #1B3A8A;
+            border-bottom: 1.5px solid #1B3A8A;
+            text-decoration: none;
+        }
 
-        nav a.active { color: #111; font-weight: 600; }
+        nav a.active {
+            color: #111;
+            font-weight: 600;
+            border-bottom: 1.5px solid #111;
+        }
         .nav-drawer a.active { color: #111; font-weight: 600; }
 
 
@@ -71,21 +92,23 @@
         a:hover { text-decoration: underline; }
 
         h2 {
-            font-family: 'EB Garamond', Georgia, serif;
-            font-size: 1.3em;
-            font-weight: 500;
-            letter-spacing: 0;
-            color: #374151;
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 1.12em;
+            font-weight: 700;
+            letter-spacing: 0.01em;
+            text-transform: none;
+            color: #111;
             margin-bottom: 24px;
             
         }
 
         h3 {
-            font-family: 'EB Garamond', Georgia, serif;
-            font-size: 1.3em;
-            font-weight: 500;
-            letter-spacing: 0;
-            color: #374151;
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 1.12em;
+            font-weight: 700;
+            letter-spacing: 0.01em;
+            text-transform: none;
+            color: #111;
             margin-top: 40px;
             margin-bottom: 14px;
         }
@@ -94,7 +117,6 @@
             font-size: 0.93em;
             line-height: 1.75;
             color: #374151;
-            text-align: justify;
         }
 
         /* Member grid */
@@ -116,8 +138,8 @@
             height: auto;
             aspect-ratio: 1/1;
             object-fit: cover;
-            border-radius: 12px;
-            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            border: 1.5px solid #b8bec8;
             margin-bottom: 8px;
         }
 
@@ -154,7 +176,8 @@
         .gallery-preview-item {
             position: relative;
             overflow: hidden;
-            border: 1px solid #d1d5db;
+            border: 1.5px solid #b8bec8;
+            border-radius: 6px;
             aspect-ratio: 1;
         }
 
@@ -211,7 +234,7 @@
 
         .menu-toggle {
             display: none;
-                        background: #FAF8F5;
+                        background: #ffffff;
             border: 1px solid #e2e6f0;
             border-radius: 6px;
             font-size: 1.3em;
@@ -220,9 +243,7 @@
             padding: 4px 8px;
             line-height: 1;
         }
-
-
-        @media (max-width: 640px) {
+        @media (max-width: 900px) {
             .inner {
                 padding: 28px 18px 40px;
             }
@@ -230,11 +251,14 @@
             header {
                 padding-bottom: 4px;
                 margin-bottom: 16px;
-                display: flex;
-                flex-direction: row;
-                align-items: baseline;
-                justify-content: space-between;
-                flex-wrap: nowrap;
+                display: grid;
+                grid-template-columns: minmax(0, 1fr) auto;
+                align-items: start;
+                column-gap: 10px;
+            }
+
+            .lab-name {
+                min-width: 0;
             }
 
             .menu-toggle {
@@ -243,56 +267,11 @@
 
             nav {
                 display: none;
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-                padding-top: 12px;
-            }
-
-            nav.open {
-                display: flex;
-            }
-
-            h2, h3 {
-                margin-bottom: 6px;
-                margin-top: 24px;
-            }
-
-            .news-item {
-                flex-direction: column;
-                gap: 2px;
-            }
-
-            .news-date {
-                min-width: unset;
-            }
-
-            .sponsor-logos, .collab-logos {
-                width: 100%;
-            }
-
-
-            p, .intro, .news-content, p.ack, .section-text {
-                text-align: left;
-            }
-
-            .member-list {
-                grid-template-columns: repeat(3, 1fr);
-            }
-
-            .member-item span,
-            .member-item a {
-                font-size: 0.72rem;
-            }
-
-            .member-item .member-position {
-                font-size: 0.62rem;
             }
 
             .footer-logos img {
                 height: 18px;
             }
-
         }
 
         /* Drawer */
@@ -310,7 +289,7 @@
             right: -280px;
             width: 240px;
             height: 100vh;
-            background: #FAF8F5;
+            background: #ffffff;
             box-shadow: -4px 0 24px rgba(0,0,0,0.12);
             z-index: 1000;
             transition: right 0.3s ease;
@@ -353,6 +332,9 @@
     </style>
 </head>
 <body>
+
+<div class="top-rule"></div>
+<div class="scroll-progress" id="scrollProgress"></div>
 
 
 <div class="inner">
@@ -540,6 +522,19 @@
     toggle.addEventListener('click', function() { drawer.classList.contains('open') ? closeDrawer() : openDrawer(); });
     close.addEventListener('click', closeDrawer);
     overlay.addEventListener('click', closeDrawer);
+
+    var scrollProgress = document.getElementById('scrollProgress');
+    function updateScrollProgress() {
+        if (!scrollProgress) return;
+        var scrollTop = window.scrollY || document.documentElement.scrollTop || 0;
+        var scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+        var ratio = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+        scrollProgress.style.width = ratio + '%';
+    }
+
+    document.addEventListener('scroll', updateScrollProgress, { passive: true });
+    window.addEventListener('resize', updateScrollProgress);
+    updateScrollProgress();
 </script>
 </body>
 </html>

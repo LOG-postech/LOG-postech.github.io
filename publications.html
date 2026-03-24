@@ -12,13 +12,24 @@
         body {
             font-family: 'Inter', system-ui, sans-serif;
             color: #111;
-            background: #FAF8F5;
+            background: #ffffff;
             min-height: 100vh;
         }
 
         .top-rule {
             height: 3px;
             background: linear-gradient(90deg, #1B3A8A 0%, #3B6FD4 60%, #93A8D8 100%);
+        }
+
+        .scroll-progress {
+            position: fixed;
+            top: 3px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #3B6FD4;
+            z-index: 1001;
+            transition: width 0.08s linear;
         }
 
         .inner {
@@ -33,15 +44,15 @@
             border-bottom: 1px solid #e2e6f0;
         }
 
-        .lab-name, .lab-name:hover {
+        .lab-name {
             font-family: 'EB Garamond', Georgia, serif;
-            font-size: 2.3em;
+            font-size: 2.8em;
             font-weight: 500;
             color: #111;
-            letter-spacing: -0.01em;
-            line-height: 1;
+            letter-spacing: 0;
+            line-height: 0.96;
             display: block;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             text-decoration: none;
         }
 
@@ -58,12 +69,22 @@
             font-size: 1em;
             font-weight: 400;
             letter-spacing: 0.01em;
-            transition: color 0.15s;
+            padding-bottom: 2px;
+            border-bottom: 1.5px dashed transparent;
+            transition: color 0.15s, border-color 0.15s;
         }
 
-        nav a:hover { color: #1B3A8A; }
+        nav a:hover {
+            color: #1B3A8A;
+            border-bottom: 1.5px solid #1B3A8A;
+            text-decoration: none;
+        }
 
-        nav a.active { color: #111; font-weight: 600; }
+        nav a.active {
+            color: #111;
+            font-weight: 600;
+            border-bottom: 1.5px solid #111;
+        }
         .nav-drawer a.active { color: #111; font-weight: 600; }
 
 
@@ -71,39 +92,46 @@
         a:hover { text-decoration: underline; }
 
         h2 {
-            font-family: 'EB Garamond', Georgia, serif;
-            font-size: 1.3em;
-            font-weight: 500;
-            letter-spacing: 0;
-            color: #374151;
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 1.12em;
+            font-weight: 700;
+            letter-spacing: 0.01em;
+            text-transform: none;
+            color: #111;
             margin-bottom: 10px;
 
         }
 
         .year-divider {
             font-family: 'Inter', system-ui, sans-serif;
-            font-size: 0.88em;
-            font-weight: 600;
-            letter-spacing: 0;
+            font-size: 1.03em;
+            font-weight: 800;
+            letter-spacing: 0.01em;
             color: #111;
-            margin-top: 20px;
-            margin-bottom: 10px;
+            margin-top: 34px;
+            margin-bottom: 14px;
+        }
+
+        .year-divider:first-of-type {
+            margin-top: 0;
         }
 
         .paper {
-            margin-bottom: 20px;
+            margin-bottom: 18px;
+            padding-left: 14px;
+            border-left: 2px solid #e2e8f4;
         }
 
         .paper-title {
-            font-size: 0.83em;
-            font-weight: 600;
+            font-size: 0.94em;
+            font-weight: 500;
             color: #111;
-            line-height: 1.5;
+            line-height: 1.56;
         }
 
         .paper-links {
-            font-size: 0.78em;
-            margin-top: 3px;
+            font-size: 0.8em;
+            margin-top: 5px;
         }
 
         .paper-links a {
@@ -115,14 +143,14 @@
         .paper-links a:hover { text-decoration: underline; }
 
         .paper-authors {
-            font-size: 0.83em;
-            color: #555;
-            margin-top: 3px;
+            font-size: 0.86em;
+            color: #4b5563;
+            margin-top: 4px;
         }
 
         .paper-venue {
-            font-size: 0.8em;
-            color: #555;
+            font-size: 0.82em;
+            color: #6b7280;
             margin-top: 2px;
         }
 
@@ -156,7 +184,7 @@
 
         .menu-toggle {
             display: none;
-                        background: #FAF8F5;
+                        background: #ffffff;
             border: 1px solid #e2e6f0;
             border-radius: 6px;
             font-size: 1.3em;
@@ -165,9 +193,7 @@
             padding: 4px 8px;
             line-height: 1;
         }
-
-
-        @media (max-width: 640px) {
+        @media (max-width: 900px) {
             .inner {
                 padding: 28px 18px 40px;
             }
@@ -175,11 +201,14 @@
             header {
                 padding-bottom: 4px;
                 margin-bottom: 16px;
-                display: flex;
-                flex-direction: row;
-                align-items: baseline;
-                justify-content: space-between;
-                flex-wrap: nowrap;
+                display: grid;
+                grid-template-columns: minmax(0, 1fr) auto;
+                align-items: start;
+                column-gap: 10px;
+            }
+
+            .lab-name {
+                min-width: 0;
             }
 
             .menu-toggle {
@@ -188,43 +217,11 @@
 
             nav {
                 display: none;
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-                padding-top: 12px;
-            }
-
-            nav.open {
-                display: flex;
-            }
-
-            h2, h3 {
-                margin-bottom: 6px;
-                margin-top: 24px;
-            }
-
-            .news-item {
-                flex-direction: column;
-                gap: 2px;
-            }
-
-            .news-date {
-                min-width: unset;
-            }
-
-            .sponsor-logos, .collab-logos {
-                width: 100%;
-            }
-
-
-            p, .intro, .news-content, p.ack, .section-text {
-                text-align: left;
             }
 
             .footer-logos img {
                 height: 18px;
             }
-
         }
 
         /* Drawer */
@@ -242,7 +239,7 @@
             right: -280px;
             width: 240px;
             height: 100vh;
-            background: #FAF8F5;
+            background: #ffffff;
             box-shadow: -4px 0 24px rgba(0,0,0,0.12);
             z-index: 1000;
             transition: right 0.3s ease;
@@ -286,6 +283,9 @@
 </head>
 <body>
 
+<div class="top-rule"></div>
+<div class="scroll-progress" id="scrollProgress"></div>
+
 
 <div class="inner">
 
@@ -303,8 +303,6 @@
     </header>
 
     <main>
-        <h2>Publications</h2>
-
         <!-- ===== 2026 ===== -->
         <div class="year-divider">2026</div>
 
@@ -312,21 +310,21 @@
             <div class="paper-title">SeedFlood: A Step Toward Scalable Decentralized Training of LLMs</div>
             <div class="paper-authors">Jihun Kim, Namhoon Lee</div>
             <div class="paper-venue">arXiv 2026</div>
-            <div class="paper-links"><a href="https://arxiv.org/abs/2602.18181v1" target="_blank">[arXiv]</a></div>
+            <div class="paper-links"><a href="https://arxiv.org/abs/2602.18181v1" target="_blank">arxiv</a></div>
         </div>
 
         <div class="paper">
             <div class="paper-title">Mitigating Staleness in Asynchronous Pipeline Parallelism via Basis Rotation</div>
             <div class="paper-authors">Hyunji Jung*, Sungbin Shin*, Namhoon Lee</div>
             <div class="paper-venue">arXiv 2026</div>
-            <div class="paper-links"><a href="https://www.arxiv.org/abs/2602.03515" target="_blank">[arXiv]</a></div>
+            <div class="paper-links"><a href="https://www.arxiv.org/abs/2602.03515" target="_blank">arxiv</a></div>
         </div>
 
         <div class="paper">
             <div class="paper-title">The Unseen Frontier: Pushing the Limits of LLM Sparsity with Surrogate-Free ADMM</div>
             <div class="paper-authors">Kwanhee Lee, Hyeondo Jang, Dongyeop Lee, Dan Alistarh, Namhoon Lee</div>
-            <div class="paper-venue">ICLR 2026 <span class="spotlight">(JKAIA 2025 Best Paper Award)</span></div>
-            <div class="paper-links"><a href="https://arxiv.org/abs/2510.01650" target="_blank">[arXiv]</a><a href="https://github.com/LOG-postech/elsa" target="_blank">[code]</a></div>
+            <div class="paper-venue">ICLR 2026; <span class="spotlight">JKAIA 2025 Best Paper Award</span></div>
+            <div class="paper-links"><a href="https://arxiv.org/abs/2510.01650" target="_blank">arxiv</a><a href="https://github.com/LOG-postech/elsa" target="_blank">code</a></div>
         </div>
 
         <!-- ===== 2025 ===== -->
@@ -336,42 +334,42 @@
             <div class="paper-title">MemIEC: A Step Toward Continual and Compositional Knowledge Editing</div>
             <div class="paper-authors">Jin Seong*, Jiyun Park*, Wencke Liermann, Hongseok Choi, Yoonji Nam, Hyun Kim, Soojong Lim, Namhoon Lee</div>
             <div class="paper-venue">NeurIPS 2025</div>
-            <div class="paper-links"><a href="https://arxiv.org/abs/2510.25798" target="_blank">[arXiv]</a></div>
+            <div class="paper-links"><a href="https://arxiv.org/abs/2510.25798" target="_blank">arxiv</a></div>
         </div>
 
         <div class="paper">
             <div class="paper-title">An Analysis of Concept Bottleneck Models: Measuring, Understanding, and Mitigating the Impact of Noisy Annotations</div>
             <div class="paper-authors">Seonghwan Park, Jueun Mun, Donghyun Oh, Namhoon Lee</div>
             <div class="paper-venue">NeurIPS 2025</div>
-            <div class="paper-links"><a href="https://arxiv.org/abs/2505.16705" target="_blank">[arXiv]</a><a href="https://github.com/LOG-postech/CBM-Noise" target="_blank">[code]</a></div>
+            <div class="paper-links"><a href="https://arxiv.org/abs/2505.16705" target="_blank">arxiv</a><a href="https://github.com/LOG-postech/CBM-Noise" target="_blank">code</a></div>
         </div>
 
         <div class="paper">
             <div class="paper-title">Critical Influence of Overparameterization on Sharpness-aware Minimization</div>
             <div class="paper-authors">Sungbin Shin*, Dongyeop Lee*, Maksym Andriushchenko, Namhoon Lee</div>
-            <div class="paper-venue">UAI 2025; ICML 2023 Workshop on High-dimensional Learning Dynamics <span class="spotlight">(JKAIA 2023 Best Paper Award)</span></div>
-            <div class="paper-links"><a href="https://arxiv.org/abs/2311.17539" target="_blank">[arXiv]</a><a href="https://github.com/LOG-postech/SAM-overparam" target="_blank">[code]</a></div>
+            <div class="paper-venue">UAI 2025; ICML 2023 Workshop on High-dimensional Learning Dynamics; <span class="spotlight">JKAIA 2023 Best Paper Award</span></div>
+            <div class="paper-links"><a href="https://arxiv.org/abs/2311.17539" target="_blank">arxiv</a><a href="https://github.com/LOG-postech/SAM-overparam" target="_blank">code</a></div>
         </div>
 
         <div class="paper">
             <div class="paper-title">SAFE: Finding Sparse and Flat Minima to Improve Pruning</div>
             <div class="paper-authors">Dongyeop Lee, Kwanhee Lee, Jinseok Chung, Namhoon Lee</div>
             <div class="paper-venue">ICML 2025 <span class="spotlight">(Spotlight)</span></div>
-            <div class="paper-links"><a href="https://arxiv.org/abs/2506.06866" target="_blank">[arXiv]</a><a href="https://github.com/log-postech/safe-torch" target="_blank">[code (torch)]</a><a href="https://github.com/LOG-postech/safe-jax" target="_blank">[code (jax)]</a></div>
+            <div class="paper-links"><a href="https://arxiv.org/abs/2506.06866" target="_blank">arxiv</a><a href="https://github.com/log-postech/safe-torch" target="_blank">code-torch</a><a href="https://github.com/LOG-postech/safe-jax" target="_blank">code-jax</a></div>
         </div>
 
         <div class="paper">
             <div class="paper-title">SASSHA: Sharpness-aware Adaptive Second-order Optimization with Stable Hessian Approximation</div>
             <div class="paper-authors">Dahun Shin*, Dongyeop Lee*, Jinseok Chung, Namhoon Lee</div>
             <div class="paper-venue">ICML 2025</div>
-            <div class="paper-links"><a href="https://arxiv.org/abs/2502.18153" target="_blank">[arXiv]</a><a href="https://github.com/LOG-postech/Sassha" target="_blank">[code]</a></div>
+            <div class="paper-links"><a href="https://arxiv.org/abs/2502.18153" target="_blank">arxiv</a><a href="https://github.com/LOG-postech/Sassha" target="_blank">code</a></div>
         </div>
 
         <div class="paper">
             <div class="paper-title">ZIP: An Efficient Zeroth-order Prompt Tuning for Black-box Vision-Language Models</div>
             <div class="paper-authors">Seonghwan Park, Jaehyeon Jeong, Yongjun Kim, Jaeho Lee, Namhoon Lee</div>
             <div class="paper-venue">ICLR 2025</div>
-            <div class="paper-links"><a href="https://arxiv.org/abs/2504.06838" target="_blank">[arXiv]</a><a href="https://github.com/LOG-postech/ZIP" target="_blank">[code]</a></div>
+            <div class="paper-links"><a href="https://arxiv.org/abs/2504.06838" target="_blank">arxiv</a><a href="https://github.com/LOG-postech/ZIP" target="_blank">code</a></div>
         </div>
 
         <!-- ===== 2024 ===== -->
@@ -381,21 +379,21 @@
             <div class="paper-title">Rethinking Pruning Large Language Models: Benefits and Pitfalls of Reconstruction Error Minimization</div>
             <div class="paper-authors">Sungbin Shin, Wonpyo Park, Jaeho Lee, Namhoon Lee</div>
             <div class="paper-venue">EMNLP 2024</div>
-            <div class="paper-links"><a href="https://arxiv.org/abs/2406.15524" target="_blank">[arXiv]</a><a href="https://github.com/LOG-postech/rethinking-LLM-pruning" target="_blank">[code]</a></div>
+            <div class="paper-links"><a href="https://arxiv.org/abs/2406.15524" target="_blank">arxiv</a><a href="https://github.com/LOG-postech/rethinking-LLM-pruning" target="_blank">code</a></div>
         </div>
 
         <div class="paper">
             <div class="paper-title">The Role of Masking for Efficient Supervised Knowledge Distillation of Vision Transformers</div>
             <div class="paper-authors">Seungwoo Son, Jegwang Ryu, Namhoon Lee, Jaeho Lee</div>
             <div class="paper-venue">ECCV 2024; ICLR 2023 Workshop</div>
-            <div class="paper-links"><a href="https://arxiv.org/abs/2302.10494" target="_blank">[arXiv]</a></div>
+            <div class="paper-links"><a href="https://arxiv.org/abs/2302.10494" target="_blank">arxiv</a></div>
         </div>
 
         <div class="paper">
             <div class="paper-title">JaxPruner: A Concise Library for Sparsity Research</div>
             <div class="paper-authors">Joo Hyung Lee, Wonpyo Park, Nicole Mitchell, Jonathan Pilault, Johan Obando-Ceron, Han-Byul Kim, Namhoon Lee, Elias Frantar, Yun Long, Amir Yazdanbakhsh, Shivani Agrawal, Suvinay Subramanian, Xin Wang, Sheng-Chun Kao, Xingyao Zhang, Trevor Gale, Aart Bik, Woohyun Han, Milen Ferez, Zhonglin Han, Hong-Seok Kim, Yann Dauphin, Gintare Karolina Dziugaite, Pablo Samuel Castro, Utku Evci</div>
             <div class="paper-venue">CPAL 2024 <span class="spotlight">(Oral)</span>; ICLR 2023 Workshop on Sparsity in Neural Networks</div>
-            <div class="paper-links"><a href="https://arxiv.org/abs/2304.14082" target="_blank">[arXiv]</a></div>
+            <div class="paper-links"><a href="https://arxiv.org/abs/2304.14082" target="_blank">arxiv</a></div>
         </div>
 
         <!-- ===== 2023 ===== -->
@@ -405,42 +403,42 @@
             <div class="paper-title">Pruning Neural Networks with Velocity-Constrained Optimization</div>
             <div class="paper-authors">Donghyun Oh*, Jinseok Chung*, Namhoon Lee</div>
             <div class="paper-venue">NeurIPS 2023 Workshop on Optimization for Machine Learning</div>
-            <div class="paper-links"><a href="https://opt-ml.org/papers.html" target="_blank">[paper]</a></div>
+            <div class="paper-links"><a href="https://opt-ml.org/papers.html" target="_blank">paper</a></div>
         </div>
 
         <div class="paper">
             <div class="paper-title">A Closer Look at the Intervention Procedure of Concept Bottleneck Models</div>
             <div class="paper-authors">Sungbin Shin, Yohan Jo, Sungsoo Ahn, Namhoon Lee</div>
             <div class="paper-venue">ICML 2023; NeurIPS 2022 Workshop on Trustworthy and Socially Responsible ML</div>
-            <div class="paper-links"><a href="https://arxiv.org/abs/2302.14260" target="_blank">[arXiv]</a><a href="https://github.com/ssbin4/Closer-Intervention-CBM" target="_blank">[code]</a></div>
+            <div class="paper-links"><a href="https://arxiv.org/abs/2302.14260" target="_blank">arxiv</a><a href="https://github.com/ssbin4/Closer-Intervention-CBM" target="_blank">code</a></div>
         </div>
 
         <div class="paper">
             <div class="paper-title">On the Effectiveness of Sharpness-Aware Minimization with Large Mini-batches</div>
             <div class="paper-authors">Jinseok Chung, Seonghwan Park, Jaeho Lee, Namhoon Lee</div>
             <div class="paper-venue">ICML 2023 Workshop on High-dimensional Learning Dynamics</div>
-            <div class="paper-links"><a href="https://sites.google.com/view/hidimlearning/papers" target="_blank">[paper]</a></div>
+            <div class="paper-links"><a href="https://sites.google.com/view/hidimlearning/papers" target="_blank">paper</a></div>
         </div>
 
         <div class="paper">
             <div class="paper-title">FedFwd: Federated Learning without Backpropagation</div>
             <div class="paper-authors">Seonghwan Park, Dahun Shin, Jinseok Chung, Namhoon Lee</div>
             <div class="paper-venue">ICML 2023 Workshop on Federated Learning and Analytics in Practice</div>
-            <div class="paper-links"><a href="https://fl-icml2023.github.io/" target="_blank">[paper]</a></div>
+            <div class="paper-links"><a href="https://fl-icml2023.github.io/" target="_blank">paper</a></div>
         </div>
 
         <div class="paper">
             <div class="paper-title">Semi-Supervised Concept Bottleneck Models</div>
             <div class="paper-authors">Jeeon Bae, Sungbin Shin, Namhoon Lee</div>
             <div class="paper-venue">ICML 2023 Workshop on Artificial Intelligence and Human-Computer Interaction</div>
-            <div class="paper-links"><a href="https://sites.google.com/view/aihci/papers" target="_blank">[paper]</a></div>
+            <div class="paper-links"><a href="https://sites.google.com/view/aihci/papers" target="_blank">paper</a></div>
         </div>
 
         <div class="paper">
             <div class="paper-title">Almost Sure Last Iterate Convergence of Sharpness-Aware Minimization</div>
             <div class="paper-authors">Kyungchun Nam, Jinseok Chung, Namhoon Lee</div>
             <div class="paper-venue">ICLR 2023 Tiny Papers</div>
-            <div class="paper-links"><a href="https://openreview.net/forum?id=IcDTYTI0Nx" target="_blank">[OpenReview]</a></div>
+            <div class="paper-links"><a href="https://openreview.net/forum?id=IcDTYTI0Nx" target="_blank">OpenReview</a></div>
         </div>
 
         <!-- ===== Previous ===== -->
@@ -450,91 +448,91 @@
             <div class="paper-title">Meta-Learning Sparse Implicit Neural Representations</div>
             <div class="paper-authors">Jaeho Lee*, Jihoon Tack*, Namhoon Lee, Jinwoo Shin</div>
             <div class="paper-venue">NeurIPS 2021; SNN 2021</div>
-            <div class="paper-links"><a href="https://arxiv.org/abs/2110.14678" target="_blank">[arXiv]</a></div>
+            <div class="paper-links"><a href="https://arxiv.org/abs/2110.14678" target="_blank">arxiv</a></div>
         </div>
 
         <div class="paper">
             <div class="paper-title">Understanding the Effects of Data Parallelism and Sparsity on Neural Network Training</div>
             <div class="paper-authors">Namhoon Lee, Thalaiyasingam Ajanthan, Philip H. S. Torr, Martin Jaggi</div>
             <div class="paper-venue">ICLR 2021</div>
-            <div class="paper-links"><a href="https://arxiv.org/abs/2003.11316" target="_blank">[arXiv]</a></div>
+            <div class="paper-links"><a href="https://arxiv.org/abs/2003.11316" target="_blank">arxiv</a></div>
         </div>
 
         <div class="paper">
             <div class="paper-title">Optimal Mini-Batch Size for Stochastic Gradient Methods</div>
             <div class="paper-authors">Namhoon Lee, Philip H. S. Torr, Richard Hartley</div>
             <div class="paper-venue">ICLR 2021 Workshop on Science and Engineering of Deep Learning</div>
-            <div class="paper-links"><a href="https://sites.google.com/view/sedl-workshop" target="_blank">[paper]</a></div>
+            <div class="paper-links"><a href="https://sites.google.com/view/sedl-workshop" target="_blank">paper</a></div>
         </div>
 
         <div class="paper">
             <div class="paper-title">Toward Efficient Deep Learning with Sparse Neural Networks</div>
             <div class="paper-authors">Namhoon Lee</div>
             <div class="paper-venue">Ph.D. Thesis, University of Oxford</div>
-            <div class="paper-links"><a href="https://ora.ox.ac.uk/objects/uuid:000e9d44-0229-48a3-84b0-dc17a8e96ccf" target="_blank">[paper]</a></div>
+            <div class="paper-links"><a href="https://ora.ox.ac.uk/objects/uuid:000e9d44-0229-48a3-84b0-dc17a8e96ccf" target="_blank">paper</a></div>
         </div>
 
         <div class="paper">
             <div class="paper-title">A Signal Propagation Perspective for Pruning Neural Networks at Initialization</div>
             <div class="paper-authors">Namhoon Lee, Thalaiyasingam Ajanthan, Stephen Gould, Philip H. S. Torr</div>
             <div class="paper-venue">ICLR 2020 <span class="spotlight">(Spotlight)</span></div>
-            <div class="paper-links"><a href="https://arxiv.org/abs/1906.06307" target="_blank">[arXiv]</a></div>
+            <div class="paper-links"><a href="https://arxiv.org/abs/1906.06307" target="_blank">arxiv</a></div>
         </div>
 
         <div class="paper">
             <div class="paper-title">Data Parallelism in Training Sparse Neural Networks</div>
             <div class="paper-authors">Namhoon Lee, Philip H. S. Torr, Martin Jaggi</div>
             <div class="paper-venue">ICLR 2020 Workshop on Practical ML</div>
-            <div class="paper-links"><a href="https://arxiv.org/abs/2003.11316" target="_blank">[arXiv]</a></div>
+            <div class="paper-links"><a href="https://arxiv.org/abs/2003.11316" target="_blank">arxiv</a></div>
         </div>
 
         <div class="paper">
             <div class="paper-title">SNIP: Single-shot Network Pruning based on Connection Sensitivity</div>
             <div class="paper-authors">Namhoon Lee, Thalaiyasingam Ajanthan, Philip H. S. Torr</div>
             <div class="paper-venue">ICLR 2019</div>
-            <div class="paper-links"><a href="https://arxiv.org/abs/1810.02340" target="_blank">[arXiv]</a></div>
+            <div class="paper-links"><a href="https://arxiv.org/abs/1810.02340" target="_blank">arxiv</a></div>
         </div>
 
         <div class="paper">
             <div class="paper-title">Learn to Pay Attention</div>
             <div class="paper-authors">Saumya Jetley, Nicholas Lord, Namhoon Lee, Philip H. S. Torr</div>
             <div class="paper-venue">ICLR 2018</div>
-            <div class="paper-links"><a href="https://arxiv.org/abs/1804.02391" target="_blank">[arXiv]</a></div>
+            <div class="paper-links"><a href="https://arxiv.org/abs/1804.02391" target="_blank">arxiv</a></div>
         </div>
 
         <div class="paper">
             <div class="paper-title">Synthesizing a Scene-Specific Pedestrian Detector and Pose Estimator for Static Video Surveillance</div>
             <div class="paper-authors">Hironori Hattori*, Namhoon Lee*, Vishnu N. Boddeti, Fares Beainy, Kris M. Kitani, Takeo Kanade</div>
             <div class="paper-venue">IJCV 2018</div>
-            <div class="paper-links"><a href="https://link.springer.com/article/10.1007/s11263-018-1077-3" target="_blank">[paper]</a></div>
+            <div class="paper-links"><a href="https://link.springer.com/article/10.1007/s11263-018-1077-3" target="_blank">paper</a></div>
         </div>
 
         <div class="paper">
             <div class="paper-title">DESIRE: Distant Future Prediction in Dynamic Scenes with Interacting Agents</div>
             <div class="paper-authors">Namhoon Lee, Wongun Choi, Paul Vernaza, Christopher B. Choy, Philip H. S. Torr, Manmohan Chandraker</div>
             <div class="paper-venue">CVPR 2017 <span class="spotlight">(Spotlight)</span></div>
-            <div class="paper-links"><a href="https://arxiv.org/abs/1704.04394" target="_blank">[arXiv]</a></div>
+            <div class="paper-links"><a href="https://arxiv.org/abs/1704.04394" target="_blank">arxiv</a></div>
         </div>
 
         <div class="paper">
             <div class="paper-title">Forecasting Interactive Dynamics of Pedestrians with Fictitious Play</div>
             <div class="paper-authors">Wei-Chiu Ma, De-An Huang, Namhoon Lee, Kris M. Kitani</div>
             <div class="paper-venue">CVPR 2017</div>
-            <div class="paper-links"><a href="https://arxiv.org/abs/1604.01431" target="_blank">[arXiv]</a></div>
+            <div class="paper-links"><a href="https://arxiv.org/abs/1604.01431" target="_blank">arxiv</a></div>
         </div>
 
         <div class="paper">
             <div class="paper-title">Predicting Wide Receiver Trajectories in American Football</div>
             <div class="paper-authors">Namhoon Lee, Kris M. Kitani</div>
             <div class="paper-venue">WACV 2016 <span class="spotlight">(Oral)</span></div>
-            <div class="paper-links"><a href="https://namhoonlee.github.io/doc/LK_WACV2016.pdf" target="_blank">[paper]</a></div>
+            <div class="paper-links"><a href="https://namhoonlee.github.io/doc/LK_WACV2016.pdf" target="_blank">paper</a></div>
         </div>
 
         <div class="paper">
             <div class="paper-title">Modeling of Dynamic Environments for Visual Forecasting of American Football Plays</div>
             <div class="paper-authors">Namhoon Lee (committee: Kris M. Kitani, Martial Hebert, Sebastian Scherer)</div>
             <div class="paper-venue">M.S. Thesis, Carnegie Mellon University, Dec 2015</div>
-            <div class="paper-links"><a href="https://namhoonlee.github.io/doc/namhoonlee_msthesis2015_final.pdf" target="_blank">[paper]</a></div>
+            <div class="paper-links"><a href="https://namhoonlee.github.io/doc/namhoonlee_msthesis2015_final.pdf" target="_blank">paper</a></div>
         </div>
     </main>
 
@@ -581,6 +579,19 @@
     toggle.addEventListener('click', function() { drawer.classList.contains('open') ? closeDrawer() : openDrawer(); });
     close.addEventListener('click', closeDrawer);
     overlay.addEventListener('click', closeDrawer);
+
+    var scrollProgress = document.getElementById('scrollProgress');
+    function updateScrollProgress() {
+        if (!scrollProgress) return;
+        var scrollTop = window.scrollY || document.documentElement.scrollTop || 0;
+        var scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+        var ratio = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+        scrollProgress.style.width = ratio + '%';
+    }
+
+    document.addEventListener('scroll', updateScrollProgress, { passive: true });
+    window.addEventListener('resize', updateScrollProgress);
+    updateScrollProgress();
 </script>
 </body>
 </html>

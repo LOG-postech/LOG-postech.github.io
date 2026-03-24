@@ -12,7 +12,7 @@
         body {
             font-family: 'Inter', system-ui, sans-serif;
             color: #111;
-            background: #FAF8F5;
+            background: #ffffff;
             min-height: 100vh;
         }
 
@@ -33,15 +33,15 @@
             border-bottom: 1px solid #e2e6f0;
         }
 
-        .lab-name, .lab-name:hover {
+        .lab-name {
             font-family: 'EB Garamond', Georgia, serif;
-            font-size: 2.3em;
+            font-size: 2.8em;
             font-weight: 500;
             color: #111;
-            letter-spacing: -0.01em;
-            line-height: 1;
+            letter-spacing: 0;
+            line-height: 0.96;
             display: block;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             text-decoration: none;
         }
 
@@ -58,33 +58,39 @@
             font-size: 1em;
             font-weight: 400;
             letter-spacing: 0.01em;
-            transition: color 0.15s;
+            padding-bottom: 2px;
+            border-bottom: 1.5px dashed transparent;
+            transition: color 0.15s, border-color 0.15s;
         }
 
-        nav a:hover { color: #1B3A8A; }
+        nav a:hover {
+            color: #1B3A8A;
+            border-bottom: 1.5px solid #1B3A8A;
+            text-decoration: none;
+        }
 
-        nav a.active { color: #111; font-weight: 600; }
+        nav a.active {
+            color: #111;
+            font-weight: 600;
+            border-bottom: 1.5px solid #111;
+        }
+
         .nav-drawer a.active { color: #111; font-weight: 600; }
-
 
         a { color: #1B3A8A; text-decoration: none; }
         a:hover { text-decoration: underline; }
 
-        h2 {
-            font-family: 'EB Garamond', Georgia, serif;
-            font-size: 1.3em;
-            font-weight: 500;
-            letter-spacing: 0;
-            color: #374151;
-            margin-bottom: 20px;
-            
+        .contact-title {
+            color: #111;
+            font-weight: 700;
+            font-size: 1.12em;
+            letter-spacing: 0.01em;
         }
 
         p {
             font-size: 0.93em;
             line-height: 1.9;
             color: #374151;
-            text-align: justify;
             margin-bottom: 0;
         }
 
@@ -114,7 +120,7 @@
 
         .menu-toggle {
             display: none;
-                        background: #FAF8F5;
+            background: #ffffff;
             border: 1px solid #e2e6f0;
             border-radius: 6px;
             font-size: 1.3em;
@@ -123,9 +129,7 @@
             padding: 4px 8px;
             line-height: 1;
         }
-
-
-        @media (max-width: 640px) {
+        @media (max-width: 900px) {
             .inner {
                 padding: 28px 18px 40px;
             }
@@ -133,11 +137,14 @@
             header {
                 padding-bottom: 4px;
                 margin-bottom: 16px;
-                display: flex;
-                flex-direction: row;
-                align-items: baseline;
-                justify-content: space-between;
-                flex-wrap: nowrap;
+                display: grid;
+                grid-template-columns: minmax(0, 1fr) auto;
+                align-items: start;
+                column-gap: 10px;
+            }
+
+            .lab-name {
+                min-width: 0;
             }
 
             .menu-toggle {
@@ -146,43 +153,11 @@
 
             nav {
                 display: none;
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-                padding-top: 12px;
-            }
-
-            nav.open {
-                display: flex;
-            }
-
-            h2, h3 {
-                margin-bottom: 6px;
-                margin-top: 24px;
-            }
-
-            .news-item {
-                flex-direction: column;
-                gap: 2px;
-            }
-
-            .news-date {
-                min-width: unset;
-            }
-
-            .sponsor-logos, .collab-logos {
-                width: 100%;
-            }
-
-
-            p, .intro, .news-content, p.ack, .section-text {
-                text-align: left;
             }
 
             .footer-logos img {
                 height: 18px;
             }
-
         }
 
         /* Drawer */
@@ -200,7 +175,7 @@
             right: -280px;
             width: 240px;
             height: 100vh;
-            background: #FAF8F5;
+            background: #ffffff;
             box-shadow: -4px 0 24px rgba(0,0,0,0.12);
             z-index: 1000;
             transition: right 0.3s ease;
@@ -244,6 +219,7 @@
 </head>
 <body>
 
+<div class="top-rule"></div>
 
 <div class="inner">
 
@@ -261,9 +237,8 @@
     </header>
 
     <main>
-        <h2>Contact</h2>
         <p>
-            <strong>Computational Optimization Lab</strong><br>
+            <strong class="contact-title">Computational Optimization Lab</strong><br>
             <br>
             (Office) RIST 4, Room #4427<br>
             <br>
@@ -286,18 +261,16 @@
 
 </div>
 
-
-
-    <div class="nav-overlay" id="navOverlay"></div>
-    <div class="nav-drawer" id="navDrawer">
-        <button class="drawer-close" id="drawerClose">&#x2715;</button>
-        <a href="index.html">Home</a>
-        <a href="research.html">Research</a>
-        <a href="publications.html">Publications</a>
-        <a href="group.html">Members</a>
-        <a href="hiring.html">Hiring</a>
-        <a href="contact.html" class="active">Contact</a>
-    </div>
+<div class="nav-overlay" id="navOverlay"></div>
+<div class="nav-drawer" id="navDrawer">
+    <button class="drawer-close" id="drawerClose">&#x2715;</button>
+    <a href="index.html">Home</a>
+    <a href="research.html">Research</a>
+    <a href="publications.html">Publications</a>
+    <a href="group.html">Members</a>
+    <a href="hiring.html">Hiring</a>
+    <a href="contact.html" class="active">Contact</a>
+</div>
 
 <script>
     var toggle = document.querySelector('.menu-toggle');
@@ -309,6 +282,7 @@
         drawer.classList.add('open');
         overlay.classList.add('open');
     }
+
     function closeDrawer() {
         drawer.classList.remove('open');
         overlay.classList.remove('open');

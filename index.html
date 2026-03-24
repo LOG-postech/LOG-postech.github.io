@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="logo/log_logo.png" type="image/png">
-    <title>Lee Optimization Group</title>
+    <title>Home | Lee Optimization Group</title>
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -12,7 +12,7 @@
         body {
             font-family: 'Inter', system-ui, sans-serif;
             color: #111;
-            background: #FAF8F5;
+            background: #ffffff;
             min-height: 100vh;
         }
 
@@ -35,13 +35,13 @@
 
         .lab-name {
             font-family: 'EB Garamond', Georgia, serif;
-            font-size: 2.3em;
+            font-size: 2.8em;
             font-weight: 500;
             color: #111;
-            letter-spacing: -0.01em;
-            line-height: 1;
+            letter-spacing: 0;
+            line-height: 0.96;
             display: block;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
         nav {
@@ -57,12 +57,22 @@
             font-size: 1em;
             font-weight: 400;
             letter-spacing: 0.01em;
-            transition: color 0.15s;
+            padding-bottom: 2px;
+            border-bottom: 1.5px dashed transparent;
+            transition: color 0.15s, border-color 0.15s;
         }
 
-        nav a:hover { color: #1B3A8A; }
+        nav a:hover {
+            color: #1B3A8A;
+            border-bottom: 1.5px solid #1B3A8A;
+            text-decoration: none;
+        }
 
-        nav a.active { color: #111; font-weight: 600; }
+        nav a.active {
+            color: #111;
+            font-weight: 600;
+            border-bottom: 1.5px solid #111;
+        }
         .nav-drawer a.active { color: #111; font-weight: 600; }
 
 
@@ -71,27 +81,29 @@
             height: auto;
             display: block;
             margin-bottom: 24px;
+            border-radius: 0;
         }
 
         .intro {
             font-size: 0.93em;
-            line-height: 1.8;
+            font-weight: 300;
+            line-height: 1.85;
             color: #374151;
             margin-bottom: 40px;
-            text-align: justify;
         }
 
         .intro a { color: #1B3A8A; text-decoration: none; }
         .intro a:hover { text-decoration: underline; }
 
         h3 {
-            font-family: 'EB Garamond', Georgia, serif;
-            font-size: 1.3em;
-            font-weight: 500;
-            letter-spacing: 0;
-            color: #374151;
-            margin-bottom: 14px;
-            margin-top: 36px;
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 1.12em;
+            font-weight: 700;
+            letter-spacing: 0.01em;
+            text-transform: none;
+            color: #111;
+            margin-bottom: 12px;
+            margin-top: 40px;
         }
 
         .news-list {
@@ -103,22 +115,24 @@
             display: flex;
             gap: 20px;
             align-items: baseline;
-            margin-bottom: 10px;
+            padding: 10px 0;
         }
 
+        .news-item:last-child { margin-bottom: 0; }
+
         .news-date {
-            font-size: 0.8em;
+            font-size: 0.78em;
             font-weight: 400;
-            color: #6b7280;
+            color: #111;
             min-width: 64px;
             flex-shrink: 0;
         }
 
         .news-content {
-            text-align: justify;
-            font-size: 0.88em;
+            font-size: 0.93em;
+            font-weight: 300;
             color: #374151;
-            line-height: 1.65;
+            line-height: 1.85;
         }
 
         .news-content a { color: #1B3A8A; text-decoration: none; }
@@ -126,11 +140,11 @@
         .news-content em { font-style: normal; font-weight: 600; color: inherit; }
 
         p.ack {
-            font-size: 0.88em;
+            font-size: 0.93em;
+            font-weight: 300;
             color: #374151;
-            line-height: 1.65;
+            line-height: 1.85;
             margin-top: 0;
-            text-align: justify;
         }
 
         .sponsor-logos {
@@ -142,7 +156,7 @@
             row-gap: 4px;
             margin-top: 20px;
             background: #fff;
-            border-radius: 10px;
+            border-radius: 6px;
             border: 1px solid #e8e4dd;
             padding: 4px 16px;
             width: fit-content;
@@ -188,7 +202,7 @@
 
         .menu-toggle {
             display: none;
-                        background: #FAF8F5;
+                        background: #ffffff;
             border: 1px solid #e2e6f0;
             border-radius: 6px;
             font-size: 1.3em;
@@ -197,9 +211,7 @@
             padding: 4px 8px;
             line-height: 1;
         }
-
-
-        @media (max-width: 640px) {
+        @media (max-width: 900px) {
             .inner {
                 padding: 28px 18px 40px;
             }
@@ -207,11 +219,14 @@
             header {
                 padding-bottom: 4px;
                 margin-bottom: 16px;
-                display: flex;
-                flex-direction: row;
-                align-items: baseline;
-                justify-content: space-between;
-                flex-wrap: nowrap;
+                display: grid;
+                grid-template-columns: minmax(0, 1fr) auto;
+                align-items: start;
+                column-gap: 10px;
+            }
+
+            .lab-name {
+                min-width: 0;
             }
 
             .menu-toggle {
@@ -220,42 +235,10 @@
 
             nav {
                 display: none;
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-                padding-top: 12px;
-            }
-
-            nav.open {
-                display: flex;
-            }
-
-            h2, h3 {
-                margin-bottom: 6px;
-                margin-top: 24px;
-            }
-
-            .news-item {
-                flex-direction: column;
-                gap: 6px;
             }
 
             .footer-logos img {
                 height: 18px;
-            }
-
-
-            .news-date {
-                min-width: unset;
-            }
-
-            .sponsor-logos, .collab-logos {
-                width: 100%;
-            }
-
-
-            p, .intro, .news-content, p.ack, .section-text {
-                text-align: left;
             }
         }
 
@@ -274,7 +257,7 @@
             right: -280px;
             width: 240px;
             height: 100vh;
-            background: #FAF8F5;
+            background: #ffffff;
             box-shadow: -4px 0 24px rgba(0,0,0,0.12);
             z-index: 1000;
             transition: right 0.3s ease;
@@ -317,6 +300,8 @@
     </style>
 </head>
 <body>
+
+<div class="top-rule"></div>
 
 
 <div class="inner">

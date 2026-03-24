@@ -12,7 +12,7 @@
         body {
             font-family: 'Inter', system-ui, sans-serif;
             color: #111;
-            background: #FAF8F5;
+            background: #ffffff;
             min-height: 100vh;
         }
 
@@ -33,20 +33,21 @@
             border-bottom: 1px solid #e2e6f0;
         }
 
-        .lab-name, .lab-name:hover {
+        .lab-name {
             font-family: 'EB Garamond', Georgia, serif;
-            font-size: 2.3em;
+            font-size: 2.8em;
             font-weight: 500;
             color: #111;
-            letter-spacing: -0.01em;
-            line-height: 1;
+            letter-spacing: 0;
+            line-height: 0.96;
             display: block;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             text-decoration: none;
         }
 
         nav {
             display: flex;
+            flex-wrap: wrap;
             align-items: center;
             gap: clamp(10px, 3vw, 24px);
         }
@@ -57,20 +58,33 @@
             font-size: 1em;
             font-weight: 400;
             letter-spacing: 0.01em;
-            transition: color 0.15s;
+            padding-bottom: 2px;
+            border-bottom: 1.5px dashed transparent;
+            transition: color 0.15s, border-color 0.15s;
         }
 
-        nav a:hover { color: #1B3A8A; }
+        nav a:hover {
+            color: #1B3A8A;
+            border-bottom: 1.5px solid #1B3A8A;
+            text-decoration: none;
+        }
+
+        nav a.active {
+            color: #111;
+            font-weight: 600;
+            border-bottom: 1.5px solid #111;
+        }
 
         a { color: #1B3A8A; text-decoration: none; }
         a:hover { text-decoration: underline; }
 
         h2 {
-            font-family: 'EB Garamond', Georgia, serif;
-            font-size: 1.3em;
-            font-weight: 500;
-            letter-spacing: 0;
-            color: #374151;
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 1.12em;
+            font-weight: 700;
+            letter-spacing: 0.01em;
+            text-transform: none;
+            color: #111;
             margin-bottom: 12px;
         }
 
@@ -91,7 +105,8 @@
         .gallery-item {
             position: relative;
             overflow: hidden;
-            border: 1px solid #d1d5db;
+            border: 1.5px solid #b8bec8;
+            border-radius: 6px;
             aspect-ratio: 1;
         }
 
