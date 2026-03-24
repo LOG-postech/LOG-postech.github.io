@@ -35,7 +35,7 @@
 
         .lab-name, .lab-name:hover {
             font-family: 'EB Garamond', Georgia, serif;
-            font-size: clamp(1.7em, 5vw, 2.6em);
+            font-size: 2.3em;
             font-weight: 500;
             color: #111;
             letter-spacing: -0.01em;
@@ -81,7 +81,7 @@
         }
 
         p {
-            font-size: 0.9em;
+            font-size: 0.93em;
             line-height: 1.75;
             color: #374151;
             text-align: justify;
@@ -139,15 +139,15 @@
             flex-wrap: wrap;
             align-items: center;
             justify-content: center;
-            gap: 20px;
+            column-gap: 20px;
+            row-gap: 10px;
             margin-top: 20px;
             margin-left: auto;
             margin-right: auto;
             background: #fff;
             border-radius: 10px;
             border: 1px solid #e8e4dd;
-            padding: 13px 12px;
-            width: fit-content;
+            padding: 13px 20px;
         }
 
         .collab-logos img {
@@ -172,10 +172,6 @@
         @media (max-width: 640px) {
             .inner {
                 padding: 28px 18px 40px;
-            }
-
-            .lab-name {
-                font-size: 1.7em;
             }
 
             header {
@@ -222,32 +218,9 @@
                 width: 100%;
             }
 
-            .collab-logos {
-                gap: 8px;
-                flex-wrap: nowrap;
-                width: 100%;
-            }
-
-            .collab-logos img {
-                flex: 1 1 0;
-                min-width: 0;
-                width: 0 !important;
-                height: auto !important;
-                max-height: 28px;
-            }
-
-
-            body {
-                font-size: 14px;
-            }
 
             p, .intro, .news-content, p.ack, .section-text {
                 text-align: left;
-                font-size: 0.9em;
-            }
-
-            .news-date {
-                font-size: 0.78em;
             }
 
             .section {
