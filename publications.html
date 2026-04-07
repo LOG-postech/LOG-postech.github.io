@@ -16,17 +16,6 @@
             min-height: 100vh;
         }
 
-        .scroll-progress {
-            position: fixed;
-            top: 3px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: #3B6FD4;
-            z-index: 1001;
-            transition: width 0.08s linear;
-        }
-
         .inner {
             max-width: 800px;
             margin: 0 auto;
@@ -283,9 +272,6 @@
 </head>
 <body>
 
-<div class="scroll-progress" id="scrollProgress"></div>
-
-
 <div class="inner">
 
     <header>
@@ -304,6 +290,13 @@
     <main>
         <!-- ===== 2026 ===== -->
         <div class="year-divider">2026</div>
+
+        <div class="paper">
+            <div class="paper-title">Quantifying Aleatoric Uncertainty of In-Context Learning for Robust Measure of LLM Prediction Confidence</div>
+            <div class="paper-authors">Jinseok Chung, Minkyoung Song, Hyunji Jung, Namhoon Lee</div>
+            <div class="paper-venue">ACL 2026</div>
+            <!-- <div class="paper-links"><a href="https://arxiv.org/abs/2602.18181v1" target="_blank">arxiv</a></div> -->
+        </div>
 
         <div class="paper">
             <div class="paper-title">SeedFlood: A Step Toward Scalable Decentralized Training of LLMs</div>
@@ -579,18 +572,6 @@
     close.addEventListener('click', closeDrawer);
     overlay.addEventListener('click', closeDrawer);
 
-    var scrollProgress = document.getElementById('scrollProgress');
-    function updateScrollProgress() {
-        if (!scrollProgress) return;
-        var scrollTop = window.scrollY || document.documentElement.scrollTop || 0;
-        var scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-        var ratio = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
-        scrollProgress.style.width = ratio + '%';
-    }
-
-    document.addEventListener('scroll', updateScrollProgress, { passive: true });
-    window.addEventListener('resize', updateScrollProgress);
-    updateScrollProgress();
 </script>
 </body>
 </html>
