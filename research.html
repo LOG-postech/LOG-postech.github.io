@@ -12,13 +12,8 @@
         body {
             font-family: 'Inter', system-ui, sans-serif;
             color: #111;
-            background: #FAF8F5;
+            background: #ffffff;
             min-height: 100vh;
-        }
-
-        .top-rule {
-            height: 3px;
-            background: linear-gradient(90deg, #1B3A8A 0%, #3B6FD4 60%, #93A8D8 100%);
         }
 
         .inner {
@@ -33,16 +28,21 @@
             border-bottom: 1px solid #e2e6f0;
         }
 
-        .lab-name, .lab-name:hover {
+        .lab-name {
             font-family: 'EB Garamond', Georgia, serif;
-            font-size: clamp(1.5em, 5vw, 2.3em);
+            font-size: 2.8em;
             font-weight: 500;
             color: #111;
-            letter-spacing: -0.01em;
-            line-height: 1;
+            letter-spacing: 0;
+            line-height: 0.96;
             display: block;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             text-decoration: none;
+        }
+
+        .lab-name:hover {
+            text-decoration: none;
+            color: #111;
         }
 
         nav {
@@ -58,46 +58,85 @@
             font-size: 1em;
             font-weight: 400;
             letter-spacing: 0.01em;
-            transition: color 0.15s;
+            padding-bottom: 2px;
+            border-bottom: 1.5px dashed transparent;
+            transition: color 0.15s, border-color 0.15s;
         }
 
-        nav a:hover { color: #1B3A8A; }
+        nav a:hover {
+            color: #1B3A8A;
+            border-bottom: 1.5px solid #1B3A8A;
+            text-decoration: none;
+        }
+
+        nav a.active {
+            color: #111;
+            font-weight: 600;
+            border-bottom: 1.5px solid #111;
+        }
+        .nav-drawer a.active { color: #111; font-weight: 600; }
 
         a { color: #1B3A8A; text-decoration: none; }
         a:hover { text-decoration: underline; }
 
         h2 {
-            font-family: 'EB Garamond', Georgia, serif;
-            font-size: 1.25em;
-            font-weight: 500;
-            letter-spacing: 0;
-            color: #374151;
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 1.20em;
+            font-weight: 700;
+            letter-spacing: 0.01em;
+            text-transform: none;
+            color: #111;
             margin-bottom: 28px;
             
         }
 
         p {
-            font-size: 0.9em;
+            font-size: 0.93em;
             line-height: 1.75;
             color: #374151;
-            text-align: justify;
             margin-bottom: 0;
         }
 
         .section {
-            display: flex;
-            align-items: flex-start;
-            gap: 22px;
+            display: grid;
+            grid-template-columns: 165px minmax(0, 1fr);
+            align-items: start;
+            column-gap: 22px;
+            row-gap: 10px;
             margin-bottom: 40px;
         }
 
+        .section .section-text {
+            min-width: 0;
+        }
+
         .section img {
-            width: 140px;
+            width: 165px;
+            max-width: none;
             height: auto;
             object-fit: contain;
-            border: 1.5px solid #d1d5db;
-            flex-shrink: 0;
+            border: 1.5px solid #b8bec8;
+            border-radius: 6px;
             margin-top: 4px;
+        }
+
+        .section.wrap-flow {
+            display: block;
+        }
+
+        .section.wrap-flow::after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+
+        .section.wrap-flow img {
+            float: left;
+            margin: 4px 22px 10px 0;
+        }
+
+        .section.wrap-flow .section-text {
+            display: block;
         }
 
         .section-title { font-weight: 700; }
@@ -114,7 +153,7 @@
             align-items: center;
             justify-content: space-between;
             font-size: 0.75em;
-            color: #9ca3af;
+            color: #6b7280;
         }
 
         .footer-logos {
@@ -135,33 +174,30 @@
             flex-wrap: wrap;
             align-items: center;
             justify-content: center;
-            gap: 20px;
+            column-gap: 16px;
+            row-gap: 12px;
             margin-top: 20px;
             margin-left: auto;
             margin-right: auto;
             background: #fff;
-            border-radius: 10px;
+            border-radius: 6px;
             border: 1px solid #e8e4dd;
-            padding: 13px 12px;
+            padding: 16px 18px;
             width: fit-content;
         }
 
         .collab-logos img {
-            height: 32px;
+            height: 40px;
             width: auto;
             object-fit: contain;
         }
 
         .menu-toggle {
             display: none;
-            position: fixed;
-            top: 16px;
-            right: 18px;
-            z-index: 1001;
-            background: #FAF8F5;
+            background: #ffffff;
             border: 1px solid #e2e6f0;
             border-radius: 6px;
-            font-size: 1.2em;
+            font-size: 1.3em;
             cursor: pointer;
             color: #374151;
             padding: 4px 8px;
@@ -169,13 +205,22 @@
         }
 
 
-        @media (max-width: 640px) {
+        @media (max-width: 900px) {
             .inner {
                 padding: 28px 18px 40px;
             }
 
+            header {
+                padding-bottom: 4px;
+                margin-bottom: 16px;
+                display: grid;
+                grid-template-columns: minmax(0, 1fr) auto;
+                align-items: start;
+                column-gap: 10px;
+            }
+
             .lab-name {
-                font-size: 1.7em;
+                min-width: 0;
             }
 
             .menu-toggle {
@@ -184,45 +229,10 @@
 
             nav {
                 display: none;
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-                padding-top: 12px;
             }
 
-            nav.open {
-                display: flex;
-            }
-
-            h2, h3 {
-                font-size: 1.05em;
-            }
-
-            .news-item {
-                flex-direction: column;
-                gap: 2px;
-            }
-
-            .news-date {
-                min-width: unset;
-            }
-
-            .sponsor-logos, .collab-logos {
-                width: 100%;
-            }
-
-
-            body {
-                font-size: 14px;
-            }
-
-            .intro, .news-content, p.ack {
-                text-align: left;
-                font-size: 0.9em;
-            }
-
-            .news-date {
-                font-size: 0.78em;
+            .footer-logos img {
+                height: 18px;
             }
         }
 
@@ -241,7 +251,7 @@
             right: -280px;
             width: 240px;
             height: 100vh;
-            background: #FAF8F5;
+            background: #ffffff;
             box-shadow: -4px 0 24px rgba(0,0,0,0.12);
             z-index: 1000;
             transition: right 0.3s ease;
@@ -293,7 +303,7 @@
         <button class="menu-toggle" aria-label="Menu">&#9776;</button>
         <nav>
             <a href="index.html">Home</a>
-            <a href="research.html">Research</a>
+            <a href="research.html" class="active">Research</a>
             <a href="publications.html">Publications</a>
             <a href="group.html">Members</a>
             <a href="hiring.html">Hiring</a>
@@ -301,62 +311,53 @@
         </nav>
     </header>
 
-    <h2>Research Focus</h2>
+    <main>
+        <h2>Research Focus</h2>
 
-    <div class="section">
-        <img src="research_focus/opt-model.png" alt="Model Compression">
-        <div class="section-text">
-            <p>
-                <!--<span class="section-title">Optimization</span> for -->
-                <span class="red">Model Compression</span> 
-                <!--
-                As modern AI models, particularly deep neural networks, grow increasingly large and computationally demanding, model compression has become essential for enabling broader and more sustainable use of AI technologies.
-                We develop optimization methods to compress large models so that they can run more efficiently at training and inference without significantly compromising their performance.-->
-                  As modern AI models, particularly deep neural networks, grow increasingly large and computationally demanding, model compression has become essential for enabling broader and more sustainable use of AI technologies.
-                We develop optimization methods to compress large models so that they can run more efficiently at training and inference without significantly compromising their performance.
-                Our research focuses on maximizing AI efficiency across the model lifecycle through extreme compression and integrated optimization to achieve high-fidelity performance.
-            </p>
+        <div class="section">
+            <img src="research_focus/opt-model.png" alt="Model Compression">
+            <div class="section-text">
+                <p>
+                    <span class="red">Model Compression</span>
+                    As AI models become larger and more computationally demanding, compression is essential for making them practical and sustainable.
+                    We develop optimization methods that reduce training and inference costs while preserving model performance.
+                    Our work focuses on extreme compression across the AI model lifecycle.
+                </p>
+            </div>
         </div>
 
-    <div class="section">
-        <img src="research_focus/opt-deep.jpeg" alt="Advanced Optimization">
-        <div class="section-text">
-            <p>
-                <!--<span class="section-title">Optimization</span> for -->
-                <span class="orange">Advanced Optimization</span> 
-                <!--Optimization has been central to the success of deep learning, yet there remain many challenges to address such as non-convexity, high dimensionality, and scalability. 
-                We study both theoretical foundations—such as convergence guarantees and generalization properties—and practical algorithms, including stochastic, adaptive, and second-order methods, so as to come up with efficient and principled optimization methods.-->  
-                  Optimization has long been a source of crucial ideas that drastically enhance all corners of deep neural network training — and many of its most impactful questions remain open.
-                Our research investigates these questions and develops optimization principles and algorithms for modern deep learning systems.
-            </p>
+        <div class="section">
+            <img src="research_focus/opt-dist.png" alt="Distributed Training">
+            <div class="section-text">
+                <p>
+                    <span class="green">Distributed Training</span>
+                    The shift toward massive-scale models has made distributed training essential for workloads that no single machine can support.
+                    From an optimization perspective, the key challenge is maintaining efficiency while managing the overhead of communication between devices.
+                    Our research develops robust algorithms for decentralized and high-latency training environments.
+                </p>
+            </div>
         </div>
 
-    <div class="section">
-        <img src="research_focus/opt-dist.png" alt="Distributed Training">
-        <div class="section-text">
-            <p>
-                <!--<span class="section-title">Optimization</span> for -->
-                <span class="green">Distributed Training</span>
-                 <!-- Collaborative machine learning is a promising learning paradigm that allows participants to work together to train a model without necessarily sharing their raw data.
-                However, frequent exchange of updates can overwhelm networks, especially with large models or slow connections. 
-                We address such a unique set of challenges due to its distributed and often decentralized nature by developing efficient and scalable solutions.-->
-                  The rapid shift toward massive-scale models has made distributed training more critical than ever, as it allows vast compute clusters to handle workloads that no single machine can support.
-                From an optimization perspective, the primary challenge is maintaining mathematical efficiency while managing the significant overhead of exchanging information between devices.
-                Our research focuses on designing robust algorithms that remain efficient in decentralized or high-latency environments.
-            </p>
+        <div class="section">
+            <img src="research_focus/opt-applied.png" alt="Application">
+            <div class="section-text">
+                <p>
+                    <span class="blue">Application</span>
+                    Optimization is not only a subject of study in itself, but also a versatile lens through which we tackle diverse challenges arising in real-world deep learning systems.
+                    Our research explores how optimization principles can be extended and applied to address such challenges.
+                </p>
+            </div>
         </div>
 
-    <div class="section">
-        <img src="research_focus/opt-applied.png" alt="Other Applications">
-        <div class="section-text">
-            <p>
-                <!--<span class="section-title">Optimization</span> for -->
-                <span class="blue">Other Applications</span> 
-                <!--  Optimization is a versatile tool that can be applied to a wide range of machine learning applications.
-                We are currently focused on addressing challenges surrounding large language models, particularly those involving learning in black-box environments, continual adaptation, and multi-modal contexts.-->
-                  Optimization is not only a subject of study in itself, but also a versatile lens through which we tackle diverse challenges arising in real-world deep learning systems.
-                Our research explores how optimization principles can be extended and applied to address such challenges.
-            </p>
+        <div class="section">
+            <img src="research_focus/opt-deep.jpeg" alt="Advanced Optimization">
+            <div class="section-text">
+                <p>
+                    <span class="orange">Advanced Optimization</span>
+                    Optimization has long been a source of crucial ideas that drastically enhance all corners of deep neural network training, and many of its most impactful questions remain open.
+                    Our research investigates these questions and develops optimization principles and algorithms for modern deep learning systems.
+                </p>
+            </div>
         </div>
 
         <h2>Collaborators</h2>
@@ -367,6 +368,8 @@
             <img src="logo/oxford_logo.png" alt="Oxford" style="height:24px;">
             <img src="logo/anu_logo.png" alt="ANU" style="height:24px;">
             <img src="logo/cmu.logo.png" alt="CMU" style="height:26px;">
+            <img src="logo/google_logo.svg" alt="Google" style="height:28px;">
+            <img src="logo/etri_logo.png" alt="ETRI" style="height:28px;">
         </div>
     </main>
 
@@ -388,7 +391,7 @@
     <div class="nav-drawer" id="navDrawer">
         <button class="drawer-close" id="drawerClose">&#x2715;</button>
         <a href="index.html">Home</a>
-        <a href="research.html">Research</a>
+        <a href="research.html" class="active">Research</a>
         <a href="publications.html">Publications</a>
         <a href="group.html">Members</a>
         <a href="hiring.html">Hiring</a>
@@ -413,6 +416,46 @@
     toggle.addEventListener('click', function() { drawer.classList.contains('open') ? closeDrawer() : openDrawer(); });
     close.addEventListener('click', closeDrawer);
     overlay.addEventListener('click', closeDrawer);
+
+    function applyConditionalResearchWrap() {
+        var sections = document.querySelectorAll('.section');
+
+        sections.forEach(function(section) {
+            var image = section.querySelector('img');
+            var textBlock = section.querySelector('.section-text p');
+            if (!image || !textBlock) {
+                return;
+            }
+
+            section.classList.remove('wrap-flow');
+
+            var textStyle = window.getComputedStyle(textBlock);
+            var lineHeight = parseFloat(textStyle.lineHeight);
+            if (!lineHeight || Number.isNaN(lineHeight)) {
+                lineHeight = parseFloat(textStyle.fontSize) * 1.75;
+            }
+
+            var textHeight = textBlock.getBoundingClientRect().height;
+            var imageHeight = image.getBoundingClientRect().height;
+            var threshold = imageHeight + (2 * lineHeight);
+
+            if (textHeight > threshold) {
+                section.classList.add('wrap-flow');
+            }
+        });
+    }
+
+    var wrapResizeTimer;
+    function onWrapResize() {
+        window.clearTimeout(wrapResizeTimer);
+        wrapResizeTimer = window.setTimeout(applyConditionalResearchWrap, 80);
+    }
+
+    window.addEventListener('load', applyConditionalResearchWrap);
+    window.addEventListener('resize', onWrapResize);
+    if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(applyConditionalResearchWrap);
+    }
 </script>
 </body>
 </html>
