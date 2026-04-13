@@ -1,444 +1,590 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="logo/log_logo.png" type="image/png">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="logo/log_logo.png" type="image/png" />
     <title>Home | Lee Optimization Group</title>
-    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
     <style>
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
-        body {
-            font-family: 'Inter', system-ui, sans-serif;
-            color: #111;
-            background: #ffffff;
-            min-height: 100vh;
-        }
+      body {
+        font-family: "Inter", system-ui, sans-serif;
+        color: #111;
+        background: #ffffff;
+        min-height: 100vh;
+      }
 
+      .top-rule {
+        height: 3px;
+        background: linear-gradient(
+          90deg,
+          #1b3a8a 0%,
+          #3b6fd4 60%,
+          #93a8d8 100%
+        );
+      }
+
+      .inner {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: clamp(24px, 5vw, 48px) clamp(16px, 4vw, 32px)
+          clamp(36px, 5vw, 60px);
+      }
+
+      header {
+        padding-bottom: 28px;
+        margin-bottom: 40px;
+        border-bottom: 1px solid #e2e6f0;
+      }
+
+      .lab-name {
+        font-family: "EB Garamond", Georgia, serif;
+        font-size: 2.8em;
+        font-weight: 500;
+        color: #111;
+        letter-spacing: 0;
+        line-height: 0.96;
+        display: block;
+        margin-bottom: 18px;
+      }
+
+      nav {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: clamp(10px, 3vw, 24px);
+      }
+
+      nav a {
+        text-decoration: none;
+        color: #6b7280;
+        font-size: 1em;
+        font-weight: 400;
+        letter-spacing: 0.01em;
+        padding-bottom: 2px;
+        border-bottom: 1.5px dashed transparent;
+        transition:
+          color 0.15s,
+          border-color 0.15s;
+      }
+
+      nav a:hover {
+        color: #1b3a8a;
+        border-bottom: 1.5px solid #1b3a8a;
+        text-decoration: none;
+      }
+
+      nav a.active {
+        color: #111;
+        font-weight: 600;
+        border-bottom: 1.5px solid #111;
+      }
+      .nav-drawer a.active {
+        color: #111;
+        font-weight: 600;
+      }
+
+      main img.lab-photo {
+        width: 100%;
+        height: auto;
+        display: block;
+        margin-bottom: 24px;
+        border-radius: 0;
+      }
+
+      .intro {
+        font-size: 0.93em;
+        font-weight: 300;
+        line-height: 1.85;
+        color: #374151;
+        margin-bottom: 40px;
+      }
+
+      .intro a {
+        color: #1b3a8a;
+        text-decoration: none;
+      }
+      .intro a:hover {
+        text-decoration: underline;
+      }
+
+      h3 {
+        font-family: "Inter", system-ui, sans-serif;
+        font-size: 1.2em;
+        font-weight: 700;
+        letter-spacing: 0.01em;
+        text-transform: none;
+        color: #111;
+        margin-bottom: 12px;
+        margin-top: 40px;
+      }
+
+      .news-list {
+        margin: 0;
+        padding: 0;
+      }
+
+      .news-item {
+        display: flex;
+        gap: 20px;
+        align-items: baseline;
+        padding: 10px 0;
+      }
+
+      .news-item:last-child {
+        margin-bottom: 0;
+      }
+
+      .news-date {
+        font-size: 0.78em;
+        font-weight: 400;
+        color: #111;
+        min-width: 64px;
+        flex-shrink: 0;
+      }
+
+      .news-content {
+        font-size: 0.93em;
+        font-weight: 300;
+        color: #374151;
+        line-height: 1.85;
+      }
+
+      .news-content a {
+        color: #1b3a8a;
+        text-decoration: none;
+      }
+      .news-content a:hover {
+        text-decoration: underline;
+      }
+      .news-content em {
+        font-style: normal;
+        font-weight: 600;
+        color: inherit;
+      }
+
+      p.ack {
+        font-size: 0.93em;
+        font-weight: 300;
+        color: #374151;
+        line-height: 1.85;
+        margin-top: 0;
+      }
+
+      .sponsor-logos {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        column-gap: 20px;
+        row-gap: 4px;
+        margin-top: 20px;
+        background: #fff;
+        border-radius: 6px;
+        border: 1px solid #e8e4dd;
+        padding: 4px 16px;
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .sponsor-card {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .sponsor-card img {
+        width: 64px;
+        height: 64px;
+        object-fit: contain;
+      }
+
+      footer {
+        margin-top: 52px;
+        padding-top: 20px;
+        border-top: 1px solid #e2e6f0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 0.75em;
+        color: #6b7280;
+      }
+
+      .footer-logos {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .footer-logos img {
+        height: 28px;
+        width: auto;
+        object-fit: contain;
+        opacity: 1;
+      }
+
+      .menu-toggle {
+        display: none;
+        background: #ffffff;
+        border: 1px solid #e2e6f0;
+        border-radius: 6px;
+        font-size: 1.3em;
+        cursor: pointer;
+        color: #374151;
+        padding: 4px 8px;
+        line-height: 1;
+      }
+      @media (max-width: 900px) {
         .inner {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: clamp(24px, 5vw, 48px) clamp(16px, 4vw, 32px) clamp(36px, 5vw, 60px);
+          padding: 28px 18px 40px;
         }
 
         header {
-            padding-bottom: 28px;
-            margin-bottom: 40px;
-            border-bottom: 1px solid #e2e6f0;
+          padding-bottom: 4px;
+          margin-bottom: 16px;
+          display: grid;
+          grid-template-columns: minmax(0, 1fr) auto;
+          align-items: start;
+          column-gap: 10px;
         }
 
         .lab-name {
-            font-family: 'EB Garamond', Georgia, serif;
-            font-size: 2.8em;
-            font-weight: 500;
-            color: #111;
-            letter-spacing: 0;
-            line-height: 0.96;
-            display: block;
-            margin-bottom: 18px;
-        }
-
-        nav {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: clamp(10px, 3vw, 24px);
-        }
-
-        nav a {
-            text-decoration: none;
-            color: #6b7280;
-            font-size: 1em;
-            font-weight: 400;
-            letter-spacing: 0.01em;
-            padding-bottom: 2px;
-            border-bottom: 1.5px dashed transparent;
-            transition: color 0.15s, border-color 0.15s;
-        }
-
-        nav a:hover {
-            color: #1B3A8A;
-            border-bottom: 1.5px solid #1B3A8A;
-            text-decoration: none;
-        }
-
-        nav a.active {
-            color: #111;
-            font-weight: 600;
-            border-bottom: 1.5px solid #111;
-        }
-        .nav-drawer a.active { color: #111; font-weight: 600; }
-
-
-        main img.lab-photo {
-            width: 100%;
-            height: auto;
-            display: block;
-            margin-bottom: 24px;
-            border-radius: 0;
-        }
-
-        .intro {
-            font-size: 0.93em;
-            font-weight: 300;
-            line-height: 1.85;
-            color: #374151;
-            margin-bottom: 40px;
-        }
-
-        .intro a { color: #1B3A8A; text-decoration: none; }
-        .intro a:hover { text-decoration: underline; }
-
-        h3 {
-            font-family: 'Inter', system-ui, sans-serif;
-            font-size: 1.20em;
-            font-weight: 700;
-            letter-spacing: 0.01em;
-            text-transform: none;
-            color: #111;
-            margin-bottom: 12px;
-            margin-top: 40px;
-        }
-
-        .news-list {
-            margin: 0;
-            padding: 0;
-        }
-
-        .news-item {
-            display: flex;
-            gap: 20px;
-            align-items: baseline;
-            padding: 10px 0;
-        }
-
-        .news-item:last-child { margin-bottom: 0; }
-
-        .news-date {
-            font-size: 0.78em;
-            font-weight: 400;
-            color: #111;
-            min-width: 64px;
-            flex-shrink: 0;
-        }
-
-        .news-content {
-            font-size: 0.93em;
-            font-weight: 300;
-            color: #374151;
-            line-height: 1.85;
-        }
-
-        .news-content a { color: #1B3A8A; text-decoration: none; }
-        .news-content a:hover { text-decoration: underline; }
-        .news-content em { font-style: normal; font-weight: 600; color: inherit; }
-
-        p.ack {
-            font-size: 0.93em;
-            font-weight: 300;
-            color: #374151;
-            line-height: 1.85;
-            margin-top: 0;
-        }
-
-        .sponsor-logos {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: center;
-            column-gap: 20px;
-            row-gap: 4px;
-            margin-top: 20px;
-            background: #fff;
-            border-radius: 6px;
-            border: 1px solid #e8e4dd;
-            padding: 4px 16px;
-            width: fit-content;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .sponsor-card {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .sponsor-card img {
-            width: 64px;
-            height: 64px;
-            object-fit: contain;
-        }
-
-        footer {
-            margin-top: 52px;
-            padding-top: 20px;
-            border-top: 1px solid #e2e6f0;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            font-size: 0.75em;
-            color: #6b7280;
-        }
-
-        .footer-logos {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-        }
-
-        .footer-logos img {
-            height: 28px;
-            width: auto;
-            object-fit: contain;
-            opacity: 1;
+          min-width: 0;
         }
 
         .menu-toggle {
-            display: none;
-                        background: #ffffff;
-            border: 1px solid #e2e6f0;
-            border-radius: 6px;
-            font-size: 1.3em;
-            cursor: pointer;
-            color: #374151;
-            padding: 4px 8px;
-            line-height: 1;
-        }
-        @media (max-width: 900px) {
-            .inner {
-                padding: 28px 18px 40px;
-            }
-
-            header {
-                padding-bottom: 4px;
-                margin-bottom: 16px;
-                display: grid;
-                grid-template-columns: minmax(0, 1fr) auto;
-                align-items: start;
-                column-gap: 10px;
-            }
-
-            .lab-name {
-                min-width: 0;
-            }
-
-            .menu-toggle {
-                display: block;
-            }
-
-            nav {
-                display: none;
-            }
-
-            .footer-logos img {
-                height: 18px;
-            }
+          display: block;
         }
 
-        /* Drawer */
-        .nav-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.3);
-            z-index: 999;
+        nav {
+          display: none;
         }
 
-        .nav-drawer {
-            position: fixed;
-            top: 0;
-            right: -280px;
-            width: 240px;
-            height: 100vh;
-            background: #ffffff;
-            box-shadow: -4px 0 24px rgba(0,0,0,0.12);
-            z-index: 1000;
-            transition: right 0.3s ease;
-            padding: 64px 32px 40px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
+        .footer-logos img {
+          height: 18px;
         }
+      }
 
-        .nav-drawer.open {
-            right: 0;
-        }
+      /* Drawer */
+      .nav-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.3);
+        z-index: 999;
+      }
 
-        .nav-overlay.open {
-            display: block;
-        }
+      .nav-drawer {
+        position: fixed;
+        top: 0;
+        right: -280px;
+        width: 240px;
+        height: 100vh;
+        background: #ffffff;
+        box-shadow: -4px 0 24px rgba(0, 0, 0, 0.12);
+        z-index: 1000;
+        transition: right 0.3s ease;
+        padding: 64px 32px 40px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
 
-        .drawer-close {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: none;
-            border: none;
-            font-size: 1.4em;
-            cursor: pointer;
-            color: #374151;
-            line-height: 1;
-        }
+      .nav-drawer.open {
+        right: 0;
+      }
 
-        .nav-drawer a {
-            text-decoration: none;
-            color: #374151;
-            font-size: 1.05em;
-            font-weight: 400;
-        }
+      .nav-overlay.open {
+        display: block;
+      }
 
-        .nav-drawer a:hover {
-            color: #1B3A8A;
-        }
+      .drawer-close {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: none;
+        border: none;
+        font-size: 1.4em;
+        cursor: pointer;
+        color: #374151;
+        line-height: 1;
+      }
+
+      .nav-drawer a {
+        text-decoration: none;
+        color: #374151;
+        font-size: 1.05em;
+        font-weight: 400;
+      }
+
+      .nav-drawer a:hover {
+        color: #1b3a8a;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
+    <div class="top-rule"></div>
 
-<div class="inner">
-
-    <header>
+    <div class="inner">
+      <header>
         <span class="lab-name">Lee Optimization Group</span>
         <button class="menu-toggle" aria-label="Menu">&#9776;</button>
         <nav>
-            <a href="index.html" class="active">Home</a>
-            <a href="research.html">Research</a>
-            <a href="publications.html">Publications</a>
-            <a href="group.html">Members</a>
-            <a href="hiring.html">Hiring</a>
-            <a href="contact.html">Contact</a>
+          <a href="index.html" class="active">Home</a>
+          <a href="research.html">Research</a>
+          <a href="publications.html">Publications</a>
+          <a href="group.html">Members</a>
+          <a href="hiring.html">Hiring</a>
+          <a href="contact.html">Contact</a>
         </nav>
-    </header>
+      </header>
 
-    <main>
-        <img src="lab_photo.png" alt="Lab Photo" class="lab-photo">
+      <main>
+        <img src="lab_photo.png" alt="Lab Photo" class="lab-photo" />
 
         <p class="intro">
-            We pursue research in machine learning and optimization.
-            To this end, we develop theories and algorithms using computational and mathematical tools.
-            Our ultimate goal is to provide robust and provable solutions to challenging problems in artificial intelligence, particularly those in large-scale settings.
-            We are passionate about translating our findings into practical applications that can benefit society.
-            For further details on our research directions and ongoing projects, please refer to the
-            <a href="research.html">Research</a>.
+          We pursue research in machine learning and optimization. To this end,
+          we develop theories and algorithms using computational and
+          mathematical tools. Our ultimate goal is to provide robust and
+          provable solutions to challenging problems in artificial intelligence,
+          particularly those in large-scale settings. We are passionate about
+          translating our findings into practical applications that can benefit
+          society. For further details on our research directions and ongoing
+          projects, please refer to the
+          <a href="research.html">Research</a>.
         </p>
 
         <h3>Recent News</h3>
         <div class="news-list">
+          <div class="news-item">
+            <span class="news-date">Apr 2026</span>
+            <span class="news-content"
+              >📃 Our paper on uncertainty quantification in ICL has been
+              accepted to ACL 2026. In this work, we introduce self-function
+              vectors to directly decompose uncertainty, and propose a novel
+              framework to evaluate these disentangled sources.</span
+            >
+          </div>
 
-            <div class="news-item">
-                <span class="news-date">Apr 2026</span>
-                <span class="news-content">🤝 Our lab has been selected for the IITP Efficient AI National R&D Program (2026–2029), a <em>KRW 7.59B</em> national initiative in collaboration with <strong>SqueezeBits</strong> and 5+ leading institutions on efficient large-scale AI.</span>
-            </div>
+          <div class="news-item">
+            <span class="news-date">Apr 2026</span>
+            <span class="news-content"
+              >🤝 Selected for the "IITP Efficient AI National R&D Program
+              (2026–2029)", a four-year, <em>KRW 7.59B</em> government-funded
+              national initiative. In collaboration with 5+ leading
+              institutions, including <strong>SqueezeBits</strong>, we aim to
+              develop efficient large-scale AI technologies—including model
+              compression, scalable training, and hardware-aware optimization—to
+              enable real-world deployment.</span
+            >
+          </div>
 
-            <div class="news-item">
-                <span class="news-date">Feb 2026</span>
-                <span class="news-content">🤝 Our lab has been selected for the "Early-Career Researcher Infrastructure Support Program" (NRF) — one of the most competitive grants in Korea. With <em>500M KRW</em> in funding, we will build a high-performance compute infrastructure to power our research on extreme compression of hyperscale AI foundation models.</span>
-            </div>
+          <div class="news-item">
+            <span class="news-date">Feb 2026</span>
+            <span class="news-content"
+              >🤝 Our lab has been selected for the "Early-Career Researcher
+              Infrastructure Support Program" (NRF) — one of the most
+              competitive grants in Korea. With <em>500M KRW</em> in funding, we
+              will build a high-performance compute infrastructure to power our
+              research on extreme compression of hyperscale AI foundation
+              models.</span
+            >
+          </div>
 
-            <div class="news-item">
-                <span class="news-date">Feb 2026</span>
-                <span class="news-content">📃 Our new paper is now available on <a href="https://arxiv.org/abs/2602.18181v1" target="_blank">arXiv</a>! In this work, We introduce SeedFlood, a decentralized LLM training framework that enables model-size–independent communication cost and perfect consensus.</span>
-            </div>
+          <div class="news-item">
+            <span class="news-date">Feb 2026</span>
+            <span class="news-content"
+              >📃 Our new paper is now available on
+              <a href="https://arxiv.org/abs/2602.18181v1" target="_blank"
+                >arXiv</a
+              >! In this work, We introduce SeedFlood, a decentralized LLM
+              training framework that enables model-size–independent
+              communication cost and perfect consensus.</span
+            >
+          </div>
 
-            <div class="news-item">
-                <span class="news-date">Feb 2026</span>
-                <span class="news-content">📃 Our new paper is now available on <a href="https://www.arxiv.org/abs/2602.03515" target="_blank">arXiv</a>! In this work, we propose a basis rotation approach to effectively address the gradient staleness problem in asynchronous pipeline parallelism.</span>
-            </div>
+          <div class="news-item">
+            <span class="news-date">Feb 2026</span>
+            <span class="news-content"
+              >📃 Our new paper is now available on
+              <a href="https://www.arxiv.org/abs/2602.03515" target="_blank"
+                >arXiv</a
+              >! In this work, we propose a basis rotation approach to
+              effectively address the gradient staleness problem in asynchronous
+              pipeline parallelism.</span
+            >
+          </div>
 
-            <div class="news-item">
-                <span class="news-date">Feb 2026</span>
-                <span class="news-content">✈️ Kwanhee started as a visiting student researcher in the <a href="https://daslab.pages.ista.ac.at/" target="_blank">Dan Alistarh Group</a> at <a href="https://ist.ac.at/en/home/" target="_blank">ISTA</a>.</span>
-            </div>
+          <div class="news-item">
+            <span class="news-date">Feb 2026</span>
+            <span class="news-content"
+              >✈️ Kwanhee started as a visiting student researcher in the
+              <a href="https://daslab.pages.ista.ac.at/" target="_blank"
+                >Dan Alistarh Group</a
+              >
+              at
+              <a href="https://ist.ac.at/en/home/" target="_blank">ISTA</a
+              >.</span
+            >
+          </div>
 
-            <div class="news-item">
-                <span class="news-date">Jan 2026</span>
-                <span class="news-content">🎓 Our paper on extreme LLM sparsity (<a href="https://arxiv.org/abs/2510.01650" target="_blank">ELSA</a>) has been accepted to ICLR 2026.</span>
-            </div>
+          <div class="news-item">
+            <span class="news-date">Jan 2026</span>
+            <span class="news-content"
+              >🎓 Our paper on extreme LLM sparsity (<a
+                href="https://arxiv.org/abs/2510.01650"
+                target="_blank"
+                >ELSA</a
+              >) has been accepted to ICLR 2026.</span
+            >
+          </div>
 
-            <!-- <div class="news-item">
-                <span class="news-date">Nov 2025</span>
-                <span class="news-content">🏆 Dongyeop recived the <a href="https://www.qualcomm.com/research/university-relations/innovation-fellowship/2025-south-korea" target="_blank">Qualcomm Innovation Fellowship Korea 2025</a>.</span>
-            </div> -->
+          <div class="news-item">
+            <span class="news-date">Nov 2025</span>
+            <span class="news-content"
+              >🏆 Dongyeop recived the
+              <a
+                href="https://www.qualcomm.com/research/university-relations/innovation-fellowship/2025-south-korea"
+                target="_blank"
+                >Qualcomm Innovation Fellowship Korea 2025</a
+              >.</span
+            >
+          </div>
 
-            <!-- <div class="news-item">
+          <!-- <div class="news-item">
                 <span class="news-date">Nov 2025</span>
                 <span class="news-content">🏆 Our new paper on extreme LLM sparsity (<a href="https://arxiv.org/abs/2510.01650" target="_blank">ELSA</a>) won Best Paper Award at JKAIA 2025.</span>
             </div> -->
 
-            <!-- <div class="news-item">
+          <!-- <div class="news-item">
                 <span class="news-date">Nov 2025</span>
                 <span class="news-content">🏆 Hyunji recived NRF Fellowship.</span>
             </div> -->
 
-            <!-- <div class="news-item">
+          <!-- <div class="news-item">
                 <span class="news-date">Nov 2025</span>
                 <span class="news-content">🎓 We had 2 papers (<a href="https://arxiv.org/abs/2510.25798" target="_blank">MemEIC</a> and <a href="https://arxiv.org/abs/2505.16705" target="_blank">An Analysis of Impact of Noisy Annotations on Concept Bottleneck Models</a>) accepted to NeurIPS 2025.</span>
             </div> -->
-
         </div>
 
         <h3>Acknowledgements</h3>
         <p class="ack">
-            Our research has been supported by a range of organizations, including government agencies
-            (NRF, IITP), industry partners (Google, Samsung, Naver, Intel), and academic institutions
-            (POSTECH, Yonsei).
+          Our research is generously supported by multiple organizations
+          including government agencies (NRF, IITP), industry (Google, Samsung,
+          Naver, Intel), and academic institutions (POSTECH, Yonsei).
         </p>
         <div class="sponsor-logos">
-            <div class="sponsor-card"><img src="logo/nrf_logo.jpg" alt="NRF" style="width:38px;height:38px;"></div>
-            <div class="sponsor-card"><img src="logo/iitp_logo.png" alt="IITP" style="width:52px;height:52px;"></div>
-            <div class="sponsor-card"><img src="logo/google_logo.svg" alt="Google"></div>
-            <div class="sponsor-card"><img src="logo/samsung_logo.svg" alt="Samsung"></div>
-            <div class="sponsor-card"><img src="logo/naver_logo.svg" alt="Naver" style="width:56px;height:56px;"></div>
-            <div class="sponsor-card"><img src="logo/intel_logo.svg" alt="Intel" style="width:42px;height:42px;"></div>
-            <div class="sponsor-card"><img src="logo/postech_logo2.jpg" alt="POSTECH" style="width:52px;height:52px;"></div>
-            <div class="sponsor-card"><img src="logo/yonsei_logo.png" alt="Yonsei" style="width:38px;height:38px;"></div>
+          <div class="sponsor-card">
+            <img
+              src="logo/nrf_logo.jpg"
+              alt="NRF"
+              style="width: 38px; height: 38px"
+            />
+          </div>
+          <div class="sponsor-card">
+            <img
+              src="logo/iitp_logo.png"
+              alt="IITP"
+              style="width: 52px; height: 52px"
+            />
+          </div>
+          <div class="sponsor-card">
+            <img src="logo/google_logo.svg" alt="Google" />
+          </div>
+          <div class="sponsor-card">
+            <img src="logo/samsung_logo.svg" alt="Samsung" />
+          </div>
+          <div class="sponsor-card">
+            <img
+              src="logo/naver_logo.svg"
+              alt="Naver"
+              style="width: 56px; height: 56px"
+            />
+          </div>
+          <div class="sponsor-card">
+            <img
+              src="logo/intel_logo.svg"
+              alt="Intel"
+              style="width: 42px; height: 42px"
+            />
+          </div>
+          <div class="sponsor-card">
+            <img
+              src="logo/postech_logo2.jpg"
+              alt="POSTECH"
+              style="width: 52px; height: 52px"
+            />
+          </div>
+          <div class="sponsor-card">
+            <img
+              src="logo/yonsei_logo.png"
+              alt="Yonsei"
+              style="width: 38px; height: 38px"
+            />
+          </div>
         </div>
-    </main>
+      </main>
 
-    <footer>
+      <footer>
         <span>&copy; 2026 LOG. All rights reserved.</span>
         <div class="footer-logos">
-            <a href="https://www.postech.ac.kr" target="_blank"><img src="logo/postech_logo.png" alt="POSTECH"></a>
-            <a href="https://ai.postech.ac.kr" target="_blank"><img src="logo/gsai_logo.png" alt="GSAI"></a>
-            <a href="https://cse.postech.ac.kr" target="_blank"><img src="logo/cs_logo.png" alt="CS"></a>
-            <img src="logo/log_logo.png" alt="LOG">
+          <a href="https://www.postech.ac.kr" target="_blank"
+            ><img src="logo/postech_logo.png" alt="POSTECH"
+          /></a>
+          <a href="https://ai.postech.ac.kr" target="_blank"
+            ><img src="logo/gsai_logo.png" alt="GSAI"
+          /></a>
+          <a href="https://cse.postech.ac.kr" target="_blank"
+            ><img src="logo/cs_logo.png" alt="CS"
+          /></a>
+          <img src="logo/log_logo.png" alt="LOG" />
         </div>
-    </footer>
-
-</div>
-
-
+      </footer>
+    </div>
 
     <div class="nav-overlay" id="navOverlay"></div>
     <div class="nav-drawer" id="navDrawer">
-        <button class="drawer-close" id="drawerClose">&#x2715;</button>
-        <a href="index.html" class="active">Home</a>
-        <a href="research.html">Research</a>
-        <a href="publications.html">Publications</a>
-        <a href="group.html">Members</a>
-        <a href="hiring.html">Hiring</a>
-        <a href="contact.html">Contact</a>
+      <button class="drawer-close" id="drawerClose">&#x2715;</button>
+      <a href="index.html" class="active">Home</a>
+      <a href="research.html">Research</a>
+      <a href="publications.html">Publications</a>
+      <a href="group.html">Members</a>
+      <a href="hiring.html">Hiring</a>
+      <a href="contact.html">Contact</a>
     </div>
 
-<script>
-    var toggle = document.querySelector('.menu-toggle');
-    var drawer = document.getElementById('navDrawer');
-    var overlay = document.getElementById('navOverlay');
-    var close = document.getElementById('drawerClose');
+    <script>
+      var toggle = document.querySelector(".menu-toggle");
+      var drawer = document.getElementById("navDrawer");
+      var overlay = document.getElementById("navOverlay");
+      var close = document.getElementById("drawerClose");
 
-    function openDrawer() {
-        drawer.classList.add('open');
-        overlay.classList.add('open');
-    }
-    function closeDrawer() {
-        drawer.classList.remove('open');
-        overlay.classList.remove('open');
-    }
+      function openDrawer() {
+        drawer.classList.add("open");
+        overlay.classList.add("open");
+      }
+      function closeDrawer() {
+        drawer.classList.remove("open");
+        overlay.classList.remove("open");
+      }
 
-    toggle.addEventListener('click', function() { drawer.classList.contains('open') ? closeDrawer() : openDrawer(); });
-    close.addEventListener('click', closeDrawer);
-    overlay.addEventListener('click', closeDrawer);
-</script>
-</body>
+      toggle.addEventListener("click", function () {
+        drawer.classList.contains("open") ? closeDrawer() : openDrawer();
+      });
+      close.addEventListener("click", closeDrawer);
+      overlay.addEventListener("click", closeDrawer);
+    </script>
+  </body>
 </html>
