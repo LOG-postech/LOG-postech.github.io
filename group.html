@@ -16,22 +16,6 @@
             min-height: 100vh;
         }
 
-        .top-rule {
-            height: 3px;
-            background: linear-gradient(90deg, #1B3A8A 0%, #3B6FD4 60%, #93A8D8 100%);
-        }
-
-        .scroll-progress {
-            position: fixed;
-            top: 3px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: #3B6FD4;
-            z-index: 1001;
-            transition: width 0.08s linear;
-        }
-
         .inner {
             max-width: 800px;
             margin: 0 auto;
@@ -354,10 +338,6 @@
 </head>
 <body>
 
-<div class="top-rule"></div>
-<div class="scroll-progress" id="scrollProgress"></div>
-
-
 <div class="inner">
 
     <header>
@@ -544,18 +524,6 @@
     close.addEventListener('click', closeDrawer);
     overlay.addEventListener('click', closeDrawer);
 
-    var scrollProgress = document.getElementById('scrollProgress');
-    function updateScrollProgress() {
-        if (!scrollProgress) return;
-        var scrollTop = window.scrollY || document.documentElement.scrollTop || 0;
-        var scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
-        var ratio = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
-        scrollProgress.style.width = ratio + '%';
-    }
-
-    document.addEventListener('scroll', updateScrollProgress, { passive: true });
-    window.addEventListener('resize', updateScrollProgress);
-    updateScrollProgress();
 </script>
 </body>
 </html>
