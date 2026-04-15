@@ -9,6 +9,10 @@
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+        html {
+            overflow-y: scroll;
+        }
+
         body {
             font-family: 'Inter', system-ui, sans-serif;
             color: #111;
@@ -90,11 +94,124 @@
             
         }
 
+        .research-intro {
+            margin-bottom: 26px;
+        }
+
         p {
             font-size: 0.93em;
             line-height: 1.75;
             color: #374151;
             margin-bottom: 0;
+        }
+
+        .fold-trigger {
+            align-items: baseline;
+            background: none;
+            border: none;
+            color: #6b7280;
+            cursor: pointer;
+            display: inline-flex;
+            font-size: 0.82em;
+            font-weight: 500;
+            gap: 6px;
+            margin-left: 4px;
+            padding: 0;
+        }
+
+        .fold-trigger:hover {
+            color: #1B3A8A;
+        }
+
+        .fold-trigger:hover .fold-label {
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .fold-trigger:focus {
+            outline: none;
+        }
+
+        .fold-trigger:focus-visible {
+            outline: 1px solid currentColor;
+            outline-offset: 3px;
+        }
+
+        .fold-caret {
+            font-size: 0.85em;
+            transition: transform 0.15s ease;
+        }
+
+        .fold-trigger[aria-expanded="true"] .fold-caret {
+            transform: rotate(90deg);
+        }
+
+        .fold-detail {
+            border-left: 2px solid #e2e8f4;
+            color: #4b5563;
+            display: none;
+            font-size: 0.9em;
+            line-height: 1.68;
+            margin-top: 10px;
+            padding-left: 12px;
+        }
+
+        .fold-detail.open {
+            display: block;
+        }
+
+        .fold-item {
+            margin-bottom: 9px;
+        }
+
+        .fold-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .fold-item-title {
+            color: #111;
+            display: block;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .paper-tag {
+            color: #8a9099;
+            font-size: 0.82em;
+            font-weight: 400;
+        }
+
+        .paper-tag a {
+            color: inherit;
+            font-weight: 500;
+            position: relative;
+            text-decoration: none;
+            transition: color 0.15s ease;
+        }
+
+        .paper-tag a::after {
+            border-bottom: 1px dotted currentColor;
+            bottom: -2px;
+            content: "";
+            left: 0;
+            position: absolute;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.18s ease;
+            width: 100%;
+        }
+
+        .paper-tag a:hover,
+        .paper-tag a:focus {
+            color: #1B3A8A;
+            outline: none;
+            text-decoration: none;
+        }
+
+        .paper-tag a:hover::after,
+        .paper-tag a:focus::after {
+            transform: scaleX(1);
+            transition-duration: 0s;
         }
 
         .section {
@@ -313,16 +430,32 @@
 
     <main>
         <h2>Research Focus</h2>
+        <p class="research-intro">
+            Our lab focuses on the research directions below. Select more for each topic to expand its description.
+        </p>
 
         <div class="section">
-            <img src="research_focus/opt-model.png" alt="Model Compression">
+            <img src="research_focus/opt-compression.svg" alt="Model Compression">
             <div class="section-text">
                 <p>
                     <span class="red">Model Compression</span>
                     As AI models become larger and more computationally demanding, compression is essential for making them practical and sustainable.
                     We develop optimization methods that reduce training and inference costs while preserving model performance.
                     Our work focuses on extreme compression across the AI model lifecycle.
+                    <button class="fold-trigger" type="button" aria-expanded="false" aria-controls="compressionDetail">
+                        <span class="fold-label">more</span><span class="fold-caret" aria-hidden="true">🔍</span>
+                    </button>
                 </p>
+                <div class="fold-detail" id="compressionDetail">
+                    <div class="fold-item">
+                        <span class="fold-item-title">Extreme Sparsity <span class="paper-tag">(<a href="https://arxiv.org/abs/2510.01650" target="_blank">ICLR 2026</a>)</span></span>
+                        We push the limits of LLM sparsity through advanced optimization frameworks such as ADMM, aiming for robust generalization even at extreme compression levels.
+                    </div>
+                    <div class="fold-item">
+                        <span class="fold-item-title">Joint Compression</span>
+                        We develop unified frameworks that integrate pruning, quantization, and distillation to reduce error accumulation and preserve core model capabilities, including reasoning, in highly compressed states.
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -334,7 +467,24 @@
                     The shift toward massive-scale models has made distributed training essential for workloads that no single machine can support.
                     From an optimization perspective, the key challenge is maintaining efficiency while managing the overhead of communication between devices.
                     Our research develops robust algorithms for decentralized and high-latency training environments.
+                    <button class="fold-trigger" type="button" aria-expanded="false" aria-controls="distributedDetail">
+                        <span class="fold-label">more</span><span class="fold-caret" aria-hidden="true">🔍</span>
+                    </button>
                 </p>
+                <div class="fold-detail" id="distributedDetail">
+                    <div class="fold-item">
+                        <span class="fold-item-title">Communication-Efficient Training <span class="paper-tag">(<a href="https://arxiv.org/abs/2602.18181" target="_blank">arXiv 2026</a>)</span></span>
+                        We design methods that reduce the heavy data-sharing requirements of distributed training through information compression, reduced synchronization, and zeroth-order optimization.
+                    </div>
+                    <div class="fold-item">
+                        <span class="fold-item-title">Asynchronous Training <span class="paper-tag">(<a href="https://arxiv.org/abs/2602.03515" target="_blank">arXiv 2026</a>)</span></span>
+                        We create algorithms that allow devices to work independently and reduce waiting time, with a focus on correcting errors caused by slightly outdated information.
+                    </div>
+                    <div class="fold-item">
+                        <span class="fold-item-title">Device-Heterogeneous Training</span>
+                        We develop adaptive strategies for imbalanced computational resources across devices, aiming for consistent global convergence despite variations in hardware performance.
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -343,9 +493,22 @@
             <div class="section-text">
                 <p>
                     <span class="blue">Deep Learning Applications</span>
-                    Optimization is not only a subject of study in itself, but also a versatile lens through which we tackle diverse challenges arising in real-world deep learning systems.
+                    Optimization is not only a subject of study in itself, but also a versatile lens through which we tackle challenges in interpretability, uncertainty quantification, continual learning, and other real-world deep learning systems.
                     Our research explores how optimization principles can be extended and applied to address such challenges.
+                    <button class="fold-trigger" type="button" aria-expanded="false" aria-controls="applicationsDetail">
+                        <span class="fold-label">more</span><span class="fold-caret" aria-hidden="true">🔍</span>
+                    </button>
                 </p>
+                <div class="fold-detail" id="applicationsDetail">
+                    <div class="fold-item">
+                        <span class="fold-item-title">Interpretability <span class="paper-tag">(<a href="https://arxiv.org/abs/2505.16705" target="_blank">NeurIPS 2025</a>)</span></span>
+                        We bridge complex model architectures and human understanding, from uncovering model logic in realistic scenarios to evaluating the reliability of model outputs.
+                    </div>
+                    <div class="fold-item">
+                        <span class="fold-item-title">Continual Adaptation <span class="paper-tag">(<a href="https://arxiv.org/abs/2510.25798" target="_blank">NeurIPS 2025</a>)</span></span>
+                        We study constrained optimization problems where models adapt to new knowledge without disrupting what has already been learned, opening principled approaches to continual learning.
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -356,7 +519,20 @@
                     <span class="orange">Advanced Optimization</span>
                     Optimization has long been a source of crucial ideas that drastically enhance all corners of deep neural network training, and many of its most impactful questions remain open.
                     Our research investigates these questions and develops optimization principles and algorithms for modern deep learning systems.
+                    <button class="fold-trigger" type="button" aria-expanded="false" aria-controls="optimizationDetail">
+                        <span class="fold-label">more</span><span class="fold-caret" aria-hidden="true">🔍</span>
+                    </button>
                 </p>
+                <div class="fold-detail" id="optimizationDetail">
+                    <div class="fold-item">
+                        <span class="fold-item-title">Optimization for Generalization</span>
+                        We study the role of loss landscape curvature in generalization and develop flatness-oriented optimization strategies with both theoretical advantages and scalability for modern deep neural networks.
+                    </div>
+                    <div class="fold-item">
+                        <span class="fold-item-title">Zeroth-Order Optimization for Black-Box Model Training</span>
+                        We develop methods that operate without direct gradient access, motivated by settings such as proprietary model APIs and decentralized learning systems where gradients are unavailable.
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -416,6 +592,17 @@
     toggle.addEventListener('click', function() { drawer.classList.contains('open') ? closeDrawer() : openDrawer(); });
     close.addEventListener('click', closeDrawer);
     overlay.addEventListener('click', closeDrawer);
+
+    document.querySelectorAll('.fold-trigger').forEach(function(button) {
+        button.addEventListener('click', function() {
+            var detail = document.getElementById(button.getAttribute('aria-controls'));
+            var isOpen = button.getAttribute('aria-expanded') === 'true';
+            button.setAttribute('aria-expanded', String(!isOpen));
+            if (detail) {
+                detail.classList.toggle('open', !isOpen);
+            }
+        });
+    });
 
     function applyConditionalResearchWrap() {
         var sections = document.querySelectorAll('.section');
