@@ -2,178 +2,389 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="logo/log_logo.png" type="image/png">
     <title>Hiring | Lee Optimization Group</title>
-
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        
+        html {
+            overflow-y: scroll;
+        }
+
         body {
-            font-family: system-ui, -apple-system, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-            color: #333;
+            font-family: 'Inter', system-ui, sans-serif;
+            color: #111;
+            background: #ffffff;
+            min-height: 100vh;
+        }
+
+        .inner {
             max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
+            margin: 0 auto;
+            padding: clamp(24px, 5vw, 48px) clamp(16px, 4vw, 32px) clamp(36px, 5vw, 60px);
         }
+
         header {
-            border-bottom: 1px solid #eee;
-            padding-bottom: 20px;
-            margin-bottom: 20px;
+            padding-bottom: 28px;
+            margin-bottom: 40px;
+            border-bottom: 1px solid #e2e6f0;
         }
-        nav a {
-            margin-right: 15px;
+
+        .lab-name {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-size: 2.8em;
+            font-weight: 500;
+            color: #111;
+            letter-spacing: 0;
+            line-height: 0.96;
+            display: block;
+            margin-bottom: 18px;
             text-decoration: none;
-            color: #007bff;
         }
-        footer {
+
+        .lab-name:hover {
+            text-decoration: none;
+            color: #111;
+        }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: clamp(10px, 3vw, 24px);
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #6b7280;
+            font-size: 1em;
+            font-weight: 400;
+            letter-spacing: 0.01em;
+            padding-bottom: 2px;
+            border-bottom: 1.5px dashed transparent;
+            transition: color 0.15s, border-color 0.15s;
+        }
+
+        nav a:hover {
+            color: #1B3A8A;
+            border-bottom: 1.5px solid #1B3A8A;
+            text-decoration: none;
+        }
+
+        nav a.active {
+            color: #111;
+            font-weight: 600;
+            border-bottom: 1.5px solid #111;
+        }
+        .nav-drawer a.active { color: #111; font-weight: 600; }
+
+
+        a { color: #1B3A8A; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        h2 {
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 1.20em;
+            font-weight: 700;
+            letter-spacing: 0.01em;
+            text-transform: none;
+            color: #111;
             margin-top: 40px;
-            font-size: 0.9em;
-            color: #777;
-            border-top: 1px solid #eee;
-            padding-top: 20px;
+            margin-bottom: 14px;
+            
         }
 
-        h3 {
-            margin-top: 30px;
-            margin-bottom: 5px;   /* 제목 아래 간격 줄임 */
-        }
+        h2:first-of-type { margin-top: 0; }
 
-        h3 + p {
-            margin-top: 0;        /* 제목 바로 다음 문단 위 간격 제거 */
+        h2.red-title {
+            color: #d6423a;
         }
 
         p {
-            margin-top: 0;
+            font-size: 0.93em;
+            line-height: 1.75;
+            color: #374151;
+            margin-bottom: 14px;
         }
 
-        a {
-            text-decoration: none;   /* 밑줄 제거 */
-            color: #007bff;          /* 링크 색상 (원하는 색으로) */
+        ul {
+            font-size: 0.93em;
+            line-height: 1.75;
+            color: #374151;
+            padding-left: 20px;
+            margin-bottom: 14px;
         }
 
-        a:hover {
-            text-decoration: underline;  /* 마우스 올리면 밑줄 (선택사항) */
-        }
-        .logo-title {
-            display: flex;
-            align-items: center;
-        }
+        li { margin-bottom: 4px; }
 
-        .highlight-box {
-            background-color: #f3e8c8;   /* 스크린샷과 비슷한 베이지 */
-            padding: 6px 10px;
-            display: inline-block;
-            border-radius: 4px;
-        }
-
-        .red-title {
-            color: #d6423a;
-        }
-
-        .red {
-            color: #d6423a;
-            font-weight: 600;
-        }
+        .red { color: #d6423a; font-weight: 600; }
 
         .highlight-text {
             background-color: #f7f1dc;
-            padding: 2px 4px;
+            padding: 2px 5px;
+            border-radius: 6px;
+        }
+
+        .video-wrap {
+            margin: 16px 0 0;
+            width: 100%;
+            aspect-ratio: 16/9;
+        }
+
+        .video-wrap iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        footer {
+            margin-top: 52px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e6f0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.75em;
+            color: #6b7280;
+        }
+
+        .footer-logos {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .footer-logos img {
+            height: 28px;
+            width: auto;
+            object-fit: contain;
+            opacity: 1;
+        }
+
+        .menu-toggle {
+            display: none;
+                        background: #ffffff;
+            border: 1px solid #e2e6f0;
+            border-radius: 6px;
+            font-size: 1.3em;
+            cursor: pointer;
+            color: #374151;
+            padding: 4px 8px;
+            line-height: 1;
+        }
+        @media (max-width: 900px) {
+            .inner {
+                padding: 28px 18px 40px;
+            }
+
+            header {
+                padding-bottom: 4px;
+                margin-bottom: 16px;
+                display: grid;
+                grid-template-columns: minmax(0, 1fr) auto;
+                align-items: start;
+                column-gap: 10px;
+            }
+
+            .lab-name {
+                min-width: 0;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .footer-logos img {
+                height: 18px;
+            }
+        }
+
+        /* Drawer */
+        .nav-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.3);
+            z-index: 999;
+        }
+
+        .nav-drawer {
+            position: fixed;
+            top: 0;
+            right: -280px;
+            width: 240px;
+            height: 100vh;
+            background: #ffffff;
+            box-shadow: -4px 0 24px rgba(0,0,0,0.12);
+            z-index: 1000;
+            transition: right 0.3s ease;
+            padding: 64px 32px 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .nav-drawer.open {
+            right: 0;
+        }
+
+        .nav-overlay.open {
+            display: block;
+        }
+
+        .drawer-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.4em;
+            cursor: pointer;
+            color: #374151;
+            line-height: 1;
+        }
+
+        .nav-drawer a {
+            text-decoration: none;
+            color: #374151;
+            font-size: 1.05em;
+            font-weight: 400;
+        }
+
+        .nav-drawer a:hover {
+            color: #1B3A8A;
         }
     </style>
 </head>
-
 <body>
 
+<div class="inner">
+
     <header>
-        <h1>Lee Optimization Group</h1>
-        <!-- <div class="logo-title">
-            <img src="log_logo.png" alt="LOG Logo" class="logo">
-            <h1>Lee Optimization Group</h1>
-        </div> -->
+        <a href="index.html" class="lab-name">Lee Optimization Group</a>
+        <button class="menu-toggle" aria-label="Menu">&#9776;</button>
         <nav>
             <a href="index.html">Home</a>
             <a href="research.html">Research</a>
+            <a href="publications.html">Publications</a>
             <a href="group.html">Members</a>
-            <a href="hiring.html">Hiring</a>
+            <a href="hiring.html" class="active">Hiring</a>
             <a href="contact.html">Contact</a>
         </nav>
     </header>
 
-<h2>Lab Documentary</h2>
+    <main>
+        <h2>Lab Documentary</h2>
+        <div class="video-wrap">
+            <iframe
+                src="https://www.youtube.com/embed/0o1SgbYiTvg?&autoplay=1"
+                title="YouTube video player"
+                allow="autoplay; encrypted-media"
+                allowfullscreen>
+            </iframe>
+        </div>
 
-<!-- 유튜브 영상 -->
-<div style="margin: 20px 0; text-align: center;">
-    <iframe width="800" height="450"
-        src="https://www.youtube.com/embed/0o1SgbYiTvg?&autoplay=1"
-        title="YouTube video player"
-        frameborder="0"
-        allow="autoplay; encrypted-media"
-        allowfullscreen>
-    </iframe>
+        <h2>Note on Hiring</h2>
+        <p>
+            Thank you for your interest in joining our group. We are always on the lookout for highly motivated and talented people to work on optimization.
+            Please review carefully the guidance below and submit this <a href="https://docs.google.com/forms/d/e/1FAIpQLSeITIA67th-wepqXm2mbmnzgiVr25PoCd207wVdYgKp8vAsYA/viewform" target="_blank">application form</a> if you're applying for a position.
+            While we encourage you to contact us with any inquiries, please be aware that due to the high volume of emails,
+            we may not be able to offer individual responses.
+            Common questions for joining our lab are answered <a href="https://docs.google.com/document/d/1WpqUZykSroao9HtoDGI8H0tOXZUqEcWWOWvRDrSOcrU/edit?tab=t.0" target="_blank">here</a> — we encourage you to check it out first.
+        </p>
+
+        <h2>Internship</h2>
+        <p>
+            We highly recommend all prospective students to participate in an <span class="red">internship</span> with us before formally applying to the graduate program.
+            While direct application is an option, pursuing an internship first is the most common route for successful applicants:
+        </p>
+        <ul>
+            <li>It allows us to get to know each other and lets you experience the lab firsthand.</li>
+            <li>We rarely hire students we haven't worked with before.</li>
+            <li>The POSTECH admission process is highly competitive, and a positive internship record can significantly strengthen your application.</li>
+        </ul>
+        <p>
+            Summer and Winter internships are available. All internships start at the beginning of off-term times
+            (mid-June for Summer, early-January for Winter) and are expected to last at least two months (ideally longer).
+            Applications are accepted until one month prior to the start of each internship
+            (i.e., May for Summer and November for Winter).
+            Selected candidates will be invited for an interview shortly after the deadline.
+        </p>
+        <p>
+            🔔 <span class="highlight-text">
+            Applications for 26 Summer internship will be received until <strong>6 May 2026</strong>.
+            See this <a href="https://docs.google.com/document/d/12wlwMer8M1LHwbNIJY5fpkR6PJd6H3gm74kr5kW1IGU/edit?tab=t.0#heading=h.8ktausigju9w" target="_blank">Google Docs</a> for more information.
+            </span>
+        </p>
+
+        <h2>Graduate Program</h2>
+        <p>
+            We take on a few new graduate students each year. Please apply directly to either the AI or CSE department,
+            and mention our PI in your application. Once you pass the screening phase and reach the advisor-matching stage,
+            please email PI (namhoon.lee@postech.ac.kr) and also submit <a href="https://docs.google.com/forms/d/e/1FAIpQLSeITIA67th-wepqXm2mbmnzgiVr25PoCd207wVdYgKp8vAsYA/viewform" target="_blank">this form</a>.
+        </p>
+
+        <h2>Postdoc</h2>
+        <p>
+            We're actively looking for postdocs who are interested in advising students with us in our lab.
+            If you have completed your PhD recently or are finishing it soon, please feel free to email PI.
+        </p>
+
+        <h2 class="red-title">All</h2>
+        <p>
+            Please submit this <a href="https://docs.google.com/forms/d/e/1FAIpQLSeITIA67th-wepqXm2mbmnzgiVr25PoCd207wVdYgKp8vAsYA/viewform" target="_blank">application form</a>.
+        </p>
+    </main>
+
+    <footer>
+        <span>&copy; 2026 LOG. All rights reserved.</span>
+        <div class="footer-logos">
+            <a href="https://www.postech.ac.kr" target="_blank"><img src="logo/postech_logo.png" alt="POSTECH"></a>
+            <a href="https://ai.postech.ac.kr" target="_blank"><img src="logo/gsai_logo.png" alt="GSAI"></a>
+            <a href="https://cse.postech.ac.kr" target="_blank"><img src="logo/cs_logo.png" alt="CS"></a>
+            <img src="logo/log_logo.png" alt="LOG">
+        </div>
+    </footer>
+
 </div>
 
 
-<h2>Note on Hiring</h2>
-<p class="update-note">(Last updated on 7 October 2025)</p>
 
-<p>
-Thank you for your interest in joining our group. We are always on the lookout for highly motivated and talented people to work on optimization. 
-Please review carefully the guidance below and submit this <a href="https://docs.google.com/forms/d/e/1FAIpQLSeITIA67th-wepqXm2mbmnzgiVr25PoCd207wVdYgKp8vAsYA/viewform" target="_blank">application form</a> if you’re applying for a position. 
-While we encourage you to contact us with any inquiries, please be aware that due to the high volume of emails, 
-we may not be able to offer individual responses.
-</p>
+    <div class="nav-overlay" id="navOverlay"></div>
+    <div class="nav-drawer" id="navDrawer">
+        <button class="drawer-close" id="drawerClose">&#x2715;</button>
+        <a href="index.html">Home</a>
+        <a href="research.html">Research</a>
+        <a href="publications.html">Publications</a>
+        <a href="group.html">Members</a>
+        <a href="hiring.html" class="active">Hiring</a>
+        <a href="contact.html">Contact</a>
+    </div>
 
-<h2>Internship</h2>
+<script>
+    var toggle = document.querySelector('.menu-toggle');
+    var drawer = document.getElementById('navDrawer');
+    var overlay = document.getElementById('navOverlay');
+    var close = document.getElementById('drawerClose');
 
-<p>
-We highly recommend all prospective students to participate in an <span class="red">internship</span> with us before formally applying to the graduate program. 
-While direct application is an option, pursuing an internship first is the most common route for successful applicants:
-</p>
+    function openDrawer() {
+        drawer.classList.add('open');
+        overlay.classList.add('open');
+    }
+    function closeDrawer() {
+        drawer.classList.remove('open');
+        overlay.classList.remove('open');
+    }
 
-<ul>
-    <li>It allows us to get to know each other and lets you experience the lab firsthand.</li>
-    <li>We rarely hire students I haven't worked with before.</li>
-    <li>The POSTECH admission process is highly competitive, and a positive internship record can significantly strengthen your application.</li>
-</ul>
-
-<p>
-Summer and Winter internships are available. All internships start at the beginning of off-term times 
-(mid-June for Summer, early-January for Winter) and are expected to last at least two months (ideally longer). 
-Applications are accepted until one month prior to the start of each internship 
-(i.e., May for Summer and November for Winter). 
-Selected candidates will be invited for an interview shortly after the deadline.
-</p>
-
-
-<p>
-    🔔<span class="highlight-text">
-    Applications for 26 Summer internship will be received until <strong>30 May 2026</strong>. 
-    See this <a href="https://docs.google.com/document/d/1IK845EHC-pgEhrYu_QhSnvrzqk69_B-y63GEwdrlKBc/edit?usp=sharing" target="_blank">Google Docs</a> for more information.
-    </span>
-</p>
-
-<h2>Graduate Program</h2>
-
-<p>
-We take on a few new graduate students each year. Please apply directly to either the AI or CSE department, 
-and mention our PI in your application. Once you pass the screening phase and reach the advisor-matching stage, 
-please email PI (namhoon.lee@postech.ac.kr) and also submit this form.
-</p>
-
-<h2>Postdoc</h2>
-
-<p>
-We're actively looking for postdocs who are interested in advising students with us in our lab. 
-If you have completed your PhD recently or are finishing it soon, please feel free to email PI.
-</p>
-
-<h2 class="red-title">All</h2>
-
-<p>
-Please submit this <a href="https://docs.google.com/forms/d/e/1FAIpQLSeITIA67th-wepqXm2mbmnzgiVr25PoCd207wVdYgKp8vAsYA/viewform" target="_blank">application form</a>.
-</p>
-
+    toggle.addEventListener('click', function() { drawer.classList.contains('open') ? closeDrawer() : openDrawer(); });
+    close.addEventListener('click', closeDrawer);
+    overlay.addEventListener('click', closeDrawer);
+</script>
 </body>
 </html>

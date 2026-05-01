@@ -2,104 +2,297 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Hiring | Lee Optimization Group</title>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="logo/log_logo.png" type="image/png">
+    <title>Contact | Lee Optimization Group</title>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        
+        html {
+            overflow-y: scroll;
+        }
+
         body {
-            font-family: system-ui, -apple-system, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-            color: #333;
+            font-family: 'Inter', system-ui, sans-serif;
+            color: #111;
+            background: #ffffff;
+            min-height: 100vh;
+        }
+
+        .inner {
             max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
+            margin: 0 auto;
+            padding: clamp(24px, 5vw, 48px) clamp(16px, 4vw, 32px) clamp(36px, 5vw, 60px);
         }
+
         header {
-            border-bottom: 1px solid #eee;
-            padding-bottom: 20px;
-            margin-bottom: 20px;
+            padding-bottom: 28px;
+            margin-bottom: 40px;
+            border-bottom: 1px solid #e2e6f0;
         }
-        nav a {
-            margin-right: 15px;
+
+        .lab-name {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-size: 2.8em;
+            font-weight: 500;
+            color: #111;
+            letter-spacing: 0;
+            line-height: 0.96;
+            display: block;
+            margin-bottom: 18px;
             text-decoration: none;
-            color: #007bff;
-        }
-        footer {
-            margin-top: 40px;
-            font-size: 0.9em;
-            color: #777;
-            border-top: 1px solid #eee;
-            padding-top: 20px;
         }
 
-        h3 {
-            margin-top: 30px;
-            margin-bottom: 5px;   /* 제목 아래 간격 줄임 */
+        .lab-name:hover {
+            text-decoration: none;
+            color: #111;
         }
 
-        h3 + p {
-            margin-top: 0;        /* 제목 바로 다음 문단 위 간격 제거 */
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: clamp(10px, 3vw, 24px);
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #6b7280;
+            font-size: 1em;
+            font-weight: 400;
+            letter-spacing: 0.01em;
+            padding-bottom: 2px;
+            border-bottom: 1.5px dashed transparent;
+            transition: color 0.15s, border-color 0.15s;
+        }
+
+        nav a:hover {
+            color: #1B3A8A;
+            border-bottom: 1.5px solid #1B3A8A;
+            text-decoration: none;
+        }
+
+        nav a.active {
+            color: #111;
+            font-weight: 600;
+            border-bottom: 1.5px solid #111;
+        }
+
+        .nav-drawer a.active { color: #111; font-weight: 600; }
+
+        a { color: #1B3A8A; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        .contact-title {
+            color: #111;
+            font-weight: 700;
+            font-size: 1.20em;
+            letter-spacing: 0.01em;
         }
 
         p {
-            margin-top: 0;
+            font-size: 0.93em;
+            line-height: 1.9;
+            color: #374151;
+            margin-bottom: 0;
         }
 
-        a {
-            text-decoration: none;   /* 밑줄 제거 */
-            color: #007bff;          /* 링크 색상 (원하는 색으로) */
-        }
-
-        a:hover {
-            text-decoration: underline;  /* 마우스 올리면 밑줄 (선택사항) */
-        }
-        .logo-title {
+        footer {
+            margin-top: 52px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e6f0;
             display: flex;
             align-items: center;
+            justify-content: space-between;
+            font-size: 0.75em;
+            color: #6b7280;
+        }
+
+        .footer-logos {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .footer-logos img {
+            height: 28px;
+            width: auto;
+            object-fit: contain;
+            opacity: 1;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: #ffffff;
+            border: 1px solid #e2e6f0;
+            border-radius: 6px;
+            font-size: 1.3em;
+            cursor: pointer;
+            color: #374151;
+            padding: 4px 8px;
+            line-height: 1;
+        }
+        @media (max-width: 900px) {
+            .inner {
+                padding: 28px 18px 40px;
+            }
+
+            header {
+                padding-bottom: 4px;
+                margin-bottom: 16px;
+                display: grid;
+                grid-template-columns: minmax(0, 1fr) auto;
+                align-items: start;
+                column-gap: 10px;
+            }
+
+            .lab-name {
+                min-width: 0;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .footer-logos img {
+                height: 18px;
+            }
+        }
+
+        /* Drawer */
+        .nav-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.3);
+            z-index: 999;
+        }
+
+        .nav-drawer {
+            position: fixed;
+            top: 0;
+            right: -280px;
+            width: 240px;
+            height: 100vh;
+            background: #ffffff;
+            box-shadow: -4px 0 24px rgba(0,0,0,0.12);
+            z-index: 1000;
+            transition: right 0.3s ease;
+            padding: 64px 32px 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .nav-drawer.open {
+            right: 0;
+        }
+
+        .nav-overlay.open {
+            display: block;
+        }
+
+        .drawer-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.4em;
+            cursor: pointer;
+            color: #374151;
+            line-height: 1;
+        }
+
+        .nav-drawer a {
+            text-decoration: none;
+            color: #374151;
+            font-size: 1.05em;
+            font-weight: 400;
+        }
+
+        .nav-drawer a:hover {
+            color: #1B3A8A;
         }
     </style>
 </head>
-
 <body>
 
-<header>
-    <h1>Lee Optimization Group</h1>
-    <nav>
-        <a href="index.html">Home</a>
-        <a href="research.html">Research</a>
-        <a href="group.html">Members</a>
-        <a href="hiring.html">Hiring</a>
-        <a href="contact.html">Contact</a>
-    </nav>
-</header>
+<div class="inner">
 
-<h2>Contact</h2>
+    <header>
+        <a href="index.html" class="lab-name">Lee Optimization Group</a>
+        <button class="menu-toggle" aria-label="Menu">&#9776;</button>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="research.html">Research</a>
+            <a href="publications.html">Publications</a>
+            <a href="group.html">Members</a>
+            <a href="hiring.html">Hiring</a>
+            <a href="contact.html" class="active">Contact</a>
+        </nav>
+    </header>
 
-<div class="contact-box">
-    <p><strong>Namhoon Lee</strong></p>
+    <main>
+        <p>
+            <strong class="contact-title">Computational Optimization Lab</strong><br>
+            <br>
+            (Office) RIST 4, Room #4427<br>
+            <br>
+            Department of Computer Science and Engineering<br>
+            Pohang University of Science and Technology (POSTECH)<br>
+            77 Cheongam-ro, Nam-gu, Pohang-si, Gyeongsangbuk-do (37673)<br>
+            South Korea
+        </p>
+    </main>
 
-    <p><span class="contact-label">Email:</span> 
-        <a href="mailto:namhoon.lee@postech.ac.kr">
-        namhoon.lee@postech.ac.kr
-        </a>
-    </p>
+    <footer>
+        <span>&copy; 2026 LOG. All rights reserved.</span>
+        <div class="footer-logos">
+            <a href="https://www.postech.ac.kr" target="_blank"><img src="logo/postech_logo.png" alt="POSTECH"></a>
+            <a href="https://ai.postech.ac.kr" target="_blank"><img src="logo/gsai_logo.png" alt="GSAI"></a>
+            <a href="https://cse.postech.ac.kr" target="_blank"><img src="logo/cs_logo.png" alt="CS"></a>
+            <img src="logo/log_logo.png" alt="LOG">
+        </div>
+    </footer>
 
-    <p><span class="contact-label">Phone:</span> +82 (0)54 279 2393</p>
-
-    <p><span class="contact-label">Office:</span> RIST 4, Room #4408</p>
-
-    <br>
-
-    <p>
-    Department of Computer Science and Engineering<br>
-    Pohang University of Science and Technology (POSTECH)<br>
-    77 Cheongam-ro, Nam-gu, Pohang-si, Gyeongsangbuk-do (37673)<br>
-    South Korea
-    </p>
 </div>
 
+<div class="nav-overlay" id="navOverlay"></div>
+<div class="nav-drawer" id="navDrawer">
+    <button class="drawer-close" id="drawerClose">&#x2715;</button>
+    <a href="index.html">Home</a>
+    <a href="research.html">Research</a>
+    <a href="publications.html">Publications</a>
+    <a href="group.html">Members</a>
+    <a href="hiring.html">Hiring</a>
+    <a href="contact.html" class="active">Contact</a>
+</div>
+
+<script>
+    var toggle = document.querySelector('.menu-toggle');
+    var drawer = document.getElementById('navDrawer');
+    var overlay = document.getElementById('navOverlay');
+    var close = document.getElementById('drawerClose');
+
+    function openDrawer() {
+        drawer.classList.add('open');
+        overlay.classList.add('open');
+    }
+
+    function closeDrawer() {
+        drawer.classList.remove('open');
+        overlay.classList.remove('open');
+    }
+
+    toggle.addEventListener('click', function() { drawer.classList.contains('open') ? closeDrawer() : openDrawer(); });
+    close.addEventListener('click', closeDrawer);
+    overlay.addEventListener('click', closeDrawer);
+</script>
 </body>
 </html>
