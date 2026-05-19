@@ -338,6 +338,31 @@
         .nav-drawer a:hover {
             color: #1B3A8A;
         }
+        
+        /* Alumni list */
+        .alumni-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 10px;
+        }
+
+        .alumni-list li {
+            position: relative;
+            font-size: 0.93em;
+            line-height: 1.75;
+            color: #374151;
+            padding-left: 16px;
+            margin-bottom: 6px;
+        }
+
+        .alumni-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #1B3A8A; /* 포인트 컬러 적용 */
+            font-size: 1.2em;
+            line-height: 1.4;
+        }
     </style>
 </head>
 <body>
@@ -477,11 +502,11 @@
         </div>
 
         <h3>Alumni</h3>
-        <p>
-            Dahun Shin (MS 2025);
-            <a href="https://shpark97.github.io/">Seonghwan Park</a> (MS 2025);
-            Jaehyeon Jeong (MS 2026)
-        </p>
+        <ul class="alumni-list">
+            <li>Dahun Shin (MS 2025, currently at NHN)</li>
+            <li><a href="https://shpark97.github.io/">Seonghwan Park</a> (MS 2025, currently at KETI)</li>
+            <li>Jaehyeon Jeong (MS 2026)</li>
+        </ul>
     </main>
 
     <footer>
