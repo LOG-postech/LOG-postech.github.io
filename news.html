@@ -101,11 +101,6 @@
             margin-bottom: 0;
         }
 
-        .page-intro {
-            color: #6b7280;
-            margin-bottom: 28px;
-        }
-
         /* News list */
         .news-list {
             margin: 0;
@@ -136,16 +131,21 @@
 
         /* Foldable year sections */
         .news-year {
-            margin-bottom: 10px;
+            margin-top: 34px;
+        }
+
+        .news-year:first-of-type {
+            margin-top: 0;
         }
 
         .news-year > summary {
             list-style: none;
             cursor: pointer;
             display: flex;
-            align-items: baseline;
-            gap: 10px;
-            padding: 14px 0 10px;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding-bottom: 10px;
             border-bottom: 1px solid #e2e6f0;
             margin-bottom: 4px;
             -webkit-user-select: none;
@@ -156,33 +156,28 @@
             display: none;
         }
 
-        .news-year > summary::before {
-            content: "\25B8";
-            display: inline-block;
-            font-size: 0.8em;
+        .news-year > summary::after {
+            content: "\25BE";
+            font-size: 0.85em;
             color: #6b7280;
+            line-height: 1;
             transition: transform 0.15s ease;
         }
 
-        .news-year[open] > summary::before {
-            transform: rotate(90deg);
+        .news-year[open] > summary::after {
+            transform: rotate(180deg);
         }
 
         .year-label {
-            font-family: 'EB Garamond', Georgia, serif;
-            font-size: 1.5em;
-            font-weight: 500;
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 1.03em;
+            font-weight: 800;
+            letter-spacing: 0.01em;
             color: #111;
-            line-height: 1;
         }
 
-        .year-count {
-            font-size: 0.75em;
-            color: #6b7280;
-            font-weight: 400;
-        }
-
-        .news-year > summary:hover .year-label {
+        .news-year > summary:hover .year-label,
+        .news-year > summary:hover::after {
             color: #1B3A8A;
         }
 
@@ -335,10 +330,9 @@
 
     <main>
         <h2>News</h2>
-        <p class="page-intro">A complete record of our lab's papers, awards, grants, and milestones.</p>
 
         <details class="news-year" open>
-            <summary><span class="year-label">2026</span><span class="year-count">9 items</span></summary>
+            <summary><span class="year-label">2026</span></summary>
             <div class="news-list">
 
                 <div class="news-item">
@@ -390,7 +384,7 @@
         </details>
 
         <details class="news-year">
-            <summary><span class="year-label">2025</span><span class="year-count">4 items</span></summary>
+            <summary><span class="year-label">2025</span></summary>
             <div class="news-list">
 
                 <div class="news-item">
