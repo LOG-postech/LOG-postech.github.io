@@ -155,11 +155,23 @@
         line-height: 1.85;
       }
 
+      .news-head {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 16px;
+        margin-top: 40px;
+      }
+
+      .news-head h3 {
+        margin-top: 0;
+      }
+
       .news-all {
-        display: inline-block;
-        margin-top: 14px;
-        font-size: 0.85em;
+        font-size: 0.8em;
+        font-weight: 400;
         color: #1b3a8a;
+        flex-shrink: 0;
       }
 
       .news-all:hover {
@@ -369,7 +381,10 @@
           <a href="research.html">Research</a>.
         </p>
 
-        <h3>Recent News</h3>
+        <div class="news-head">
+          <h3>Recent News</h3>
+          <a class="news-all" href="news.html">see all</a>
+        </div>
         <div class="news-list">
 
         <div class="news-item">
@@ -493,8 +508,6 @@
           -->
 
         </div>
-
-        <a class="news-all" href="news.html">See all news &rarr;</a>
 
         <h3>Acknowledgements</h3>
         <p class="ack">
