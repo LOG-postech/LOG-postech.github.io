@@ -147,18 +147,29 @@
             display: none;
         }
 
-        .news-year > summary::after {
-            content: "";
+        .fold-btn {
             flex-shrink: 0;
-            width: 8px;
-            height: 8px;
-            border-right: 1.8px solid #374151;
-            border-bottom: 1.8px solid #374151;
-            transform: translateY(-3px) rotate(45deg);
+            width: 26px;
+            height: 26px;
+            border: 1px solid #e2e6f0;
+            border-radius: 8px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.15s ease, border-color 0.15s ease;
+        }
+
+        .fold-btn::after {
+            content: "";
+            width: 7px;
+            height: 7px;
+            border-right: 1.7px solid #374151;
+            border-bottom: 1.7px solid #374151;
+            transform: translateY(-2px) rotate(45deg);
             transition: transform 0.15s ease, border-color 0.15s ease;
         }
 
-        .news-year[open] > summary::after {
+        .news-year[open] .fold-btn::after {
             transform: translateY(2px) rotate(225deg);
         }
 
@@ -174,7 +185,12 @@
             color: #1B3A8A;
         }
 
-        .news-year > summary:hover::after {
+        .news-year > summary:hover .fold-btn {
+            background: #f5f7fc;
+            border-color: #1B3A8A;
+        }
+
+        .news-year > summary:hover .fold-btn::after {
             border-color: #1B3A8A;
         }
 
@@ -327,7 +343,7 @@
 
     <main>
         <details class="news-year" open>
-            <summary><span class="year-label">2026</span></summary>
+            <summary><span class="year-label">2026</span><span class="fold-btn"></span></summary>
             <div class="news-list">
 
                 <div class="news-item">
@@ -384,7 +400,7 @@
         </details>
 
         <details class="news-year" open>
-            <summary><span class="year-label">2025</span></summary>
+            <summary><span class="year-label">2025</span><span class="fold-btn"></span></summary>
             <div class="news-list">
 
                 <div class="news-item">
