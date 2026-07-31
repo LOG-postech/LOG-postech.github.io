@@ -84,16 +84,6 @@
         a { color: #1B3A8A; text-decoration: none; }
         a:hover { text-decoration: underline; }
 
-        h2 {
-            font-family: 'Inter', system-ui, sans-serif;
-            font-size: 1.20em;
-            font-weight: 700;
-            letter-spacing: 0.01em;
-            text-transform: none;
-            color: #111;
-            margin-bottom: 12px;
-        }
-
         p {
             font-size: 0.93em;
             line-height: 1.9;
@@ -117,6 +107,8 @@
         .news-date {
             font-size: 0.78em;
             font-weight: 400;
+            font-variant-numeric: tabular-nums;
+            font-feature-settings: "tnum";
             color: #111;
             min-width: 64px;
             flex-shrink: 0;
@@ -145,8 +137,7 @@
             align-items: center;
             justify-content: space-between;
             gap: 12px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #e2e6f0;
+            padding-bottom: 6px;
             margin-bottom: 4px;
             -webkit-user-select: none;
             user-select: none;
@@ -329,8 +320,6 @@
     </header>
 
     <main>
-        <h2>News</h2>
-
         <details class="news-year" open>
             <summary><span class="year-label">2026</span></summary>
             <div class="news-list">
@@ -383,7 +372,7 @@
             </div>
         </details>
 
-        <details class="news-year">
+        <details class="news-year" open>
             <summary><span class="year-label">2025</span></summary>
             <div class="news-list">
 
