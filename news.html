@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="logo/log_logo.png" type="image/png">
+    <title>News | Lee Optimization Group</title>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html {
+            overflow-y: scroll;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            color: #111;
+            background: #ffffff;
+            min-height: 100vh;
+        }
+
+        .inner {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: clamp(24px, 5vw, 48px) clamp(16px, 4vw, 32px) clamp(36px, 5vw, 60px);
+        }
+
+        header {
+            padding-bottom: 28px;
+            margin-bottom: 40px;
+            border-bottom: 1px solid #e2e6f0;
+        }
+
+        .lab-name {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-size: 2.8em;
+            font-weight: 500;
+            color: #111;
+            letter-spacing: 0;
+            line-height: 0.96;
+            display: block;
+            margin-bottom: 18px;
+            text-decoration: none;
+        }
+
+        .lab-name:hover {
+            text-decoration: none;
+            color: #111;
+        }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: clamp(10px, 3vw, 24px);
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #6b7280;
+            font-size: 1em;
+            font-weight: 400;
+            letter-spacing: 0.01em;
+            padding-bottom: 2px;
+            border-bottom: 1.5px dashed transparent;
+            transition: color 0.15s, border-color 0.15s;
+        }
+
+        nav a:hover {
+            color: #1B3A8A;
+            border-bottom: 1.5px solid #1B3A8A;
+            text-decoration: none;
+        }
+
+        nav a.active {
+            color: #111;
+            font-weight: 600;
+            border-bottom: 1.5px solid #111;
+        }
+
+        .nav-drawer a.active { color: #111; font-weight: 600; }
+
+        a { color: #1B3A8A; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        h2 {
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 1.20em;
+            font-weight: 700;
+            letter-spacing: 0.01em;
+            text-transform: none;
+            color: #111;
+            margin-bottom: 12px;
+        }
+
+        p {
+            font-size: 0.93em;
+            line-height: 1.9;
+            color: #374151;
+            margin-bottom: 0;
+        }
+
+        .page-intro {
+            color: #6b7280;
+            margin-bottom: 28px;
+        }
+
+        /* News list */
+        .news-list {
+            margin: 0;
+            padding: 0;
+        }
+
+        .news-item {
+            display: flex;
+            gap: 20px;
+            align-items: baseline;
+            padding: 10px 0;
+        }
+
+        .news-date {
+            font-size: 0.78em;
+            font-weight: 400;
+            color: #111;
+            min-width: 64px;
+            flex-shrink: 0;
+        }
+
+        .news-content {
+            font-size: 0.93em;
+            font-weight: 300;
+            color: #374151;
+            line-height: 1.85;
+        }
+
+        /* Foldable year sections */
+        .news-year {
+            margin-bottom: 10px;
+        }
+
+        .news-year > summary {
+            list-style: none;
+            cursor: pointer;
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            padding: 14px 0 10px;
+            border-bottom: 1px solid #e2e6f0;
+            margin-bottom: 4px;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        .news-year > summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .news-year > summary::before {
+            content: "\25B8";
+            display: inline-block;
+            font-size: 0.8em;
+            color: #6b7280;
+            transition: transform 0.15s ease;
+        }
+
+        .news-year[open] > summary::before {
+            transform: rotate(90deg);
+        }
+
+        .year-label {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-size: 1.5em;
+            font-weight: 500;
+            color: #111;
+            line-height: 1;
+        }
+
+        .year-count {
+            font-size: 0.75em;
+            color: #6b7280;
+            font-weight: 400;
+        }
+
+        .news-year > summary:hover .year-label {
+            color: #1B3A8A;
+        }
+
+        .news-year > summary:focus-visible {
+            outline: 2px solid #3B6FD4;
+            outline-offset: 3px;
+            border-radius: 2px;
+        }
+
+        footer {
+            margin-top: 52px;
+            padding-top: 20px;
+            border-top: 1px solid #e2e6f0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.75em;
+            color: #6b7280;
+        }
+
+        .footer-logos {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .footer-logos img {
+            height: 28px;
+            width: auto;
+            object-fit: contain;
+            opacity: 1;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: #ffffff;
+            border: 1px solid #e2e6f0;
+            border-radius: 6px;
+            font-size: 1.3em;
+            cursor: pointer;
+            color: #374151;
+            padding: 4px 8px;
+            line-height: 1;
+        }
+
+        @media (max-width: 900px) {
+            .inner {
+                padding: 28px 18px 40px;
+            }
+
+            header {
+                padding-bottom: 4px;
+                margin-bottom: 16px;
+                display: grid;
+                grid-template-columns: minmax(0, 1fr) auto;
+                align-items: start;
+                column-gap: 10px;
+            }
+
+            .lab-name {
+                min-width: 0;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            nav {
+                display: none;
+            }
+
+            .footer-logos img {
+                height: 18px;
+            }
+        }
+
+        /* Drawer */
+        .nav-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.3);
+            z-index: 999;
+        }
+
+        .nav-drawer {
+            position: fixed;
+            top: 0;
+            right: -280px;
+            width: 240px;
+            height: 100vh;
+            background: #ffffff;
+            box-shadow: -4px 0 24px rgba(0,0,0,0.12);
+            z-index: 1000;
+            transition: right 0.3s ease;
+            padding: 64px 32px 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .nav-drawer.open {
+            right: 0;
+        }
+
+        .nav-overlay.open {
+            display: block;
+        }
+
+        .drawer-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.4em;
+            cursor: pointer;
+            color: #374151;
+            line-height: 1;
+        }
+
+        .nav-drawer a {
+            text-decoration: none;
+            color: #374151;
+            font-size: 1.05em;
+            font-weight: 400;
+        }
+
+        .nav-drawer a:hover {
+            color: #1B3A8A;
+        }
+    </style>
+</head>
+<body>
+
+<div class="inner">
+
+    <header>
+        <a href="index.html" class="lab-name">Lee Optimization Group</a>
+        <button class="menu-toggle" aria-label="Menu">&#9776;</button>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="research.html">Research</a>
+            <a href="publications.html">Publications</a>
+            <a href="group.html">Members</a>
+            <a href="hiring.html">Hiring</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>News</h2>
+        <p class="page-intro">A complete record of our lab's papers, awards, grants, and milestones.</p>
+
+        <details class="news-year" open>
+            <summary><span class="year-label">2026</span><span class="year-count">9 items</span></summary>
+            <div class="news-list">
+
+                <div class="news-item">
+                    <span class="news-date">Jul 2026</span>
+                    <span class="news-content">&#127942; Our new paper on extreme LLM sparsity has received the Best Paper Award at CKAIA 2026. The preprint will be available on arXiv soon.</span>
+                </div>
+
+                <div class="news-item">
+                    <span class="news-date">Jul 2026</span>
+                    <span class="news-content">&#127942; Sungbin has been selected for the 2026 PhD Excellence Scholarship in Science and Engineering.</span>
+                </div>
+
+                <div class="news-item">
+                    <span class="news-date">Jun 2026</span>
+                    <span class="news-content">&#127891; Our paper on flatness-based out-of-distribution detection has been accepted to ECCV 2026. In this work, we propose FOLD, a lightweight detector that leverages feature-Hessian curvature and partial feature normalization to improve ID-OOD separability.</span>
+                </div>
+
+                <div class="news-item">
+                    <span class="news-date">May 2026</span>
+                    <span class="news-content">&#127942; Our paper on uncertainty quantification in ICL, accepted to ACL 2026, has been selected as an Oral presentation. In this work, we introduce self-function vectors to directly decompose uncertainty, and propose a novel framework to evaluate these disentangled sources.</span>
+                </div>
+
+                <div class="news-item">
+                    <span class="news-date">May 2026</span>
+                    <span class="news-content">&#127891; Our paper on asynchronous pipeline parallelism has been accepted to ICML 2026. In this work, we propose a basis rotation approach to effectively address the associated gradient staleness problem.</span>
+                </div>
+
+                <div class="news-item">
+                    <span class="news-date">Apr 2026</span>
+                    <span class="news-content">&#129309; Our lab has been selected for the IITP Efficient AI National R&amp;D Program (2026&ndash;2029), a national research program with <em>KRW 7.5B</em> in total funding, together with leading partners including <a href="https://squeezebits.com/" target="_blank" rel="noopener"><strong>SqueezeBits</strong></a>.</span>
+                </div>
+
+                <div class="news-item">
+                    <span class="news-date">Feb 2026</span>
+                    <span class="news-content">&#129309; Our lab has been selected for the "Early-Career Researcher Infrastructure Support Program" (NRF) &mdash; one of the most competitive grants in Korea. With <em>500M KRW</em> in funding, we will build a high-performance compute infrastructure to power our research on extreme compression of hyperscale AI foundation models.</span>
+                </div>
+
+                <div class="news-item">
+                    <span class="news-date">Feb 2026</span>
+                    <span class="news-content">&#9992;&#65039; Kwanhee started as a visiting student researcher in the <a href="https://daslab.pages.ista.ac.at/" target="_blank" rel="noopener">Dan Alistarh Group</a> at <a href="https://ist.ac.at/en/home/" target="_blank" rel="noopener">ISTA</a>.</span>
+                </div>
+
+                <div class="news-item">
+                    <span class="news-date">Jan 2026</span>
+                    <span class="news-content">&#127891; Our paper on extreme LLM sparsity (<a href="https://arxiv.org/abs/2510.01650" target="_blank" rel="noopener">ELSA</a>) has been accepted to ICLR 2026.</span>
+                </div>
+
+            </div>
+        </details>
+
+        <details class="news-year">
+            <summary><span class="year-label">2025</span><span class="year-count">4 items</span></summary>
+            <div class="news-list">
+
+                <div class="news-item">
+                    <span class="news-date">Nov 2025</span>
+                    <span class="news-content">&#127942; Dongyeop received the <a href="https://www.qualcomm.com/research/university-relations/innovation-fellowship/2025-south-korea" target="_blank" rel="noopener">Qualcomm Innovation Fellowship Korea 2025</a>.</span>
+                </div>
+
+                <div class="news-item">
+                    <span class="news-date">Nov 2025</span>
+                    <span class="news-content">&#127942; Our paper on extreme LLM sparsity (<a href="https://arxiv.org/abs/2510.01650" target="_blank" rel="noopener">ELSA</a>) received the Best Paper Award at JKAIA 2025.</span>
+                </div>
+
+                <div class="news-item">
+                    <span class="news-date">Nov 2025</span>
+                    <span class="news-content">&#127942; Hyunji received the NRF Fellowship.</span>
+                </div>
+
+                <div class="news-item">
+                    <span class="news-date">Nov 2025</span>
+                    <span class="news-content">&#127891; We had 2 papers (<a href="https://arxiv.org/abs/2510.25798" target="_blank" rel="noopener">MemEIC</a> and <a href="https://arxiv.org/abs/2505.16705" target="_blank" rel="noopener">An Analysis of Concept Bottleneck Models</a>) accepted to NeurIPS 2025.</span>
+                </div>
+
+            </div>
+        </details>
+    </main>
+
+    <footer>
+        <span>&copy; 2026 LOG. All rights reserved.</span>
+        <div class="footer-logos">
+            <a href="https://www.postech.ac.kr" target="_blank"><img src="logo/postech_logo.png" alt="POSTECH"></a>
+            <a href="https://ai.postech.ac.kr" target="_blank"><img src="logo/gsai_logo.png" alt="GSAI"></a>
+            <a href="https://cse.postech.ac.kr" target="_blank"><img src="logo/cs_logo.png" alt="CS"></a>
+            <img src="logo/log_logo.png" alt="LOG">
+        </div>
+    </footer>
+
+</div>
+
+<div class="nav-overlay" id="navOverlay"></div>
+<div class="nav-drawer" id="navDrawer">
+    <button class="drawer-close" id="drawerClose">&#x2715;</button>
+    <a href="index.html">Home</a>
+    <a href="research.html">Research</a>
+    <a href="publications.html">Publications</a>
+    <a href="group.html">Members</a>
+    <a href="hiring.html">Hiring</a>
+    <a href="contact.html">Contact</a>
+</div>
+
+<script>
+    var toggle = document.querySelector('.menu-toggle');
+    var drawer = document.getElementById('navDrawer');
+    var overlay = document.getElementById('navOverlay');
+    var close = document.getElementById('drawerClose');
+
+    function openDrawer() {
+        drawer.classList.add('open');
+        overlay.classList.add('open');
+    }
+
+    function closeDrawer() {
+        drawer.classList.remove('open');
+        overlay.classList.remove('open');
+    }
+
+    toggle.addEventListener('click', function() { drawer.classList.contains('open') ? closeDrawer() : openDrawer(); });
+    close.addEventListener('click', closeDrawer);
+    overlay.addEventListener('click', closeDrawer);
+</script>
+</body>
+</html>
