@@ -18,6 +18,42 @@
         padding: 0;
       }
 
+      /* ------------------------------------------------------------------
+         Layout tokens — single source of truth for spacing on this page.
+         This block is identical on every page; keep all pages in sync.
+         ------------------------------------------------------------------ */
+      :root {
+        /* page frame */
+        --content-max: 800px;
+        --page-pad-top: clamp(24px, 5vw, 48px);
+        --page-pad-x: clamp(16px, 4vw, 32px);
+        --page-pad-bottom: clamp(36px, 5vw, 60px);
+
+        /* header / nav */
+        --header-pad-bottom: 28px;
+        --header-gap: 40px;
+        --lab-name-gap: 18px;
+        --nav-gap: clamp(10px, 3vw, 24px);
+
+        /* vertical rhythm */
+        --section-gap: 40px;   /* space above a section heading */
+        --heading-gap: 14px;   /* space below a section heading */
+        --para-gap: 14px;      /* space between stacked paragraphs */
+
+        /* footer */
+        --footer-gap: 52px;
+        --footer-pad-top: 20px;
+        --footer-logo-gap: 14px;
+        --footer-logo-h: 28px;
+
+        /* body type */
+        --text-body: 0.93em;
+        --leading-body: 1.85;
+
+        /* rules & lines */
+        --rule-color: #e2e6f0;
+      }
+
       html {
         overflow-y: scroll;
       }
@@ -30,34 +66,39 @@
       }
 
       .inner {
-        max-width: 800px;
+        max-width: var(--content-max);
         margin: 0 auto;
-        padding: clamp(24px, 5vw, 48px) clamp(16px, 4vw, 32px)
-          clamp(36px, 5vw, 60px);
+        padding: var(--page-pad-top) var(--page-pad-x) var(--page-pad-bottom);
       }
 
       header {
-        padding-bottom: 28px;
-        margin-bottom: 40px;
-        border-bottom: 1px solid #e2e6f0;
+        padding-bottom: var(--header-pad-bottom);
+        margin-bottom: var(--header-gap);
+        border-bottom: 1px solid var(--rule-color);
       }
 
       .lab-name {
-        font-family: "EB Garamond", Georgia, serif;
+        font-family: 'EB Garamond', Georgia, serif;
         font-size: 2.8em;
         font-weight: 500;
         color: #111;
         letter-spacing: 0;
         line-height: 0.96;
         display: block;
-        margin-bottom: 18px;
+        margin-bottom: var(--lab-name-gap);
+        text-decoration: none;
+      }
+
+      .lab-name:hover {
+        text-decoration: none;
+        color: #111;
       }
 
       nav {
         display: flex;
         flex-wrap: wrap;
         align-items: center;
-        gap: clamp(10px, 3vw, 24px);
+        gap: var(--nav-gap);
       }
 
       nav a {
@@ -98,11 +139,11 @@
       }
 
       .intro {
-        font-size: 0.93em;
+        font-size: var(--text-body);
         font-weight: 300;
-        line-height: 1.85;
+        line-height: var(--leading-body);
         color: #374151;
-        margin-bottom: 40px;
+        margin-bottom: var(--section-gap);
       }
 
       .intro a {
@@ -120,8 +161,12 @@
         letter-spacing: 0.01em;
         text-transform: none;
         color: #111;
-        margin-bottom: 12px;
-        margin-top: 40px;
+        margin-top: var(--section-gap);
+        margin-bottom: var(--heading-gap);
+      }
+
+      h3:first-of-type {
+        margin-top: 0;
       }
 
       .news-list {
@@ -151,18 +196,18 @@
       }
 
       .news-content {
-        font-size: 0.93em;
+        font-size: var(--text-body);
         font-weight: 300;
         color: #374151;
-        line-height: 1.85;
+        line-height: var(--leading-body);
       }
 
       p.news-note {
-        font-size: 0.93em;
+        font-size: var(--text-body);
         font-weight: 300;
         color: #374151;
-        line-height: 1.85;
-        margin-top: 18px;
+        line-height: var(--leading-body);
+        margin-top: var(--para-gap);
       }
 
       .news-note a {
@@ -188,10 +233,10 @@
       }
 
       p.ack {
-        font-size: 0.93em;
+        font-size: var(--text-body);
         font-weight: 300;
         color: #374151;
-        line-height: 1.85;
+        line-height: var(--leading-body);
         margin-top: 0;
       }
 
@@ -225,9 +270,9 @@
       }
 
       footer {
-        margin-top: 52px;
-        padding-top: 20px;
-        border-top: 1px solid #e2e6f0;
+        margin-top: var(--footer-gap);
+        padding-top: var(--footer-pad-top);
+        border-top: 1px solid var(--rule-color);
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -238,11 +283,11 @@
       .footer-logos {
         display: flex;
         align-items: center;
-        gap: 14px;
+        gap: var(--footer-logo-gap);
       }
 
       .footer-logos img {
-        height: 28px;
+        height: var(--footer-logo-h);
         width: auto;
         object-fit: contain;
         opacity: 1;
@@ -251,7 +296,7 @@
       .menu-toggle {
         display: none;
         background: #ffffff;
-        border: 1px solid #e2e6f0;
+        border: 1px solid var(--rule-color);
         border-radius: 6px;
         font-size: 1.3em;
         cursor: pointer;
@@ -260,13 +305,16 @@
         line-height: 1;
       }
       @media (max-width: 900px) {
-        .inner {
-          padding: 28px 18px 40px;
+        :root {
+          --page-pad-top: 28px;
+          --page-pad-x: 18px;
+          --page-pad-bottom: 40px;
+          --header-pad-bottom: 4px;
+          --header-gap: 16px;
+          --footer-logo-h: 18px;
         }
 
         header {
-          padding-bottom: 4px;
-          margin-bottom: 16px;
           display: grid;
           grid-template-columns: minmax(0, 1fr) auto;
           align-items: start;
@@ -283,10 +331,6 @@
 
         nav {
           display: none;
-        }
-
-        .footer-logos img {
-          height: 18px;
         }
       }
 

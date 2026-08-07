@@ -11,6 +11,7 @@ This is a static HTML/CSS academic lab website for the **Lee Optimization Group 
 | File | Purpose |
 |---|---|
 | `index.html` | Home — lab intro, news, acknowledgements |
+| `news.html` | Full news archive (linked from the home page) |
 | `research.html` | Research areas |
 | `publications.html` | Paper list |
 | `group.html` | Lab members |
@@ -22,6 +23,10 @@ This is a static HTML/CSS academic lab website for the **Lee Optimization Group 
 
 **CSS is inline per-page** — each HTML file contains a full `<style>` block in `<head>`. There is no shared stylesheet. When making a visual change that must apply site-wide (e.g., changing a font size or color), you must update every page's `<style>` block individually.
 
+Spacing is the exception: it is driven by a `:root` block of CSS custom properties that
+is duplicated verbatim at the top of every page's `<style>`. See **Layout Tokens** below
+before touching any margin, padding, or gap.
+
 **Asset directories:**
 - `logo/` — sponsor and collaborator logos (PNG/SVG); referenced in `index.html` and `research.html`
 - `research_focus/` — thumbnail images for research area cards in `research.html`
@@ -30,15 +35,48 @@ This is a static HTML/CSS academic lab website for the **Lee Optimization Group 
 
 **Scratch files** (not published pages, do not modify unless explicitly asked): `index_v1.html`, `design_demo.html`, `font_compare.html`
 
+## Layout Tokens (read this before changing any spacing)
+
+Every page opens its `<style>` block with an identical `:root` block of CSS custom
+properties. **This block is the single source of truth for spacing** — all chassis
+rules (`.inner`, `header`, `.lab-name`, `nav`, `footer`, section headings, body text)
+reference it via `var(...)` instead of literal pixel values.
+
+| Token | Value | Controls |
+|---|---|---|
+| `--content-max` | `800px` | `.inner` max width |
+| `--page-pad-top` / `--page-pad-x` / `--page-pad-bottom` | `clamp()` | `.inner` padding |
+| `--header-pad-bottom` / `--header-gap` | `28px` / `40px` | header padding + gap to `<main>` |
+| `--lab-name-gap` | `18px` | lab name → nav |
+| `--nav-gap` | `clamp(10px, 3vw, 24px)` | space between nav links |
+| `--section-gap` | `40px` | space **above** a section heading |
+| `--heading-gap` | `14px` | space **below** a section heading |
+| `--para-gap` | `14px` | space between stacked paragraphs |
+| `--footer-gap` / `--footer-pad-top` | `52px` / `20px` | footer offset + padding |
+| `--footer-logo-gap` / `--footer-logo-h` | `14px` / `28px` | footer logo row |
+| `--text-body` / `--leading-body` | `0.93em` / `1.85` | body text size + line height |
+| `--rule-color` | `#e2e6f0` | header/footer hairlines |
+
+**Rules for editing:**
+- To change spacing site-wide, edit the token value — in **all 8 pages**, since the
+  block is duplicated per page. The blocks must stay byte-identical.
+- Never reintroduce a literal `px` for anything a token already covers.
+- The `@media (max-width: 900px)` block **redefines tokens on `:root`** rather than
+  re-declaring `.inner` / `header` / `.footer-logos img`. Add responsive spacing the
+  same way.
+- Section headings (`h2`, `h3`, `.year-divider`, `.news-year`) all use
+  `margin-top: var(--section-gap)` + `margin-bottom: var(--heading-gap)`, paired with
+  a `:first-of-type { margin-top: 0 }` rule so the first heading sits flush.
+
 ## Design Conventions (must be preserved)
 
-- **Background**: `#FAF8F5` (warm off-white)
+- **Background**: `#ffffff`
 - **Primary color**: `#1B3A8A` (deep blue); hover/accent: `#3B6FD4`
-- **Top rule**: 3px gradient `#1B3A8A → #3B6FD4 → #93A8D8`
+- **No top rule** — the 3px gradient bar was deliberately removed (`6d008de`, `a3a85de`); do not reintroduce it
 - **Heading font**: EB Garamond (serif), weight 500
 - **Body font**: Inter (sans-serif), weights 300/400/500/600
-- **Max content width**: 800px, centered via `.inner`
-- **Padding**: `clamp()` for responsive spacing
+- **Max content width**: 800px, centered via `.inner` (`--content-max`)
+- **Padding**: `clamp()` for responsive spacing (`--page-pad-*`)
 - **Text color**: `#111` (headings), `#374151` (body), `#6b7280` (muted)
 - **Links**: `#1B3A8A`, underline on hover only
 
@@ -47,8 +85,8 @@ This is a static HTML/CSS academic lab website for the **Lee Optimization Group 
 When adding or modifying any page, verify all of the following:
 
 ### Consistency
-- [ ] Top gradient rule (`<div class="top-rule">`) is present on every page
 - [ ] Navigation links are identical across all pages, with the correct `active` class on the current page
+- [ ] Drawer nav has both `nav a.active` and `.nav-drawer a.active` styling
 - [ ] Lab name / logo links back to `index.html` on all inner pages
 - [ ] Favicon (`logo/log_logo.png`) is referenced in `<head>`
 - [ ] Google Fonts `<link>` for EB Garamond + Inter is present
@@ -60,8 +98,10 @@ When adding or modifying any page, verify all of the following:
 - [ ] New sections reuse existing CSS classes (`.inner`, `.news-item`, etc.) before adding new ones
 - [ ] Responsive: layout must not break on mobile (≤ 480px) or tablet (≤ 768px)
 - [ ] **Font sizes must not shrink on small screens** — never use `body { font-size: 14px }` or reduce `font-size` for text elements inside `@media` queries
-- [ ] **Lab name font size is fixed at `2.3em`** — do not use `clamp()` with a viewport unit for `.lab-name`, and do not override it in media queries
-- [ ] **Body text is unified at `0.93em`** across all pages — `p`, `.intro`, and equivalent paragraph elements must use `0.93em`, matching `index.html`
+- [ ] **Lab name font size is fixed at `2.8em`** — do not use `clamp()` with a viewport unit for `.lab-name`, and do not override it in media queries
+- [ ] **Body text uses the tokens** — `p`, `.intro`, `.news-content`, list items and equivalent paragraph elements must use `font-size: var(--text-body)` and `line-height: var(--leading-body)`, never literal values
+- [ ] **Spacing uses the tokens** — no literal `px` for page padding, header/footer offsets, section-heading margins, or paragraph gaps; see the Layout Tokens section
+- [ ] **The `:root` token block is identical in all 8 pages** — after editing one, propagate it verbatim to the rest
 - [ ] **Logo card containers use `flex-wrap: wrap`** so logos reflow to multiple rows on narrow screens instead of shrinking — do not set `flex-wrap: nowrap` or force images to scale down inside logo cards (`.sponsor-logos`, `.collab-logos`)
 - [ ] **Members grid keeps fixed avatar size** — member photos must not shrink on small screens; reduce the number of columns instead (`4 → 3 → 2 → 1`) and keep visible spacing between cards
 - [ ] **Gallery page uses dynamic grid** — `.gallery-grid` should use `repeat(auto-fit, minmax(..., 1fr))` with consistent `gap`, so tile count adapts smoothly to viewport width
