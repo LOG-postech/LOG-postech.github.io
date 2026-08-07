@@ -30,8 +30,45 @@ before touching any margin, padding, or gap.
 **Asset directories:**
 - `logo/` — sponsor and collaborator logos (PNG/SVG); referenced in `index.html` and `research.html`
 - `research_focus/` — thumbnail images for research area cards in `research.html`
-- `stories/` — gallery photos for `gallery.html` (year-prefixed filenames, e.g., `25_iclr.jpeg`)
+- `stories/` — gallery photos for `gallery.html` (year-prefixed filenames, e.g., `25_iclr.jpg`)
+- `stories/thumbs/` — **generated**, never hand-made; see Images below
 - `group_profile/` — member headshots for `group.html` (filename = person's name slug)
+- `lab_photo/` — home page hero photo
+
+## Images
+
+**Do not resize or compress images by hand.** Drop the original in, commit, and the
+pre-commit hook does it — resizing, re-encoding, stripping EXIF (which also removes
+GPS coordinates from lab photos), generating the gallery thumbnail, and updating any
+HTML path if the extension changes.
+
+```bash
+tools/setup-hooks.sh              # once per clone — enables the hook
+tools/optimize-images.sh          # optimize everything that needs it
+tools/optimize-images.sh --check  # report only, change nothing
+```
+
+Requires ImageMagick (`apt install imagemagick` / `brew install imagemagick`). The hook
+refuses the commit if it is missing rather than letting a 10MB camera original into
+history; `git commit --no-verify` bypasses it.
+
+Targets are ~3x the CSS display size, so images stay sharp on retina screens:
+
+| Directory | Max long edge | Format | Displayed at |
+|---|---|---|---|
+| `stories/` | 2560px | JPEG q82 | click-through full view |
+| `stories/thumbs/` | 600px square | JPEG q80 | 112–180px grid tiles |
+| `lab_photo/` | 1600px | JPEG q85 | ≤800px hero |
+| `group_profile/` | 512px | JPEG q85 | 140px avatar |
+| `research_focus/` | 500px | keep (PNG stays PNG — line art) | 165px card |
+| `logo/` | untouched | — | logos must stay crisp |
+
+Processed files carry a `log-opt-v1` marker in their image comment, so re-running is
+safe — already-optimized files are skipped, never re-compressed. To force a full
+re-pass after changing the rules, bump `MARKER` in `tools/optimize-images.sh`.
+
+Gallery photos are stored as lowercase `.jpg`; the optimizer normalizes `.png`/`.jpeg`/
+`.JPG` and rewrites the HTML reference for you.
 
 **Scratch files** (not published pages, do not modify unless explicitly asked): `index_v1.html`, `design_demo.html`, `font_compare.html`
 
@@ -110,6 +147,8 @@ When adding or modifying any page, verify all of the following:
 - [ ] External links open in a new tab (`target="_blank"`) and have `rel="noopener"`
 - [ ] Images have descriptive `alt` text
 - [ ] Large images use `loading="lazy"`
+- [ ] **Images were never hand-resized** — the pre-commit hook handles it; see Images above
+- [ ] **No hand-made files in `stories/thumbs/`** — thumbnails are generated from `stories/`
 - [ ] Dates are written consistently: `MMM YYYY` (e.g., `Mar 2025`)
 - [ ] Paper/thesis links use lowercase labels: `[paper]`, `[thesis]`, `[code]`, `[slides]`
 

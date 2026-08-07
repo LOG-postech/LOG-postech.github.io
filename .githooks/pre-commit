@@ -1,0 +1,91 @@
+#!/usr/bin/env bash
+#
+# Optimize any image being committed, and generate its gallery thumbnail.
+#
+# Enable with:  tools/setup-hooks.sh
+# Bypass once:  git commit --no-verify
+#
+# Photos are resized, re-encoded and stripped of EXIF before they enter git
+# history, so the repository never stores a 10MB camera original. Rules live in
+# tools/optimize-images.sh.
+
+set -euo pipefail
+
+REPO="$(git rev-parse --show-toplevel)"
+cd "$REPO"
+
+# Staged images in the directories the optimizer manages.
+mapfile -t STAGED < <(
+    git diff --cached --name-only --diff-filter=ACMR \
+    | grep -Ei '^(stories|lab_photo|group_profile|research_focus)/.*\.(jpe?g|png)$' || true
+)
+
+[ "${#STAGED[@]}" -gt 0 ] || exit 0
+
+if ! command -v convert >/dev/null 2>&1; then
+    cat >&2 <<'EOF'
+
+  This commit adds images, but ImageMagick is not installed so they cannot be
+  optimized. Unoptimized camera photos bloat the repository permanently.
+
+    Ubuntu/Debian : sudo apt install imagemagick
+    macOS         : brew install imagemagick
+
+  To commit anyway: git commit --no-verify
+
+EOF
+    exit 1
+fi
+
+# Remember the HTML files' state so we can stage only the ones the optimizer
+# actually rewrites (when a file changes extension).
+declare -A HTML_BEFORE
+for page in *.html; do
+    [ -f "$page" ] && HTML_BEFORE["$page"]="$(git hash-object "$page")"
+done
+
+echo "pre-commit: optimizing ${#STAGED[@]} image(s)..."
+tools/optimize-images.sh "${STAGED[@]}"
+
+# Re-stage each image: it may have been shrunk in place, or renamed to .jpg.
+for path in "${STAGED[@]}"; do
+    if [ -f "$path" ]; then
+        git add -- "$path"
+    else
+        renamed="${path%.*}.jpg"
+        if [ -f "$renamed" ]; then
+            git add -- "$renamed"
+            git rm --cached --quiet --ignore-unmatch -- "$path"
+        fi
+    fi
+done
+
+# A new photo in stories/ needs its gallery thumbnail generated and staged.
+for path in "${STAGED[@]}"; do
+    case "$path" in
+        stories/thumbs/*) continue ;;
+        stories/*) ;;
+        *) continue ;;
+    esac
+    base="$(basename "${path%.*}")"
+    thumb="stories/thumbs/${base}.jpg"
+    if [ ! -f "$thumb" ]; then
+        source_file="$path"
+        [ -f "$source_file" ] || source_file="${path%.*}.jpg"
+        convert "$source_file" -auto-orient -resize "600x600^" -gravity center \
+            -extent 600x600 -strip -interlace Plane -sampling-factor 4:2:0 \
+            -quality 80 -set comment "log-opt-v1" "$thumb"
+        chmod 644 "$thumb"
+        echo "  generated thumbnail  $thumb"
+    fi
+    git add -- "$thumb"
+done
+
+# Stage HTML only where a path reference was rewritten.
+for page in "${!HTML_BEFORE[@]}"; do
+    [ -f "$page" ] || continue
+    if [ "$(git hash-object "$page")" != "${HTML_BEFORE[$page]}" ]; then
+        git add -- "$page"
+        echo "  staged rewritten references in $page"
+    fi
+done
