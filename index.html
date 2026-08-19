@@ -52,6 +52,28 @@
 
         /* rules & lines */
         --rule-color: #e2e6f0;
+
+        /* colour palette */
+        --color-bg: #ffffff;
+        --color-heading: #111;
+        --color-body: #374151;
+        --color-muted: #6b7280;
+        --color-primary: #1B3A8A;
+        --color-accent: #3B6FD4;
+        --color-emphasis: #d6423a;
+        --color-highlight-bg: #f7f1dc;
+
+        /* surfaces & borders */
+        --img-border: #b8bec8;
+        --control-border: #d3d9e6;
+        --surface-subtle: #f4f6fa;
+        --surface-hover: #e6ecf9;
+
+        /* research area categories */
+        --cat-compression: #d6423a;
+        --cat-distributed: #27ae60;
+        --cat-applications: #2e6bd9;
+        --cat-optimization: #f39c12;
       }
 
       html {
@@ -60,8 +82,8 @@
 
       body {
         font-family: "Inter", system-ui, sans-serif;
-        color: #111;
-        background: #ffffff;
+        color: var(--color-heading);
+        background: var(--color-bg);
         min-height: 100vh;
       }
 
@@ -81,7 +103,7 @@
         font-family: 'EB Garamond', Georgia, serif;
         font-size: 2.8em;
         font-weight: 500;
-        color: #111;
+        color: var(--color-heading);
         letter-spacing: 0;
         line-height: 0.96;
         display: block;
@@ -91,7 +113,7 @@
 
       .lab-name:hover {
         text-decoration: none;
-        color: #111;
+        color: var(--color-heading);
       }
 
       nav {
@@ -103,7 +125,7 @@
 
       nav a {
         text-decoration: none;
-        color: #6b7280;
+        color: var(--color-muted);
         font-size: 1em;
         font-weight: 400;
         letter-spacing: 0.01em;
@@ -115,18 +137,18 @@
       }
 
       nav a:hover {
-        color: #1b3a8a;
-        border-bottom: 1.5px solid #1b3a8a;
+        color: var(--color-primary);
+        border-bottom: 1.5px solid var(--color-primary);
         text-decoration: none;
       }
 
       nav a.active {
-        color: #111;
+        color: var(--color-heading);
         font-weight: 600;
-        border-bottom: 1.5px solid #111;
+        border-bottom: 1.5px solid var(--color-heading);
       }
       .nav-drawer a.active {
-        color: #111;
+        color: var(--color-heading);
         font-weight: 600;
       }
 
@@ -142,12 +164,12 @@
         font-size: var(--text-body);
         font-weight: 300;
         line-height: var(--leading-body);
-        color: #374151;
+        color: var(--color-body);
         margin-bottom: var(--section-gap);
       }
 
       .intro a {
-        color: #1b3a8a;
+        color: var(--color-primary);
         text-decoration: none;
       }
       .intro a:hover {
@@ -160,7 +182,7 @@
         font-weight: 700;
         letter-spacing: 0.01em;
         text-transform: none;
-        color: #111;
+        color: var(--color-heading);
         margin-top: var(--section-gap);
         margin-bottom: var(--heading-gap);
       }
@@ -190,7 +212,7 @@
         font-weight: 400;
         font-variant-numeric: tabular-nums;
         font-feature-settings: "tnum";
-        color: #111;
+        color: var(--color-heading);
         min-width: 64px;
         flex-shrink: 0;
       }
@@ -198,20 +220,20 @@
       .news-content {
         font-size: var(--text-body);
         font-weight: 300;
-        color: #374151;
+        color: var(--color-body);
         line-height: var(--leading-body);
       }
 
       p.news-note {
         font-size: var(--text-body);
         font-weight: 300;
-        color: #374151;
+        color: var(--color-body);
         line-height: var(--leading-body);
         margin-top: var(--para-gap);
       }
 
       .news-note a {
-        color: #1b3a8a;
+        color: var(--color-primary);
         text-decoration: none;
       }
 
@@ -220,7 +242,7 @@
       }
 
       .news-content a {
-        color: #1b3a8a;
+        color: var(--color-primary);
         text-decoration: none;
       }
       .news-content a:hover {
@@ -235,7 +257,7 @@
       p.ack {
         font-size: var(--text-body);
         font-weight: 300;
-        color: #374151;
+        color: var(--color-body);
         line-height: var(--leading-body);
         margin-top: 0;
       }
@@ -248,9 +270,9 @@
         column-gap: 20px;
         row-gap: 4px;
         margin-top: 20px;
-        background: #fff;
+        background: var(--color-bg);
         border-radius: 6px;
-        border: 1px solid #e8e4dd;
+        border: 1px solid var(--rule-color);
         padding: 4px 16px;
         width: fit-content;
         margin-left: auto;
@@ -277,7 +299,7 @@
         align-items: center;
         justify-content: space-between;
         font-size: 0.75em;
-        color: #6b7280;
+        color: var(--color-muted);
       }
 
       .footer-logos {
@@ -295,12 +317,12 @@
 
       .menu-toggle {
         display: none;
-        background: #ffffff;
+        background: var(--color-bg);
         border: 1px solid var(--rule-color);
         border-radius: 6px;
         font-size: 1.3em;
         cursor: pointer;
-        color: #374151;
+        color: var(--color-body);
         padding: 4px 8px;
         line-height: 1;
       }
@@ -349,7 +371,7 @@
         right: -280px;
         width: 240px;
         height: 100vh;
-        background: #ffffff;
+        background: var(--color-bg);
         box-shadow: -4px 0 24px rgba(0, 0, 0, 0.12);
         z-index: 1000;
         transition: right 0.3s ease;
@@ -375,19 +397,19 @@
         border: none;
         font-size: 1.4em;
         cursor: pointer;
-        color: #374151;
+        color: var(--color-body);
         line-height: 1;
       }
 
       .nav-drawer a {
         text-decoration: none;
-        color: #374151;
+        color: var(--color-body);
         font-size: 1.05em;
         font-weight: 400;
       }
 
       .nav-drawer a:hover {
-        color: #1b3a8a;
+        color: var(--color-primary);
       }
     </style>
   </head>

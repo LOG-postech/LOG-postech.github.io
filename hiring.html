@@ -43,6 +43,28 @@
 
             /* rules & lines */
             --rule-color: #e2e6f0;
+
+            /* colour palette */
+            --color-bg: #ffffff;
+            --color-heading: #111;
+            --color-body: #374151;
+            --color-muted: #6b7280;
+            --color-primary: #1B3A8A;
+            --color-accent: #3B6FD4;
+            --color-emphasis: #d6423a;
+            --color-highlight-bg: #f7f1dc;
+
+            /* surfaces & borders */
+            --img-border: #b8bec8;
+            --control-border: #d3d9e6;
+            --surface-subtle: #f4f6fa;
+            --surface-hover: #e6ecf9;
+
+            /* research area categories */
+            --cat-compression: #d6423a;
+            --cat-distributed: #27ae60;
+            --cat-applications: #2e6bd9;
+            --cat-optimization: #f39c12;
         }
 
         html {
@@ -51,8 +73,8 @@
 
         body {
             font-family: 'Inter', system-ui, sans-serif;
-            color: #111;
-            background: #ffffff;
+            color: var(--color-heading);
+            background: var(--color-bg);
             min-height: 100vh;
         }
 
@@ -72,7 +94,7 @@
             font-family: 'EB Garamond', Georgia, serif;
             font-size: 2.8em;
             font-weight: 500;
-            color: #111;
+            color: var(--color-heading);
             letter-spacing: 0;
             line-height: 0.96;
             display: block;
@@ -82,7 +104,7 @@
 
         .lab-name:hover {
             text-decoration: none;
-            color: #111;
+            color: var(--color-heading);
         }
 
         nav {
@@ -94,7 +116,7 @@
 
         nav a {
             text-decoration: none;
-            color: #6b7280;
+            color: var(--color-muted);
             font-size: 1em;
             font-weight: 400;
             letter-spacing: 0.01em;
@@ -104,20 +126,20 @@
         }
 
         nav a:hover {
-            color: #1B3A8A;
-            border-bottom: 1.5px solid #1B3A8A;
+            color: var(--color-primary);
+            border-bottom: 1.5px solid var(--color-primary);
             text-decoration: none;
         }
 
         nav a.active {
-            color: #111;
+            color: var(--color-heading);
             font-weight: 600;
-            border-bottom: 1.5px solid #111;
+            border-bottom: 1.5px solid var(--color-heading);
         }
-        .nav-drawer a.active { color: #111; font-weight: 600; }
+        .nav-drawer a.active { color: var(--color-heading); font-weight: 600; }
 
 
-        a { color: #1B3A8A; text-decoration: none; }
+        a { color: var(--color-primary); text-decoration: none; }
         a:hover { text-decoration: underline; }
 
         h2 {
@@ -126,7 +148,7 @@
             font-weight: 700;
             letter-spacing: 0.01em;
             text-transform: none;
-            color: #111;
+            color: var(--color-heading);
             margin-top: var(--section-gap);
             margin-bottom: var(--heading-gap);
         }
@@ -134,30 +156,30 @@
         h2:first-of-type { margin-top: 0; }
 
         h2.red-title {
-            color: #d6423a;
+            color: var(--color-emphasis);
         }
 
         p {
             font-size: var(--text-body);
             line-height: var(--leading-body);
-            color: #374151;
+            color: var(--color-body);
             margin-bottom: var(--para-gap);
         }
 
         ul {
             font-size: var(--text-body);
             line-height: var(--leading-body);
-            color: #374151;
+            color: var(--color-body);
             padding-left: 20px;
             margin-bottom: var(--para-gap);
         }
 
         li { margin-bottom: 4px; }
 
-        .red { color: #d6423a; font-weight: 600; }
+        .red { color: var(--color-emphasis); font-weight: 600; }
 
         .highlight-text {
-            background-color: #f7f1dc;
+            background-color: var(--color-highlight-bg);
             padding: 2px 5px;
             border-radius: 6px;
         }
@@ -182,7 +204,7 @@
             align-items: center;
             justify-content: space-between;
             font-size: 0.75em;
-            color: #6b7280;
+            color: var(--color-muted);
         }
 
         .footer-logos {
@@ -200,12 +222,12 @@
 
         .menu-toggle {
             display: none;
-            background: #ffffff;
+            background: var(--color-bg);
             border: 1px solid var(--rule-color);
             border-radius: 6px;
             font-size: 1.3em;
             cursor: pointer;
-            color: #374151;
+            color: var(--color-body);
             padding: 4px 8px;
             line-height: 1;
         }
@@ -254,7 +276,7 @@
             right: -280px;
             width: 240px;
             height: 100vh;
-            background: #ffffff;
+            background: var(--color-bg);
             box-shadow: -4px 0 24px rgba(0,0,0,0.12);
             z-index: 1000;
             transition: right 0.3s ease;
@@ -280,19 +302,19 @@
             border: none;
             font-size: 1.4em;
             cursor: pointer;
-            color: #374151;
+            color: var(--color-body);
             line-height: 1;
         }
 
         .nav-drawer a {
             text-decoration: none;
-            color: #374151;
+            color: var(--color-body);
             font-size: 1.05em;
             font-weight: 400;
         }
 
         .nav-drawer a:hover {
-            color: #1B3A8A;
+            color: var(--color-primary);
         }
     </style>
 </head>
