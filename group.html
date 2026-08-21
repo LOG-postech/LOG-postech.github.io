@@ -532,37 +532,37 @@
         <div class="gallery-preview">
 
             <div class="gallery-preview-item">
-                <a href="stories/26_pl_workshop.jpg" target="_blank">
+                <a href="stories/26_aiconnect.jpg" target="_blank" rel="noopener">
+                    <img src="stories/thumbs/26_aiconnect.jpg" alt="Kwanhee receiving the IITP President's Award at AI Connect Korea 2026" loading="lazy">
+                    <span class="tooltip">AI Connect Korea 2026 - IITP President's Award</span>
+                </a>
+            </div>
+
+            <div class="gallery-preview-item">
+                <a href="stories/26_ckaia.jpg" target="_blank" rel="noopener">
+                    <img src="stories/thumbs/26_ckaia.jpg" alt="Presenting our work at CKAIA 2026" loading="lazy">
+                    <span class="tooltip">CKAIA 2026 - Presentation</span>
+                </a>
+            </div>
+
+            <div class="gallery-preview-item">
+                <a href="stories/26_pl_workshop.jpg" target="_blank" rel="noopener">
                     <img src="stories/thumbs/26_pl_workshop.jpg" alt="Protocol learning workshop" loading="lazy">
                     <span class="tooltip">Protocol learning workshop</span>
                 </a>
             </div>
 
             <div class="gallery-preview-item">
-                <a href="stories/26_pl_workshop2.jpg" target="_blank">
+                <a href="stories/26_pl_workshop2.jpg" target="_blank" rel="noopener">
                     <img src="stories/thumbs/26_pl_workshop2.jpg" alt="Protocol learning workshop" loading="lazy">
                     <span class="tooltip">Protocol learning workshop</span>
                 </a>
             </div>
 
             <div class="gallery-preview-item">
-                <a href="stories/26_das_dinner.jpg" target="_blank">
+                <a href="stories/26_das_dinner.jpg" target="_blank" rel="noopener">
                     <img src="stories/thumbs/26_das_dinner.jpg" alt="LOG-DASLab group dinner" loading="lazy">
                     <span class="tooltip">LOG-DASLab group dinner</span>
-                </a>
-            </div>
-            
-            <div class="gallery-preview-item">
-                <a href="stories/26_icml_poster.jpg" target="_blank">
-                    <img src="stories/thumbs/26_icml_poster.jpg" alt="ICML 2026 poster" loading="lazy">
-                    <span class="tooltip">ICML 2026 poster</span>
-                </a>
-            </div>
-            
-            <div class="gallery-preview-item">
-                <a href="stories/26_icml.jpg" target="_blank">
-                    <img src="stories/thumbs/26_icml.jpg" alt="ICML 2026" loading="lazy">
-                    <span class="tooltip">ICML 2026</span>
                 </a>
             </div>
         </div>
@@ -620,6 +620,57 @@
     close.addEventListener('click', closeDrawer);
     overlay.addEventListener('click', closeDrawer);
 
+
+    /* Keep this preview in sync with the newest tiles in gallery.html.
+       The markup above is the no-JS fallback; this replaces it when fetch works. */
+    (function () {
+        var box = document.querySelector('.gallery-preview');
+        if (!box || !window.fetch || !window.DOMParser) return;
+
+        fetch('gallery.html')
+            .then(function (r) { return r.ok ? r.text() : Promise.reject(); })
+            .then(function (html) {
+                var doc = new DOMParser().parseFromString(html, 'text/html');
+                var tiles = doc.querySelectorAll('.gallery-grid .gallery-item');
+                var frag = document.createDocumentFragment();
+
+                Array.prototype.slice.call(tiles, 0, 5).forEach(function (tile) {
+                    var a = tile.querySelector('a');
+                    var img = tile.querySelector('img');
+                    var tip = tile.querySelector('.tooltip');
+                    if (!a || !img) return;
+
+                    var link = document.createElement('a');
+                    link.setAttribute('href', a.getAttribute('href'));
+                    link.setAttribute('target', '_blank');
+                    link.setAttribute('rel', 'noopener');
+
+                    var pic = document.createElement('img');
+                    pic.setAttribute('src', img.getAttribute('src'));
+                    pic.setAttribute('alt', img.getAttribute('alt') || '');
+                    pic.setAttribute('loading', 'lazy');
+                    link.appendChild(pic);
+
+                    if (tip) {
+                        var span = document.createElement('span');
+                        span.className = 'tooltip';
+                        span.textContent = tip.textContent;
+                        link.appendChild(span);
+                    }
+
+                    var cell = document.createElement('div');
+                    cell.className = 'gallery-preview-item';
+                    cell.appendChild(link);
+                    frag.appendChild(cell);
+                });
+
+                if (frag.childNodes.length) {
+                    box.textContent = '';
+                    box.appendChild(frag);
+                }
+            })
+            .catch(function () { /* leave the static fallback in place */ });
+    })();
 </script>
 </body>
 </html>
