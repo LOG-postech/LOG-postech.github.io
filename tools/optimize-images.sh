@@ -166,12 +166,35 @@ optimize_one() {
 }
 
 # Generate stories/thumbs/<name>.jpg for any original that has no thumbnail.
+#
+# With no arguments, scans every original in stories/. With arguments, only the
+# given paths are considered, so an explicit run still produces thumbnails —
+# passing files used to skip thumbnail generation entirely.
 generate_thumbs() {
     mkdir -p stories/thumbs
     local made=0
     local orig base thumb
-    for orig in stories/*; do
+    local sources=()
+
+    if [ "$#" -gt 0 ]; then
+        for orig in "$@"; do
+            orig="${orig#./}"
+            # optimize_one may have renamed the file to .jpg.
+            [ -f "$orig" ] || orig="${orig%.*}.jpg"
+            sources+=("$orig")
+        done
+    else
+        sources=(stories/*)
+    fi
+
+    for orig in ${sources[@]+"${sources[@]}"}; do
         [ -f "$orig" ] || continue
+        # Only originals directly under stories/ get a gallery thumbnail.
+        case "$orig" in
+            stories/thumbs/*) continue ;;
+            stories/*) ;;
+            *) continue ;;
+        esac
         is_raster "$orig" || continue
         base="$(basename "${orig%.*}")"
         thumb="stories/thumbs/${base}.jpg"
@@ -225,6 +248,7 @@ if [ "${#TARGETS[@]}" -gt 0 ]; then
     for t in "${TARGETS[@]}"; do
         optimize_one "$t"
     done
+    generate_thumbs "${TARGETS[@]}"
 else
     # Originals first, so generated thumbnails come from the optimized source.
     while IFS= read -r f; do
