@@ -14,6 +14,21 @@ set -euo pipefail
 REPO="$(git rev-parse --show-toplevel)"
 cd "$REPO"
 
+# news.html is the source of truth for Recent News on the home page. If it is
+# being committed, regenerate the home page's copy so links added on the News
+# page never go missing there.
+if git diff --cached --name-only --diff-filter=ACMR | grep -qx 'news.html'; then
+    if tools/sync-home-news.py >/dev/null; then
+        if ! git diff --quiet -- index.html; then
+            git add -- index.html
+            echo "pre-commit: synced Recent News on index.html from news.html"
+        fi
+    else
+        echo "pre-commit: tools/sync-home-news.py failed; commit anyway with --no-verify" >&2
+        exit 1
+    fi
+fi
+
 # Staged images in the directories the optimizer manages.
 mapfile -t STAGED < <(
     git diff --cached --name-only --diff-filter=ACMR \

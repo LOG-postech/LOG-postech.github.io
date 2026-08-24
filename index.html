@@ -452,36 +452,29 @@
 
         <div class="news-item">
           <span class="news-date">Aug 2026</span>
-          <span class="news-content">🎓 Our paper on extreme LLM sparsity has been accepted to
-            EMNLP 2026. In this work, we show that carefully handling the elementary
-            components of pruning can already substantially outperform
-            existing pruning methods, even at extreme sparsity.</span>
+          <span class="news-content">&#127891; Our paper on extreme LLM sparsity has been accepted to EMNLP 2026. In this work, we show that carefully handling the elementary components of pruning can already substantially outperform existing pruning methods, even at extreme sparsity.</span>
         </div>
 
         <div class="news-item">
           <span class="news-date">Aug 2026</span>
-          <span class="news-content">🎓 Our paper on semiconductor anomaly detection has been accepted to BMVC 2026. 
-            In this work, we introduce a semiconductor defect dataset (OASIS) along with vision-guided instruction tuning method.</span>
+          <span class="news-content">&#127891; Our paper on semiconductor anomaly detection has been accepted to BMVC 2026. In this work, we introduce a semiconductor defect dataset (OASIS) along with vision-guided instruction tuning method.</span>
         </div>
 
         <div class="news-item">
           <span class="news-date">Jul 2026</span>
-          <span class="news-content">🏆 Kwanhee received the IITP President&rsquo;s Award in the Graduate
-            Student Outstanding Research Achievement Competition at AI Connect Korea 2026.</span>
+          <span class="news-content">&#127942; Kwanhee received the IITP President&rsquo;s Award in the Graduate Student Outstanding Research Achievement Competition at <a href="https://www.aiconnectkorea.kr/" target="_blank" rel="noopener">AI Connect Korea 2026</a>.</span>
         </div>
 
         <div class="news-item">
           <span class="news-date">Jul 2026</span>
-          <span class="news-content">🏆 Our new paper on extreme LLM sparsity has received the Best Paper
-            Award at CKAIA 2026. The preprint will be available on arXiv soon.</span>
+          <span class="news-content">&#127942; Our new paper on extreme LLM sparsity has received the Best Paper Award at CKAIA 2026. The preprint will be available on arXiv soon.</span>
         </div>
 
         <div class="news-item">
           <span class="news-date">Jul 2026</span>
-          <span class="news-content">🏆 Sungbin has been selected for the 2026 PhD Excellence Scholarship
-            in Science and Engineering.</span>
+          <span class="news-content">&#127942; Sungbin has been selected for the 2026 PhD Excellence Scholarship in Science and Engineering.</span>
         </div>
-          
+
           <!-- <div class="news-item">
             <span class="news-date">Apr 2026</span>
             <span class="news-content"
@@ -657,6 +650,83 @@
       });
       close.addEventListener("click", closeDrawer);
       overlay.addEventListener("click", closeDrawer);
+
+      /* Keep Recent News in sync with news.html, which is the single source of
+         truth. The markup above is the no-JS fallback; this replaces it with the
+         newest 5 items whenever fetch works, so links added on the News page can
+         never go missing here. */
+      (function () {
+        var box = document.querySelector(".news-list");
+        if (!box || !window.fetch || !window.DOMParser) return;
+
+        fetch("news.html")
+          .then(function (r) {
+            return r.ok ? r.text() : Promise.reject();
+          })
+          .then(function (html) {
+            var doc = new DOMParser().parseFromString(html, "text/html");
+            var items = doc.querySelectorAll(".news-year .news-item");
+            var frag = document.createDocumentFragment();
+
+            Array.prototype.slice.call(items, 0, 5).forEach(function (item) {
+              var date = item.querySelector(".news-date");
+              var body = item.querySelector(".news-content");
+              if (!date || !body) return;
+
+              var row = document.createElement("div");
+              row.className = "news-item";
+
+              var d = document.createElement("span");
+              d.className = "news-date";
+              d.textContent = date.textContent.trim();
+              row.appendChild(d);
+
+              var c = document.createElement("span");
+              c.className = "news-content";
+              copyInto(body, c);
+              row.appendChild(c);
+
+              frag.appendChild(row);
+            });
+
+            if (frag.childNodes.length) {
+              box.textContent = "";
+              box.appendChild(frag);
+            }
+          })
+          .catch(function () {
+            /* leave the static fallback in place */
+          });
+
+        /* Copy text plus a whitelist of inline tags. Anything else contributes
+           only its text, so nothing executable is carried across. */
+        function copyInto(src, dest) {
+          Array.prototype.forEach.call(src.childNodes, function (node) {
+            if (node.nodeType === 3) {
+              dest.appendChild(document.createTextNode(node.nodeValue));
+              return;
+            }
+            if (node.nodeType !== 1) return;
+
+            var tag = node.tagName.toLowerCase();
+            if (tag === "a") {
+              var a = document.createElement("a");
+              var href = node.getAttribute("href") || "";
+              if (/^(https?:|\/|[\w.-]+\.html)/i.test(href)) a.setAttribute("href", href);
+              if (node.getAttribute("target")) a.setAttribute("target", node.getAttribute("target"));
+              if (node.getAttribute("rel")) a.setAttribute("rel", node.getAttribute("rel"));
+              copyInto(node, a);
+              dest.appendChild(a);
+            } else if (tag === "em" || tag === "strong") {
+              var el = document.createElement(tag);
+              copyInto(node, el);
+              dest.appendChild(el);
+            } else {
+              dest.appendChild(document.createTextNode(node.textContent));
+            }
+          });
+        }
+      })();
     </script>
   </body>
 </html>
