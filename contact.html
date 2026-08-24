@@ -156,6 +156,40 @@
             margin-bottom: 0;
         }
 
+        .contact-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            gap: 28px;
+            align-items: start;
+        }
+
+        .contact-map {
+            width: 100%;
+            min-height: 260px;
+            aspect-ratio: 4 / 3;
+            border: 1px solid var(--rule-color);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .contact-map iframe {
+            display: block;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .map-link {
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 0.8em;
+            color: var(--color-primary);
+        }
+
+        .map-link:hover {
+            color: var(--color-accent);
+        }
+
         footer {
             margin-top: var(--footer-gap);
             padding-top: var(--footer-pad-top);
@@ -218,6 +252,11 @@
 
             nav {
                 display: none;
+            }
+
+            .contact-layout {
+                grid-template-columns: minmax(0, 1fr);
+                gap: 20px;
             }
         }
 
@@ -296,16 +335,30 @@
     </header>
 
     <main>
-        <p>
-            <strong class="contact-title">Computational Optimization Lab</strong><br>
-            <br>
-            (Office) RIST 4, Room #4427<br>
-            <br>
-            Department of Computer Science and Engineering<br>
-            Pohang University of Science and Technology (POSTECH)<br>
-            77 Cheongam-ro, Nam-gu, Pohang-si, Gyeongsangbuk-do (37673)<br>
-            South Korea
-        </p>
+        <div class="contact-layout">
+            <p>
+                <strong class="contact-title">Computational Optimization Lab</strong><br>
+                <br>
+                (Office) RIST 4, Room #4427<br>
+                <br>
+                Department of Computer Science and Engineering<br>
+                Pohang University of Science and Technology (POSTECH)<br>
+                77 Cheongam-ro, Nam-gu, Pohang-si, Gyeongsangbuk-do (37673)<br>
+                South Korea
+            </p>
+
+            <div>
+                <div class="contact-map">
+                    <iframe
+                        title="Map showing our lab at POSTECH, Pohang"
+                        src="https://maps.google.com/maps?q=POSTECH+RIST&amp;output=embed"
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"
+                        allowfullscreen></iframe>
+                </div>
+                <a class="map-link" href="https://maps.google.com/maps?q=POSTECH+RIST" target="_blank" rel="noopener">Open in Google Maps &rarr;</a>
+            </div>
+        </div>
     </main>
 
     <footer>
