@@ -19,6 +19,32 @@ This is a static HTML/CSS academic lab website for the **Lee Optimization Group 
 | `contact.html` | Contact info |
 | `gallery.html` | Lab photos |
 
+## Derived content — never edit these by hand
+
+Two blocks on the site are **copies of content that lives elsewhere**. Editing the
+copy instead of the source is how links go missing.
+
+| Block | Source of truth | Kept in sync by |
+|---|---|---|
+| `index.html` → Recent News (newest 5) | `news.html` | `tools/sync-home-news.py` + pre-commit hook, and a runtime `fetch` in `index.html` |
+| `group.html` → Gallery preview (newest 5) | `gallery.html` | runtime `fetch` in `group.html` |
+
+**Add news to `news.html` only.** The home page follows automatically:
+
+```bash
+tools/sync-home-news.py           # rewrite index.html's copy
+tools/sync-home-news.py --check   # report drift, change nothing (exit 1)
+```
+
+Committing `news.html` runs the sync through the pre-commit hook and stages
+`index.html` alongside it. On top of that, both pages re-read their source at load
+time, so a stale copy still renders correctly for visitors — the static markup is
+only the no-JS fallback. Commented-out entries lower down `index.html`'s news list
+are left alone by the sync.
+
+Gallery photos work the same way: add the tile to `gallery.html` and the preview on
+`group.html` follows. Do not hand-edit either preview block.
+
 ## Architecture
 
 **CSS is inline per-page** — each HTML file contains a full `<style>` block in `<head>`. There is no shared stylesheet. When making a visual change that must apply site-wide (e.g., changing a font size or color), you must update every page's `<style>` block individually.
