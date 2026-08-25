@@ -236,12 +236,68 @@
         }
 
         /* Gallery preview */
+        .gallery-preview-shell {
+            margin-top: 14px;
+            margin-bottom: 10px;
+        }
+
+        .gallery-preview-frame {
+            display: grid;
+            grid-template-columns: auto minmax(0, 1fr) auto;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .gallery-preview-nav {
+            appearance: none;
+            border: 0;
+            background: transparent;
+            color: transparent;
+            width: 34px;
+            height: 72px;
+            padding: 0;
+            cursor: pointer;
+            position: relative;
+            transition: opacity 0.2s;
+        }
+
+        .gallery-preview-nav::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 18px;
+            height: 18px;
+            border-top: 3px solid #8d8d8d;
+            border-right: 3px solid #8d8d8d;
+            transition: border-color 0.2s;
+        }
+
+        .gallery-preview-nav[data-gallery-dir="prev"]::before {
+            transform: translate(-30%, -50%) rotate(-135deg);
+        }
+
+        .gallery-preview-nav[data-gallery-dir="next"]::before {
+            transform: translate(-70%, -50%) rotate(45deg);
+        }
+
+        .gallery-preview-nav:hover:not(:disabled) {
+            color: transparent;
+        }
+
+        .gallery-preview-nav:hover:not(:disabled)::before {
+            border-color: #5f5f5f;
+        }
+
+        .gallery-preview-nav:disabled {
+            opacity: 0.35;
+            cursor: default;
+        }
+
         .gallery-preview {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
             gap: 4px;
-            margin-top: 14px;
-            margin-bottom: 10px;
         }
 
         .gallery-preview-item {
@@ -278,6 +334,33 @@
         }
 
         .gallery-preview-item:hover .tooltip { opacity: 1; }
+
+        @media (max-width: 700px) {
+            .gallery-preview-frame {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .gallery-preview-shell .gallery-preview-nav[data-gallery-dir="prev"] {
+                grid-row: 2;
+                justify-self: start;
+            }
+
+            .gallery-preview-shell .gallery-preview-nav[data-gallery-dir="next"] {
+                grid-row: 2;
+                justify-self: end;
+            }
+
+            .gallery-preview {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 420px) {
+            .gallery-preview {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
 
         footer {
             margin-top: var(--footer-gap);
@@ -529,41 +612,47 @@
 
         <h3>Gallery</h3>
         <p>We also spend time together on various occasions. For more stories, check out <a href="gallery.html">here</a>!</p>
-        <div class="gallery-preview">
+        <div class="gallery-preview-shell">
+            <div class="gallery-preview-frame" aria-label="Gallery preview navigation">
+                <button class="gallery-preview-nav" type="button" data-gallery-dir="prev" aria-label="Show previous 5 gallery photos" disabled>&lt;</button>
+                <div class="gallery-preview">
 
-            <div class="gallery-preview-item">
-                <a href="stories/26_aiconnect.jpg" target="_blank" rel="noopener">
-                    <img src="stories/thumbs/26_aiconnect.jpg" alt="Kwanhee receiving the IITP President's Award at AI Connect Korea 2026" loading="lazy">
-                    <span class="tooltip">AI Connect Korea 2026 - IITP President's Award</span>
-                </a>
-            </div>
+                    <div class="gallery-preview-item">
+                        <a href="photo.html?image=stories/26_aiconnect.jpg">
+                            <img src="stories/thumbs/26_aiconnect.jpg" alt="Kwanhee receiving the IITP President's Award at AI Connect Korea 2026" loading="lazy">
+                            <span class="tooltip">AI Connect Korea 2026 - IITP President's Award</span>
+                        </a>
+                    </div>
 
-            <div class="gallery-preview-item">
-                <a href="stories/26_ckaia.jpg" target="_blank" rel="noopener">
-                    <img src="stories/thumbs/26_ckaia.jpg" alt="Presenting our work at CKAIA 2026" loading="lazy">
-                    <span class="tooltip">CKAIA 2026 - Presentation</span>
-                </a>
-            </div>
+                    <div class="gallery-preview-item">
+                        <a href="photo.html?image=stories/26_ckaia.jpg">
+                            <img src="stories/thumbs/26_ckaia.jpg" alt="Presenting our work at CKAIA 2026" loading="lazy">
+                            <span class="tooltip">CKAIA 2026 - Presentation</span>
+                        </a>
+                    </div>
 
-            <div class="gallery-preview-item">
-                <a href="stories/26_pl_workshop.jpg" target="_blank" rel="noopener">
-                    <img src="stories/thumbs/26_pl_workshop.jpg" alt="Protocol learning workshop" loading="lazy">
-                    <span class="tooltip">Protocol learning workshop</span>
-                </a>
-            </div>
+                    <div class="gallery-preview-item">
+                        <a href="photo.html?image=stories/26_pl_workshop.jpg">
+                            <img src="stories/thumbs/26_pl_workshop.jpg" alt="Protocol learning workshop" loading="lazy">
+                            <span class="tooltip">Protocol learning workshop</span>
+                        </a>
+                    </div>
 
-            <div class="gallery-preview-item">
-                <a href="stories/26_pl_workshop2.jpg" target="_blank" rel="noopener">
-                    <img src="stories/thumbs/26_pl_workshop2.jpg" alt="Protocol learning workshop" loading="lazy">
-                    <span class="tooltip">Protocol learning workshop</span>
-                </a>
-            </div>
+                    <div class="gallery-preview-item">
+                        <a href="photo.html?image=stories/26_pl_workshop2.jpg">
+                            <img src="stories/thumbs/26_pl_workshop2.jpg" alt="Protocol learning workshop" loading="lazy">
+                            <span class="tooltip">Protocol learning workshop</span>
+                        </a>
+                    </div>
 
-            <div class="gallery-preview-item">
-                <a href="stories/26_das_dinner.jpg" target="_blank" rel="noopener">
-                    <img src="stories/thumbs/26_das_dinner.jpg" alt="LOG-DASLab group dinner" loading="lazy">
-                    <span class="tooltip">LOG-DASLab group dinner</span>
-                </a>
+                    <div class="gallery-preview-item">
+                        <a href="photo.html?image=stories/26_das_dinner.jpg">
+                            <img src="stories/thumbs/26_das_dinner.jpg" alt="LOG-DASLab group dinner" loading="lazy">
+                            <span class="tooltip">LOG-DASLab group dinner</span>
+                        </a>
+                    </div>
+                </div>
+                <button class="gallery-preview-nav" type="button" data-gallery-dir="next" aria-label="Show next 5 gallery photos" disabled>&gt;</button>
             </div>
         </div>
 
@@ -625,25 +714,66 @@
        The markup above is the no-JS fallback; this replaces it when fetch works. */
     (function () {
         var box = document.querySelector('.gallery-preview');
-        if (!box || !window.fetch || !window.DOMParser) return;
+        var prevButton = document.querySelector('[data-gallery-dir="prev"]');
+        var nextButton = document.querySelector('[data-gallery-dir="next"]');
+        var pageSize = 5;
+        var currentPage = 0;
+        var items = [];
+
+        if (!box || !prevButton || !nextButton || !window.fetch || !window.DOMParser) return;
+
+        function updateButtons() {
+            var lastPage = Math.max(Math.ceil(items.length / pageSize) - 1, 0);
+            prevButton.disabled = currentPage === 0;
+            nextButton.disabled = currentPage >= lastPage;
+        }
+
+        function renderPage() {
+            var start = currentPage * pageSize;
+            var end = start + pageSize;
+            var frag = document.createDocumentFragment();
+
+            items.slice(start, end).forEach(function (item) {
+                var cell = document.createElement('div');
+                cell.className = 'gallery-preview-item';
+                cell.appendChild(item.cloneNode(true));
+                frag.appendChild(cell);
+            });
+
+            if (frag.childNodes.length) {
+                box.textContent = '';
+                box.appendChild(frag);
+            }
+
+            updateButtons();
+        }
+
+        prevButton.addEventListener('click', function () {
+            if (currentPage === 0) return;
+            currentPage -= 1;
+            renderPage();
+        });
+
+        nextButton.addEventListener('click', function () {
+            var lastPage = Math.max(Math.ceil(items.length / pageSize) - 1, 0);
+            if (currentPage >= lastPage) return;
+            currentPage += 1;
+            renderPage();
+        });
 
         fetch('gallery.html')
             .then(function (r) { return r.ok ? r.text() : Promise.reject(); })
             .then(function (html) {
                 var doc = new DOMParser().parseFromString(html, 'text/html');
                 var tiles = doc.querySelectorAll('.gallery-grid .gallery-item');
-                var frag = document.createDocumentFragment();
-
-                Array.prototype.slice.call(tiles, 0, 5).forEach(function (tile) {
+                items = Array.prototype.reduce.call(tiles, function (list, tile) {
                     var a = tile.querySelector('a');
                     var img = tile.querySelector('img');
                     var tip = tile.querySelector('.tooltip');
-                    if (!a || !img) return;
+                    if (!a || !img) return list;
 
                     var link = document.createElement('a');
                     link.setAttribute('href', a.getAttribute('href'));
-                    link.setAttribute('target', '_blank');
-                    link.setAttribute('rel', 'noopener');
 
                     var pic = document.createElement('img');
                     pic.setAttribute('src', img.getAttribute('src'));
@@ -658,15 +788,13 @@
                         link.appendChild(span);
                     }
 
-                    var cell = document.createElement('div');
-                    cell.className = 'gallery-preview-item';
-                    cell.appendChild(link);
-                    frag.appendChild(cell);
-                });
+                    list.push(link);
+                    return list;
+                }, []);
 
-                if (frag.childNodes.length) {
-                    box.textContent = '';
-                    box.appendChild(frag);
+                if (items.length) {
+                    currentPage = 0;
+                    renderPage();
                 }
             })
             .catch(function () { /* leave the static fallback in place */ });

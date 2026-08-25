@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="logo/log_logo.png" type="image/png">
+    <title>Gallery Photo | Lee Optimization Group</title>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        /* ------------------------------------------------------------------
+           Layout tokens — single source of truth for spacing on this page.
+           This block is identical on every page; keep all pages in sync.
+           ------------------------------------------------------------------ */
+        :root {
+            /* page frame */
+            --content-max: 800px;
+            --page-pad-top: clamp(24px, 5vw, 48px);
+            --page-pad-x: clamp(16px, 4vw, 32px);
+            --page-pad-bottom: clamp(36px, 5vw, 60px);
+
+            /* header / nav */
+            --header-pad-bottom: 28px;
+            --header-gap: 40px;
+            --lab-name-gap: 18px;
+            --nav-gap: clamp(10px, 3vw, 24px);
+
+            /* vertical rhythm */
+            --section-gap: 40px;
+            --heading-gap: 14px;
+            --para-gap: 14px;
+
+            /* footer */
+            --footer-gap: 52px;
+            --footer-pad-top: 20px;
+            --footer-logo-gap: 14px;
+            --footer-logo-h: 28px;
+
+            /* body type */
+            --text-body: 0.93em;
+            --leading-body: 1.85;
+
+            /* rules & lines */
+            --rule-color: #e2e6f0;
+
+            /* colour palette */
+            --color-bg: #ffffff;
+            --color-heading: #111;
+            --color-body: #374151;
+            --color-muted: #6b7280;
+            --color-primary: #1B3A8A;
+            --color-accent: #3B6FD4;
+            --color-emphasis: #d6423a;
+            --color-highlight-bg: #f7f1dc;
+
+            /* surfaces & borders */
+            --img-border: #b8bec8;
+            --control-border: #d3d9e6;
+            --surface-subtle: #f4f6fa;
+            --surface-hover: #e6ecf9;
+
+            /* research area categories */
+            --cat-compression: #d6423a;
+            --cat-distributed: #27ae60;
+            --cat-applications: #2e6bd9;
+            --cat-optimization: #f39c12;
+        }
+
+        html {
+            overflow-y: scroll;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            color: var(--color-heading);
+            background: var(--color-bg);
+            min-height: 100vh;
+        }
+
+        .inner {
+            max-width: var(--content-max);
+            margin: 0 auto;
+            padding: var(--page-pad-top) var(--page-pad-x) var(--page-pad-bottom);
+        }
+
+        header {
+            padding-bottom: var(--header-pad-bottom);
+            margin-bottom: var(--header-gap);
+            border-bottom: 1px solid var(--rule-color);
+        }
+
+        .lab-name {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-size: 2.8em;
+            font-weight: 500;
+            color: var(--color-heading);
+            letter-spacing: 0;
+            line-height: 0.96;
+            display: block;
+            margin-bottom: var(--lab-name-gap);
+            text-decoration: none;
+        }
+
+        .lab-name:hover {
+            text-decoration: none;
+            color: var(--color-heading);
+        }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: var(--nav-gap);
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--color-muted);
+            font-size: 1em;
+            font-weight: 400;
+            letter-spacing: 0.01em;
+            padding-bottom: 2px;
+            border-bottom: 1.5px dashed transparent;
+            transition: color 0.15s, border-color 0.15s;
+        }
+
+        nav a:hover {
+            color: var(--color-primary);
+            border-bottom: 1.5px solid var(--color-primary);
+            text-decoration: none;
+        }
+
+        nav a.active {
+            color: var(--color-heading);
+            font-weight: 600;
+            border-bottom: 1.5px solid var(--color-heading);
+        }
+
+        .nav-drawer a.active { color: var(--color-heading); font-weight: 600; }
+
+        a { color: var(--color-primary); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        h2 {
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 1.20em;
+            font-weight: 700;
+            letter-spacing: 0.01em;
+            text-transform: none;
+            color: var(--color-heading);
+            margin-top: var(--section-gap);
+            margin-bottom: var(--heading-gap);
+        }
+
+        h2:first-of-type {
+            margin-top: 0;
+        }
+
+        p {
+            font-size: var(--text-body);
+            line-height: var(--leading-body);
+            color: var(--color-body);
+            margin-bottom: var(--para-gap);
+        }
+
+        .photo-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 18px;
+            flex-wrap: wrap;
+        }
+
+        .photo-back {
+            font-size: var(--text-body);
+        }
+
+        .photo-status {
+            font-size: 0.82em;
+            color: var(--color-muted);
+            letter-spacing: 0.04em;
+        }
+
+        .photo-stage {
+            display: grid;
+            grid-template-columns: auto minmax(0, 1fr) auto;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .photo-nav {
+            appearance: none;
+            border: 0;
+            background: transparent;
+            color: transparent;
+            width: 34px;
+            height: 72px;
+            padding: 0;
+            cursor: pointer;
+            position: relative;
+            transition: opacity 0.2s;
+        }
+
+        .photo-nav::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 18px;
+            height: 18px;
+            border-top: 3px solid #8d8d8d;
+            border-right: 3px solid #8d8d8d;
+            transition: border-color 0.2s;
+        }
+
+        .photo-nav.prev::before {
+            transform: translate(-30%, -50%) rotate(-135deg);
+        }
+
+        .photo-nav.next::before {
+            transform: translate(-70%, -50%) rotate(45deg);
+        }
+
+        .photo-nav:hover::before {
+            border-color: #5f5f5f;
+        }
+
+        .photo-nav.is-disabled {
+            opacity: 0.28;
+            pointer-events: none;
+        }
+
+        .photo-panel {
+            margin: 0;
+            padding: clamp(12px, 2vw, 18px);
+            border: 1px solid var(--rule-color);
+            border-radius: 14px;
+            background: #fafbfd;
+        }
+
+        .photo-image-link {
+            display: block;
+            border-radius: 10px;
+            overflow: hidden;
+            background: var(--color-bg);
+        }
+
+        .photo-image {
+            display: block;
+            width: 100%;
+            max-height: min(72vh, 880px);
+            object-fit: contain;
+            margin: 0 auto;
+            background: var(--color-bg);
+        }
+
+        .photo-caption {
+            margin-top: 14px;
+        }
+
+        .photo-caption p:last-of-type {
+            margin-bottom: 0;
+        }
+
+        .photo-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+            margin-top: 8px;
+        }
+
+        .photo-actions a {
+            font-size: 0.88em;
+        }
+
+        .photo-error {
+            padding: 18px;
+            border: 1px solid var(--rule-color);
+            border-radius: 12px;
+            background: #fafbfd;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: var(--color-bg);
+            border: 1px solid var(--rule-color);
+            border-radius: 6px;
+            font-size: 1.3em;
+            cursor: pointer;
+            color: var(--color-body);
+            padding: 4px 8px;
+            line-height: 1;
+        }
+
+        footer {
+            margin-top: var(--footer-gap);
+            padding-top: var(--footer-pad-top);
+            border-top: 1px solid var(--rule-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.75em;
+            color: var(--color-muted);
+        }
+
+        .footer-logos {
+            display: flex;
+            align-items: center;
+            gap: var(--footer-logo-gap);
+        }
+
+        .footer-logos img {
+            height: var(--footer-logo-h);
+            width: auto;
+            object-fit: contain;
+            opacity: 1;
+        }
+
+        @media (max-width: 900px) {
+            :root {
+                --page-pad-top: 28px;
+                --page-pad-x: 18px;
+                --page-pad-bottom: 40px;
+                --header-pad-bottom: 4px;
+                --header-gap: 16px;
+                --footer-logo-h: 18px;
+            }
+
+            header {
+                display: grid;
+                grid-template-columns: minmax(0, 1fr) auto;
+                align-items: start;
+                column-gap: 10px;
+            }
+
+            .lab-name {
+                min-width: 0;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            nav {
+                display: none;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .photo-stage {
+                grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+                grid-template-areas:
+                    "panel panel"
+                    "prev next";
+                gap: 12px;
+            }
+
+            .photo-panel {
+                grid-area: panel;
+            }
+
+            .photo-nav.prev {
+                grid-area: prev;
+                justify-self: start;
+            }
+
+            .photo-nav.next {
+                grid-area: next;
+                justify-self: end;
+            }
+        }
+
+        /* Drawer */
+        .nav-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.3);
+            z-index: 999;
+        }
+
+        .nav-drawer {
+            position: fixed;
+            top: 0;
+            right: -280px;
+            width: 240px;
+            height: 100vh;
+            background: var(--color-bg);
+            box-shadow: -4px 0 24px rgba(0,0,0,0.12);
+            z-index: 1000;
+            transition: right 0.3s ease;
+            padding: 64px 32px 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .nav-drawer.open {
+            right: 0;
+        }
+
+        .nav-overlay.open {
+            display: block;
+        }
+
+        .drawer-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.4em;
+            cursor: pointer;
+            color: var(--color-body);
+            line-height: 1;
+        }
+
+        .nav-drawer a {
+            text-decoration: none;
+            color: var(--color-body);
+            font-size: 1.05em;
+            font-weight: 400;
+        }
+
+        .nav-drawer a:hover {
+            color: var(--color-primary);
+        }
+    </style>
+</head>
+<body>
+
+<div class="inner">
+
+    <header>
+        <a href="index.html" class="lab-name">Lee Optimization Group</a>
+        <button class="menu-toggle" aria-label="Menu">&#9776;</button>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="research.html">Research</a>
+            <a href="publications.html">Publications</a>
+            <a href="group.html">Members</a>
+            <a href="hiring.html">Hiring</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Gallery Photo</h2>
+
+        <div class="photo-meta">
+            <a href="gallery.html" class="photo-back">&larr; Back to Gallery</a>
+            <span class="photo-status" id="photoStatus"></span>
+        </div>
+
+        <div class="photo-stage" id="photoStage">
+            <a class="photo-nav prev is-disabled" id="photoPrev" aria-label="Previous photo"></a>
+
+            <figure class="photo-panel">
+                <a class="photo-image-link" id="photoImageLink">
+                    <img class="photo-image" id="photoImage" alt="" loading="eager">
+                </a>
+                <figcaption class="photo-caption">
+                    <p id="photoCaption">Loading photo...</p>
+                    <div class="photo-actions">
+                        <a href="gallery.html">Browse all photos</a>
+                        <a id="photoOriginal" target="_blank" rel="noopener">Open original JPG</a>
+                    </div>
+                </figcaption>
+            </figure>
+
+            <a class="photo-nav next is-disabled" id="photoNext" aria-label="Next photo"></a>
+        </div>
+
+        <div class="photo-error" id="photoError" hidden>
+            <p>We could not find that gallery photo. Please return to <a href="gallery.html">the gallery</a>.</p>
+        </div>
+    </main>
+
+    <footer>
+        <span>&copy; 2026 LOG. All rights reserved.</span>
+        <div class="footer-logos">
+            <a href="https://www.postech.ac.kr" target="_blank"><img src="logo/postech_logo.png" alt="POSTECH"></a>
+            <a href="https://ai.postech.ac.kr" target="_blank"><img src="logo/gsai_logo.png" alt="GSAI"></a>
+            <a href="https://cse.postech.ac.kr" target="_blank"><img src="logo/cs_logo.png" alt="CS"></a>
+            <img src="logo/log_logo.png" alt="LOG">
+        </div>
+    </footer>
+
+</div>
+
+    <div class="nav-overlay" id="navOverlay"></div>
+    <div class="nav-drawer" id="navDrawer">
+        <button class="drawer-close" id="drawerClose">&#x2715;</button>
+        <a href="index.html">Home</a>
+        <a href="research.html">Research</a>
+        <a href="publications.html">Publications</a>
+        <a href="group.html">Members</a>
+        <a href="hiring.html">Hiring</a>
+        <a href="contact.html">Contact</a>
+    </div>
+
+<script>
+    var toggle = document.querySelector(".menu-toggle");
+    var drawer = document.getElementById("navDrawer");
+    var overlay = document.getElementById("navOverlay");
+    var close = document.getElementById("drawerClose");
+
+    function openDrawer() {
+        drawer.classList.add("open");
+        overlay.classList.add("open");
+    }
+
+    function closeDrawer() {
+        drawer.classList.remove("open");
+        overlay.classList.remove("open");
+    }
+
+    toggle.addEventListener("click", function() {
+        drawer.classList.contains("open") ? closeDrawer() : openDrawer();
+    });
+    close.addEventListener("click", closeDrawer);
+    overlay.addEventListener("click", closeDrawer);
+
+    (function () {
+        var stage = document.getElementById("photoStage");
+        var errorBox = document.getElementById("photoError");
+        var image = document.getElementById("photoImage");
+        var imageLink = document.getElementById("photoImageLink");
+        var caption = document.getElementById("photoCaption");
+        var status = document.getElementById("photoStatus");
+        var originalLink = document.getElementById("photoOriginal");
+        var prevLink = document.getElementById("photoPrev");
+        var nextLink = document.getElementById("photoNext");
+        var requested = new URLSearchParams(window.location.search).get("image");
+        var currentPath = normalizeImagePath(requested);
+
+        function normalizeImagePath(value) {
+            if (!value) return "";
+            var clean = value.split("#")[0];
+            try {
+                clean = new URL(clean, window.location.href).pathname;
+            } catch (e) {}
+            clean = clean.replace(/^\/+/, "");
+            var idx = clean.indexOf("stories/");
+            return idx >= 0 ? clean.slice(idx) : clean;
+        }
+
+        function buildViewerHref(path) {
+            return "photo.html?image=" + encodeURIComponent(normalizeImagePath(path));
+        }
+
+        function setNav(link, item, label) {
+            if (!item) {
+                link.removeAttribute("href");
+                link.classList.add("is-disabled");
+                link.setAttribute("aria-disabled", "true");
+                link.setAttribute("aria-label", label);
+                return;
+            }
+
+            link.setAttribute("href", buildViewerHref(item.imagePath));
+            link.classList.remove("is-disabled");
+            link.removeAttribute("aria-disabled");
+            link.setAttribute("aria-label", label + ": " + (item.caption || item.alt || item.imagePath));
+        }
+
+        function setFallbackImage(path) {
+            image.setAttribute("src", path);
+            image.setAttribute("alt", path.split("/").pop());
+            imageLink.setAttribute("href", path);
+            originalLink.setAttribute("href", path);
+            caption.textContent = path.split("/").pop();
+            status.textContent = "";
+        }
+
+        function showMissingState() {
+            stage.hidden = true;
+            errorBox.hidden = false;
+        }
+
+        function render(items, currentIndex) {
+            var current = items[currentIndex];
+            var prev = currentIndex > 0 ? items[currentIndex - 1] : null;
+            var next = currentIndex < items.length - 1 ? items[currentIndex + 1] : null;
+            var label = current.caption || current.alt || current.imagePath.split("/").pop();
+
+            image.setAttribute("src", current.imagePath);
+            image.setAttribute("alt", current.alt || label);
+            imageLink.setAttribute("href", current.imagePath);
+            originalLink.setAttribute("href", current.imagePath);
+            caption.textContent = label;
+            status.textContent = (currentIndex + 1) + " / " + items.length;
+            document.title = label + " | Lee Optimization Group";
+
+            setNav(prevLink, prev, "Previous photo");
+            setNav(nextLink, next, "Next photo");
+        }
+
+        if (!currentPath) {
+            showMissingState();
+            return;
+        }
+
+        setFallbackImage(currentPath);
+
+        fetch("gallery.html")
+            .then(function (response) {
+                return response.ok ? response.text() : Promise.reject();
+            })
+            .then(function (html) {
+                var doc = new DOMParser().parseFromString(html, "text/html");
+                var tiles = doc.querySelectorAll(".gallery-grid .gallery-item");
+                var items = Array.prototype.reduce.call(tiles, function (list, tile) {
+                    var link = tile.querySelector("a");
+                    var img = tile.querySelector("img");
+                    var tip = tile.querySelector(".tooltip");
+                    var href;
+
+                    if (!link || !img) return list;
+
+                    href = link.getAttribute("href") || "";
+                    href = normalizeImagePath(new URL(href, window.location.href).searchParams.get("image") || href);
+                    if (!href) return list;
+
+                    list.push({
+                        imagePath: href,
+                        alt: img.getAttribute("alt") || "",
+                        caption: tip ? tip.textContent.trim() : ""
+                    });
+                    return list;
+                }, []);
+
+                var currentIndex = items.findIndex(function (item) {
+                    return item.imagePath === currentPath;
+                });
+
+                if (currentIndex === -1) return;
+                render(items, currentIndex);
+            })
+            .catch(function () {
+                setNav(prevLink, null, "Previous photo");
+                setNav(nextLink, null, "Next photo");
+            });
+
+        window.addEventListener("keydown", function (event) {
+            if (event.key === "ArrowLeft" && prevLink.getAttribute("href")) {
+                window.location.href = prevLink.getAttribute("href");
+            }
+
+            if (event.key === "ArrowRight" && nextLink.getAttribute("href")) {
+                window.location.href = nextLink.getAttribute("href");
+            }
+        });
+    })();
+</script>
+</body>
+</html>
