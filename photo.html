@@ -264,17 +264,6 @@
             margin-bottom: 0;
         }
 
-        .photo-actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 14px;
-            margin-top: 8px;
-        }
-
-        .photo-actions a {
-            font-size: 0.88em;
-        }
-
         .photo-error {
             padding: 18px;
             border: 1px solid var(--rule-color);
@@ -463,10 +452,6 @@
                 </a>
                 <figcaption class="photo-caption">
                     <p id="photoCaption">Loading photo...</p>
-                    <div class="photo-actions">
-                        <a href="gallery.html">Browse all photos</a>
-                        <a id="photoOriginal" target="_blank" rel="noopener">Open original JPG</a>
-                    </div>
                 </figcaption>
             </figure>
 
@@ -530,7 +515,6 @@
         var imageLink = document.getElementById("photoImageLink");
         var caption = document.getElementById("photoCaption");
         var status = document.getElementById("photoStatus");
-        var originalLink = document.getElementById("photoOriginal");
         var prevLink = document.getElementById("photoPrev");
         var nextLink = document.getElementById("photoNext");
         var requested = new URLSearchParams(window.location.search).get("image");
@@ -570,7 +554,6 @@
             image.setAttribute("src", path);
             image.setAttribute("alt", path.split("/").pop());
             imageLink.setAttribute("href", path);
-            originalLink.setAttribute("href", path);
             caption.textContent = path.split("/").pop();
             status.textContent = "";
         }
@@ -589,7 +572,6 @@
             image.setAttribute("src", current.imagePath);
             image.setAttribute("alt", current.alt || label);
             imageLink.setAttribute("href", current.imagePath);
-            originalLink.setAttribute("href", current.imagePath);
             caption.textContent = label;
             status.textContent = (currentIndex + 1) + " / " + items.length;
             document.title = label + " | Lee Optimization Group";
