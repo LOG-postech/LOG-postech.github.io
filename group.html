@@ -483,14 +483,16 @@
             color: var(--color-primary);
         }
 
-        /* Alumni list */
-        .alumni-list {
+        /* Alumni & intern lists */
+        .alumni-list,
+        .intern-list {
             list-style: none;
             padding: 0;
             margin-top: 10px;
         }
 
-        .alumni-list li {
+        .alumni-list li,
+        .intern-list li {
             position: relative;
             font-size: var(--text-body);
             line-height: var(--leading-body);
@@ -499,7 +501,8 @@
             margin-bottom: 6px;
         }
 
-        .alumni-list li::before {
+        .alumni-list li::before,
+        .intern-list li::before {
             content: "•";
             position: absolute;
             left: 0;
@@ -614,6 +617,13 @@
                 <span class="member-position">MS Student</span>
             </li>
 
+        </ul>
+
+        <h3>Interns</h3>
+        <ul class="intern-list">
+            <li>Minsung Kang</li>
+            <li>Junkyu Park</li>
+            <li>Wuvin An</li>
         </ul>
 
         <h3>Gallery</h3>
