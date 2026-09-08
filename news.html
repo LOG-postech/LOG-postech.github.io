@@ -193,10 +193,9 @@
             cursor: pointer;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            padding-bottom: 6px;
-            margin-bottom: 4px;
+            gap: 10px;
+            min-height: 44px;
+            margin-bottom: 6px;
             -webkit-user-select: none;
             user-select: none;
         }
@@ -205,37 +204,34 @@
             display: none;
         }
 
-        .fold-btn {
-            flex-shrink: 0;
-            width: 23px;
-            height: 23px;
-            border: 1px solid var(--control-border);
-            border-radius: 7px;
-            background: var(--surface-subtle);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.15s ease, border-color 0.15s ease;
-        }
-
-        .fold-btn::after {
+        .news-year > summary::before {
             content: "";
-            width: 7px;
-            height: 7px;
-            border-right: 1.7px solid var(--color-body);
-            border-bottom: 1.7px solid var(--color-body);
-            transform: translateY(-2px) rotate(45deg);
+            flex-shrink: 0;
+            width: 6px;
+            height: 6px;
+            margin: 0 3px 0 2px;
+            border-right: 1.5px solid var(--color-muted);
+            border-bottom: 1.5px solid var(--color-muted);
+            transform: rotate(-45deg);
             transition: transform 0.15s ease, border-color 0.15s ease;
         }
 
-        .news-year[open] .fold-btn::after {
-            transform: translateY(2px) rotate(225deg);
+        .news-year[open] > summary::before {
+            transform: translateY(-2px) rotate(45deg);
+        }
+
+        .news-year > summary::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            margin-left: 6px;
+            background: var(--rule-color);
         }
 
         .year-label {
             font-family: 'Inter', system-ui, sans-serif;
-            font-size: 1.20em;
-            font-weight: 700;
+            font-size: 1.10em;
+            font-weight: 600;
             letter-spacing: 0.01em;
             color: var(--color-heading);
         }
@@ -244,12 +240,7 @@
             color: var(--color-primary);
         }
 
-        .news-year > summary:hover .fold-btn {
-            background: var(--surface-hover);
-            border-color: var(--color-primary);
-        }
-
-        .news-year > summary:hover .fold-btn::after {
+        .news-year > summary:hover::before {
             border-color: var(--color-primary);
         }
 
@@ -257,6 +248,12 @@
             outline: 2px solid var(--color-accent);
             outline-offset: 3px;
             border-radius: 2px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .news-year > summary::before {
+                transition: none;
+            }
         }
 
         footer {
@@ -401,7 +398,7 @@
 
     <main>
         <details class="news-year" open>
-            <summary><span class="year-label">2026</span><span class="fold-btn"></span></summary>
+            <summary><span class="year-label">2026</span></summary>
             <div class="news-list">
 
                 <div class="news-item">
@@ -488,7 +485,7 @@
         </details>
 
         <details class="news-year">
-            <summary><span class="year-label">2025</span><span class="fold-btn"></span></summary>
+            <summary><span class="year-label">2025</span></summary>
             <div class="news-list">
 
                 <div class="news-item">
@@ -546,7 +543,7 @@
         </details>
 
         <details class="news-year">
-            <summary><span class="year-label">2024</span><span class="fold-btn"></span></summary>
+            <summary><span class="year-label">2024</span></summary>
             <div class="news-list">
 
                 <div class="news-item">
@@ -563,7 +560,7 @@
         </details>
 
         <details class="news-year">
-            <summary><span class="year-label">2023</span><span class="fold-btn"></span></summary>
+            <summary><span class="year-label">2023</span></summary>
             <div class="news-list">
 
                 <div class="news-item">
