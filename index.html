@@ -687,7 +687,7 @@
           })
           .then(function (html) {
             var doc = new DOMParser().parseFromString(html, "text/html");
-            var items = doc.querySelectorAll(".news-year .news-item");
+            var items = doc.querySelectorAll("#news-list .news-item");
             var frag = document.createDocumentFragment();
 
             Array.prototype.slice.call(items, 0, 5).forEach(function (item) {

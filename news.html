@@ -179,81 +179,45 @@
             line-height: var(--leading-body);
         }
 
-        /* Foldable year sections */
-        .news-year {
-            margin-top: var(--section-gap);
-        }
-
-        .news-year:first-of-type {
-            margin-top: 0;
-        }
-
-        .news-year > summary {
-            list-style: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            min-height: 44px;
-            margin-bottom: 6px;
-            -webkit-user-select: none;
-            user-select: none;
-        }
-
-        .news-year > summary::-webkit-details-marker {
+        .news-item[hidden],
+        .news-more[hidden] {
             display: none;
         }
 
-        .news-year > summary::before {
-            content: "";
-            flex-shrink: 0;
-            width: 6px;
-            height: 6px;
-            margin: 0 3px 0 2px;
-            border-right: 1.5px solid var(--color-muted);
-            border-bottom: 1.5px solid var(--color-muted);
-            transform: rotate(-45deg);
-            transition: transform 0.15s ease, border-color 0.15s ease;
+        .news-more {
+            display: block;
+            width: 100%;
+            min-height: 44px;
+            margin-top: var(--heading-gap);
+            padding: 12px 0;
+            border: 0;
+            background: transparent;
+            color: var(--color-muted);
+            font: inherit;
+            font-size: 0.85em;
+            cursor: pointer;
         }
 
-        .news-year[open] > summary::before {
-            transform: translateY(-2px) rotate(45deg);
-        }
-
-        .news-year > summary::after {
-            content: "";
-            flex: 1;
-            height: 1px;
-            margin-left: 6px;
-            background: var(--rule-color);
-        }
-
-        .year-label {
-            font-family: 'Inter', system-ui, sans-serif;
-            font-size: 1.10em;
-            font-weight: 600;
-            letter-spacing: 0.01em;
-            color: var(--color-heading);
-        }
-
-        .news-year > summary:hover .year-label {
+        .news-more:hover {
             color: var(--color-primary);
         }
 
-        .news-year > summary:hover::before {
-            border-color: var(--color-primary);
+        .news-more::after {
+            content: "";
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            margin-left: 8px;
+            vertical-align: 3px;
+            border-right: 1.5px solid currentColor;
+            border-bottom: 1.5px solid currentColor;
+            transform: rotate(45deg);
         }
 
-        .news-year > summary:focus-visible {
+        .news-more:focus-visible,
+        .news-item:focus-visible {
             outline: 2px solid var(--color-accent);
             outline-offset: 3px;
-            border-radius: 2px;
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            .news-year > summary::before {
-                transition: none;
-            }
         }
 
         footer {
@@ -397,194 +361,88 @@
     </header>
 
     <main>
-        <details class="news-year" open>
-            <summary><span class="year-label">2026</span></summary>
-            <div class="news-list">
-
-                <div class="news-item">
-                    <span class="news-date">Aug 2026</span>
-                    <span class="news-content">&#127942; Hyunji, Hyeondo, and Jinseok have been selected for the NRF Research Grant for Master&rsquo;s and PhD Students.</span>
-                </div>
-
-                <div class="news-item">
-                    <span class="news-date">Aug 2026</span>
-                    <span class="news-content">&#127963; We are co-organizing the <a href="https://let-workshop.github.io/2026/" target="_blank" rel="noopener">LeT Workshop</a> on October 7~8 at POSTECH. The workshop aims to bring together researchers interested in machine learning theory.</span>
-                </div>
-                
-                <div class="news-item">
-                    <span class="news-date">Aug 2026</span>
-                    <span class="news-content">&#127891; Our paper on extreme LLM sparsity has been accepted to EMNLP 2026. In this work, we show that carefully handling the elementary components of pruning can already substantially outperform existing pruning methods, even at extreme sparsity.</span>
-                </div>
-
-                <div class="news-item">
-                    <span class="news-date">Aug 2026</span>
-                    <span class="news-content">&#127891; Our paper on semiconductor anomaly detection has been accepted to BMVC 2026. In this work, we introduce a semiconductor defect dataset (OASIS) along with vision-guided instruction tuning method.</span>
-                </div>
-
-                <div class="news-item">
-                    <span class="news-date">Jul 2026</span>
-                    <span class="news-content">&#129309; Our lab has been selected for the 2026 NRF Next-Generation AI for Mathematics program.</span>
-                </div>
-
-                <div class="news-item">
-                    <span class="news-date">Jul 2026</span>
-                    <span class="news-content">&#127942; Kwanhee received the IITP President&rsquo;s Award in the Graduate Student Outstanding Research Achievement Competition at <a href="https://www.aiconnectkorea.kr/" target="_blank" rel="noopener">AI Connect Korea 2026</a>.</span>
-                </div>
-
-                <div class="news-item">
-                    <span class="news-date">Jul 2026</span>
-                    <span class="news-content">&#127942; Our new paper on extreme LLM sparsity has received the Best Paper Award at CKAIA 2026. The preprint will be available on arXiv soon.</span>
-                </div>
-
-                <div class="news-item">
-                    <span class="news-date">Jul 2026</span>
-                    <span class="news-content">&#127942; Sungbin has been selected for the 2026 PhD Excellence Scholarship in Science and Engineering.</span>
-                </div>
-
-                <div class="news-item">
-                    <span class="news-date">Jul 2026</span>
-                    <span class="news-content">&#129309; Our lab joined the <a href="https://nairl.kr/academic-ko/" target="_blank" rel="noopener">National AI Research Lab (NAIRL)</a> academic consortium on July 1, 2026.</span>
-                </div>
-
-                <div class="news-item">
-                    <span class="news-date">Jun 2026</span>
-                    <span class="news-content">&#127891; Our <a href="https://arxiv.org/abs/2606.29952v1" target="_blank" rel="noopener">paper</a> on flatness-based out-of-distribution detection has been accepted to ECCV 2026. In this work, we propose FOLD, a lightweight detector that leverages feature-Hessian curvature and partial feature normalization to improve ID-OOD separability.</span>
-                </div>
-
-                <div class="news-item">
-                    <span class="news-date">May 2026</span>
-                    <span class="news-content">&#127942; Our <a href="https://arxiv.org/abs/2606.19353" target="_blank" rel="noopener">paper</a> on uncertainty quantification in ICL, accepted to ACL 2026, has been selected as an Oral presentation. In this work, we introduce self-function vectors to directly decompose uncertainty, and propose a novel framework to evaluate these disentangled sources.</span>
-                </div>
-
-                <div class="news-item">
-                    <span class="news-date">May 2026</span>
-                    <span class="news-content">&#127891; Our <a href="https://arxiv.org/abs/2602.03515v2" target="_blank" rel="noopener">paper</a> on asynchronous pipeline parallelism has been accepted to ICML 2026. In this work, we propose a basis rotation approach to effectively address the associated gradient staleness problem.</span>
-                </div>
-
-                <div class="news-item">
-                    <span class="news-date">Apr 2026</span>
-                    <span class="news-content">&#129309; Our lab has been selected for the IITP Efficient AI National R&amp;D Program (2026&ndash;2029), a national research program with <em>KRW 7.5B</em> in total funding, together with leading partners including <a href="https://squeezebits.com/" target="_blank" rel="noopener">SqueezeBits</a>.</span>
-                </div>
-
-                <div class="news-item">
-                    <span class="news-date">Feb 2026</span>
-                    <span class="news-content">&#129309; Our lab has been selected for the "Early-Career Researcher Infrastructure Support Program" (NRF) &mdash; one of the most competitive grants in Korea. With <em>500M KRW</em> in funding, we will build a high-performance compute infrastructure to power our research on extreme compression of hyperscale AI foundation models.</span>
-                </div>
-
-                <div class="news-item">
-                    <span class="news-date">Feb 2026</span>
-                    <span class="news-content">&#9992;&#65039; Kwanhee started as a visiting student researcher in the <a href="https://daslab.pages.ista.ac.at/" target="_blank" rel="noopener">Dan Alistarh Group</a> at <a href="https://ist.ac.at/en/home/" target="_blank" rel="noopener">ISTA</a>.</span>
-                </div>
-
-                <div class="news-item">
-                    <span class="news-date">Jan 2026</span>
-                    <span class="news-content">&#127891; Our <a href="https://arxiv.org/abs/2510.01650" target="_blank" rel="noopener">paper</a> on extreme LLM sparsity (ELSA) has been accepted to ICLR 2026.</span>
-                </div>
-
+        <div class="news-list" id="news-list">
+            <div class="news-item">
+                <span class="news-date">Aug 2026</span>
+                <span class="news-content">&#127942; Hyunji, Hyeondo, and Jinseok have been selected for the NRF Research Grant for Master&rsquo;s and PhD Students.</span>
             </div>
-        </details>
 
-        <details class="news-year">
-            <summary><span class="year-label">2025</span></summary>
-            <div class="news-list">
-
-                <div class="news-item">
-                    <span class="news-date">Nov 2025</span>
-                    <span class="news-content">&#127942; Dongyeop received the <a href="https://www.qualcomm.com/research/university-relations/innovation-fellowship/2025-south-korea" target="_blank" rel="noopener">Qualcomm Innovation Fellowship Korea 2025</a>.</span>
-                </div>
-
-                <div class="news-item">
-                    <span class="news-date">Nov 2025</span>
-                    <span class="news-content">&#127942; Our <a href="https://arxiv.org/abs/2510.01650" target="_blank" rel="noopener">paper</a> on extreme LLM sparsity (ELSA) received the Best Paper Award at JKAIA 2025.</span>
-                </div>
-
-                <div class="news-item">
-                    <span class="news-date">Nov 2025</span>
-                    <span class="news-content">&#127942; Hyunji received the NRF Fellowship.</span>
-                </div>
-
-                <div class="news-item">
-                    <span class="news-date">Sep 2025</span>
-                    <span class="news-content">&#127891; We have 2 papers (<a href="https://arxiv.org/abs/2510.25798" target="_blank" rel="noopener">MemEIC</a> and <a href="https://arxiv.org/abs/2505.16705" target="_blank" rel="noopener">An Analysis of Concept Bottleneck Models</a>) accepted to NeurIPS 2025.</span>
-                </div>
-
-                <div class="news-item">
-                    <span class="news-date">Aug 2025</span>
-                    <span class="news-content">&#129309; Our lab has been selected for the 2025 High-Performance Computing Support Program, providing cloud access to four NVIDIA H200 GPUs for approximately six months.</span>
-                </div>
-
-                <div class="news-item">
-                    <span class="news-date">May 2025</span>
-                    <span class="news-content">&#129309; Our lab has been selected for the <a href="https://www.msit.go.kr/bbs/view.do?bbsSeqNo=100&amp;mId=311&amp;mPid=121&amp;nttSeqNo=3179520&amp;sCode=user" target="_blank" rel="noopener">2025 Global Basic Research Laboratory program</a> (NRF), with up to <em>KRW 1.5B</em> in funding over three years.</span>
-                </div>
-
-
-                <div class="news-item">
-                    <span class="news-date">May 2025</span>
-                    <span class="news-content">&#127891; Our <a href="https://arxiv.org/abs/2311.17539" target="_blank" rel="noopener">paper</a> on overparameterization on SAM has been accepted to UAI 2025.</span>
-                </div>
-
-                <div class="news-item">
-                    <span class="news-date">May 2025</span>
-                    <span class="news-content">&#127891; Our works on second-order optimization (<a href="https://arxiv.org/abs/2502.18153" target="_blank" rel="noopener">SASSHA</a>) and pruning (<a href="https://arxiv.org/abs/2506.06866" target="_blank" rel="noopener">SAFE</a>) have been accepted to ICML 2025. SAFE is also selected as a spotlight poster.</span>
-                </div>
-
-                <div class="news-item">
-                    <span class="news-date">May 2025</span>
-                    <span class="news-content">&#127891; Our <a href="https://arxiv.org/abs/2504.06838" target="_blank" rel="noopener">paper</a> on zeroth-order prompt tuning for black-box VLM (ZIP) has been accepted to ICLR 2025.</span>
-                </div>
-
-                <div class="news-item">
-                    <span class="news-date">Apr 2025</span>
-                    <span class="news-content">&#127942; Hyeondo has been selected for the Kwanjeong Educational Foundation Graduate Scholarship.</span>
-                </div>
-
+            <div class="news-item">
+                <span class="news-date">Aug 2026</span>
+                <span class="news-content">&#127963; We are co-organizing the <a href="https://let-workshop.github.io/2026/" target="_blank" rel="noopener">LeT Workshop</a> on October 7~8 at POSTECH. The workshop aims to bring together researchers interested in machine learning theory.</span>
             </div>
-        </details>
 
-        <details class="news-year">
-            <summary><span class="year-label">2024</span></summary>
-            <div class="news-list">
-
-                <div class="news-item">
-                    <span class="news-date">Sep 2024</span>
-                    <span class="news-content">&#129489;&#8205;&#128187; Dongyeop joined Google as a Student Researcher.</span>
-                </div>
-
-                <div class="news-item">
-                    <span class="news-date">Sep 2024</span>
-                    <span class="news-content">&#127891; Our <a href="https://arxiv.org/abs/2406.15524" target="_blank" rel="noopener">paper</a> on LLM pruning has been accepted to EMNLP 2024.</span>
-                </div>
-
+            <div class="news-item">
+                <span class="news-date">Aug 2026</span>
+                <span class="news-content">&#127891; Our paper on extreme LLM sparsity has been accepted to EMNLP 2026. In this work, we show that carefully handling the elementary components of pruning can already substantially outperform existing pruning methods, even at extreme sparsity.</span>
             </div>
-        </details>
 
-        <details class="news-year">
-            <summary><span class="year-label">2023</span></summary>
-            <div class="news-list">
-
-                <div class="news-item">
-                    <span class="news-date">Nov 2023</span>
-                    <span class="news-content">&#127942; Our <a href="https://arxiv.org/abs/2311.17539" target="_blank" rel="noopener">paper</a> on overparameterization on SAM received the Best Paper Award at JKAIA 2023.</span>
-                </div>
-
-                <div class="news-item">
-                    <span class="news-date">Apr 2023</span>
-                    <span class="news-content">&#127942; Sungbin has been selected for the Kwanjeong Educational Foundation Graduate Scholarship.</span>
-                </div>
-
-                <div class="news-item">
-                    <span class="news-date">Apr 2023</span>
-                    <span class="news-content">&#127891; Our <a href="https://arxiv.org/abs/2302.14260" target="_blank" rel="noopener">paper</a> on concept bottleneck models has been accepted to ICML 2023.</span>
-                </div>
-
-                <div class="news-item">
-                    <span class="news-date">Feb 2023</span>
-                    <span class="news-content">&#129489;&#8205;&#128187; Sungbin joined Google as a Student Researcher.</span>
-                </div>
-
+            <div class="news-item">
+                <span class="news-date">Aug 2026</span>
+                <span class="news-content">&#127891; Our paper on semiconductor anomaly detection has been accepted to BMVC 2026. In this work, we introduce a semiconductor defect dataset (OASIS) along with vision-guided instruction tuning method.</span>
             </div>
-        </details>
+
+            <div class="news-item">
+                <span class="news-date">Jul 2026</span>
+                <span class="news-content">&#129309; Our lab has been selected for the 2026 NRF Next-Generation AI for Mathematics program.</span>
+            </div>
+
+            <div class="news-item">
+                <span class="news-date">Jul 2026</span>
+                <span class="news-content">&#127942; Kwanhee received the IITP President&rsquo;s Award in the Graduate Student Outstanding Research Achievement Competition at <a href="https://www.aiconnectkorea.kr/" target="_blank" rel="noopener">AI Connect Korea 2026</a>.</span>
+            </div>
+
+            <div class="news-item">
+                <span class="news-date">Jul 2026</span>
+                <span class="news-content">&#127942; Our new paper on extreme LLM sparsity has received the Best Paper Award at CKAIA 2026. The preprint will be available on arXiv soon.</span>
+            </div>
+
+            <div class="news-item">
+                <span class="news-date">Jul 2026</span>
+                <span class="news-content">&#127942; Sungbin has been selected for the 2026 PhD Excellence Scholarship in Science and Engineering.</span>
+            </div>
+
+            <div class="news-item">
+                <span class="news-date">Jul 2026</span>
+                <span class="news-content">&#129309; Our lab joined the <a href="https://nairl.kr/academic-ko/" target="_blank" rel="noopener">National AI Research Lab (NAIRL)</a> academic consortium on July 1, 2026.</span>
+            </div>
+
+            <div class="news-item">
+                <span class="news-date">Jun 2026</span>
+                <span class="news-content">&#127891; Our <a href="https://arxiv.org/abs/2606.29952v1" target="_blank" rel="noopener">paper</a> on flatness-based out-of-distribution detection has been accepted to ECCV 2026. In this work, we propose FOLD, a lightweight detector that leverages feature-Hessian curvature and partial feature normalization to improve ID-OOD separability.</span>
+            </div>
+
+            <div class="news-item">
+                <span class="news-date">May 2026</span>
+                <span class="news-content">&#127942; Our <a href="https://arxiv.org/abs/2606.19353" target="_blank" rel="noopener">paper</a> on uncertainty quantification in ICL, accepted to ACL 2026, has been selected as an Oral presentation. In this work, we introduce self-function vectors to directly decompose uncertainty, and propose a novel framework to evaluate these disentangled sources.</span>
+            </div>
+
+            <div class="news-item">
+                <span class="news-date">May 2026</span>
+                <span class="news-content">&#127891; Our <a href="https://arxiv.org/abs/2602.03515v2" target="_blank" rel="noopener">paper</a> on asynchronous pipeline parallelism has been accepted to ICML 2026. In this work, we propose a basis rotation approach to effectively address the associated gradient staleness problem.</span>
+            </div>
+
+            <div class="news-item">
+                <span class="news-date">Apr 2026</span>
+                <span class="news-content">&#129309; Our lab has been selected for the IITP Efficient AI National R&amp;D Program (2026&ndash;2029), a national research program with <em>KRW 7.5B</em> in total funding, together with leading partners including <a href="https://squeezebits.com/" target="_blank" rel="noopener">SqueezeBits</a>.</span>
+            </div>
+
+            <div class="news-item">
+                <span class="news-date">Feb 2026</span>
+                <span class="news-content">&#129309; Our lab has been selected for the "Early-Career Researcher Infrastructure Support Program" (NRF) &mdash; one of the most competitive grants in Korea. With <em>500M KRW</em> in funding, we will build a high-performance compute infrastructure to power our research on extreme compression of hyperscale AI foundation models.</span>
+            </div>
+
+            <div class="news-item">
+                <span class="news-date">Feb 2026</span>
+                <span class="news-content">&#9992;&#65039; Kwanhee started as a visiting student researcher in the <a href="https://daslab.pages.ista.ac.at/" target="_blank" rel="noopener">Dan Alistarh Group</a> at <a href="https://ist.ac.at/en/home/" target="_blank" rel="noopener">ISTA</a>.</span>
+            </div>
+
+            <div class="news-item">
+                <span class="news-date">Jan 2026</span>
+                <span class="news-content">&#127891; Our <a href="https://arxiv.org/abs/2510.01650" target="_blank" rel="noopener">paper</a> on extreme LLM sparsity (ELSA) has been accepted to ICLR 2026.</span>
+            </div>
+        </div>
+        <button class="news-more" id="news-more" type="button" aria-controls="news-list" hidden>Show more</button>
     </main>
 
     <footer>
@@ -610,6 +468,33 @@
 </div>
 
 <script>
+
+    // Keep all current news in the HTML for the home-page sync and no-JS readers.
+    (function () {
+        var items = document.querySelectorAll('#news-list .news-item');
+        var more = document.getElementById('news-more');
+        var visibleCount = Math.min(10, items.length);
+
+        function updateVisibility() {
+            Array.prototype.forEach.call(items, function (item, index) {
+                item.hidden = index >= visibleCount;
+            });
+            more.hidden = visibleCount >= items.length;
+        }
+
+        more.addEventListener('click', function () {
+            var firstNewItem = items[visibleCount];
+            visibleCount = Math.min(visibleCount + 5, items.length);
+            updateVisibility();
+            // Continue reading at the newly revealed news, even on the final batch.
+            if (firstNewItem) {
+                firstNewItem.setAttribute('tabindex', '-1');
+                firstNewItem.focus({ preventScroll: true });
+            }
+        });
+
+        updateVisibility();
+    })();
     var toggle = document.querySelector('.menu-toggle');
     var drawer = document.getElementById('navDrawer');
     var overlay = document.getElementById('navOverlay');
