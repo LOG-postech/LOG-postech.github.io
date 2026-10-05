@@ -776,7 +776,7 @@
             renderPage();
         });
 
-        fetch('gallery.html')
+        fetch('gallery.html', { cache: 'no-cache' })
             .then(function (r) { return r.ok ? r.text() : Promise.reject(); })
             .then(function (html) {
                 var doc = new DOMParser().parseFromString(html, 'text/html');
