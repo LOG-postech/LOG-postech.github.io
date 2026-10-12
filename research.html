@@ -641,16 +641,16 @@
             section.classList.remove('wrap-flow');
         });
 
-        // One square size for every icon, as tall as the tallest paragraph.
+        // One square size for every icon, as tall as the shortest paragraph.
         // Resizing the icons reflows the text, so repeat a few times to converge;
         // capped so narrow screens fall back to the wrap-flow layout below.
         var maxSize = Math.min(200, sections[0].getBoundingClientRect().width * 0.4);
         for (var i = 0; i < 4; i++) {
-            var tallest = 0;
+            var shortest = Infinity;
             sections.forEach(function(section) {
-                tallest = Math.max(tallest, section.querySelector('.section-text p').getBoundingClientRect().height);
+                shortest = Math.min(shortest, section.querySelector('.section-text p').getBoundingClientRect().height);
             });
-            var size = Math.min(Math.max(tallest, 100), maxSize);
+            var size = Math.min(Math.max(shortest, 100), maxSize);
             sections.forEach(function(section) {
                 var image = section.querySelector('img');
                 image.style.width = size + 'px';
