@@ -278,7 +278,7 @@
 
         .section {
             display: grid;
-            grid-template-columns: 165px minmax(0, 1fr);
+            grid-template-columns: auto minmax(0, 1fr);
             align-items: start;
             column-gap: 22px;
             row-gap: 10px;
@@ -293,10 +293,12 @@
             width: 165px;
             max-width: none;
             height: auto;
+            aspect-ratio: 1 / 1;
+            box-sizing: border-box;
+            padding: 12px;
             object-fit: contain;
             border: 1.5px solid var(--img-border);
             border-radius: 6px;
-            margin-top: 4px;
         }
 
         .section.wrap-flow {
@@ -311,7 +313,7 @@
 
         .section.wrap-flow img {
             float: left;
-            margin: 4px 22px 10px 0;
+            margin: 0 22px 10px 0;
         }
 
         .section.wrap-flow .section-text {
@@ -494,7 +496,7 @@
         </div>
 
         <div class="section">
-            <img src="research_focus/opt-dist.png" alt="Distributed Training">
+            <img src="research_focus/opt-distributed.png" alt="Distributed Training">
             <div class="section-text">
                 <p>
                     <span class="green">Distributed Training</span>
@@ -524,7 +526,7 @@
 
 
         <div class="section">
-            <img src="research_focus/opt-applied.png" alt="Deep Learning Applications">
+            <img src="research_focus/opt-applications.png" alt="Deep Learning Applications">
             <div class="section-text">
                 <p>
                     <span class="blue">Deep Learning Applications</span>
@@ -638,6 +640,16 @@
             }
 
             section.classList.remove('wrap-flow');
+
+            // Square icon as tall as its paragraph. Resizing the icon reflows the
+            // text, so repeat a few times to converge; capped so narrow screens
+            // fall back to the wrap-flow layout below.
+            var maxSize = Math.min(200, section.getBoundingClientRect().width * 0.4);
+            for (var i = 0; i < 4; i++) {
+                var size = Math.min(Math.max(textBlock.getBoundingClientRect().height, 100), maxSize);
+                image.style.width = size + 'px';
+                image.style.height = size + 'px';
+            }
 
             var textStyle = window.getComputedStyle(textBlock);
             var lineHeight = parseFloat(textStyle.lineHeight);
