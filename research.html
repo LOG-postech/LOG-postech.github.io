@@ -630,26 +630,37 @@
     });
 
     function applyConditionalResearchWrap() {
-        var sections = document.querySelectorAll('.section');
+        var sections = Array.prototype.filter.call(document.querySelectorAll('.section'), function(section) {
+            return section.querySelector('img') && section.querySelector('.section-text p');
+        });
+        if (!sections.length) {
+            return;
+        }
+
+        sections.forEach(function(section) {
+            section.classList.remove('wrap-flow');
+        });
+
+        // One square size for every icon, as tall as the tallest paragraph.
+        // Resizing the icons reflows the text, so repeat a few times to converge;
+        // capped so narrow screens fall back to the wrap-flow layout below.
+        var maxSize = Math.min(200, sections[0].getBoundingClientRect().width * 0.4);
+        for (var i = 0; i < 4; i++) {
+            var tallest = 0;
+            sections.forEach(function(section) {
+                tallest = Math.max(tallest, section.querySelector('.section-text p').getBoundingClientRect().height);
+            });
+            var size = Math.min(Math.max(tallest, 100), maxSize);
+            sections.forEach(function(section) {
+                var image = section.querySelector('img');
+                image.style.width = size + 'px';
+                image.style.height = size + 'px';
+            });
+        }
 
         sections.forEach(function(section) {
             var image = section.querySelector('img');
             var textBlock = section.querySelector('.section-text p');
-            if (!image || !textBlock) {
-                return;
-            }
-
-            section.classList.remove('wrap-flow');
-
-            // Square icon as tall as its paragraph. Resizing the icon reflows the
-            // text, so repeat a few times to converge; capped so narrow screens
-            // fall back to the wrap-flow layout below.
-            var maxSize = Math.min(200, section.getBoundingClientRect().width * 0.4);
-            for (var i = 0; i < 4; i++) {
-                var size = Math.min(Math.max(textBlock.getBoundingClientRect().height, 100), maxSize);
-                image.style.width = size + 'px';
-                image.style.height = size + 'px';
-            }
 
             var textStyle = window.getComputedStyle(textBlock);
             var lineHeight = parseFloat(textStyle.lineHeight);
