@@ -301,6 +301,12 @@
             border-radius: 6px;
         }
 
+        /* Round shapes read smaller than square ones at the same size, so
+           these icons get less inset inside the same frame. */
+        .section img.icon-round {
+            padding: 4px;
+        }
+
         .section.wrap-flow {
             display: block;
         }
@@ -496,7 +502,7 @@
         </div>
 
         <div class="section">
-            <img src="research_focus/opt-distributed.png" alt="Distributed Training">
+            <img class="icon-round" src="research_focus/opt-distributed.png" alt="Distributed Training">
             <div class="section-text">
                 <p>
                     <span class="green">Distributed Training</span>
@@ -550,7 +556,7 @@
         </div>
 
         <div class="section">
-            <img src="research_focus/opt-deep.png" alt="Advanced Optimization">
+            <img class="icon-round" src="research_focus/opt-deep.png" alt="Advanced Optimization">
             <div class="section-text">
                 <p>
                     <span class="orange">Advanced Optimization</span>
