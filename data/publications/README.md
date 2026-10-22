@@ -35,7 +35,7 @@ chosen.
 | `is_preprint` | true/false | Listed under **Preprint**, above the years. |
 | `is_previous` | true/false | Listed under **Previous**, below the years (work before the lab). |
 | `spaced_links` | true/false | Space between this paper's links (see note below). |
-| *anything else* | URL | A link, labelled with the field name, in the order written: `paper`, `code`, `model`, `slides`, … |
+| *anything else* | URL | A link, labelled with the field name, in the order written. In use: `paper`, `code`, `code-torch`, `code-jax`, `model`, `OpenReview`. A new name (e.g. `slides`) just works. |
 
 Fields left out are false or empty. When a preprint is accepted, remove
 `is_preprint` and update `venue` and `year`.

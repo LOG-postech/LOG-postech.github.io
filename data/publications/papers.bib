@@ -20,8 +20,15 @@
 %   is_preprint  = {true},              optional. Under "Preprint"
 %   is_previous  = {true},              optional. Under "Previous" (work before the lab)
 %   spaced_links = {true},              optional. Space between this paper's links
-%   paper        = {https://...},       any other field is a link, labelled with its name,
-%   code         = {https://...},       in this order; news links [text](@key) go to `paper`
+%
+%   Links: any other field is a link, shown with the field name as its label, in the
+%   order written. News links [text](@key) go to `paper`. Labels in use:
+%   paper        = {https://...},       the paper itself (arXiv, OpenReview, journal, ...)
+%   code         = {https://...},       code repository
+%   code-torch   = {https://...},       code, PyTorch version  (lee25safe)
+%   code-jax     = {https://...},       code, JAX version      (lee25safe)
+%   model        = {https://...},       released models        (lee26hardware)
+%   OpenReview   = {https://...},       OpenReview page, when `paper` is elsewhere (nam23almost)
 % }
 
 % ===== Preprint =====
