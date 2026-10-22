@@ -170,6 +170,9 @@
             color: var(--color-heading);
             min-width: 64px;
             flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
         }
 
         .news-content {
@@ -177,6 +180,45 @@
             font-weight: 300;
             color: var(--color-body);
             line-height: var(--leading-body);
+        }
+
+        /* Member faces under a news item's date; filled in by js/people.js */
+        .news-people {
+            display: flex;
+            gap: 2px;
+        }
+
+        .member-face {
+            width: 20px;
+            height: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 0 0.5px var(--img-border);
+            overflow: hidden;
+            background: var(--color-bg);
+        }
+
+        a.member-face:hover {
+            box-shadow: 0 0 0 1.5px var(--color-accent);
+        }
+
+        /* Headshots have room above and around the face; zoom in on it. */
+        .member-face img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1.25);
+            transform-origin: 50% 30%;
+        }
+
+        .member-face-more {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 9px;
+            font-weight: 500;
+            color: var(--color-muted);
+            background: var(--rule-color);
         }
 
         .news-item[hidden],
@@ -384,7 +426,7 @@
                 <span class="news-content">&#127891; Our <a href="https://arxiv.org/abs/2602.18181" target="_blank" rel="noopener">paper</a> on decentralized training has been accepted to NeurIPS 2026 Workshop on Collaborative, Open, and Decentralized Training of Foundation Models, selected as an oral presentation. In this work, we introduce a novel decentralized LLM fine-tuning framework that achieves extreme communiation efficiency and global consensus.</span>
             </div>
 
-            <div class="news-item">
+            <div class="news-item" data-paper="FRESCO">
                 <span class="news-date">Sep 2026</span>
                 <span class="news-content">&#127891; Our paper on asynchronous pipeline parallelism has been accepted to NeurIPS 2026. In this work, we introduce FRESCO, a new principle for consistency control in asynchronous pipelines, which consistently outperforms standard baselines while being extremely efficient and theoretically sound.</span>
             </div>
@@ -409,7 +451,7 @@
                 <span class="news-content">&#127891; Our <a href="https://arxiv.org/abs/2609.06557" target="_blank" rel="noopener">paper</a> on extreme LLM sparsity has been accepted to EMNLP 2026. In this work, we show that carefully handling the elementary components of pruning can already substantially outperform existing pruning methods, even at extreme sparsity.</span>
             </div>
 
-            <div class="news-item">
+            <div class="news-item" data-paper="Advancing Semiconductor Inspection">
                 <span class="news-date">Aug 2026</span>
                 <span class="news-content">&#127891; Our paper on semiconductor anomaly detection has been accepted to BMVC 2026. In this work, we introduce a semiconductor defect dataset (OASIS) along with vision-guided instruction tuning method.</span>
             </div>
@@ -424,7 +466,7 @@
                 <span class="news-content">&#127942; Kwanhee received the IITP President&rsquo;s Award in the Graduate Student Outstanding Research Achievement Competition at <a href="https://www.aiconnectkorea.kr/" target="_blank" rel="noopener">AI Connect Korea 2026</a>.</span>
             </div>
 
-            <div class="news-item">
+            <div class="news-item" data-paper="Hidden in Plain Sight">
                 <span class="news-date">Jul 2026</span>
                 <span class="news-content">&#127942; Our new paper on extreme LLM sparsity has received the Best Paper Award at CKAIA 2026. The preprint will be available on arXiv soon.</span>
             </div>
@@ -499,6 +541,7 @@
     <a href="contact.html">Contact</a>
 </div>
 
+<script src="js/people.js"></script>
 <script>
 
     // Keep all current news in the HTML for the home-page sync and no-JS readers.
@@ -526,6 +569,7 @@
         });
 
         updateVisibility();
+        LOGPeople.decorateNews(document.getElementById('news-list'));
     })();
     var toggle = document.querySelector('.menu-toggle');
     var drawer = document.getElementById('navDrawer');

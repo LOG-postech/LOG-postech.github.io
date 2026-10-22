@@ -21,7 +21,7 @@ ARCHIVE = 'news.html'
 COUNT = 5
 
 ITEM = re.compile(
-    r'<div class="news-item">\s*'
+    r'<div class="news-item"([^>]*)>\s*'
     r'<span class="news-date">([^<]+)</span>\s*'
     r'<span class="news-content"\s*>(.*?)</span\s*>\s*'
     r'</div>',
@@ -33,7 +33,7 @@ def newest_items(archive_html):
     """The first COUNT news items in document order (news.html is newest-first)."""
     out = []
     for m in ITEM.finditer(archive_html):
-        out.append((m.group(1).strip(), ' '.join(m.group(2).split())))
+        out.append((m.group(1), m.group(2).strip(), ' '.join(m.group(3).split())))
         if len(out) == COUNT:
             break
     return out
@@ -41,12 +41,12 @@ def newest_items(archive_html):
 
 def render(items):
     blocks = []
-    for date, content in items:
+    for attrs, date, content in items:
         blocks.append(
-            '        <div class="news-item">\n'
+            '        <div class="news-item"%s>\n'
             '          <span class="news-date">%s</span>\n'
             '          <span class="news-content">%s</span>\n'
-            '        </div>' % (date, content)
+            '        </div>' % (attrs, date, content)
         )
     return '\n\n'.join(blocks)
 
@@ -95,7 +95,7 @@ def main():
 
     if check:
         print('Recent News on %s is out of sync with %s:' % (HOME, ARCHIVE))
-        for date, content in items:
+        for _, date, content in items:
             text = re.sub(r'<[^>]+>', '', content)
             print('  %-9s %s' % (date, ' '.join(text.split())[:64]))
         print('Run tools/sync-home-news.py to update.')

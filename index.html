@@ -215,6 +215,9 @@
         color: var(--color-heading);
         min-width: 64px;
         flex-shrink: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
       }
 
       .news-content {
@@ -222,6 +225,45 @@
         font-weight: 300;
         color: var(--color-body);
         line-height: var(--leading-body);
+      }
+
+      /* Member faces under a news item's date; filled in by js/people.js */
+      .news-people {
+        display: flex;
+        gap: 2px;
+      }
+
+      .member-face {
+        width: 20px;
+        height: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 0 0.5px var(--img-border);
+        overflow: hidden;
+        background: var(--color-bg);
+      }
+
+      a.member-face:hover {
+        box-shadow: 0 0 0 1.5px var(--color-accent);
+      }
+
+      /* Headshots have room above and around the face; zoom in on it. */
+      .member-face img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transform: scale(1.25);
+        transform-origin: 50% 30%;
+      }
+
+      .member-face-more {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 9px;
+        font-weight: 500;
+        color: var(--color-muted);
+        background: var(--rule-color);
       }
 
       p.news-note {
@@ -473,6 +515,11 @@
 
         <div class="news-item">
           <span class="news-date">Oct 2026</span>
+          <span class="news-content">&#127891; Our <a href="https://arxiv.org/abs/2602.18181" target="_blank" rel="noopener">preprint</a> on decentralized LLM training, SeedFlood, has received a major update, with substantial improvements to its overall presentation, analysis, and experimental evaluation.</span>
+        </div>
+
+        <div class="news-item">
+          <span class="news-date">Oct 2026</span>
           <span class="news-content">&#129489;&#8205;&#128187; Minkyoung has started a research internship at <a href="https://www.nota.ai/" target="_blank" rel="noopener">Nota AI</a>.</span>
         </div>
 
@@ -483,17 +530,12 @@
 
         <div class="news-item">
           <span class="news-date">Sep 2026</span>
+          <span class="news-content">&#127891; Our <a href="https://arxiv.org/abs/2602.18181" target="_blank" rel="noopener">paper</a> on decentralized training has been accepted to NeurIPS 2026 Workshop on Collaborative, Open, and Decentralized Training of Foundation Models, selected as an oral presentation. In this work, we introduce a novel decentralized LLM fine-tuning framework that achieves extreme communiation efficiency and global consensus.</span>
+        </div>
+
+        <div class="news-item" data-paper="FRESCO">
+          <span class="news-date">Sep 2026</span>
           <span class="news-content">&#127891; Our paper on asynchronous pipeline parallelism has been accepted to NeurIPS 2026. In this work, we introduce FRESCO, a new principle for consistency control in asynchronous pipelines, which consistently outperforms standard baselines while being extremely efficient and theoretically sound.</span>
-        </div>
-
-        <div class="news-item">
-          <span class="news-date">Aug 2026</span>
-          <span class="news-content">&#127942; Hyunji, Hyeondo, and Jinseok have been selected for the NRF Research Grant for Master&rsquo;s and PhD Students.</span>
-        </div>
-
-        <div class="news-item">
-          <span class="news-date">Aug 2026</span>
-          <span class="news-content">&#127963; We are co-organizing the <a href="https://let-workshop.github.io/2026/" target="_blank" rel="noopener">LeT Workshop</a> on October 7~8 at POSTECH. The workshop aims to bring together researchers interested in machine learning theory.</span>
         </div>
 
           <!-- <div class="news-item">
@@ -652,6 +694,7 @@
       <a href="contact.html">Contact</a>
     </div>
 
+    <script src="js/people.js"></script>
     <script>
       var toggle = document.querySelector(".menu-toggle");
       var drawer = document.getElementById("navDrawer");
@@ -680,6 +723,9 @@
       (function () {
         var box = document.querySelector(".news-list");
         if (!box || !window.fetch || !window.DOMParser) return;
+        var decorate = function () {
+          if (window.LOGPeople) LOGPeople.decorateNews(box);
+        };
 
         fetch("news.html", { cache: "no-cache" })
           .then(function (r) {
@@ -697,6 +743,9 @@
 
               var row = document.createElement("div");
               row.className = "news-item";
+              ["data-people", "data-paper"].forEach(function (attr) {
+                if (item.hasAttribute(attr)) row.setAttribute(attr, item.getAttribute(attr));
+              });
 
               var d = document.createElement("span");
               d.className = "news-date";
@@ -715,9 +764,11 @@
               box.textContent = "";
               box.appendChild(frag);
             }
+            decorate();
           })
           .catch(function () {
             /* leave the static fallback in place */
+            decorate();
           });
 
         /* Copy text plus a whitelist of inline tags. Anything else contributes

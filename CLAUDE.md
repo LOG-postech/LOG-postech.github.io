@@ -45,6 +45,34 @@ are left alone by the sync.
 Gallery photos work the same way: add the tile to `gallery.html` and the preview on
 `group.html` follows. Do not hand-edit either preview block.
 
+### Member faces (news and publications)
+
+`js/people.js` adds small rounded-square member faces in two places:
+
+- **News** (`news.html`, home page): under each item's date, up to 3 faces side by side, then `+N`
+  (hover for all names).
+- **Publications**: before each current member's name in `.paper-authors`, with the
+  name set slightly darker.
+
+There is no separate database: `group.html` (`.member-item`) is the member list and
+`publications.html` (`.paper`) is the paper list, both fetched at runtime. Author names
+must match the member's name on `group.html` exactly (`*` and `†` are ignored).
+
+Every face links to the member's own site (new tab) if their `.member-item` has an
+`<a href>`, otherwise to their card at `group.html#<photo file name>` (e.g.
+`#jinseokchung`). `group.html` assigns those ids from the photo file names at load
+time, so adding a member needs no extra markup.
+
+A news item gets the faces of:
+
+- members mentioned by first or full name in its text ("Hyunji, Hyeondo, and Jinseok …");
+- the in-lab authors of a paper it links to (arXiv / OpenReview id or exact URL match).
+
+For a paper news item **without a link**, add `data-paper="<part of the title>"` to the
+`news-item` div, e.g. `<div class="news-item" data-paper="FRESCO">`. Override with
+`data-people="Hyunji, Kwanhee"`, or hide with `data-people="none"`. Alumni and
+external co-authors have no `.member-item`, so they never get a face.
+
 ## Architecture
 
 **CSS is inline per-page** — each HTML file contains a full `<style>` block in `<head>`. There is no shared stylesheet. When making a visual change that must apply site-wide (e.g., changing a font size or color), you must update every page's `<style>` block individually.

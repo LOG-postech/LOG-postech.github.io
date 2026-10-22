@@ -199,6 +199,16 @@
             margin-bottom: 8px;
         }
 
+        /* Arriving from a face elsewhere on the site (group.html#<photo name>) */
+        @keyframes member-highlight {
+            from { box-shadow: 0 0 0 4px var(--color-accent); }
+            to { box-shadow: 0 0 0 4px transparent; }
+        }
+
+        .member-highlight img {
+            animation: member-highlight 2.4s ease-out;
+        }
+
         .member-item span {
             display: block;
             font-size: 0.88rem;
@@ -706,6 +716,19 @@
     </div>
 
 <script>
+    // Faces on the news and publication pages link here as #<photo file name>
+    // (same rule as memberSlug in js/people.js), so new members need no id.
+    (function () {
+        Array.prototype.forEach.call(document.querySelectorAll('.member-item img'), function (img) {
+            img.closest('.member-item').id = img.getAttribute('src').split('/').pop().replace(/\.[^.]*$/, '');
+        });
+        var target = location.hash && document.getElementById(decodeURIComponent(location.hash.slice(1)));
+        if (target && target.classList.contains('member-item')) {
+            target.scrollIntoView({ block: 'center' });
+            target.classList.add('member-highlight');
+        }
+    })();
+
     var toggle = document.querySelector('.menu-toggle');
     var drawer = document.getElementById('navDrawer');
     var overlay = document.getElementById('navOverlay');
