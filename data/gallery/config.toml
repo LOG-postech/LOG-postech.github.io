@@ -1,9 +1,0 @@
-# Gallery settings. Details: README.md.
-
-[thumbnail]
-size = 600              # px, square center crop made at build time
-quality = 80            # JPEG quality
-
-
-[preview]
-count = 5               # photos per page in the Members page preview

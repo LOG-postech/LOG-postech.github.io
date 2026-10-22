@@ -4,135 +4,69 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-Academic lab website for the **Lee Optimization Group (LOG)** at POSTECH, served by
-GitHub Pages at `opt.postech.ac.kr` (domain from the root `CNAME` file). **Content and
-design are separate**: lists are data in `data/`, page bodies are in `content/`, design
-is in `layout/`. GitHub Pages builds the repo with its standard Jekyll ("Deploy from a
-branch", `main`) — **no custom build, no plugins**: Jekyll only wraps each `content/`
-page in `layout/base.html` and embeds `data/` into data pages
-(`layout/partials/data.html`), and **`static/js/site.js` renders the data in the
-browser** (BibTeX, TOML, @tags, faces, ordering). The root `README.md` maps every kind
-of edit to its file.
-
-```bash
-python3 tools/build.py --check    # validate data/ (same rules as site.js); exit 1 on errors
-python3 tools/build.py            # validate + make missing gallery thumbnails
-bundle exec jekyll serve          # local preview with GitHub's Jekyll (Gemfile)
-```
-
-Jekyll settings, lab name, nav and footer logos are in `_config.yml`
-(`data_dir: data`, `layouts_dir: layout`, `includes_dir: .`). Nothing in `data/` or
-`content/` may contain Liquid syntax (`{{`, `{%`).
+This is a static HTML/CSS academic lab website for the **Lee Optimization Group (LOG)** at POSTECH, deployed via GitHub Pages at `opt.postech.ac.kr`. There is no build step — edit HTML files directly and push to deploy.
 
 ## Pages
 
-Every page is `content/<page>.html`: front matter (`title`, `permalink`, `data: true`
-for data pages, `script: true` if `layout/scripts/<page>.js` exists) plus the body of
-`<main>`. Its CSS is `layout/styles/<page>.css`, included after the shared footer CSS
-(no page rule overlaps the footer or drawer rules, so the cascade is unchanged).
+| File | Purpose |
+|---|---|
+| `index.html` | Home — lab intro, news, acknowledgements |
+| `news.html` | Full news archive (linked from the home page) |
+| `research.html` | Research areas |
+| `publications.html` | Paper list |
+| `group.html` | Lab members |
+| `hiring.html` | Open positions |
+| `contact.html` | Contact info |
+| `gallery.html` | Lab photos |
 
-| Page | Purpose | Rendered from |
+## Derived content — never edit these by hand
+
+Two blocks on the site are **copies of content that lives elsewhere**. Editing the
+copy instead of the source is how links go missing.
+
+| Block | Source of truth | Kept in sync by |
 |---|---|---|
-| `content/index.html` | Home — lab intro, recent news | `data/news/` |
-| `content/news.html` | News list | `data/news/` |
-| `content/publications.html` | Paper list | `data/publications/` |
-| `content/group.html` | Members, interns, gallery preview, alumni | `data/members/`, `data/gallery/` |
-| `content/gallery.html` | Lab photos | `data/gallery/` |
-| `content/photo.html` | Single-photo viewer (`photo.html?image=data/gallery/photos/…`; old `stories/…` links still work) | `data/gallery/` |
-| `content/research.html` | Research areas (text) | — |
-| `content/hiring.html` | Open positions (text) | — |
-| `content/contact.html` | Contact info (text) | — |
+| `index.html` → Recent News (newest 5) | `news.html` | `tools/sync-home-news.py` + pre-commit hook, and a runtime `fetch` in `index.html` |
+| `group.html` → Gallery preview (newest 5) | `gallery.html` | runtime `fetch` in `group.html` |
 
-Data pages keep static parts (headings, intro, interns) in `content/` and leave the
-lists as empty containers that `site.js` fills (`.news-list`, `#news-list`, `main` of
-publications, `.member-list`, `.gallery-preview`, `.alumni-list`, `.gallery-grid`).
-Page scripts run after `site.js` and read `LOG.config` / `LOG.gallery`.
+**Add news to `news.html` only.** The home page follows automatically:
 
-## Lists live in `data/` — never in `content/` or `layout/`
+```bash
+tools/sync-home-news.py           # rewrite index.html's copy
+tools/sync-home-news.py --check   # report drift, change nothing (exit 1)
+```
 
-Each directory in `data/` is one database: its entries, a `config.toml` of
-presentation settings, and a `README.md` on how to add an entry. **Read that README
-before adding or changing content.**
+Committing `news.html` runs the sync through the pre-commit hook and stages
+`index.html` alongside it. On top of that, both pages re-read their source at load
+time, so a stale copy still renders correctly for visitors — the static markup is
+only the no-JS fallback. Commented-out entries lower down `index.html`'s news list
+are left alone by the sync.
 
-| Database | Entries | Notes |
-|---|---|---|
-| `data/news/` | `<year>.yaml`: items keyed by idx (`39:`) with `date`, `text` (one paragraph of Markdown), optional `paper` | Higher idx = newer, unique across years; a repeated key is an error. Home page shows the newest `home.count`. |
-| `data/publications/` | one `papers.bib`; entry order = display order within a heading | Headings: `is_preprint`, then `year` (newest first), then `is_previous`. News refers to entries as `@key` (`@lee26fresco`). |
-| `data/members/` | `members.yaml` (`members:` and `alumni:`, each person keyed by tag) + `photos/` | The tag is the person's id everywhere (`@tag`). |
-| `data/gallery/` | `gallery.yaml` (photos keyed by idx, highest first) + `photos/` + `thumbs/` | Thumbnails are generated by `tools/build.py` (hook); never make them by hand. |
-
-`tools/build.py --check` validates all of it (file names, required fields, unknown
-fields, @tags, paper keys, missing photos); the pre-commit hook runs it. In the browser,
-`site.js` logs data errors to the console.
-
-Numbers that used to be hard-coded in page scripts (news shown/added per click, home
-news count, gallery preview page size) come from the
-`config.toml` files — change them there, not in the template.
-
-Rendering rules (`site.js`, mirrored by `tools/build.py`):
-- Markdown links to `http(s)://` get `target="_blank" rel="noopener"`; relative links
-  stay in the same tab. The same holds for paper links.
-- Text is HTML-escaped.
-
-Files are published at their repository paths (`data/gallery/photos/…`,
-`data/members/photos/…`, `static/logo/…`). `_config.yml` excludes `layout/`, `tools/`
-and the READMEs from the published site.
-
-### People (`@tags`) and member faces
-
-Every data file starts with a comment listing every field of an entry.
-
-Every person in `data/members/members.yaml` (members and alumni) is keyed by their tag. News
-text and BibTeX `author` fields refer to lab people **only** by tag (`@hyunjijung`);
-plain names are plain text. In news a tag renders as the person's `short` name
-(default: first name), in author lists as the full `name`. Unknown tags fail the build.
-
-`tools/build.py` renders small rounded-square faces of **current members** at build
-time (alumni tags give the name without a face):
-
-- **News** (news page, home page): under each item's date — the in-lab authors of the
-  papers it refers to — its `paper` field, then links written `[paper](@shin23closer)`, which the
-  build points at the entry's `paper` URL — then members
-  `@tagged` in the text; up to `faces.max` (3), then `+N`.
-- **Publications**: before each tagged current member in `.paper-authors`.
-
-Nothing is inferred from names or links. Each face links to the member's `url` (new
-tab) if set, otherwise to `group.html#<photo file name>`; `group.html` assigns those
-ids at load time.
+Gallery photos work the same way: add the tile to `gallery.html` and the preview on
+`group.html` follows. Do not hand-edit either preview block.
 
 ## Architecture
 
-**CSS** is inline in each page's `<style>`, assembled by `layout/base.html` from:
+**CSS is inline per-page** — each HTML file contains a full `<style>` block in `<head>`. There is no shared stylesheet. When making a visual change that must apply site-wide (e.g., changing a font size or color), you must update every page's `<style>` block individually.
 
-1. `layout/partials/chassis.css` — reset, **layout tokens** (`:root`), body, header, nav
-2. `layout/partials/footer.css` — footer, footer logos, menu button
-3. `layout/styles/<page>.css` — the page's own rules, incl. its `@media (max-width: 900px)`
-4. `layout/partials/drawer.css` — mobile drawer
-
-No page rule shares a selector with the footer or drawer partials, so this order
-renders exactly like the old per-page order. Keep it that way: a page rule that
-targets footer/drawer selectors would now win where it used to lose. A site-wide
-visual change goes in a partial or `base.html`, once; a one-page change goes in
-`layout/styles/<page>.css`.
-
-**Scripts**: `layout/partials/data.html` (data pages) embeds `LOG` and loads
-`static/js/site.js`; then `base.html` runs `layout/scripts/drawer.js` and the page's
-`layout/scripts/<page>.js`.
+Spacing is the exception: it is driven by a `:root` block of CSS custom properties that
+is duplicated verbatim at the top of every page's `<style>`. See **Layout Tokens** below
+before touching any margin, padding, or gap.
 
 **Asset directories:**
-- `static/logo/` — logos (PNG/SVG); footer logos are listed in `_config.yml`
-- `static/lab_photo/` — home page hero photo
-- `static/research_focus/` — research topic icons, used by `content/research.html`
-- `data/gallery/photos/`, `data/gallery/thumbs/` — gallery photos and their generated thumbnails
-- `data/members/photos/` — member headshots (filename = person's name slug)
+- `logo/` — sponsor and collaborator logos (PNG/SVG); referenced in `index.html` and `research.html`
+- `research_focus/` — thumbnail images for research area cards in `research.html`
+- `stories/` — gallery photos for `gallery.html` (year-prefixed filenames, e.g., `25_iclr.jpg`)
+- `stories/thumbs/` — **generated**, never hand-made; see Images below
+- `group_profile/` — member headshots for `group.html` (filename = person's name slug)
+- `lab_photo/` — home page hero photo
 
 ## Images
 
 **Do not resize or compress images by hand.** Drop the original in, commit, and the
 pre-commit hook does it — resizing, re-encoding, stripping EXIF (which also removes
-GPS coordinates from lab photos), and updating the data file that names the image if
-the extension changes — and making the gallery thumbnail in `data/gallery/thumbs/`
-(center crop, `data/gallery/config.toml`).
+GPS coordinates from lab photos), generating the gallery thumbnail, and updating any
+HTML path if the extension changes.
 
 ```bash
 tools/setup-hooks.sh              # once per clone — enables the hook
@@ -140,35 +74,34 @@ tools/optimize-images.sh          # optimize everything that needs it
 tools/optimize-images.sh --check  # report only, change nothing
 ```
 
-The hook also runs `tools/build.py --check`. Both scripts run on the bash 3.2 that
-ships with macOS. Requires ImageMagick (`apt install imagemagick` / `brew install
-imagemagick`); the hook refuses the commit if it is missing rather than letting a
-10MB camera original into history; `git commit --no-verify` bypasses it.
+Requires ImageMagick (`apt install imagemagick` / `brew install imagemagick`). The hook
+refuses the commit if it is missing rather than letting a 10MB camera original into
+history; `git commit --no-verify` bypasses it.
 
 Targets are ~3x the CSS display size, so images stay sharp on retina screens:
 
 | Directory | Max long edge | Format | Displayed at |
 |---|---|---|---|
-| `data/gallery/photos/` | 2560px | JPEG q82 | click-through full view |
-| `data/gallery/thumbs/` (generated) | 600px square | JPEG q80 | 112–180px grid tiles |
-| `static/lab_photo/` | 1600px | JPEG q85 | ≤800px hero |
-| `data/members/photos/` | 512px | JPEG q85 | 140px avatar |
-| `static/research_focus/` | 500px | keep (PNG stays PNG — line art) | ~124px card |
-| `static/logo/` | untouched | — | logos must stay crisp |
+| `stories/` | 2560px | JPEG q82 | click-through full view |
+| `stories/thumbs/` | 600px square | JPEG q80 | 112–180px grid tiles |
+| `lab_photo/` | 1600px | JPEG q85 | ≤800px hero |
+| `group_profile/` | 512px | JPEG q85 | 140px avatar |
+| `research_focus/` | 500px | keep (PNG stays PNG — line art) | 165px card |
+| `logo/` | untouched | — | logos must stay crisp |
 
 Processed files carry a `log-opt-v1` marker in their image comment, so re-running is
 safe — already-optimized files are skipped, never re-compressed. To force a full
 re-pass after changing the rules, bump `MARKER` in `tools/optimize-images.sh`.
 
 Gallery photos are stored as lowercase `.jpg`; the optimizer normalizes `.png`/`.jpeg`/
-`.JPG` and rewrites the reference in the data file for you.
+`.JPG` and rewrites the HTML reference for you.
 
-**Scratch files**: `static/index_v1.html` is a redirect kept for old links — do not modify unless explicitly asked.
+**Scratch files** (not published pages, do not modify unless explicitly asked): `index_v1.html`, `design_demo.html`, `font_compare.html`
 
 ## Layout Tokens (read this before changing any spacing)
 
-`layout/partials/chassis.css` holds the `:root` block of CSS custom properties,
-shared by every page. **This block is the single source of truth for spacing** — all chassis
+Every page opens its `<style>` block with an identical `:root` block of CSS custom
+properties. **This block is the single source of truth for spacing** — all chassis
 rules (`.inner`, `header`, `.lab-name`, `nav`, `footer`, section headings, body text)
 reference it via `var(...)` instead of literal pixel values.
 
@@ -188,7 +121,8 @@ reference it via `var(...)` instead of literal pixel values.
 | `--rule-color` | `#e2e6f0` | header/footer hairlines |
 
 **Rules for editing:**
-- To change spacing site-wide, edit the token value in `layout/partials/chassis.css`.
+- To change spacing site-wide, edit the token value — in **all 8 pages**, since the
+  block is duplicated per page. The blocks must stay byte-identical.
 - Never reintroduce a literal `px` for anything a token already covers.
 - The `@media (max-width: 900px)` block **redefines tokens on `:root`** rather than
   re-declaring `.inner` / `header` / `.footer-logos img`. Add responsive spacing the
@@ -214,13 +148,12 @@ reference it via `var(...)` instead of literal pixel values.
 When adding or modifying any page, verify all of the following:
 
 ### Consistency
-- [ ] Navigation comes from `_config.yml` (`nav`) via `layout/base.html` — never hand-write nav in a page
+- [ ] Navigation links are identical across all pages, with the correct `active` class on the current page
 - [ ] Drawer nav has both `nav a.active` and `.nav-drawer a.active` styling
 - [ ] Lab name / logo links back to `index.html` on all inner pages
 - [ ] Favicon (`logo/log_logo.png`) is referenced in `<head>`
 - [ ] Google Fonts `<link>` for EB Garamond + Inter is present
-- [ ] Page `<title>` follows the pattern `Page Name | Lee Optimization Group` (set by `{% block title %}`)
-- [ ] `python3 tools/build.py --check` passes, and the built page was checked in a browser (`--serve`)
+- [ ] Page `<title>` follows the pattern `Page Name | Lee Optimization Group`
 
 ### Style
 - [ ] No inline styles that override the established color palette
@@ -231,7 +164,7 @@ When adding or modifying any page, verify all of the following:
 - [ ] **Lab name font size is fixed at `2.8em`** — do not use `clamp()` with a viewport unit for `.lab-name`, and do not override it in media queries
 - [ ] **Body text uses the tokens** — `p`, `.intro`, `.news-content`, list items and equivalent paragraph elements must use `font-size: var(--text-body)` and `line-height: var(--leading-body)`, never literal values
 - [ ] **Spacing uses the tokens** — no literal `px` for page padding, header/footer offsets, section-heading margins, or paragraph gaps; see the Layout Tokens section
-- [ ] **Shared CSS stays in `layout/partials/`** — never copy a shared rule into a page template
+- [ ] **The `:root` token block is identical in all 8 pages** — after editing one, propagate it verbatim to the rest
 - [ ] **Logo card containers use `flex-wrap: wrap`** so logos reflow to multiple rows on narrow screens instead of shrinking — do not set `flex-wrap: nowrap` or force images to scale down inside logo cards (`.sponsor-logos`, `.collab-logos`)
 - [ ] **Members grid keeps fixed avatar size** — member photos must not shrink on small screens; reduce the number of columns instead (`4 → 3 → 2 → 1`) and keep visible spacing between cards
 - [ ] **Gallery page uses dynamic grid** — `.gallery-grid` should use `repeat(auto-fit, minmax(..., 1fr))` with consistent `gap`, so tile count adapts smoothly to viewport width
@@ -241,13 +174,12 @@ When adding or modifying any page, verify all of the following:
 - [ ] Images have descriptive `alt` text
 - [ ] Large images use `loading="lazy"`
 - [ ] **Images were never hand-resized** — the pre-commit hook handles it; see Images above
-- [ ] **Thumbnails are generated** — `tools/build.py` makes `data/gallery/thumbs/` from the photos; never by hand
-- [ ] **No content in `layout/`** — news, papers, members and photos are entries in `data/`; page text is in `content/`
+- [ ] **No hand-made files in `stories/thumbs/`** — thumbnails are generated from `stories/`
 - [ ] Dates are written consistently: `MMM YYYY` (e.g., `Mar 2025`)
 - [ ] Paper/thesis links use lowercase labels: `[paper]`, `[thesis]`, `[code]`, `[slides]`
 
 ### Code Quality
-- [ ] No JavaScript frameworks or Jekyll plugins — plain HTML/CSS/JS; GitHub's Jekyll only assembles pages, `static/js/site.js` renders data
+- [ ] No JavaScript frameworks or build tools — plain HTML/CSS only
 - [ ] No unused CSS rules left behind after edits
 - [ ] HTML is valid and properly nested
 - [ ] No hardcoded absolute URLs for internal pages (use relative paths)

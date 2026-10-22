@@ -1,9 +1,0 @@
-# Publications settings. Details: README.md.
-
-[groups]
-preprint = "Preprint"   # heading for is_preprint papers (first)
-previous = "Previous"   # heading for is_previous papers (last)
-
-
-[links]
-separator = ""          # between a paper's links; spaced_links = {true} uses a space
