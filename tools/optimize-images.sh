@@ -75,7 +75,7 @@ references_for() {
     case "$1" in
         data/gallery/photos/*)  echo "data/gallery/gallery.yaml" ;;
         data/members/photos/*)  echo "data/members/members.yaml" ;;
-        static/research_focus/*) echo "layout/research.html" ;;
+        static/research_focus/*) echo "content/research.html" ;;
         static/lab_photo/*)     echo "layout/index.html" ;;
     esac
 }

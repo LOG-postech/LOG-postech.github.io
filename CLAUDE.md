@@ -23,16 +23,20 @@ python3 tools/build.py --serve    # build and serve on http://localhost:8000
 |---|---|---|
 | `layout/index.html` | Home — lab intro, recent news | `data/news/` |
 | `layout/news.html` | News list (linked from the home page) | `data/news/` |
-| `layout/research.html` | Research areas (content written in the page, like hiring) | — |
+| `content/research.html` | Research areas | — |
 | `layout/publications.html` | Paper list | `data/publications/` |
 | `layout/group.html` | Members, gallery preview, alumni | `data/members/`, `data/gallery/` |
 | `layout/gallery.html` | Lab photos | `data/gallery/` |
 | `layout/photo.html` | Single-photo viewer (`photo.html?image=stories/…`) | — |
-| `layout/hiring.html` | Open positions | — |
-| `layout/contact.html` | Contact info | — |
+| `content/hiring.html` | Open positions | — |
+| `content/contact.html` | Contact info | — |
 
-Every page extends `layout/base.html`, which holds the head, header/nav, footer
-and mobile drawer. Nav items, footer logos and the lab name come from `data/site.toml`.
+Pages built from data have their own layout in `layout/`. Pages that are just text
+(`content/*.html`) are plain HTML for inside `<main>` — no template code — wrapped by
+`layout/page.html`; their CSS is `layout/styles/<page>.css` and any extra script
+`layout/scripts/<page>.js` (after the shared `layout/scripts/drawer.js`). Their title
+is their nav label in `data/site.toml`. Every page extends `layout/base.html`, which
+holds the head, header/nav, footer and mobile drawer. Nav items, footer logos and the lab name come from `data/site.toml`.
 
 ## Content lives in `data/` — never in templates
 
@@ -106,7 +110,7 @@ unchanged. A visual change that applies site-wide goes in a partial or in
 - `static/lab_photo/` — home page hero photo
 - `data/gallery/photos/` — gallery photos, published at `stories/`
 - `data/members/photos/` — member headshots (filename = person's name slug), published at `group_profile/`
-- `static/research_focus/` — research topic icons, used by `layout/research.html`
+- `static/research_focus/` — research topic icons, used by `content/research.html`
 
 ## Images
 
@@ -225,7 +229,7 @@ When adding or modifying any page, verify all of the following:
 - [ ] Large images use `loading="lazy"`
 - [ ] **Images were never hand-resized** — the pre-commit hook handles it; see Images above
 - [ ] **No thumbnails committed** — the build generates them from `data/gallery/photos/`
-- [ ] **No list content in templates** — news, papers, members and photos are entries in `data/` (research, hiring and contact are written in their pages)
+- [ ] **No content in `layout/`** — news, papers, members and photos are entries in `data/`; the text of research, hiring and contact is in `content/`
 - [ ] Dates are written consistently: `MMM YYYY` (e.g., `Mar 2025`)
 - [ ] Paper/thesis links use lowercase labels: `[paper]`, `[thesis]`, `[code]`, `[slides]`
 

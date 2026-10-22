@@ -14,10 +14,14 @@ data/                  content — one directory per kind, each with a README
   gallery/             gallery.yaml + photos/  (thumbnails are generated)
   site.toml            lab name, navigation, footer logos
     */config.toml      presentation settings for that kind of content
+content/               text of the pages not built from data, as plain HTML
+  research.html, hiring.html, contact.html
 layout/                page design (Jinja + HTML/CSS)
   base.html            the frame every page shares: head, header, nav, footer
   partials/*.css       CSS shared by every page, incl. the layout tokens
-  <page>.html          one per page: its own CSS, layout and scripts
+  <page>.html          pages built from data/: their own CSS, layout and scripts
+  page.html            the layout content/ pages are inserted into
+  styles/, scripts/    CSS and JS of the content/ pages (<page>.css, <page>.js)
 static/                copied to the site as is (logos, lab photo, research icons)
 tools/build.py         renders data + layout into _site/
 ```
@@ -27,11 +31,12 @@ tools/build.py         renders data + layout into _site/
 | I want to… | Edit |
 |---|---|
 | add news, a paper, a member, a photo | an entry in `data/<kind>/`; its `README.md` explains how |
-| change the research topics, hiring or contact text | `layout/research.html`, `layout/hiring.html`, `layout/contact.html` |
+| change the research topics, hiring or contact text | `content/research.html`, `content/hiring.html`, `content/contact.html` |
+| add a new page of text | a new `content/<page>.html` (and a nav entry in `data/site.toml`) |
 | change how many items show, date format, thumbnail size, … | `data/<kind>/config.toml` |
 | change the nav, footer or lab name everywhere | `data/site.toml` |
 | change the design of every page (spacing, fonts, colours) | `layout/partials/chassis.css` (layout tokens) or `layout/base.html` |
-| change the design of one page | `layout/<page>.html` |
+| change the design of one page | `layout/<page>.html`, or `layout/styles/<page>.css` for a content page |
 
 ## Build and preview locally
 

@@ -1,6 +1,3 @@
-{% extends "base.html" %}
-{% block title %}Contact{% endblock %}
-{% block style_page %}
         a { color: var(--color-primary); text-decoration: none; }
         a:hover { text-decoration: underline; }
 
@@ -43,8 +40,7 @@
             height: 100%;
             border: 0;
         }
-{% endblock %}
-{% block style_after_footer %}
+
         @media (max-width: 900px) {
             :root {
                 --page-pad-top: 28px;
@@ -83,50 +79,3 @@
                 top: 0;
             }
         }
-{% endblock %}
-{% block main %}
-        <div class="contact-layout">
-            <p>
-                <strong class="contact-title">Computational Optimization Lab</strong><br>
-                <br>
-                (Office) RIST 4, Room #4427<br>
-                <br>
-                Department of Computer Science and Engineering<br>
-                Pohang University of Science and Technology (POSTECH)<br>
-                67 Cheongam-ro, Nam-gu, Pohang-si, Gyeongsangbuk-do (37673)<br>
-                South Korea
-            </p>
-
-            <div class="contact-map">
-                <iframe
-                    title="Map showing our lab at POSTECH, Pohang"
-                    src="https://maps.google.com/maps?q=RIST%28%ED%8F%AC%ED%95%AD%EC%82%B0%EC%97%85%EA%B3%BC%ED%95%99%EC%97%B0%EA%B5%AC%EC%9B%90%29+4%EC%97%B0%EA%B5%AC%EB%8F%99&amp;z=13&amp;output=embed"
-                    loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade"
-                    allowfullscreen></iframe>
-            </div>
-        </div>
-    
-{% endblock %}
-{% block scripts %}
-<script>
-    var toggle = document.querySelector('.menu-toggle');
-    var drawer = document.getElementById('navDrawer');
-    var overlay = document.getElementById('navOverlay');
-    var close = document.getElementById('drawerClose');
-
-    function openDrawer() {
-        drawer.classList.add('open');
-        overlay.classList.add('open');
-    }
-
-    function closeDrawer() {
-        drawer.classList.remove('open');
-        overlay.classList.remove('open');
-    }
-
-    toggle.addEventListener('click', function() { drawer.classList.contains('open') ? closeDrawer() : openDrawer(); });
-    close.addEventListener('click', closeDrawer);
-    overlay.addEventListener('click', closeDrawer);
-</script>
-{% endblock %}

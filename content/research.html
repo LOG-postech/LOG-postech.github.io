@@ -1,0 +1,107 @@
+        <h2>Research Focus</h2>
+        <div class="section">
+            <img src="research_focus/opt-compression.png" alt="Model Compression">
+            <div class="section-text">
+                <p>
+                    <span class="red">Model Compression</span>
+                    As AI models become larger and more computationally demanding, compression is essential for making them practical and sustainable.
+                    We develop optimization methods that reduce training and inference costs while preserving model performance.
+                    Our work focuses on extreme compression across the AI model lifecycle.
+                    <button class="fold-trigger" type="button" aria-expanded="false" aria-controls="compressionDetail">
+                        <span class="fold-label">more</span><span class="fold-caret" aria-hidden="true">🔍</span>
+                    </button>
+                </p>
+                <div class="fold-detail" id="compressionDetail">
+                    <div class="fold-item">
+                        <span class="fold-item-title">Extreme Sparsity <span class="paper-tag">(EMNLP '26, <a href="https://arxiv.org/abs/2510.01650" target="_blank">ICLR '26</a>, <a href="https://arxiv.org/abs/2506.06866" target="_blank">ICML '25 Spotlight</a>, <a href="https://arxiv.org/abs/2406.15524" target="_blank">EMNLP '24</a>)</span></span>
+                        We push the limits of LLM sparsity through advanced optimization frameworks such as ADMM, aiming for robust generalization even at extreme compression levels.
+                    </div>
+                    <div class="fold-item">
+                        <span class="fold-item-title">Joint Compression</span>
+                        We develop unified frameworks that integrate pruning, quantization, and distillation to reduce error accumulation and preserve core model capabilities, including reasoning, in highly compressed states.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <img class="icon-round" src="research_focus/opt-distributed.png" alt="Distributed Training">
+            <div class="section-text">
+                <p>
+                    <span class="green">Distributed Training</span>
+                    The shift toward massive-scale models has made distributed training essential for workloads that no single machine can support.
+                    From an optimization perspective, the key challenge is maintaining efficiency while managing the overhead of communication between devices.
+                    Our research develops robust algorithms for decentralized and high-latency training environments.
+                    <button class="fold-trigger" type="button" aria-expanded="false" aria-controls="distributedDetail">
+                        <span class="fold-label">more</span><span class="fold-caret" aria-hidden="true">🔍</span>
+                    </button>
+                </p>
+                <div class="fold-detail" id="distributedDetail">
+                    <div class="fold-item">
+                        <span class="fold-item-title">Communication-Efficient Training <span class="paper-tag">(<a href="https://arxiv.org/abs/2602.18181" target="_blank">NeurIPS '26 WS</a>)</span></span>
+                        We design methods that reduce the heavy data-sharing requirements of distributed training through information compression, reduced synchronization, and zeroth-order optimization.
+                    </div>
+                    <div class="fold-item">
+                        <span class="fold-item-title">Asynchronous Training <span class="paper-tag">(NeurIPS '26, <a href="https://arxiv.org/abs/2602.03515" target="_blank">ICML '26</a>)</span></span>
+                        We create algorithms that allow devices to work independently and reduce waiting time, with a focus on correcting errors caused by slightly outdated information.
+                    </div>
+                    <div class="fold-item">
+                        <span class="fold-item-title">Device-Heterogeneous Training</span>
+                        We develop adaptive strategies for imbalanced computational resources across devices, aiming for consistent global convergence despite variations in hardware performance.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Deep Learning Applications: hidden for now
+        <div class="section">
+            <img src="research_focus/opt-applications.png" alt="Deep Learning Applications">
+            <div class="section-text">
+                <p>
+                    <span class="blue">Deep Learning Applications</span>
+                    Optimization is not only a subject of study in itself, but also a versatile lens through which we tackle challenges in interpretability, uncertainty quantification, continual learning, and other real-world deep learning systems.
+                    Our research explores how optimization principles can be extended and applied to address such challenges.
+                    <button class="fold-trigger" type="button" aria-expanded="false" aria-controls="applicationsDetail">
+                        <span class="fold-label">more</span><span class="fold-caret" aria-hidden="true">🔍</span>
+                    </button>
+                </p>
+                <div class="fold-detail" id="applicationsDetail">
+                    <div class="fold-item">
+                        <span class="fold-item-title">Trustworthy Machine Learning <span class="paper-tag">(ECCV '26, ACL '26 Oral, <a href="https://arxiv.org/abs/2505.16705" target="_blank">NeurIPS '25</a>, <a href="https://arxiv.org/abs/2302.14260" target="_blank">ICML '23</a>)</span></span>
+                        We bridge complex model architectures and human understanding, from uncovering model logic in realistic scenarios to evaluating the reliability of model outputs.
+                    </div>
+                    <div class="fold-item">
+                        <span class="fold-item-title">Continual Adaptation <span class="paper-tag">(<a href="https://arxiv.org/abs/2510.25798" target="_blank">NeurIPS '25</a>)</span></span>
+                        We study constrained optimization problems where models adapt to new knowledge without disrupting what has already been learned, opening principled approaches to continual learning.
+                    </div>
+                </div>
+            </div>
+        </div>
+        -->
+
+        <div class="section">
+            <img class="icon-round" src="research_focus/opt-deep.png" alt="Advanced Optimization">
+            <div class="section-text">
+                <p>
+                    <span class="orange">Advanced Optimization</span>
+                    Optimization has long been a source of crucial ideas that drastically enhance all corners of deep neural network training, and many of its most impactful questions remain open.
+                    Our research investigates these questions and develops optimization principles and algorithms for modern deep learning systems.
+                    <button class="fold-trigger" type="button" aria-expanded="false" aria-controls="optimizationDetail">
+                        <span class="fold-label">more</span><span class="fold-caret" aria-hidden="true">🔍</span>
+                    </button>
+                </p>
+                <div class="fold-detail" id="optimizationDetail">
+                    <div class="fold-item">
+                        <span class="fold-item-title">Optimization for Generalization <span class="paper-tag">(<a href="https://arxiv.org/abs/2311.17539" target="_blank">UAI '25</a>, <a href="https://arxiv.org/abs/2502.18153" target="_blank">ICML '25</a>)</span></span>
+                        We study the role of loss landscape curvature in generalization and develop flatness-oriented optimization strategies with both theoretical advantages and scalability for modern deep neural networks.
+                    </div>
+                    <div class="fold-item">
+                        <span class="fold-item-title">Zeroth-Order Optimization for Black-Box Model Training <span class="paper-tag">(<a href="https://arxiv.org/abs/2504.06838" target="_blank">ICLR '25</a>)</span></span>
+                        We develop methods that operate without direct gradient access, motivated by settings such as proprietary model APIs and decentralized learning systems where gradients are unavailable.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    

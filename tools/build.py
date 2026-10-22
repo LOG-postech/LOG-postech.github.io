@@ -7,7 +7,8 @@
 
 Content lives in data/<database>/ — one directory per kind of content, each with
 its entries, a config.toml for presentation settings, and a README.md on how to
-add an entry. Pages are Jinja templates in layout/. Files in static/ are
+add an entry. Pages are Jinja templates in layout/; the text of pages that are
+not built from data (research, hiring, contact) is plain HTML in content/. Files in static/ are
 copied to the site root unchanged.
 
 Images are copied byte-for-byte. The only generated images are gallery
@@ -33,10 +34,13 @@ from markupsafe import Markup, escape
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
 LAYOUT_DIR = ROOT / "layout"
+CONTENT = ROOT / "content"
 STATIC = ROOT / "static"
 OUT = ROOT / "_site"
 
-PAGES = ["index", "news", "research", "publications", "group", "gallery", "photo", "hiring", "contact"]
+# Pages built from data/ by their own layout. Every content/<page>.html is a
+# page too, wrapped by layout/page.html.
+PAGES = ["index", "news", "publications", "group", "gallery", "photo"]
 
 # Where each database's files are published. These paths are part of the site's
 # public URLs (photo.html?image=stories/...), so they stay as they always were.
@@ -634,6 +638,22 @@ def build(check_only=False):
         html = env.get_template(page + ".html").render(page=page, **site)
         (OUT / (page + ".html")).write_text(html, encoding="utf-8")
 
+    # content/<page>.html: plain HTML for inside <main>, in the shared frame.
+    # The title is the page's nav label (or its file name).
+    labels = {item["page"]: item["label"] for item in site_cfg["nav"]}
+    content_pages = sorted(CONTENT.glob("*.html"))
+    for path in content_pages:
+        page = path.stem
+        if page in PAGES:
+            raise SystemExit("content/%s.html clashes with layout/%s.html" % (page, page))
+        html = env.get_template("page.html").render(
+            page=page,
+            title=labels.get(page, page.capitalize()),
+            content=Markup(path.read_text(encoding="utf-8").strip("\n")),
+            **site,
+        )
+        (OUT / (page + ".html")).write_text(html, encoding="utf-8")
+
     copy_tree(STATIC, OUT)
     for src, dest in PUBLISH.items():
         copy_tree(src, OUT / dest)
@@ -641,7 +661,7 @@ def build(check_only=False):
     thumbs.mkdir(parents=True, exist_ok=True)
     for p in site["gallery"]["photos"]:
         thumbnail(DATA / "gallery" / "photos" / p["file"], OUT / p["thumb"], site["gallery"]["config"]["thumbnail"])
-    print("Built %d pages into %s" % (len(PAGES), OUT.relative_to(ROOT)))
+    print("Built %d pages into %s" % (len(PAGES) + len(content_pages), OUT.relative_to(ROOT)))
     return 0
 
 
