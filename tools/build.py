@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the site: read data/, render templates/, write _site/.
+"""Build the site: read data/, render pages/, write _site/.
 
   tools/build.py            build into _site/
   tools/build.py --check    validate data/ only, write nothing (exit 1 on errors)
@@ -7,7 +7,7 @@
 
 Content lives in data/<database>/ — one directory per kind of content, each with
 its entries, a config.toml for presentation settings, and a README.md on how to
-add an entry. Pages are Jinja templates in templates/. Files in static/ are
+add an entry. Pages are Jinja templates in pages/. Files in static/ are
 copied to the site root unchanged.
 
 Images are copied byte-for-byte. The only generated images are gallery
@@ -32,7 +32,7 @@ from markupsafe import Markup, escape
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
-TEMPLATES = ROOT / "templates"
+PAGES_DIR = ROOT / "pages"
 STATIC = ROOT / "static"
 OUT = ROOT / "_site"
 
@@ -588,7 +588,7 @@ def build(check_only=False):
         return 0
 
     env = Environment(
-        loader=FileSystemLoader(TEMPLATES),
+        loader=FileSystemLoader(PAGES_DIR),
         autoescape=True,
         undefined=StrictUndefined,
         keep_trailing_newline=True,

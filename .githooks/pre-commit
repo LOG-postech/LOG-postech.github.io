@@ -53,7 +53,7 @@ fi
 
 # Files that name images. Remember their state so we stage only the ones the
 # optimizer rewrites (when an image changes extension), not unrelated edits.
-REFS="data/gallery/gallery.yaml data/members/members.yaml data/research/topics.yaml templates/index.html"
+REFS="data/gallery/gallery.yaml data/members/members.yaml data/research/topics.yaml pages/index.html"
 BEFORE="$(for f in $REFS; do [ -f "$f" ] && echo "$f $(git hash-object "$f")"; done)"
 
 echo "pre-commit: optimizing ${#STAGED[@]} image(s)..."

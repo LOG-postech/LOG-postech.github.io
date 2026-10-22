@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Academic lab website for the **Lee Optimization Group (LOG)** at POSTECH, served by
 GitHub Pages at `opt.postech.ac.kr`. **Content and design are separate**: content is
-data in `data/`, design is Jinja templates in `templates/`, and `tools/build.py`
+data in `data/`, design is Jinja templates in `pages/`, and `tools/build.py`
 renders them into `_site/`. `.github/workflows/deploy.yml` builds and deploys on every
 push to `main` (Pages source must be "GitHub Actions"). `_site/` is output — never edit
 it, never commit it. The root `README.md` maps every kind of edit to its file.
@@ -21,17 +21,17 @@ python3 tools/build.py --serve    # build and serve on http://localhost:8000
 
 | Template | Purpose | Data |
 |---|---|---|
-| `templates/index.html` | Home — lab intro, recent news | `data/news/` |
-| `templates/news.html` | News list (linked from the home page) | `data/news/` |
-| `templates/research.html` | Research areas | `data/research/` |
-| `templates/publications.html` | Paper list | `data/publications/` |
-| `templates/group.html` | Members, gallery preview, alumni | `data/members/`, `data/gallery/` |
-| `templates/gallery.html` | Lab photos | `data/gallery/` |
-| `templates/photo.html` | Single-photo viewer (`photo.html?image=stories/…`) | — |
-| `templates/hiring.html` | Open positions | — |
-| `templates/contact.html` | Contact info | — |
+| `pages/index.html` | Home — lab intro, recent news | `data/news/` |
+| `pages/news.html` | News list (linked from the home page) | `data/news/` |
+| `pages/research.html` | Research areas | `data/research/` |
+| `pages/publications.html` | Paper list | `data/publications/` |
+| `pages/group.html` | Members, gallery preview, alumni | `data/members/`, `data/gallery/` |
+| `pages/gallery.html` | Lab photos | `data/gallery/` |
+| `pages/photo.html` | Single-photo viewer (`photo.html?image=stories/…`) | — |
+| `pages/hiring.html` | Open positions | — |
+| `pages/contact.html` | Contact info | — |
 
-Every page extends `templates/base.html`, which holds the head, header/nav, footer
+Every page extends `pages/base.html`, which holds the head, header/nav, footer
 and mobile drawer. Nav items, footer logos and the lab name come from `data/site.toml`.
 
 ## Content lives in `data/` — never in templates
@@ -91,11 +91,11 @@ ids at load time.
 
 **CSS** is inline in each page's `<style>`, assembled by `base.html` from:
 
-1. `templates/partials/chassis.css` — reset, **layout tokens** (`:root`), body, header, nav
+1. `pages/partials/chassis.css` — reset, **layout tokens** (`:root`), body, header, nav
 2. the page's `{% block style_page %}`
-3. `templates/partials/footer.css` — footer, footer logos, menu button
+3. `pages/partials/footer.css` — footer, footer logos, menu button
 4. the page's `{% block style_after_footer %}` (holds the page's `@media (max-width: 900px)`)
-5. `templates/partials/drawer.css` — mobile drawer
+5. `pages/partials/drawer.css` — mobile drawer
 6. the page's `{% block style_after_drawer %}`
 
 This order is the order the pages always had their rules in, so cascade behaviour is
@@ -151,7 +151,7 @@ Gallery photos are stored as lowercase `.jpg`; the optimizer normalizes `.png`/`
 
 ## Layout Tokens (read this before changing any spacing)
 
-`templates/partials/chassis.css` holds the `:root` block of CSS custom properties,
+`pages/partials/chassis.css` holds the `:root` block of CSS custom properties,
 shared by every page. **This block is the single source of truth for spacing** — all chassis
 rules (`.inner`, `header`, `.lab-name`, `nav`, `footer`, section headings, body text)
 reference it via `var(...)` instead of literal pixel values.
@@ -172,7 +172,7 @@ reference it via `var(...)` instead of literal pixel values.
 | `--rule-color` | `#e2e6f0` | header/footer hairlines |
 
 **Rules for editing:**
-- To change spacing site-wide, edit the token value in `templates/partials/chassis.css`.
+- To change spacing site-wide, edit the token value in `pages/partials/chassis.css`.
 - Never reintroduce a literal `px` for anything a token already covers.
 - The `@media (max-width: 900px)` block **redefines tokens on `:root`** rather than
   re-declaring `.inner` / `header` / `.footer-logos img`. Add responsive spacing the
@@ -215,7 +215,7 @@ When adding or modifying any page, verify all of the following:
 - [ ] **Lab name font size is fixed at `2.8em`** — do not use `clamp()` with a viewport unit for `.lab-name`, and do not override it in media queries
 - [ ] **Body text uses the tokens** — `p`, `.intro`, `.news-content`, list items and equivalent paragraph elements must use `font-size: var(--text-body)` and `line-height: var(--leading-body)`, never literal values
 - [ ] **Spacing uses the tokens** — no literal `px` for page padding, header/footer offsets, section-heading margins, or paragraph gaps; see the Layout Tokens section
-- [ ] **Shared CSS stays in `templates/partials/`** — never copy a shared rule into a page template
+- [ ] **Shared CSS stays in `pages/partials/`** — never copy a shared rule into a page template
 - [ ] **Logo card containers use `flex-wrap: wrap`** so logos reflow to multiple rows on narrow screens instead of shrinking — do not set `flex-wrap: nowrap` or force images to scale down inside logo cards (`.sponsor-logos`, `.collab-logos`)
 - [ ] **Members grid keeps fixed avatar size** — member photos must not shrink on small screens; reduce the number of columns instead (`4 → 3 → 2 → 1`) and keep visible spacing between cards
 - [ ] **Gallery page uses dynamic grid** — `.gallery-grid` should use `repeat(auto-fit, minmax(..., 1fr))` with consistent `gap`, so tile count adapts smoothly to viewport width

@@ -76,7 +76,7 @@ references_for() {
         data/gallery/photos/*)  echo "data/gallery/gallery.yaml" ;;
         data/members/photos/*)  echo "data/members/members.yaml" ;;
         data/research/icons/*)  echo "data/research/topics.yaml" ;;
-        static/lab_photo/*)     echo "templates/index.html" ;;
+        static/lab_photo/*)     echo "pages/index.html" ;;
     esac
 }
 
