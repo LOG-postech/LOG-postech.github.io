@@ -215,8 +215,10 @@ def author_list(field, people, where):
 
 NEWS_KEYS = {"idx", "date", "paper", "text"}
 NEWS_DATE = re.compile(r"^(\d{4})-(\d{2})(?:-(\d{2}))?$")
-# A Markdown link whose target is a bare word is a paper key: [paper](shin23closer).
-PAPER_LINK = re.compile(r"\]\(([a-z][a-z0-9_]*)\)")
+# A Markdown link to a paper by its papers.bib key: [paper](@shin23closer).
+PAPER_LINK = re.compile(r"\]\(@([a-z][a-z0-9_]*)\)")
+# A link target that is a bare word is a key missing its @.
+BARE_LINK = re.compile(r"\]\(([a-z][a-z0-9_]*)\)")
 
 
 def load_news(papers_by_key, people):
@@ -262,8 +264,14 @@ def load_news(papers_by_key, people):
             front = item
             # Papers: named in front matter (paper: key), or linked in the text as
             # [paper](key), which links to the paper's own `paper` URL.
-            keys = front.get("paper") or []
-            keys = [str(k) for k in ([keys] if isinstance(keys, str) else keys)]
+            keys = []
+            listed = front.get("paper") or []
+            for k in [listed] if isinstance(listed, str) else listed:
+                if not str(k).startswith("@"):
+                    fail('%s: paper keys start with @, in quotes: paper: "@%s"' % (where, k))
+                keys.append(str(k).lstrip("@"))
+            for m in BARE_LINK.finditer(body):
+                fail("%s: link target %r: write a paper key as (@%s)" % (where, m.group(1), m.group(1)))
 
             def link_paper(m):
                 key = m.group(1)

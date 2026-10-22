@@ -22,7 +22,7 @@ blank line between items:
 | `idx` | yes | The highest `idx` in any year + 1. Sets the order: higher is newer. Never reuse one. |
 | `date` | yes | `"YYYY-MM"`, or `"YYYY-MM-DD"` if you know the day, in quotes. Shown as `Oct 2026`. Must be in the file's year. |
 | `text` | yes | One paragraph of Markdown, after `>-` on the next lines, indented. Line breaks inside it are just spaces. |
-| `paper` | no | Key(s) of papers the item is about but does not link (see below). |
+| `paper` | no | `"@key"` (in quotes) of papers the item is about but does not link (see below). |
 
 Start `text` with the emoji for the item's kind:
 
@@ -35,7 +35,7 @@ Start `text` with the emoji for the item's kind:
 | ✈️ | visit, research stay |
 | 🏛 | workshop or event we organize |
 
-Links use Markdown: `[text](https://...)`, or `[text](paperkey)` for a paper.
+Links use Markdown: `[text](https://...)`, or `[text](@paperkey)` for a paper.
 External links open in a new tab automatically. Use `*italic*` and `**bold**` if
 needed. The top of each year file lists every field as a template.
 
@@ -59,12 +59,12 @@ shows their first name (or their `short` name), with their face under the date:
 → "Hyunji, Hyeondo, and Jinseok have been selected for …"
 
 For news about a paper, refer to it by its key in `data/publications/papers.bib`.
-Its in-lab authors get faces too. To link to it, use the key as the link target;
+Its in-lab authors get faces too. To link to it, use `@key` as the link target;
 the build fills in the paper's `paper` URL from papers.bib:
 
 ```yaml
   text: >-
-    🎓 Our [paper](shin23closer) on concept bottleneck models has been accepted to ICML 2023.
+    🎓 Our [paper](@shin23closer) on concept bottleneck models has been accepted to ICML 2023.
 ```
 
 For a paper mentioned without a link (no `paper` URL yet), name it in `paper`:
@@ -72,7 +72,7 @@ For a paper mentioned without a link (no `paper` URL yet), name it in `paper`:
 ```yaml
 - idx: 34
   date: "2026-09"
-  paper: lee26fresco                  # or a list: [lee26fresco, jang26hidden]
+  paper: "@lee26fresco"               # or a list: ["@lee26fresco", "@jang26hidden"]
   text: >-
     🎓 Our paper on asynchronous pipeline parallelism has been accepted to NeurIPS 2026.
 ```

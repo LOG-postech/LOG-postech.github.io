@@ -20,7 +20,7 @@ Add an entry where it should appear:
 ```
 
 The key (`jang26hidden`) is first author's last name + 2-digit year + first title
-word. News items refer to the paper by it (`paper: jang26hidden`), so keep it once
+word. News items refer to the paper by it as `@jang26hidden`, so keep it once
 chosen.
 
 | Field | Kind | Meaning |

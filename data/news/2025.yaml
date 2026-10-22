@@ -4,11 +4,11 @@
 #
 # - idx: 39                   # required. Unique across all years; higher = newer (sets the order)
 #   date: "2025-10"           # required. "YYYY-MM" or "YYYY-MM-DD", within this file's year
-#   paper: lee26fresco        # optional. papers.bib key(s) the item is about but does not link:
-#                             #   lee26fresco  or  [lee26fresco, jang26hidden]
+#   paper: "@lee26fresco"     # optional. papers.bib key(s) the item is about but does not link:
+#                             #   "@lee26fresco"  or  ["@lee26fresco", "@jang26hidden"]
 #   text: >-                  # required. One paragraph of Markdown, starting with its emoji:
-#     🎓 Our [paper](shin23closer) ... @hyunjijung ...
-#                             #   [text](paperkey) links a paper, [text](https://...) any page,
+#     🎓 Our [paper](@shin23closer) ... @hyunjijung ...
+#                             #   [text](@paperkey) links a paper, [text](https://...) any page,
 #                             #   @tag names a lab member (data/members/members.yaml)
 
 - idx: 16
@@ -20,7 +20,7 @@
 - idx: 15
   date: "2025-11"
   text: >-
-    🏆 Our [paper](lee26unseen) on extreme LLM sparsity (ELSA) received the Best Paper
+    🏆 Our [paper](@lee26unseen) on extreme LLM sparsity (ELSA) received the Best Paper
     Award at JKAIA 2025.
 
 - idx: 14
@@ -31,8 +31,8 @@
 - idx: 13
   date: "2025-09"
   text: >-
-    🎓 We have 2 papers ([MemEIC](seong25memeic) and [An Analysis of Concept Bottleneck
-    Models](park25analysis)) accepted to NeurIPS 2025.
+    🎓 We have 2 papers ([MemEIC](@seong25memeic) and [An Analysis of Concept Bottleneck
+    Models](@park25analysis)) accepted to NeurIPS 2025.
 
 - idx: 12
   date: "2025-08"
@@ -50,20 +50,20 @@
 - idx: 10
   date: "2025-05"
   text: >-
-    🎓 Our [paper](shin25critical) on overparameterization on SAM has been accepted to
+    🎓 Our [paper](@shin25critical) on overparameterization on SAM has been accepted to
     UAI 2025.
 
 - idx: 9
   date: "2025-05"
   text: >-
-    🎓 Our works on second-order optimization ([SASSHA](shin25sassha)) and pruning
-    ([SAFE](lee25safe)) have been accepted to ICML 2025. SAFE is also selected as a
+    🎓 Our works on second-order optimization ([SASSHA](@shin25sassha)) and pruning
+    ([SAFE](@lee25safe)) have been accepted to ICML 2025. SAFE is also selected as a
     spotlight poster.
 
 - idx: 8
   date: "2025-05"
   text: >-
-    🎓 Our [paper](park25zip) on zeroth-order prompt tuning for black-box VLM (ZIP) has
+    🎓 Our [paper](@park25zip) on zeroth-order prompt tuning for black-box VLM (ZIP) has
     been accepted to ICLR 2025.
 
 - idx: 7

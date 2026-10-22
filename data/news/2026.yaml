@@ -4,17 +4,17 @@
 #
 # - idx: 39                   # required. Unique across all years; higher = newer (sets the order)
 #   date: "2026-10"           # required. "YYYY-MM" or "YYYY-MM-DD", within this file's year
-#   paper: lee26fresco        # optional. papers.bib key(s) the item is about but does not link:
-#                             #   lee26fresco  or  [lee26fresco, jang26hidden]
+#   paper: "@lee26fresco"     # optional. papers.bib key(s) the item is about but does not link:
+#                             #   "@lee26fresco"  or  ["@lee26fresco", "@jang26hidden"]
 #   text: >-                  # required. One paragraph of Markdown, starting with its emoji:
-#     🎓 Our [paper](shin23closer) ... @hyunjijung ...
-#                             #   [text](paperkey) links a paper, [text](https://...) any page,
+#     🎓 Our [paper](@shin23closer) ... @hyunjijung ...
+#                             #   [text](@paperkey) links a paper, [text](https://...) any page,
 #                             #   @tag names a lab member (data/members/members.yaml)
 
 - idx: 38
   date: "2026-10"
   text: >-
-    🎓 Our [preprint](kim26seedflood) on decentralized LLM training, SeedFlood, has
+    🎓 Our [preprint](@kim26seedflood) on decentralized LLM training, SeedFlood, has
     received a major update, with substantial improvements to its overall presentation,
     analysis, and experimental evaluation.
 
@@ -27,7 +27,7 @@
 - idx: 36
   date: "2026-10"
   text: >-
-    🎓 Our [paper](lee26hardware) on hardware-native sparse-quantization for
+    🎓 Our [paper](@lee26hardware) on hardware-native sparse-quantization for
     trillion-scale MoEs is out on arXiv. In this work, we introduce MoESQ, which jointly
     learns semi-structured sparsity and low-precision quantization for MoE experts and
     executes them on Sparse Tensor Cores with a custom grouped sparse GEMM kernel. The
@@ -38,7 +38,7 @@
 - idx: 35
   date: "2026-09"
   text: >-
-    🎓 Our [paper](kim26seedflood) on decentralized training has been accepted to NeurIPS
+    🎓 Our [paper](@kim26seedflood) on decentralized training has been accepted to NeurIPS
     2026 Workshop on Collaborative, Open, and Decentralized Training of Foundation
     Models, selected as an oral presentation. In this work, we introduce a novel
     decentralized LLM fine-tuning framework that achieves extreme communiation
@@ -46,7 +46,7 @@
 
 - idx: 34
   date: "2026-09"
-  paper: lee26fresco
+  paper: "@lee26fresco"
   text: >-
     🎓 Our paper on asynchronous pipeline parallelism has been accepted to NeurIPS 2026.
     In this work, we introduce FRESCO, a new principle for consistency control in
@@ -74,14 +74,14 @@
 - idx: 30
   date: "2026-08"
   text: >-
-    🎓 Our [paper](jang26hidden) on extreme LLM sparsity has been accepted to EMNLP 2026.
+    🎓 Our [paper](@jang26hidden) on extreme LLM sparsity has been accepted to EMNLP 2026.
     In this work, we show that carefully handling the elementary components of pruning
     can already substantially outperform existing pruning methods, even at extreme
     sparsity.
 
 - idx: 29
   date: "2026-08"
-  paper: jeong26advancing
+  paper: "@jeong26advancing"
   text: >-
     🎓 Our paper on semiconductor anomaly detection has been accepted to BMVC 2026. In
     this work, we introduce a semiconductor defect dataset (OASIS) along with
@@ -102,7 +102,7 @@
 
 - idx: 26
   date: "2026-07"
-  paper: jang26hidden
+  paper: "@jang26hidden"
   text: >-
     🏆 Our new paper on extreme LLM sparsity has received the Best Paper Award at CKAIA
     2026. The preprint will be available on arXiv soon.
@@ -122,7 +122,7 @@
 - idx: 23
   date: "2026-06"
   text: >-
-    🎓 Our [paper](park26exploiting) on flatness-based out-of-distribution detection has
+    🎓 Our [paper](@park26exploiting) on flatness-based out-of-distribution detection has
     been accepted to ECCV 2026. In this work, we propose FOLD, a lightweight detector
     that leverages feature-Hessian curvature and partial feature normalization to
     improve ID-OOD separability.
@@ -130,7 +130,7 @@
 - idx: 22
   date: "2026-05"
   text: >-
-    🏆 Our [paper](chung26quantifying) on uncertainty quantification in ICL, accepted to
+    🏆 Our [paper](@chung26quantifying) on uncertainty quantification in ICL, accepted to
     ACL 2026, has been selected as an Oral presentation. In this work, we introduce
     self-function vectors to directly decompose uncertainty, and propose a novel
     framework to evaluate these disentangled sources.
@@ -138,7 +138,7 @@
 - idx: 21
   date: "2026-05"
   text: >-
-    🎓 Our [paper](jung26mitigating) on asynchronous pipeline parallelism has been
+    🎓 Our [paper](@jung26mitigating) on asynchronous pipeline parallelism has been
     accepted to ICML 2026. In this work, we propose a basis rotation approach to
     effectively address the associated gradient staleness problem.
 
@@ -166,5 +166,5 @@
 - idx: 17
   date: "2026-01"
   text: >-
-    🎓 Our [paper](lee26unseen) on extreme LLM sparsity (ELSA) has been accepted to ICLR
+    🎓 Our [paper](@lee26unseen) on extreme LLM sparsity (ELSA) has been accepted to ICLR
     2026.
