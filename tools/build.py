@@ -307,7 +307,10 @@ def copy_tree(src, dest):
 
 
 def build(check_only=False):
+    with (DATA / "site.toml").open("rb") as f:
+        site_cfg = tomllib.load(f)
     site = {
+        "site": site_cfg,
         "news": load_news(),
         "publications": load_publications(),
         "members": load_members(),
@@ -333,7 +336,7 @@ def build(check_only=False):
     )
     OUT.mkdir(exist_ok=True)
     for page in PAGES:
-        html = env.get_template(page + ".html").render(**site)
+        html = env.get_template(page + ".html").render(page=page, **site)
         (OUT / (page + ".html")).write_text(html, encoding="utf-8")
 
     copy_tree(STATIC, OUT)

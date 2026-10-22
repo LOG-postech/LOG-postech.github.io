@@ -1,144 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="logo/log_logo.png" type="image/png">
-    <title>Publications | Lee Optimization Group</title>
-    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <style>
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-        /* ------------------------------------------------------------------
-           Layout tokens — single source of truth for spacing on this page.
-           This block is identical on every page; keep all pages in sync.
-           ------------------------------------------------------------------ */
-        :root {
-            /* page frame */
-            --content-max: 800px;
-            --page-pad-top: clamp(24px, 5vw, 48px);
-            --page-pad-x: clamp(16px, 4vw, 32px);
-            --page-pad-bottom: clamp(36px, 5vw, 60px);
-
-            /* header / nav */
-            --header-pad-bottom: 28px;
-            --header-gap: 40px;
-            --lab-name-gap: 18px;
-            --nav-gap: clamp(10px, 3vw, 24px);
-
-            /* vertical rhythm */
-            --section-gap: 40px;   /* space above a section heading */
-            --heading-gap: 14px;   /* space below a section heading */
-            --para-gap: 14px;      /* space between stacked paragraphs */
-
-            /* footer */
-            --footer-gap: 52px;
-            --footer-pad-top: 20px;
-            --footer-logo-gap: 14px;
-            --footer-logo-h: 28px;
-
-            /* body type */
-            --text-body: 0.93em;
-            --leading-body: 1.85;
-
-            /* rules & lines */
-            --rule-color: #e2e6f0;
-
-            /* colour palette */
-            --color-bg: #ffffff;
-            --color-heading: #111;
-            --color-body: #374151;
-            --color-muted: #6b7280;
-            --color-primary: #1B3A8A;
-            --color-accent: #3B6FD4;
-            --color-emphasis: #d6423a;
-            --color-highlight-bg: #f7f1dc;
-
-            /* surfaces & borders */
-            --img-border: #b8bec8;
-            --control-border: #d3d9e6;
-            --surface-subtle: #f4f6fa;
-            --surface-hover: #e6ecf9;
-
-            /* research area categories */
-            --cat-compression: #d6423a;
-            --cat-distributed: #27ae60;
-            --cat-applications: #2e6bd9;
-            --cat-optimization: #f39c12;
-        }
-
-        html {
-            overflow-y: scroll;
-        }
-
-        body {
-            font-family: 'Inter', system-ui, sans-serif;
-            color: var(--color-heading);
-            background: var(--color-bg);
-            min-height: 100vh;
-        }
-
-        .inner {
-            max-width: var(--content-max);
-            margin: 0 auto;
-            padding: var(--page-pad-top) var(--page-pad-x) var(--page-pad-bottom);
-        }
-
-        header {
-            padding-bottom: var(--header-pad-bottom);
-            margin-bottom: var(--header-gap);
-            border-bottom: 1px solid var(--rule-color);
-        }
-
-        .lab-name {
-            font-family: 'EB Garamond', Georgia, serif;
-            font-size: 2.8em;
-            font-weight: 500;
-            color: var(--color-heading);
-            letter-spacing: 0;
-            line-height: 0.96;
-            display: block;
-            margin-bottom: var(--lab-name-gap);
-            text-decoration: none;
-        }
-
-        .lab-name:hover {
-            text-decoration: none;
-            color: var(--color-heading);
-        }
-
-        nav {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: var(--nav-gap);
-        }
-
-        nav a {
-            text-decoration: none;
-            color: var(--color-muted);
-            font-size: 1em;
-            font-weight: 400;
-            letter-spacing: 0.01em;
-            padding-bottom: 2px;
-            border-bottom: 1.5px dashed transparent;
-            transition: color 0.15s, border-color 0.15s;
-        }
-
-        nav a:hover {
-            color: var(--color-primary);
-            border-bottom: 1.5px solid var(--color-primary);
-            text-decoration: none;
-        }
-
-        nav a.active {
-            color: var(--color-heading);
-            font-weight: 600;
-            border-bottom: 1.5px solid var(--color-heading);
-        }
-        .nav-drawer a.active { color: var(--color-heading); font-weight: 600; }
-
-
+{% extends "base.html" %}
+{% block title %}Publications{% endblock %}
+{% block style_page %}
         a { color: var(--color-primary); text-decoration: none; }
         a:hover { text-decoration: underline; }
 
@@ -232,42 +94,8 @@
         .spotlight {
             color: var(--color-emphasis);
         }
-
-        footer {
-            margin-top: var(--footer-gap);
-            padding-top: var(--footer-pad-top);
-            border-top: 1px solid var(--rule-color);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            font-size: 0.75em;
-            color: var(--color-muted);
-        }
-
-        .footer-logos {
-            display: flex;
-            align-items: center;
-            gap: var(--footer-logo-gap);
-        }
-
-        .footer-logos img {
-            height: var(--footer-logo-h);
-            width: auto;
-            object-fit: contain;
-            opacity: 1;
-        }
-
-        .menu-toggle {
-            display: none;
-            background: var(--color-bg);
-            border: 1px solid var(--rule-color);
-            border-radius: 6px;
-            font-size: 1.3em;
-            cursor: pointer;
-            color: var(--color-body);
-            padding: 4px 8px;
-            line-height: 1;
-        }
+{% endblock %}
+{% block style_after_footer %}
         @media (max-width: 900px) {
             :root {
                 --page-pad-top: 28px;
@@ -297,83 +125,8 @@
                 display: none;
             }
         }
-
-        /* Drawer */
-        .nav-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.3);
-            z-index: 999;
-        }
-
-        .nav-drawer {
-            position: fixed;
-            top: 0;
-            right: -280px;
-            width: 240px;
-            height: 100vh;
-            background: var(--color-bg);
-            box-shadow: -4px 0 24px rgba(0,0,0,0.12);
-            z-index: 1000;
-            transition: right 0.3s ease;
-            padding: 64px 32px 40px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .nav-drawer.open {
-            right: 0;
-        }
-
-        .nav-overlay.open {
-            display: block;
-        }
-
-        .drawer-close {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: none;
-            border: none;
-            font-size: 1.4em;
-            cursor: pointer;
-            color: var(--color-body);
-            line-height: 1;
-        }
-
-        .nav-drawer a {
-            text-decoration: none;
-            color: var(--color-body);
-            font-size: 1.05em;
-            font-weight: 400;
-        }
-
-        .nav-drawer a:hover {
-            color: var(--color-primary);
-        }
-    </style>
-</head>
-<body>
-
-<div class="inner">
-
-    <header>
-        <a href="index.html" class="lab-name">Lee Optimization Group</a>
-        <button class="menu-toggle" aria-label="Menu">&#9776;</button>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="research.html">Research</a>
-            <a href="publications.html" class="active">Publications</a>
-            <a href="group.html">Members</a>
-            <a href="hiring.html">Hiring</a>
-            <a href="contact.html">Contact</a>
-        </nav>
-    </header>
-
-    <main>
-
+{% endblock %}
+{% block main %}
 {% for g in publications.groups %}
         <div class="year-divider">{{ g.label }}</div>
 
@@ -389,32 +142,9 @@
 
 {% endfor %}
 {% endfor %}
-    </main>
-
-    <footer>
-        <span>&copy; 2026 LOG. All rights reserved.</span>
-        <div class="footer-logos">
-            <a href="https://www.postech.ac.kr" target="_blank"><img src="logo/postech_logo.png" alt="POSTECH"></a>
-            <a href="https://ai.postech.ac.kr" target="_blank"><img src="logo/gsai_logo.png" alt="GSAI"></a>
-            <a href="https://cse.postech.ac.kr" target="_blank"><img src="logo/cs_logo.png" alt="CS"></a>
-        </div>
-    </footer>
-
-</div>
-
-
-
-    <div class="nav-overlay" id="navOverlay"></div>
-    <div class="nav-drawer" id="navDrawer">
-        <button class="drawer-close" id="drawerClose">&#x2715;</button>
-        <a href="index.html">Home</a>
-        <a href="research.html">Research</a>
-        <a href="publications.html" class="active">Publications</a>
-        <a href="group.html">Members</a>
-        <a href="hiring.html">Hiring</a>
-        <a href="contact.html">Contact</a>
-    </div>
-
+    
+{% endblock %}
+{% block scripts %}
 <script src="js/people.js"></script>
 <script>
     LOGPeople.decoratePapers(document.querySelector('main'));
@@ -438,5 +168,4 @@
     overlay.addEventListener('click', closeDrawer);
 
 </script>
-</body>
-</html>
+{% endblock %}

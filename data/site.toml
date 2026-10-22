@@ -1,0 +1,47 @@
+# Site-wide content shared by every page: the header, navigation and footer.
+# The page frame itself (layout, shared CSS) is templates/base.html.
+
+lab_name = "Lee Optimization Group"
+copyright = "© 2026 LOG. All rights reserved."
+
+# Navigation, in order. `page` is the template name; its link gets the
+# "active" style on that page.
+[[nav]]
+page = "index"
+label = "Home"
+
+[[nav]]
+page = "research"
+label = "Research"
+
+[[nav]]
+page = "publications"
+label = "Publications"
+
+[[nav]]
+page = "group"
+label = "Members"
+
+[[nav]]
+page = "hiring"
+label = "Hiring"
+
+[[nav]]
+page = "contact"
+label = "Contact"
+
+# Footer logos, left to right. Images are in static/logo/.
+[[footer_logos]]
+url = "https://www.postech.ac.kr"
+image = "logo/postech_logo.png"
+alt = "POSTECH"
+
+[[footer_logos]]
+url = "https://ai.postech.ac.kr"
+image = "logo/gsai_logo.png"
+alt = "GSAI"
+
+[[footer_logos]]
+url = "https://cse.postech.ac.kr"
+image = "logo/cs_logo.png"
+alt = "CS"
