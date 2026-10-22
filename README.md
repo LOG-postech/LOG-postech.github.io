@@ -3,7 +3,7 @@
 Website of the Lee Optimization Group at POSTECH: <https://opt.postech.ac.kr>.
 
 Content and design are kept apart. Content is data in `data/`. Design is
-templates in `pages/`. `tools/build.py` combines them into the site, and a
+templates in `layout/`. `tools/build.py` combines them into the site, and a
 GitHub Action publishes it on every push to `main`.
 
 ```text
@@ -15,12 +15,12 @@ data/                  content — one directory per kind, each with a README
   research/            topics.yaml + icons/
   site.toml            lab name, navigation, footer logos
     */config.toml      presentation settings for that kind of content
-pages/                 page design (Jinja + HTML/CSS)
+layout/                page design (Jinja + HTML/CSS)
   base.html            the frame every page shares: head, header, nav, footer
   partials/*.css       CSS shared by every page, incl. the layout tokens
   <page>.html          one per page: its own CSS, layout and scripts
 static/                copied to the site as is (logos, lab photo, redirect)
-tools/build.py         renders data + pages into _site/
+tools/build.py         renders data + layout into _site/
 ```
 
 ## Which file do I edit?
@@ -30,8 +30,8 @@ tools/build.py         renders data + pages into _site/
 | add news, a paper, a member, a photo, a research topic | an entry in `data/<kind>/`; its `README.md` explains how |
 | change how many items show, date format, thumbnail size, … | `data/<kind>/config.toml` |
 | change the nav, footer or lab name everywhere | `data/site.toml` |
-| change the design of every page (spacing, fonts, colours) | `pages/partials/chassis.css` (layout tokens) or `pages/base.html` |
-| change the design of one page | `pages/<page>.html` |
+| change the design of every page (spacing, fonts, colours) | `layout/partials/chassis.css` (layout tokens) or `layout/base.html` |
+| change the design of one page | `layout/<page>.html` |
 
 ## Build and preview locally
 

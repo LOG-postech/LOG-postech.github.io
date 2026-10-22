@@ -1,4 +1,4 @@
-# Build the site from data/ + pages/ and publish it to GitHub Pages.
+# Build the site from data/ + layout/ and publish it to GitHub Pages.
 #
 # Requires Settings -> Pages -> Build and deployment -> Source: "GitHub Actions".
 # Pull requests are built (so broken data fails the check) but not deployed.

@@ -1,5 +1,5 @@
 # Site-wide content shared by every page: the header, navigation and footer.
-# The page frame itself (layout, shared CSS) is pages/base.html.
+# The page frame itself (layout, shared CSS) is layout/base.html.
 
 lab_name = "Lee Optimization Group"
 copyright = "© 2026 LOG. All rights reserved."
