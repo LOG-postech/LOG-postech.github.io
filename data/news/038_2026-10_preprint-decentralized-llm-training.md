@@ -1,4 +1,1 @@
----
-paper: kim26seedflood
----
-🎓 Our [preprint](https://arxiv.org/abs/2602.18181) on decentralized LLM training, SeedFlood, has received a major update, with substantial improvements to its overall presentation, analysis, and experimental evaluation.
+🎓 Our [preprint](kim26seedflood) on decentralized LLM training, SeedFlood, has received a major update, with substantial improvements to its overall presentation, analysis, and experimental evaluation.

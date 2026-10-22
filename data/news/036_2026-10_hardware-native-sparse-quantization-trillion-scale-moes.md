@@ -1,4 +1,1 @@
----
-paper: lee26hardware
----
-🎓 Our [paper](https://arxiv.org/abs/2610.02241) on hardware-native sparse-quantization for trillion-scale MoEs is out on arXiv. In this work, we introduce MoESQ, which jointly learns semi-structured sparsity and low-precision quantization for MoE experts and executes them on Sparse Tensor Cores with a custom grouped sparse GEMM kernel. The [code](https://github.com/IST-DASLab/MoESQ) and [models](https://huggingface.co/collections/ISTA-DASLab/moesq) are publicly available.
+🎓 Our [paper](lee26hardware) on hardware-native sparse-quantization for trillion-scale MoEs is out on arXiv. In this work, we introduce MoESQ, which jointly learns semi-structured sparsity and low-precision quantization for MoE experts and executes them on Sparse Tensor Cores with a custom grouped sparse GEMM kernel. The [code](https://github.com/IST-DASLab/MoESQ) and [models](https://huggingface.co/collections/ISTA-DASLab/moesq) are publicly available.

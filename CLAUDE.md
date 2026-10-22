@@ -76,7 +76,8 @@ plain names are plain text. In news a tag renders as the person's `short` name
 time (alumni tags give the name without a face):
 
 - **News** (news page, home page): under each item's date — the in-lab authors of the
-  papers in its `paper:` front matter (BibTeX keys, e.g. `lee26fresco`), then members
+  papers it refers to — `paper:` front matter, then links written `[paper](shin23closer)`, which the
+  build points at the entry's `paper` URL — then members
   `@tagged` in the text; up to `faces.max` (3), then `+N`.
 - **Publications**: before each tagged current member in `.paper-authors`.
 

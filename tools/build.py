@@ -215,6 +215,8 @@ def author_list(field, people, where):
 
 NEWS_NAME = re.compile(r"^(\d+)_(\d{4})-(\d{2})(?:-(\d{2}))?_([a-z0-9][a-z0-9-]*)\.md$")
 NEWS_KEYS = {"paper"}
+# A Markdown link whose target is a bare word is a paper key: [paper](shin23closer).
+PAPER_LINK = re.compile(r"\]\(([a-z][a-z0-9_]*)\)")
 
 
 def split_front_matter(text, where):
@@ -256,11 +258,30 @@ def load_news(papers_by_key, people):
             fail("news/%s: unknown field(s) %s (allowed: %s)" % (path.name, ", ".join(sorted(unknown)), ", ".join(sorted(NEWS_KEYS))))
         if not body.strip():
             fail("news/%s: empty body" % path.name)
-        # Faces: the in-lab authors of the papers named by key, then the
-        # members @tagged in the text, in that order.
-        faces = []
+        # Papers: named in front matter (paper: key), or linked in the text as
+        # [paper](key), which links to the paper's own `paper` URL.
         keys = front.get("paper") or []
-        for key in [keys] if isinstance(keys, str) else keys:
+        keys = [str(k) for k in ([keys] if isinstance(keys, str) else keys)]
+
+        def link_paper(m):
+            key = m.group(1)
+            paper = papers_by_key.get(key)
+            if paper is None:
+                fail("news/%s: link target %r is not a key in publications/papers.bib" % (path.name, key))
+                return m.group(0)
+            if not paper["url"]:
+                fail("news/%s: %s has no `paper` link in papers.bib to link to" % (path.name, key))
+                return m.group(0)
+            if key not in keys:
+                keys.append(key)
+            return "](%s)" % paper["url"]
+
+        body = PAPER_LINK.sub(link_paper, body)
+
+        # Faces: the in-lab authors of those papers, then the members @tagged in
+        # the text, in that order.
+        faces = []
+        for key in keys:
             paper = papers_by_key.get(str(key))
             if paper is None:
                 fail("news/%s: paper %r is not a key in publications/papers.bib" % (path.name, key))
@@ -417,6 +438,7 @@ def load_publications(people):
             "title": p["title"],
             "authors": authors,
             "members": members,
+            "url": next((u for n, u in links if n.lower() == "paper"), None),
             "venue": venue_line(p),
             "links": Markup(sep).join(
                 Markup('<a href="%s" target="_blank" rel="noopener">%s</a>') % (url, label)
