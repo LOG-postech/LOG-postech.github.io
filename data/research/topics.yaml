@@ -1,3 +1,5 @@
+# Research topics on the Research page, in display order. See README.md.
+
 - key: compression
   title: Model Compression
   color: red
@@ -20,6 +22,7 @@
       We develop unified frameworks that integrate pruning, quantization, and distillation
       to reduce error accumulation and preserve core model capabilities, including reasoning,
       in highly compressed states.
+
 - key: distributed
   title: Distributed Training
   color: green
@@ -45,6 +48,7 @@
     text: >-
       We develop adaptive strategies for imbalanced computational resources across devices,
       aiming for consistent global convergence despite variations in hardware performance.
+
 - key: applications
   title: Deep Learning Applications
   color: blue
@@ -68,6 +72,7 @@
       We study constrained optimization problems where models adapt to new knowledge without
       disrupting what has already been learned, opening principled approaches to continual
       learning.
+
 - key: optimization
   title: Advanced Optimization
   color: orange

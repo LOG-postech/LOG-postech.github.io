@@ -14,3 +14,7 @@ since = "2026-01"
 # Items shown when the News page opens, and how many each "Show more" click adds.
 initial = 10
 step = 5
+
+[faces]
+# Member faces under a news item's date: at most this many, then "+N".
+max = 3

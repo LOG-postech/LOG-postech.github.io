@@ -11,7 +11,8 @@ headshots.
 2. Add them to `members:` in `members.yaml`, at the position they should appear:
 
    ```yaml
-   - name: Hyeondo Jang
+   - tag: hyeondojang
+     name: Hyeondo Jang
      photo: hyeondojang.jpg
      position: MS Student
      url: https://hyeondo-jang.github.io/   # optional: name links here
@@ -19,7 +20,9 @@ headshots.
 
 | Field | Required | Notes |
 |---|---|---|
-| `name` | yes | As shown under the photo. Also how news and papers find this person's face. |
+| `tag` | yes | How news and papers refer to them: `@hyeondojang`. Lowercase, no spaces; use the photo's name. Never reuse a tag. |
+| `name` | yes | As shown under the photo and in author lists. |
+| `short` | no | Name used for `@tag` in news. Defaults to the first word of `name`. |
 | `photo` | yes | File name in `photos/`. Also the anchor of their card: `group.html#hyeondojang`. |
 | `position` | yes | `Principal Investigator`, `PhD Student`, `MS/PhD Student`, `MS Student`, … |
 | `url` | no | Personal site. Without it the name is plain text. |
@@ -30,12 +33,15 @@ headshots.
 Remove them from `members:`, and add them to `alumni:`:
 
 ```yaml
-- name: Jaehyeon Jeong
+- tag: jaehyeonjeong        # keep the same tag, so old news and papers still work
+  name: Jaehyeon Jeong
   url: https://...          # optional
   note: (MS 2026 → ETRI)
 ```
 
-Keep their photo in `photos/`, since old pages may still link to it.
+Their `@tag` keeps working in news and papers, showing the name without a face.
+Keep their photo in `photos/`, since old pages may still link to it. Someone who
+stays on (MS → PhD) can be in both lists under one tag.
 
 ## Presentation settings (`config.toml`)
 

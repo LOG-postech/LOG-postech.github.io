@@ -9,8 +9,8 @@ GitHub Action publishes it on every push to `main`.
 ```text
 data/                  content — one directory per kind, each with a README
   news/                one .md file per news item
-  publications/        one .yaml file per year (+ preprint, previous)
-  members/             members.yaml + photos/
+  publications/        papers.bib (one BibTeX file, all papers)
+  members/             members.yaml + photos/  (@tags for people)
   gallery/             gallery.yaml + photos/  (thumbnails are generated)
   research/            topics.yaml + icons/
   site.toml            lab name, navigation, footer logos

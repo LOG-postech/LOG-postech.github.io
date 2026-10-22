@@ -101,10 +101,120 @@ def external(url):
     return bool(re.match(r"https?://", url or ""))
 
 
+# ------------------------------------------------------------------- people
+
+TAG = re.compile(r"(?<![\w.])@([a-z0-9_]+)")
+
+
+class People:
+    """@tag -> person, from data/members/members.yaml (members, then alumni).
+
+    A person can be in both lists (an MS graduate continuing as a PhD student)
+    under one tag; the current-member entry wins. Only current members have a
+    face: alumni tags show the name alone.
+    """
+
+    def __init__(self, raw):
+        self.by_tag = {}
+        for group, current in (("members", True), ("alumni", False)):
+            for p in raw.get(group, []) or []:
+                tag = p.get("tag", "")
+                if not re.fullmatch(r"[a-z0-9_]+", tag or ""):
+                    fail("members.yaml: %s needs a tag of lowercase letters/digits (e.g. hyunjijung)" % p.get("name", p))
+                    continue
+                if tag in self.by_tag:
+                    other = self.by_tag[tag]
+                    if not (other["current"] and not current and other["name"] == p.get("name")):
+                        fail("members.yaml: tag @%s is used for both %s and %s" % (tag, other["name"], p.get("name")))
+                    continue
+                name = p.get("name", "")
+                self.by_tag[tag] = {
+                    "tag": tag,
+                    "name": name,
+                    "short": p.get("short") or name.split(" ")[0],
+                    "url": p.get("url"),
+                    "photo": "group_profile/" + p["photo"] if current and p.get("photo") else None,
+                    "slug": Path(p.get("photo", "")).stem,
+                    "current": current,
+                }
+
+    def get(self, tag, where):
+        person = self.by_tag.get(tag)
+        if person is None:
+            fail("%s: @%s is not a tag in members/members.yaml" % (where, tag))
+        return person
+
+    def resolve(self, text, where, form):
+        """Replace each @tag with the person's name; return (text, people in order)."""
+        found = []
+
+        def sub(m):
+            person = self.get(m.group(1), where)
+            if person is None:
+                return m.group(0)
+            if person not in found:
+                found.append(person)
+            return person[form]
+
+        return TAG.sub(sub, text), found
+
+
+def _profile_link(person):
+    """Where a face links: the member's own site, else their card on group.html."""
+    if person["url"] and external(person["url"]):
+        return Markup(' href="%s" target="_blank" rel="noopener"') % person["url"]
+    if person["url"]:
+        return Markup(' href="%s"') % person["url"]
+    return Markup(' href="group.html#%s"') % person["slug"]
+
+
+def _face_img(person):
+    return Markup('<img src="%s" alt="" loading="lazy" decoding="async">') % person["photo"]
+
+
+def news_faces(people, max_faces):
+    """Faces under a news item's date: a few, then "+N" (like Slack)."""
+    people = [p for p in people if p["current"]]
+    if not people:
+        return Markup("")
+    names = ", ".join(p["name"] for p in people)
+    shown = people[: max_faces - 1] if len(people) > max_faces else people
+    html = Markup('<span class="news-people" aria-label="%s" title="%s">') % (names, names)
+    for p in shown:
+        html += Markup('<a class="member-face" title="%s"%s>%s</a>') % (p["name"], _profile_link(p), _face_img(p))
+    if len(shown) < len(people):
+        html += Markup('<span class="member-face member-face-more">+%d</span>') % (len(people) - len(shown))
+    return html + Markup("</span>")
+
+
+def author_list(field, people, where):
+    """BibTeX author field -> (HTML author list, current members in order).
+
+    "@hyunjijung* and Ziyang Wu" -> a face and name for the member (marks such
+    as * kept), plain text for everyone else.
+    """
+    out, members = [], []
+    for raw in re.split(r"\s+and\s+", field.strip()):
+        raw = raw.strip()
+        m = re.fullmatch(r"@([a-z0-9_]+)([*†‡]*)", raw)
+        person = people.get(m.group(1), where) if m else None
+        if person is None:
+            out.append(escape(raw))
+            continue
+        label = person["name"] + m.group(2)
+        if not person["current"]:
+            out.append(escape(label))
+            continue
+        members.append(person)
+        out.append(Markup('<a class="paper-member" title="%s"%s><span class="member-face">%s</span>%s</a>')
+                   % (person["name"], _profile_link(person), _face_img(person), label))
+    return Markup(", ").join(out), members
+
+
 # --------------------------------------------------------------------- news
 
 NEWS_NAME = re.compile(r"^(\d+)_(\d{4})-(\d{2})(?:-(\d{2}))?_([a-z0-9][a-z0-9-]*)\.md$")
-NEWS_KEYS = {"people", "paper"}
+NEWS_KEYS = {"paper"}
 
 
 def split_front_matter(text, where):
@@ -117,7 +227,7 @@ def split_front_matter(text, where):
     return yaml.safe_load(head) or {}, body
 
 
-def load_news():
+def load_news(papers_by_key, people):
     cfg = load_config("news")
     entries, seen = [], {}
     for path in sorted((DATA / "news").glob("*.md")):
@@ -146,16 +256,24 @@ def load_news():
             fail("news/%s: unknown field(s) %s (allowed: %s)" % (path.name, ", ".join(sorted(unknown)), ", ".join(sorted(NEWS_KEYS))))
         if not body.strip():
             fail("news/%s: empty body" % path.name)
-        attrs = ""
-        for key in ("people", "paper"):
-            if front.get(key):
-                attrs += ' data-%s="%s"' % (key, escape(front[key]))
+        # Faces: the in-lab authors of the papers named by key, then the
+        # members @tagged in the text, in that order.
+        faces = []
+        keys = front.get("paper") or []
+        for key in [keys] if isinstance(keys, str) else keys:
+            paper = papers_by_key.get(str(key))
+            if paper is None:
+                fail("news/%s: paper %r is not a key in publications/papers.bib" % (path.name, key))
+                continue
+            faces += [p for p in paper["members"] if p not in faces]
+        body, tagged = people.resolve(body, "news/" + path.name, "short")
+        faces += [p for p in tagged if p not in faces]
         entries.append({
             "idx": idx,
             "date": date,
             "date_label": date.strftime(cfg["date_format"]),
             "html": render_inline(body),
-            "attrs": Markup(attrs),
+            "faces": news_faces(faces, cfg["faces"]["max"]),
             "file": path.name,
         })
     entries.sort(key=lambda e: e["idx"], reverse=True)
@@ -171,45 +289,154 @@ def load_news():
 
 # ------------------------------------------------------------- publications
 
-PAPER_KEYS = {"title", "authors", "venue", "links", "link_separator"}
+BIB_ENTRY = re.compile(r"@(\w+)\s*\{\s*([^,\s]+)\s*,")
+BIB_FIELD = re.compile(r"\s*([A-Za-z][\w-]*)\s*=\s*")
 
 
-def load_publications():
-    cfg = load_config("publications")
-    groups = []
-    for key in cfg["groups"]["order"]:
-        path = DATA / "publications" / ("%s.yaml" % key)
-        if not path.exists():
-            fail("publications: groups.order lists %r but %s is missing" % (key, path.name))
+def parse_bibtex(text, where):
+    """Entries of a .bib file, in file order: [(key, {field: value})].
+
+    Covers what papers.bib uses: @type{key, field = {value} or "value" or 2026}.
+    Field order and name case are kept (link fields are shown in that order, with
+    that label). Braces only protect capitalisation in BibTeX, so they are
+    dropped; \\& is &. Anything outside an entry is a comment, and so is a
+    line starting with % inside one.
+    """
+    entries, pos = [], 0
+    text = re.sub(r"(?m)^[ \t]*%.*$", "", text)
+    while True:
+        m = BIB_ENTRY.search(text, pos)
+        if not m:
+            return entries
+        key, fields, pos = m.group(2), {}, m.end()
+        if m.group(1).lower() in ("comment", "string", "preamble"):
             continue
-        papers = load_yaml(path) or []
-        rendered = []
-        for i, p in enumerate(papers, 1):
-            where = "publications/%s.yaml paper #%d" % (key, i)
-            for req in ("title", "authors", "venue"):
-                if not p.get(req):
-                    fail("%s: missing %s" % (where, req))
-            unknown = set(p) - PAPER_KEYS
-            if unknown:
-                fail("%s: unknown field(s) %s" % (where, ", ".join(sorted(unknown))))
-            sep = p.get("link_separator", cfg["links"]["separator"])
-            links = Markup(sep).join(
+        while True:
+            close = re.match(r"\s*\}", text[pos:])
+            if close:
+                pos += close.end()
+                break
+            f = BIB_FIELD.match(text, pos)
+            if not f:
+                raise DataError("%s: entry %s: cannot read field near %r" % (where, key, text[pos:pos + 40]))
+            name, pos = f.group(1), f.end()
+            if text[pos] in "{\"":
+                opener, depth, start = text[pos], 0, pos
+                while True:
+                    c = text[pos]
+                    if opener == '"' and c == '"' and pos > start:
+                        break
+                    if c == "{":
+                        depth += 1
+                    elif c == "}":
+                        depth -= 1
+                        if depth == 0 and opener == "{":
+                            break
+                    pos += 1
+                    if pos >= len(text):
+                        raise DataError("%s: entry %s: unclosed value of %s" % (where, key, name))
+                value, pos = text[start + 1:pos], pos + 1
+            else:
+                v = re.match(r"[^,}\s]+", text[pos:])
+                value, pos = v.group(0), pos + v.end()
+            if name.lower() in (n.lower() for n in fields):
+                raise DataError("%s: entry %s: %s is given twice" % (where, key, name))
+            fields[name] = " ".join(value.replace("{", "").replace("}", "").replace("\\&", "&").split())
+            comma = re.match(r"\s*,", text[pos:])
+            if comma:
+                pos += comma.end()
+        entries.append((key, fields))
+
+
+# Fields of a papers.bib entry. Any other field is a link: its name is the label
+# shown on the page ([paper], [code], ...), its value the URL.
+PAPER_TEXT = {"title", "author", "venue", "year", "also", "award"}
+PAPER_FLAGS = {"is_preprint", "is_previous", "oral", "spotlight", "spaced_links"}
+
+
+def flag(value, where, name):
+    v = value.strip().lower()
+    if v in ("true", "yes", "1"):
+        return True
+    if v in ("false", "no", "0", ""):
+        return False
+    fail("%s: %s must be true or false, not %r" % (where, name, value))
+    return False
+
+
+def venue_line(p):
+    """venue (Oral); also; award  — the award highlighted, as on the page."""
+    line = str(escape(p["venue"]))
+    if p["oral"] or p["spotlight"]:
+        line += ' <span class="spotlight">(%s)</span>' % ("Oral" if p["oral"] else "Spotlight")
+    if p.get("also"):
+        line += "; " + str(escape(p["also"]))
+    if p.get("award"):
+        line += '; <span class="spotlight">%s</span>' % escape(p["award"])
+    return Markup(line)
+
+
+def load_publications(people):
+    cfg = load_config("publications")
+    where = "publications/papers.bib"
+    try:
+        entries = parse_bibtex((DATA / "publications" / "papers.bib").read_text(encoding="utf-8"), where)
+    except DataError as e:
+        fail(str(e))
+        entries = []
+
+    papers, keys = [], set()
+    for key, f in entries:
+        here = "%s: %s" % (where, key)
+        if key in keys:
+            fail("%s: the key %s is used twice" % (where, key))
+        keys.add(key)
+        lower = {k.lower(): v for k, v in f.items()}
+        for req in ("title", "author", "venue", "year"):
+            if not lower.get(req):
+                fail("%s: missing %s" % (here, req))
+        if lower.get("year") and not re.fullmatch(r"\d{4}", lower["year"]):
+            fail("%s: year must be four digits, not %r" % (here, lower["year"]))
+        p = {k: lower.get(k, "") for k in PAPER_TEXT}
+        for k in PAPER_FLAGS:
+            p[k] = flag(lower.get(k, ""), here, k)
+        if p["is_preprint"] and p["is_previous"]:
+            fail("%s: is_preprint and is_previous cannot both be true" % here)
+        if p["oral"] and p["spotlight"]:
+            fail("%s: oral and spotlight cannot both be true" % here)
+        links = []
+        for name, url in f.items():
+            if name.lower() in PAPER_TEXT | PAPER_FLAGS:
+                continue
+            if not re.match(r"(https?://|[\w./-]+$)", url):
+                fail("%s: %s is not a known field, so it is read as a link, but %r is not a URL" % (here, name, url))
+            links.append((name, url))
+        sep = " " if p["spaced_links"] else cfg["links"]["separator"]
+        authors, members = author_list(p["author"], people, here)
+        papers.append({
+            "title": p["title"],
+            "authors": authors,
+            "members": members,
+            "venue": venue_line(p),
+            "links": Markup(sep).join(
                 Markup('<a href="%s" target="_blank" rel="noopener">%s</a>') % (url, label)
                 if external(url) else Markup('<a href="%s">%s</a>') % (url, label)
-                for label, url in (p.get("links") or {}).items()
-            )
-            rendered.append({
-                "title": p.get("title", ""),
-                "authors": p.get("authors", ""),
-                "venue": render_venue(p.get("venue", "")),
-                "links": links,
-            })
-        groups.append({"key": key, "label": cfg["groups"]["labels"].get(key, key), "papers": rendered})
-    listed = set(cfg["groups"]["order"])
-    for path in (DATA / "publications").glob("*.yaml"):
-        if path.stem not in listed:
-            fail("publications/%s is not listed in config.toml groups.order, so it would not be shown" % path.name)
-    return {"config": cfg, "groups": groups}
+                for label, url in links
+            ),
+            "key": key,
+            "group": "preprint" if p["is_preprint"] else "previous" if p["is_previous"] else p["year"],
+        })
+
+    # Preprints first, then years newest first, then earlier work. Within a group,
+    # papers keep their order in the file.
+    years = sorted({p["group"] for p in papers if p["group"] not in ("preprint", "previous")}, reverse=True)
+    order = ["preprint"] + years + ["previous"]
+    labels = cfg["groups"]
+    groups = [
+        {"key": g, "label": labels.get(g, g), "papers": [p for p in papers if p["group"] == g]}
+        for g in order
+    ]
+    return {"config": cfg, "groups": [g for g in groups if g["papers"]], "by_key": {p["key"]: p for p in papers}}
 
 
 # ------------------------------------------------------------------ members
@@ -227,7 +454,7 @@ def load_members():
             fail("members.yaml: %s's photo %s is not in data/members/photos/" % (m.get("name"), m["photo"]))
         members.append(dict(m, alt=m.get("alt", m.get("name")), url=m.get("url")))
     alumni = [dict(a, url=a.get("url"), note=a.get("note", "")) for a in raw.get("alumni", [])]
-    return {"config": cfg, "members": members, "alumni": alumni}
+    return {"config": cfg, "members": members, "alumni": alumni, "people": People(raw)}
 
 
 # ------------------------------------------------------------------ gallery
@@ -309,11 +536,13 @@ def copy_tree(src, dest):
 def build(check_only=False):
     with (DATA / "site.toml").open("rb") as f:
         site_cfg = tomllib.load(f)
+    members = load_members()
+    publications = load_publications(members["people"])
     site = {
         "site": site_cfg,
-        "news": load_news(),
-        "publications": load_publications(),
-        "members": load_members(),
+        "news": load_news(publications["by_key"], members["people"]),
+        "publications": publications,
+        "members": members,
         "gallery": load_gallery(),
         "research": load_research(),
     }

@@ -50,7 +50,7 @@
             margin-top: 4px;
         }
 
-        /* Faces before current members in author lists; filled in by js/people.js.
+        /* Faces before current members in author lists; rendered by tools/build.py.
            Face + name link to the member's site, or their card on group.html. */
         .paper-member {
             white-space: nowrap;
@@ -145,10 +145,7 @@
     
 {% endblock %}
 {% block scripts %}
-<script src="js/people.js"></script>
 <script>
-    LOGPeople.decoratePapers(document.querySelector('main'));
-
     var toggle = document.querySelector('.menu-toggle');
     var drawer = document.getElementById('navDrawer');
     var overlay = document.getElementById('navOverlay');

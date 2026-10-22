@@ -1,1 +1,4 @@
+---
+paper: jang26hidden
+---
 🎓 Our [paper](https://arxiv.org/abs/2609.06557) on extreme LLM sparsity has been accepted to EMNLP 2026. In this work, we show that carefully handling the elementary components of pruning can already substantially outperform existing pruning methods, even at extreme sparsity.

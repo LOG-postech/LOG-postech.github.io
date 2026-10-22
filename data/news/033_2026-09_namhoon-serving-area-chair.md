@@ -1,1 +1,1 @@
-🎓 Namhoon is serving as an area chair for ICLR 2027.
+🎓 @namhoonlee is serving as an area chair for ICLR 2027.

@@ -1,1 +1,1 @@
-🏆 Hyunji received the NRF Fellowship.
+🏆 @hyunjijung received the NRF Fellowship.

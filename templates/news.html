@@ -44,7 +44,7 @@
             line-height: var(--leading-body);
         }
 
-        /* Member faces under a news item's date; filled in by js/people.js */
+        /* Member faces under a news item's date (rendered by tools/build.py) */
         .news-people {
             display: flex;
             gap: 2px;
@@ -159,8 +159,8 @@
         <div class="news-list" id="news-list">
 
 {% for n in news.listed %}
-            <div class="news-item"{{ n.attrs }}>
-                <span class="news-date">{{ n.date_label }}</span>
+            <div class="news-item">
+                <span class="news-date">{{ n.date_label }}{{ n.faces }}</span>
                 <span class="news-content">{{ n.html }}</span>
             </div>
 
@@ -170,7 +170,6 @@
     
 {% endblock %}
 {% block scripts %}
-<script src="js/people.js"></script>
 <script>
 
     // Keep all current news in the HTML for the home-page sync and no-JS readers.
@@ -198,7 +197,6 @@
         });
 
         updateVisibility();
-        LOGPeople.decorateNews(document.getElementById('news-list'));
     })();
     var toggle = document.querySelector('.menu-toggle');
     var drawer = document.getElementById('navDrawer');

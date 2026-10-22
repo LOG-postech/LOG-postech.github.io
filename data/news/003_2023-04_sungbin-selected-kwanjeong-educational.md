@@ -1,1 +1,1 @@
-🏆 Sungbin has been selected for the Kwanjeong Educational Foundation Graduate Scholarship.
+🏆 @sungbinshin has been selected for the Kwanjeong Educational Foundation Graduate Scholarship.

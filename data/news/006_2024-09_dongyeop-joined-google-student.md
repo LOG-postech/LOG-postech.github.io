@@ -1,1 +1,1 @@
-🧑‍💻 Dongyeop joined Google as a Student Researcher.
+🧑‍💻 @dongyeoplee joined Google as a Student Researcher.

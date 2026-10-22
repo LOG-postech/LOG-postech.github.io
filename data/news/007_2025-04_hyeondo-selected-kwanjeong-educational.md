@@ -1,1 +1,1 @@
-🏆 Hyeondo has been selected for the Kwanjeong Educational Foundation Graduate Scholarship.
+🏆 @hyeondojang has been selected for the Kwanjeong Educational Foundation Graduate Scholarship.

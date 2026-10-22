@@ -1,1 +1,1 @@
-🧑‍💻 Sungbin joined Google as a Student Researcher.
+🧑‍💻 @sungbinshin joined Google as a Student Researcher.

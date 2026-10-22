@@ -76,7 +76,7 @@
         line-height: var(--leading-body);
       }
 
-      /* Member faces under a news item's date; filled in by js/people.js */
+      /* Member faces under a news item's date (rendered by tools/build.py) */
       .news-people {
         display: flex;
         gap: 2px;
@@ -257,8 +257,8 @@
         <div class="news-list">
 
 {% for n in news.home %}
-        <div class="news-item"{{ n.attrs }}>
-            <span class="news-date">{{ n.date_label }}</span>
+        <div class="news-item">
+            <span class="news-date">{{ n.date_label }}{{ n.faces }}</span>
             <span class="news-content">{{ n.html }}</span>
         </div>
 
@@ -393,7 +393,6 @@
       
 {% endblock %}
 {% block scripts %}
-    <script src="js/people.js"></script>
     <script>
       var toggle = document.querySelector(".menu-toggle");
       var drawer = document.getElementById("navDrawer");
@@ -415,90 +414,6 @@
       close.addEventListener("click", closeDrawer);
       overlay.addEventListener("click", closeDrawer);
 
-      /* Keep Recent News in sync with news.html, which is the single source of
-         truth. The markup above is the no-JS fallback; this replaces it with the
-         newest {{ news.config.home.count }} items whenever fetch works, so links added on the News page can
-         never go missing here. */
-      (function () {
-        var box = document.querySelector(".news-list");
-        if (!box || !window.fetch || !window.DOMParser) return;
-        var decorate = function () {
-          if (window.LOGPeople) LOGPeople.decorateNews(box);
-        };
-
-        fetch("news.html", { cache: "no-cache" })
-          .then(function (r) {
-            return r.ok ? r.text() : Promise.reject();
-          })
-          .then(function (html) {
-            var doc = new DOMParser().parseFromString(html, "text/html");
-            var items = doc.querySelectorAll("#news-list .news-item");
-            var frag = document.createDocumentFragment();
-
-            Array.prototype.slice.call(items, 0, {{ news.config.home.count }}).forEach(function (item) {
-              var date = item.querySelector(".news-date");
-              var body = item.querySelector(".news-content");
-              if (!date || !body) return;
-
-              var row = document.createElement("div");
-              row.className = "news-item";
-              ["data-people", "data-paper"].forEach(function (attr) {
-                if (item.hasAttribute(attr)) row.setAttribute(attr, item.getAttribute(attr));
-              });
-
-              var d = document.createElement("span");
-              d.className = "news-date";
-              d.textContent = date.textContent.trim();
-              row.appendChild(d);
-
-              var c = document.createElement("span");
-              c.className = "news-content";
-              copyInto(body, c);
-              row.appendChild(c);
-
-              frag.appendChild(row);
-            });
-
-            if (frag.childNodes.length) {
-              box.textContent = "";
-              box.appendChild(frag);
-            }
-            decorate();
-          })
-          .catch(function () {
-            /* leave the static fallback in place */
-            decorate();
-          });
-
-        /* Copy text plus a whitelist of inline tags. Anything else contributes
-           only its text, so nothing executable is carried across. */
-        function copyInto(src, dest) {
-          Array.prototype.forEach.call(src.childNodes, function (node) {
-            if (node.nodeType === 3) {
-              dest.appendChild(document.createTextNode(node.nodeValue));
-              return;
-            }
-            if (node.nodeType !== 1) return;
-
-            var tag = node.tagName.toLowerCase();
-            if (tag === "a") {
-              var a = document.createElement("a");
-              var href = node.getAttribute("href") || "";
-              if (/^(https?:|\/|[\w.-]+\.html)/i.test(href)) a.setAttribute("href", href);
-              if (node.getAttribute("target")) a.setAttribute("target", node.getAttribute("target"));
-              if (node.getAttribute("rel")) a.setAttribute("rel", node.getAttribute("rel"));
-              copyInto(node, a);
-              dest.appendChild(a);
-            } else if (tag === "em" || tag === "strong") {
-              var el = document.createElement(tag);
-              copyInto(node, el);
-              dest.appendChild(el);
-            } else {
-              dest.appendChild(document.createTextNode(node.textContent));
-            }
-          });
-        }
-      })();
     </script>
   
 {% endblock %}

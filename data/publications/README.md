@@ -1,47 +1,52 @@
 # Publications
 
-Papers are grouped into one YAML file per heading on the Publications page:
-`preprint.yaml`, `2026.yaml`, `2025.yaml`, …, `previous.yaml`. Each file is a list
-of papers **in display order**, top to bottom.
+All papers are in one BibTeX file, `papers.bib`. The Publications page groups
+them under **Preprint**, then each year (newest first), then **Previous**. Within a
+group, papers appear in the order they are written in the file.
 
 ## Add a paper
 
-Add an entry to the right file, at the position it should appear:
+Add an entry where it should appear:
 
-```yaml
-- title: 'FRESCO: A Novel Consistency Control for Asynchronous Pipeline Parallel Training'
-  authors: Dongyeop Lee, Namhoon Lee
-  venue: NeurIPS 2026 **(Oral)**
-  links:
-    paper: https://arxiv.org/abs/2602.03515
-    code: https://github.com/LOG-postech/fresco
+```bibtex
+@inproceedings{jang26hidden,
+  title  = {Hidden in Plain Sight: The Overlooked Significance of Canonical Elements for Extreme LLM Sparsity},
+  author = {@hyeondojang and @kwanheelee and @dongyeoplee and @namhoonlee},
+  venue  = {EMNLP 2026},
+  year   = {2026},
+  award  = {CKAIA 2026 Best Paper Award},
+  paper  = {https://arxiv.org/abs/2609.06557},
+}
 ```
 
-| Field | Required | Notes |
+The key (`jang26hidden`) is first author's last name + 2-digit year + first title
+word. News items refer to the paper by it (`paper: jang26hidden`), so keep it once
+chosen.
+
+| Field | Kind | Meaning |
 |---|---|---|
-| `title` | yes | Quote it with `'...'` if it contains a colon (`:`). |
-| `authors` | yes | Comma-separated, as printed. Mark equal contribution with `*`. Current members get their face automatically. |
-| `venue` | yes | Wrap highlights in `**...**`: `ACL 2026 **(Oral)**; **KCC 2026 Outstanding Paper Award**`. |
-| `links` | no | `label: url`, in display order. Use lowercase labels: `paper`, `code`, `slides`, `model`, `thesis`. |
-| `link_separator` | no | Overrides `links.separator` in `config.toml` for this paper. |
+| `title` | text | Required. Write `\&` for &. |
+| `author` | text | Required. Names joined by `and`. Lab members and alumni by **tag**: `@hyunjijung`; current members get their face. Others by name: `Dan Alistarh`. Mark equal contribution with `*`: `@hyunjijung*`. |
+| `venue` | text | Required. As printed: `NeurIPS 2026`, `ICML 2026 Workshop on ...`, `arXiv 2026`. |
+| `year` | text | Required. Decides the year heading. |
+| `oral` / `spotlight` | true/false | Adds a highlighted `(Oral)` / `(Spotlight)` after the venue. |
+| `also` | text | Another venue of the same paper: `ICLR 2023 Workshop on ...`. |
+| `award` | text | Shown highlighted at the end: `CKAIA 2026 Best Paper Award`. |
+| `is_preprint` | true/false | Listed under **Preprint**, above the years. |
+| `is_previous` | true/false | Listed under **Previous**, below the years (work before the lab). |
+| `spaced_links` | true/false | Space between this paper's links (see note below). |
+| *anything else* | URL | A link, labelled with the field name, in the order written: `paper`, `code`, `model`, `slides`, … |
 
-When a preprint is accepted, move its entry from `preprint.yaml` to the year's
-file and update `venue`.
-
-## Start a new year
-
-Create `2027.yaml`, then add `"2027"` to `groups.order` in `config.toml`. The
-build refuses to run if a file is not listed there, so a year cannot go missing.
+Fields left out are false or empty. When a preprint is accepted, remove
+`is_preprint` and update `venue` and `year`.
 
 ## Presentation settings (`config.toml`)
 
 | Setting | Meaning |
 |---|---|
-| `groups.order` | Which files are shown, top to bottom |
-| `groups.labels` | Heading for a file (`preprint = "Preprint"`); others use the file name |
+| `groups.preprint` / `groups.previous` | The two special headings |
 | `links.separator` | Text between a paper's links |
 
-> Some papers have `link_separator: " "`. Until now, link spacing was set paper
-> by paper: some had a space between `paper` and `code`, most did not. This
-> keeps the page exactly as it was. Delete those lines to make every paper
-> consistent.
+> `spaced_links = {true}` reproduces the page as it was: until now, some papers
+> had a space between `paper` and `code` and most did not. Delete those lines to
+> make every paper the same.

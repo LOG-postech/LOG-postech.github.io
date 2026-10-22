@@ -353,7 +353,7 @@
 {% block scripts %}
 <script>
     // Faces on the news and publication pages link here as #<photo file name>
-    // (same rule as memberSlug in js/people.js), so new members need no id.
+    // (the anchor tools/build.py links faces to), so new members need no id.
     (function () {
         Array.prototype.forEach.call(document.querySelectorAll('.member-item img'), function (img) {
             img.closest('.member-item').id = img.getAttribute('src').split('/').pop().replace(/\.[^.]*$/, '');
