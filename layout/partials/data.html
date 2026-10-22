@@ -1,0 +1,24 @@
+{%- comment -%}
+Everything static/js/site.js renders from, embedded in the page so the data is
+there before any script runs: the YAML databases (Jekyll reads data/ as
+site.data), papers.bib and each config.toml as text.
+{%- endcomment -%}
+{%- capture bib %}{% include data/publications/papers.bib %}{% endcapture -%}
+{%- capture news_cfg %}{% include data/news/config.toml %}{% endcapture -%}
+{%- capture pub_cfg %}{% include data/publications/config.toml %}{% endcapture -%}
+{%- capture mem_cfg %}{% include data/members/config.toml %}{% endcapture -%}
+{%- capture gal_cfg %}{% include data/gallery/config.toml %}{% endcapture -%}
+<script>
+var LOG = {
+    page: {{ page.name | remove: ".html" | jsonify }},
+    data: {{ site.data | jsonify }},
+    bib: {{ bib | jsonify }},
+    toml: {
+        news: {{ news_cfg | jsonify }},
+        publications: {{ pub_cfg | jsonify }},
+        members: {{ mem_cfg | jsonify }},
+        gallery: {{ gal_cfg | jsonify }}
+    }
+};
+</script>
+<script src="static/js/site.js"></script>

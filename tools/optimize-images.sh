@@ -11,8 +11,8 @@
 # multiple of its display size, re-encodes it, and strips EXIF (which also drops
 # GPS coordinates from lab photos).
 #
-# Gallery thumbnails are not stored at all: tools/build.py makes them from the
-# photos at build time (settings in data/gallery/config.toml).
+# Gallery thumbnails are made by tools/build.py into data/gallery/thumbs/
+# (settings in data/gallery/config.toml); the pre-commit hook runs it.
 #
 # Every processed file is stamped with a marker in its image comment, so running
 # this repeatedly is safe: already-optimized files are skipped rather than
@@ -76,7 +76,7 @@ references_for() {
         data/gallery/photos/*)  echo "data/gallery/gallery.yaml" ;;
         data/members/photos/*)  echo "data/members/members.yaml" ;;
         static/research_focus/*) echo "content/research.html" ;;
-        static/lab_photo/*)     echo "layout/index.html" ;;
+        static/lab_photo/*)     echo "content/index.html" ;;
     esac
 }
 
@@ -190,8 +190,8 @@ import os, re, sys
 ref, old, new = sys.argv[1], sys.argv[2], sys.argv[3]
 text = open(ref, encoding="utf-8").read()
 if ref.endswith(".html"):
-    # Templates refer to static files by their published path (lab_photo/x.jpg).
-    pairs = [(old.split("/", 1)[1], new.split("/", 1)[1])]
+    # Pages refer to static files by their path in the repository.
+    pairs = [(old, new)]
 else:
     pairs = [(os.path.basename(old), os.path.basename(new))]
 for a, b in pairs:

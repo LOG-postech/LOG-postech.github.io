@@ -2,28 +2,29 @@
 
 Website of the Lee Optimization Group at POSTECH: <https://opt.postech.ac.kr>.
 
-Content and design are kept apart. Content is data in `data/`. Design is
-templates in `layout/`. `tools/build.py` combines them into the site, and a
-GitHub Action publishes it on every push to `main`.
+Content and design are kept apart. Lists (news, papers, members, photos) are
+data in `data/`. Page bodies are in `content/`, design in `layout/`. GitHub Pages
+builds the site with Jekyll straight from `main`, and `static/js/site.js` renders
+the data in the browser.
 
 ```text
-data/                  content — one directory per kind, each with a README
+data/                  lists — one directory per kind, each with a README
   news/                one .yaml file per year
   publications/        papers.bib (one BibTeX file, all papers)
   members/             members.yaml + photos/  (@tags for people)
-  gallery/             gallery.yaml + photos/  (thumbnails are generated)
-  site.toml            lab name, navigation, footer logos
+  gallery/             gallery.yaml + photos/ + thumbs/ (thumbs are generated)
     */config.toml      presentation settings for that kind of content
-content/               text of the pages not built from data, as plain HTML
-  research.html, hiring.html, contact.html
-layout/                page design (Jinja + HTML/CSS)
+content/               the body of every page (front matter: title, address)
+  research.html, hiring.html, contact.html    text, plain HTML
+  index.html, news.html, ...                  page parts around the lists
+layout/                design
   base.html            the frame every page shares: head, header, nav, footer
-  partials/*.css       CSS shared by every page, incl. the layout tokens
-  <page>.html          pages built from data/: their own CSS, layout and scripts
-  page.html            the layout content/ pages are inserted into
-  styles/, scripts/    CSS and JS of the content/ pages (<page>.css, <page>.js)
-static/                copied to the site as is (logos, lab photo, research icons)
-tools/build.py         renders data + layout into _site/
+  partials/            CSS shared by every page (incl. the layout tokens); data.html
+  styles/<page>.css    each page's own CSS
+  scripts/<page>.js    each page's own script; drawer.js is shared
+static/                logos, lab photo, research icons, js/site.js
+_config.yml            Jekyll settings, lab name, navigation, footer logos
+tools/build.py         checks data/ and makes gallery thumbnails
 ```
 
 ## Which file do I edit?
@@ -31,36 +32,35 @@ tools/build.py         renders data + layout into _site/
 | I want to… | Edit |
 |---|---|
 | add news, a paper, a member, a photo | an entry in `data/<kind>/`; its `README.md` explains how |
+| change how many items show, date format, … | `data/<kind>/config.toml` |
 | change the research topics, hiring or contact text | `content/research.html`, `content/hiring.html`, `content/contact.html` |
-| add a new page of text | a new `content/<page>.html` (and a nav entry in `data/site.toml`) |
-| change how many items show, date format, thumbnail size, … | `data/<kind>/config.toml` |
-| change the nav, footer or lab name everywhere | `data/site.toml` |
+| add a new page | a new `content/<page>.html` (front matter like the others) and a `layout/styles/<page>.css`; add it to `nav` in `_config.yml` |
+| change the nav, footer or lab name everywhere | `_config.yml` |
 | change the design of every page (spacing, fonts, colours) | `layout/partials/chassis.css` (layout tokens) or `layout/base.html` |
-| change the design of one page | `layout/<page>.html`, or `layout/styles/<page>.css` for a content page |
+| change the design of one page | `layout/styles/<page>.css` |
 
-## Build and preview locally
+## Check and preview locally
 
 ```bash
-pip install -r requirements.txt       # once; needs Python 3.11+
-brew install imagemagick              # once (Ubuntu: apt install imagemagick)
 tools/setup-hooks.sh                  # once per clone: enables the pre-commit hook
-
-python3 tools/build.py --serve        # build, then open http://localhost:8000
-python3 tools/build.py --check        # only validate data/
+python3 tools/build.py --check        # check data/ (needs: pip install -r requirements.txt)
+python3 tools/build.py                # check, and make thumbnails for new photos
+bundle install && bundle exec jekyll serve   # preview at http://localhost:4000 (Ruby)
 ```
 
-`_site/` is build output: never edit it, and it is not committed.
+`_site/` is preview output: never edit it, and it is not committed.
 
 ## Commit hook
 
-`tools/setup-hooks.sh` enables a pre-commit hook that does two things:
+`tools/setup-hooks.sh` enables a pre-commit hook that:
 
-- validates `data/` (file names, required fields, missing photos), and
-- shrinks new photos to their display size and strips EXIF/GPS before they enter
-  git history. Rules are in `tools/optimize-images.sh`.
+- checks `data/` (names, required fields, @tags, paper keys, missing photos),
+- shrinks new photos to their display size and strips EXIF/GPS (rules in
+  `tools/optimize-images.sh`), and
+- makes the thumbnail of each new gallery photo in `data/gallery/thumbs/`.
 
 ## Deployment
 
-`.github/workflows/deploy.yml` builds and publishes the site on every push to
-`main`. Pull requests are built as a check but not published. This needs
-**Settings → Pages → Build and deployment → Source: GitHub Actions**.
+Push to `main`. GitHub Pages ("Deploy from a branch", `main`, `/`) runs Jekyll
+on the repository as it is; no other setup is needed. The custom domain comes
+from the `CNAME` file at the root.

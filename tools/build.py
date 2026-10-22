@@ -1,24 +1,20 @@
 #!/usr/bin/env python3
-"""Build the site: read data/, render layout/, write _site/.
+"""Check data/ and make gallery thumbnails.
 
-  tools/build.py            build into _site/
-  tools/build.py --check    validate data/ only, write nothing (exit 1 on errors)
-  tools/build.py --serve    build, then serve _site/ on http://localhost:8000
+  tools/build.py            check data/, then make missing gallery thumbnails
+  tools/build.py --check    check data/ only, write nothing (exit 1 on errors)
 
-Content lives in data/<database>/ — one directory per kind of content, each with
-its entries, a config.toml for presentation settings, and a README.md on how to
-add an entry. Pages are Jinja templates in layout/; the text of pages that are
-not built from data (research, hiring, contact) is plain HTML in content/. Files in static/ are
-copied to the site root unchanged.
+The site itself is built by GitHub Pages (Jekyll) straight from main, and
+static/js/site.js renders data/ in the browser; see README.md. Jekyll cannot
+process images, so gallery thumbnails are made here, from each photo, into
+data/gallery/thumbs/ and committed. The pre-commit hook runs this script.
 
-Images are copied byte-for-byte. The only generated images are gallery
-thumbnails, made from the photo itself with ImageMagick (see data/gallery).
+This script reads data/ with the same rules as static/js/site.js, so a broken
+entry is caught before it is pushed instead of showing up as a gap on the page.
 """
 
 import argparse
 import datetime as dt
-import functools
-import http.server
 import re
 import shutil
 import subprocess
@@ -28,27 +24,11 @@ from pathlib import Path
 
 import markdown
 import yaml
-from jinja2 import Environment, FileSystemLoader, StrictUndefined
 from markupsafe import Markup, escape
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
-LAYOUT_DIR = ROOT / "layout"
-CONTENT = ROOT / "content"
-STATIC = ROOT / "static"
-OUT = ROOT / "_site"
-
-# Pages built from data/ by their own layout. Every content/<page>.html is a
-# page too, wrapped by layout/page.html.
-PAGES = ["index", "news", "publications", "group", "gallery", "photo"]
-
-# Where each database's files are published. These paths are part of the site's
-# public URLs (photo.html?image=stories/...), so they stay as they always were.
-PUBLISH = {
-    DATA / "gallery" / "photos": "stories",
-    DATA / "members" / "photos": "group_profile",
-}
-THUMBS = "stories/thumbs"
+THUMBS = DATA / "gallery" / "thumbs"
 
 
 class DataError(Exception):
@@ -567,8 +547,7 @@ def load_gallery():
             "file": name,
             "caption": p["caption"],
             "alt": p.get("alt", p["caption"]),
-            "full": "stories/" + name,
-            "thumb": "%s/%s" % (THUMBS, Path(name).with_suffix(".jpg").name),
+            "thumb": THUMBS / Path(name).with_suffix(".jpg").name,
         })
     for path in photos_dir.iterdir():
         if path.is_file() and path.name not in listed and not path.name.startswith("."):
@@ -578,44 +557,30 @@ def load_gallery():
 
 # ------------------------------------------------------------------- output
 
-def thumbnail(src, dest, cfg):
-    """Square center crop, same command the pre-commit hook used to run."""
-    if dest.exists() and dest.stat().st_mtime >= src.stat().st_mtime:
-        return
+def thumbnail(src, dest, cfg, force=False):
+    """Square center crop of a gallery photo (data/gallery/config.toml)."""
+    if dest.exists() and not force:
+        return False
     tool = shutil.which("magick") or shutil.which("convert")
     if not tool:
         raise SystemExit("ImageMagick is required to make gallery thumbnails "
                          "(brew install imagemagick / apt install imagemagick)")
     size = cfg["size"]
+    dest.parent.mkdir(parents=True, exist_ok=True)
     subprocess.run([
         tool, str(src), "-auto-orient",
         "-resize", "%dx%d^" % (size, size), "-gravity", "center", "-extent", "%dx%d" % (size, size),
         "-strip", "-interlace", "Plane", "-sampling-factor", "4:2:0",
         "-quality", str(cfg["quality"]), str(dest),
     ], check=True)
+    return True
 
 
-def copy_tree(src, dest):
-    for path in src.rglob("*"):
-        if path.is_file() and path.name != ".DS_Store":
-            target = dest / path.relative_to(src)
-            target.parent.mkdir(parents=True, exist_ok=True)
-            if not target.exists() or target.stat().st_mtime < path.stat().st_mtime:
-                shutil.copy2(path, target)
-
-
-def build(check_only=False):
-    with (DATA / "site.toml").open("rb") as f:
-        site_cfg = tomllib.load(f)
+def build(check_only=False, force=()):
     members = load_members()
     publications = load_publications(members["people"])
-    site = {
-        "site": site_cfg,
-        "news": load_news(publications["by_key"], members["people"]),
-        "publications": publications,
-        "members": members,
-        "gallery": load_gallery(),
-    }
+    load_news(publications["by_key"], members["people"])
+    gallery = load_gallery()
     if errors:
         print("Data errors:", file=sys.stderr)
         for e in errors:
@@ -625,58 +590,25 @@ def build(check_only=False):
         print("data/ is valid.")
         return 0
 
-    env = Environment(
-        loader=FileSystemLoader(LAYOUT_DIR),
-        autoescape=True,
-        undefined=StrictUndefined,
-        keep_trailing_newline=True,
-        trim_blocks=True,
-        lstrip_blocks=True,
-    )
-    OUT.mkdir(exist_ok=True)
-    for page in PAGES:
-        html = env.get_template(page + ".html").render(page=page, **site)
-        (OUT / (page + ".html")).write_text(html, encoding="utf-8")
-
-    # content/<page>.html: plain HTML for inside <main>, in the shared frame.
-    # The title is the page's nav label (or its file name).
-    labels = {item["page"]: item["label"] for item in site_cfg["nav"]}
-    content_pages = sorted(CONTENT.glob("*.html"))
-    for path in content_pages:
-        page = path.stem
-        if page in PAGES:
-            raise SystemExit("content/%s.html clashes with layout/%s.html" % (page, page))
-        html = env.get_template("page.html").render(
-            page=page,
-            title=labels.get(page, page.capitalize()),
-            content=Markup(path.read_text(encoding="utf-8").strip("\n")),
-            **site,
-        )
-        (OUT / (page + ".html")).write_text(html, encoding="utf-8")
-
-    copy_tree(STATIC, OUT)
-    for src, dest in PUBLISH.items():
-        copy_tree(src, OUT / dest)
-    thumbs = OUT / THUMBS
-    thumbs.mkdir(parents=True, exist_ok=True)
-    for p in site["gallery"]["photos"]:
-        thumbnail(DATA / "gallery" / "photos" / p["file"], OUT / p["thumb"], site["gallery"]["config"]["thumbnail"])
-    print("Built %d pages into %s" % (len(PAGES) + len(content_pages), OUT.relative_to(ROOT)))
+    made = 0
+    for p in gallery["photos"]:
+        src = DATA / "gallery" / "photos" / p["file"]
+        made += thumbnail(src, p["thumb"], gallery["config"]["thumbnail"], force=p["file"] in force)
+    wanted = {p["thumb"].name for p in gallery["photos"]}
+    for old in THUMBS.glob("*.jpg"):
+        if old.name not in wanted:
+            print("note: %s has no photo in gallery.yaml any more" % old.relative_to(ROOT))
+    print("data/ is valid; %d thumbnail(s) made in %s" % (made, THUMBS.relative_to(ROOT)))
     return 0
 
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
-    ap.add_argument("--check", action="store_true", help="validate data/ only")
-    ap.add_argument("--serve", action="store_true", help="serve _site/ after building")
-    ap.add_argument("--port", type=int, default=8000)
+    ap.add_argument("--check", action="store_true", help="check data/ only, write nothing")
+    ap.add_argument("--remake", nargs="*", default=[], metavar="PHOTO",
+                    help="remake the thumbnails of these photo file names (after replacing a photo)")
     args = ap.parse_args()
-    status = build(check_only=args.check)
-    if status or not args.serve:
-        return status
-    handler = functools.partial(http.server.SimpleHTTPRequestHandler, directory=str(OUT))
-    print("Serving http://localhost:%d (Ctrl-C to stop)" % args.port)
-    http.server.ThreadingHTTPServer(("", args.port), handler).serve_forever()
+    return build(check_only=args.check, force=set(args.remake))
 
 
 if __name__ == "__main__":

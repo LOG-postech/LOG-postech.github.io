@@ -1,3 +1,5 @@
 _site/
 __pycache__/
 .DS_Store
+Gemfile.lock
+.jekyll-cache/
