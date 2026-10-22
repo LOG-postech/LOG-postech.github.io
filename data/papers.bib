@@ -1,0 +1,369 @@
+% Lab paper list — the source of truth for publications.html.
+%
+% One entry per paper, in display order (newest first). After editing, the
+% pre-commit hook or the GitHub Action runs tools/build-db.py to rebuild the page.
+%
+% Sections: @misc / @unpublished go under "Preprint"; others by year, and papers
+% from before 2023 under "Previous".
+%
+% Fields besides standard BibTeX:
+%   venue        = {ICML 2026}            what the list shows (required)
+%   presentation = {Oral}                 shown highlighted as "(Oral)"
+%   also         = {ICML 2023 Workshop on ...}       more venues, ";"-separated
+%   award        = {JKAIA 2025 Best Paper Award}     highlighted, ";"-separated
+%   equal        = {Hyunji Jung and Sungbin Shin}    equal contribution (*)
+%   url          = {https://...}          the [paper] link
+%   code, model, slides, ... = {https://...}         any other link, labelled
+%                                                     with the field name
+% Authors who are current members (data/members.bib) get their face and a link.
+
+@misc{lee2026hardware,
+  title  = {Hardware-Native Joint Sparse-Quantization for Trillion-Scale Mixture-of-Experts},
+  author = {Kwanhee Lee and Namhoon Lee and Dan Alistarh},
+  year   = {2026},
+  venue  = {arXiv 2026},
+  url    = {https://arxiv.org/abs/2610.02241},
+  code   = {https://github.com/IST-DASLab/MoESQ},
+  model  = {https://huggingface.co/collections/ISTA-DASLab/moesq},
+}
+
+@inproceedings{park2026comparing,
+  title  = {Comparing Synchronous and Asynchronous Pipeline Parallelism Across Training Configurations},
+  author = {Junkyu Park and Dongyeop Lee and Namhoon Lee},
+  year   = {2026},
+  venue  = {NeurIPS 2026 Workshop on Collaborative, Open, and Decentralized Training of Foundation Models},
+}
+
+@inproceedings{kim2026seedflood,
+  title        = {SeedFlood: A Step Toward Scalable Decentralized Fine-Tuning of LLMs},
+  author       = {Jihun Kim and Dongyeop Lee and Namhoon Lee},
+  year         = {2026},
+  venue        = {NeurIPS 2026 Workshop on Collaborative, Open, and Decentralized Training of Foundation Models},
+  presentation = {Oral},
+  url          = {https://arxiv.org/abs/2602.18181},
+}
+
+@inproceedings{lee2026fresco,
+  title  = {FRESCO: A Novel Consistency Control for Asynchronous Pipeline Parallel Training},
+  author = {Dongyeop Lee and Namhoon Lee},
+  year   = {2026},
+  venue  = {NeurIPS 2026},
+}
+
+@inproceedings{jang2026hidden,
+  title  = {Hidden in Plain Sight: The Overlooked Significance of Canonical Elements for Extreme LLM Sparsity},
+  author = {Hyeondo Jang and Kwanhee Lee and Dongyeop Lee and Namhoon Lee},
+  year   = {2026},
+  venue  = {EMNLP 2026},
+  award  = {CKAIA 2026 Best Paper Award},
+  url    = {https://arxiv.org/abs/2609.06557},
+}
+
+@inproceedings{jeong2026advancing,
+  title  = {Advancing Semiconductor Inspection: A New Dataset and Approach for Robust Anomaly Detection with Large Vision Language Models},
+  author = {Jaehyeon Jeong and Hyeondo Jang and Donghyun Oh and Seongeun Kim and Namhoon Lee},
+  equal  = {Jaehyeon Jeong and Hyeondo Jang},
+  year   = {2026},
+  venue  = {BMVC 2026},
+}
+
+@inproceedings{park2026exploiting,
+  title  = {Exploiting Local Flatness for Efficient Out-of-Distribution Detection},
+  author = {Seonghwan Park and Hyunji Jung and Dongyeop Lee and Namhoon Lee},
+  year   = {2026},
+  venue  = {ECCV 2026},
+  url    = {https://arxiv.org/abs/2606.29952v1},
+  code   = {https://github.com/shpark97/Fold},
+}
+
+@inproceedings{kim2026policy,
+  title  = {On-Policy Adaptation Mitigates Hyperparameter-Sensitive Forgetting in Vision-Language Models},
+  author = {Doyoon Kim and Ziyang Wu and Jingfeng Yang and Yi Ma},
+  equal  = {Doyoon Kim and Ziyang Wu},
+  year   = {2026},
+  venue  = {ICML 2026 Workshop on Continual Adaptation at Scale: Towards Sustainable AI},
+  url    = {https://openreview.net/forum?id=hSugVMRCLK},
+}
+
+@inproceedings{jung2026mitigating,
+  title  = {Mitigating Staleness in Asynchronous Pipeline Parallelism via Basis Rotation},
+  author = {Hyunji Jung and Sungbin Shin and Namhoon Lee},
+  equal  = {Hyunji Jung and Sungbin Shin},
+  year   = {2026},
+  venue  = {ICML 2026},
+  url    = {https://www.arxiv.org/abs/2602.03515v2},
+  code   = {https://github.com/LOG-postech/basis-rotation},
+}
+
+@inproceedings{chung2026quantifying,
+  title        = {Quantifying Aleatoric Uncertainty of In-Context Learning for Robust Measure of LLM Prediction Confidence},
+  author       = {Jinseok Chung and Minkyoung Song and Hyunji Jung and Namhoon Lee},
+  equal        = {Minkyoung Song and Hyunji Jung},
+  year         = {2026},
+  venue        = {ACL 2026},
+  presentation = {Oral},
+  award        = {KCC 2026 Workshop Outstanding Paper Award},
+  url          = {https://arxiv.org/abs/2606.19353},
+  code         = {https://github.com/LOG-postech/self-fv-icl},
+}
+
+@inproceedings{lee2026dynamic,
+  title  = {Dynamic Network Compression via Probabilistic Channel Pruning},
+  author = {Kwanhee Lee and Hyang Won Lee},
+  year   = {2026},
+  venue  = {Neural Networks 2026},
+  url    = {https://www.sciencedirect.com/science/article/pii/S0893608025009608},
+}
+
+@inproceedings{lee2026unseen,
+  title  = {The Unseen Frontier: Pushing the Limits of LLM Sparsity with Surrogate-Free ADMM},
+  author = {Kwanhee Lee and Hyeondo Jang and Dongyeop Lee and Dan Alistarh and Namhoon Lee},
+  year   = {2026},
+  venue  = {ICLR 2026},
+  award  = {JKAIA 2025 Best Paper Award},
+  url    = {https://arxiv.org/abs/2510.01650},
+  code   = {https://github.com/LOG-postech/elsa},
+}
+
+@inproceedings{seong2025memeic,
+  title  = {MemEIC: A Step Toward Continual and Compositional Knowledge Editing},
+  author = {Jin Seong and Jiyun Park and Wencke Liermann and Hongseok Choi and Yoonji Nam and Hyun Kim and Soojong Lim and Namhoon Lee},
+  equal  = {Jin Seong and Jiyun Park},
+  year   = {2025},
+  venue  = {NeurIPS 2025},
+  url    = {https://arxiv.org/abs/2510.25798},
+  code   = {https://github.com/MemEIC/MemEIC},
+}
+
+@inproceedings{park2025analysis,
+  title  = {An Analysis of Concept Bottleneck Models: Measuring, Understanding, and Mitigating the Impact of Noisy Annotations},
+  author = {Seonghwan Park and Jueun Mun and Donghyun Oh and Namhoon Lee},
+  year   = {2025},
+  venue  = {NeurIPS 2025},
+  url    = {https://arxiv.org/abs/2505.16705},
+  code   = {https://github.com/LOG-postech/CBM-Noise},
+}
+
+@inproceedings{shin2025critical,
+  title  = {Critical Influence of Overparameterization on Sharpness-aware Minimization},
+  author = {Sungbin Shin and Dongyeop Lee and Maksym Andriushchenko and Namhoon Lee},
+  equal  = {Sungbin Shin and Dongyeop Lee},
+  year   = {2025},
+  venue  = {UAI 2025},
+  also   = {ICML 2023 Workshop on High-dimensional Learning Dynamics},
+  award  = {JKAIA 2023 Best Paper Award},
+  url    = {https://arxiv.org/abs/2311.17539},
+  code   = {https://github.com/LOG-postech/SAM-overparam},
+}
+
+@inproceedings{lee2025safe,
+  title        = {SAFE: Finding Sparse and Flat Minima to Improve Pruning},
+  author       = {Dongyeop Lee and Kwanhee Lee and Jinseok Chung and Namhoon Lee},
+  year         = {2025},
+  venue        = {ICML 2025},
+  presentation = {Spotlight},
+  url          = {https://arxiv.org/abs/2506.06866},
+  code-torch   = {https://github.com/log-postech/safe-torch},
+  code-jax     = {https://github.com/LOG-postech/safe-jax},
+}
+
+@inproceedings{shin2025sassha,
+  title  = {SASSHA: Sharpness-aware Adaptive Second-order Optimization with Stable Hessian Approximation},
+  author = {Dahun Shin and Dongyeop Lee and Jinseok Chung and Namhoon Lee},
+  equal  = {Dahun Shin and Dongyeop Lee},
+  year   = {2025},
+  venue  = {ICML 2025},
+  url    = {https://arxiv.org/abs/2502.18153},
+  code   = {https://github.com/LOG-postech/Sassha},
+}
+
+@inproceedings{park2025zip,
+  title  = {ZIP: An Efficient Zeroth-order Prompt Tuning for Black-box Vision-Language Models},
+  author = {Seonghwan Park and Jaehyeon Jeong and Yongjun Kim and Jaeho Lee and Namhoon Lee},
+  year   = {2025},
+  venue  = {ICLR 2025},
+  url    = {https://arxiv.org/abs/2504.06838},
+  code   = {https://github.com/LOG-postech/ZIP},
+}
+
+@inproceedings{jung2025convergence,
+  title  = {Convergence and Implicit Bias of Gradient Descent on Continual Linear Classification},
+  author = {Hyunji Jung and Hanseul Cho and Chulhee Yun},
+  equal  = {Hyunji Jung and Hanseul Cho},
+  year   = {2025},
+  venue  = {ICLR 2025},
+  url    = {https://arxiv.org/abs/2504.12712},
+}
+
+@inproceedings{shin2024rethinking,
+  title  = {Rethinking Pruning Large Language Models: Benefits and Pitfalls of Reconstruction Error Minimization},
+  author = {Sungbin Shin and Wonpyo Park and Jaeho Lee and Namhoon Lee},
+  year   = {2024},
+  venue  = {EMNLP 2024},
+  url    = {https://arxiv.org/abs/2406.15524},
+  code   = {https://github.com/LOG-postech/rethinking-LLM-pruning},
+}
+
+@inproceedings{son2024role,
+  title  = {The Role of Masking for Efficient Supervised Knowledge Distillation of Vision Transformers},
+  author = {Seungwoo Son and Jegwang Ryu and Namhoon Lee and Jaeho Lee},
+  year   = {2024},
+  venue  = {ECCV 2024},
+  also   = {ICLR 2023 Workshop},
+  url    = {https://arxiv.org/abs/2302.10494},
+}
+
+@inproceedings{lee2024jaxpruner,
+  title        = {JaxPruner: A Concise Library for Sparsity Research},
+  author       = {Joo Hyung Lee and Wonpyo Park and Nicole Mitchell and Jonathan Pilault and Johan Obando-Ceron and Han-Byul Kim and Namhoon Lee and Elias Frantar and Yun Long and Amir Yazdanbakhsh and Shivani Agrawal and Suvinay Subramanian and Xin Wang and Sheng-Chun Kao and Xingyao Zhang and Trevor Gale and Aart Bik and Woohyun Han and Milen Ferez and Zhonglin Han and Hong-Seok Kim and Yann Dauphin and Gintare Karolina Dziugaite and Pablo Samuel Castro and Utku Evci},
+  year         = {2024},
+  venue        = {CPAL 2024},
+  presentation = {Oral},
+  also         = {ICLR 2023 Workshop on Sparsity in Neural Networks},
+  url          = {https://arxiv.org/abs/2304.14082},
+}
+
+@inproceedings{oh2023pruning,
+  title  = {Pruning Neural Networks with Velocity-Constrained Optimization},
+  author = {Donghyun Oh and Jinseok Chung and Namhoon Lee},
+  equal  = {Donghyun Oh and Jinseok Chung},
+  year   = {2023},
+  venue  = {NeurIPS 2023 Workshop on Optimization for Machine Learning},
+  url    = {https://opt-ml.org/papers.html},
+}
+
+@inproceedings{shin2023closer,
+  title  = {A Closer Look at the Intervention Procedure of Concept Bottleneck Models},
+  author = {Sungbin Shin and Yohan Jo and Sungsoo Ahn and Namhoon Lee},
+  year   = {2023},
+  venue  = {ICML 2023},
+  also   = {NeurIPS 2022 Workshop on Trustworthy and Socially Responsible ML},
+  url    = {https://arxiv.org/abs/2302.14260},
+  code   = {https://github.com/ssbin4/Closer-Intervention-CBM},
+}
+
+@inproceedings{chung2023effectiveness,
+  title  = {On the Effectiveness of Sharpness-Aware Minimization with Large Mini-batches},
+  author = {Jinseok Chung and Seonghwan Park and Jaeho Lee and Namhoon Lee},
+  year   = {2023},
+  venue  = {ICML 2023 Workshop on High-dimensional Learning Dynamics},
+  url    = {https://sites.google.com/view/hidimlearning/papers},
+}
+
+@inproceedings{park2023fedfwd,
+  title  = {FedFwd: Federated Learning without Backpropagation},
+  author = {Seonghwan Park and Dahun Shin and Jinseok Chung and Namhoon Lee},
+  year   = {2023},
+  venue  = {ICML 2023 Workshop on Federated Learning and Analytics in Practice},
+  url    = {https://fl-icml2023.github.io/},
+}
+
+@inproceedings{bae2023semi,
+  title  = {Semi-Supervised Concept Bottleneck Models},
+  author = {Jeeon Bae and Sungbin Shin and Namhoon Lee},
+  year   = {2023},
+  venue  = {ICML 2023 Workshop on Artificial Intelligence and Human-Computer Interaction},
+  url    = {https://sites.google.com/view/aihci/papers},
+}
+
+@inproceedings{nam2023almost,
+  title      = {Almost Sure Last Iterate Convergence of Sharpness-Aware Minimization},
+  author     = {Kyungchun Nam and Jinseok Chung and Namhoon Lee},
+  year       = {2023},
+  venue      = {ICLR 2023 Tiny Papers},
+  openreview = {https://openreview.net/forum?id=IcDTYTI0Nx},
+}
+
+@inproceedings{lee2021meta,
+  title  = {Meta-Learning Sparse Implicit Neural Representations},
+  author = {Jaeho Lee and Jihoon Tack and Namhoon Lee and Jinwoo Shin},
+  equal  = {Jaeho Lee and Jihoon Tack},
+  year   = {2021},
+  venue  = {NeurIPS 2021},
+  also   = {SNN 2021},
+  url    = {https://arxiv.org/abs/2110.14678},
+}
+
+@inproceedings{lee2021understanding,
+  title  = {Understanding the Effects of Data Parallelism and Sparsity on Neural Network Training},
+  author = {Namhoon Lee and Thalaiyasingam Ajanthan and Philip H. S. Torr and Martin Jaggi},
+  year   = {2021},
+  venue  = {ICLR 2021},
+  url    = {https://arxiv.org/abs/2003.11316},
+}
+
+@inproceedings{lee2021optimal,
+  title  = {Optimal Mini-Batch Size for Stochastic Gradient Methods},
+  author = {Namhoon Lee and Philip H. S. Torr and Richard Hartley},
+  year   = {2021},
+  venue  = {ICLR 2021 Workshop on Science and Engineering of Deep Learning},
+  url    = {https://sites.google.com/view/sedl-workshop},
+}
+
+@inproceedings{lee2020signal,
+  title        = {A Signal Propagation Perspective for Pruning Neural Networks at Initialization},
+  author       = {Namhoon Lee and Thalaiyasingam Ajanthan and Stephen Gould and Philip H. S. Torr},
+  year         = {2020},
+  venue        = {ICLR 2020},
+  presentation = {Spotlight},
+  url          = {https://arxiv.org/abs/1906.06307},
+}
+
+@inproceedings{lee2020data,
+  title  = {Data Parallelism in Training Sparse Neural Networks},
+  author = {Namhoon Lee and Philip H. S. Torr and Martin Jaggi},
+  year   = {2020},
+  venue  = {ICLR 2020 Workshop on Practical ML},
+  url    = {https://arxiv.org/abs/2003.11316},
+}
+
+@inproceedings{lee2019snip,
+  title  = {SNIP: Single-shot Network Pruning based on Connection Sensitivity},
+  author = {Namhoon Lee and Thalaiyasingam Ajanthan and Philip H. S. Torr},
+  year   = {2019},
+  venue  = {ICLR 2019},
+  url    = {https://arxiv.org/abs/1810.02340},
+}
+
+@inproceedings{jetley2018learn,
+  title  = {Learn to Pay Attention},
+  author = {Saumya Jetley and Nicholas Lord and Namhoon Lee and Philip H. S. Torr},
+  year   = {2018},
+  venue  = {ICLR 2018},
+  url    = {https://arxiv.org/abs/1804.02391},
+}
+
+@inproceedings{hattori2018synthesizing,
+  title  = {Synthesizing a Scene-Specific Pedestrian Detector and Pose Estimator for Static Video Surveillance},
+  author = {Hironori Hattori and Namhoon Lee and Vishnu N. Boddeti and Fares Beainy and Kris M. Kitani and Takeo Kanade},
+  equal  = {Hironori Hattori and Namhoon Lee},
+  year   = {2018},
+  venue  = {IJCV 2018},
+  url    = {https://link.springer.com/article/10.1007/s11263-018-1077-3},
+}
+
+@inproceedings{lee2017desire,
+  title        = {DESIRE: Distant Future Prediction in Dynamic Scenes with Interacting Agents},
+  author       = {Namhoon Lee and Wongun Choi and Paul Vernaza and Christopher B. Choy and Philip H. S. Torr and Manmohan Chandraker},
+  year         = {2017},
+  venue        = {CVPR 2017},
+  presentation = {Spotlight},
+  url          = {https://arxiv.org/abs/1704.04394},
+}
+
+@inproceedings{ma2017forecasting,
+  title  = {Forecasting Interactive Dynamics of Pedestrians with Fictitious Play},
+  author = {Wei-Chiu Ma and De-An Huang and Namhoon Lee and Kris M. Kitani},
+  year   = {2017},
+  venue  = {CVPR 2017},
+  url    = {https://arxiv.org/abs/1604.01431},
+}
+
+@inproceedings{lee2016predicting,
+  title        = {Predicting Wide Receiver Trajectories in American Football},
+  author       = {Namhoon Lee and Kris M. Kitani},
+  year         = {2016},
+  venue        = {WACV 2016},
+  presentation = {Oral},
+  url          = {https://namhoonlee.github.io/doc/LK_WACV2016.pdf},
+}

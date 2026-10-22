@@ -1,0 +1,145 @@
+% Lab members — the source of truth for the lists on group.html, and for the
+% member faces on the news and publication pages.
+%
+% @member{<photo file name>,       the key is also the card's anchor: group.html#<key>
+%   name     = {...},
+%   position = {MS Student},
+%   photo    = {group_profile/<key>.jpg},
+%   url      = {https://...},      optional personal site
+%   aliases  = {Other Spelling},   optional, ";"-separated: other spellings in papers
+% }
+% @intern{...,  name, affiliation }
+% @alumnus{..., name, url (optional), note = {MS 2025 → NHN} }
+%
+% Entries are shown in file order. After editing, the pre-commit hook or the
+% GitHub Action runs tools/build-db.py to rebuild group.html.
+
+@member{namhoonlee,
+  name     = {Namhoon Lee},
+  position = {Principal Investigator},
+  photo    = {group_profile/namhoonlee.jpg},
+  url      = {https://namhoonlee.github.io/},
+}
+
+@member{damiso,
+  name     = {Dami So},
+  position = {Administrator},
+  photo    = {group_profile/damiso.jpg},
+}
+
+@member{jinseokchung,
+  name     = {Jinseok Chung},
+  position = {MS/PhD Student},
+  photo    = {group_profile/jinseokchung.jpg},
+}
+
+@member{donghyunoh,
+  name     = {Donghyun Oh},
+  position = {MS/PhD Student},
+  photo    = {group_profile/donghyunoh.jpg},
+}
+
+@member{sungbinshin,
+  name     = {Sungbin Shin},
+  position = {MS/PhD Student},
+  photo    = {group_profile/sungbinshin.jpg},
+  url      = {https://ssbin4.github.io},
+}
+
+@member{dongyeoplee,
+  name     = {Dongyeop Lee},
+  position = {PhD Student},
+  photo    = {group_profile/dongyeoplee.jpg},
+  url      = {https://dongyeoplee2.github.io},
+}
+
+@member{jihunkim,
+  name     = {Jihun Kim},
+  position = {MS/PhD Student},
+  photo    = {group_profile/jihunkim.jpg},
+}
+
+@member{kwanheelee,
+  name     = {Kwanhee Lee},
+  position = {MS Student},
+  photo    = {group_profile/kwanheelee.jpg},
+  url      = {https://kwanhee-lee.github.io},
+}
+
+@member{hyunjijung,
+  name     = {Hyunji Jung},
+  position = {MS Student},
+  photo    = {group_profile/hyunjijung.jpg},
+  url      = {https://www.linkedin.com/in/hyunji-jung-1121b5276/?locale=en},
+}
+
+@member{minkyoungsong,
+  name     = {Minkyoung Song},
+  position = {MS Student},
+  photo    = {group_profile/minkyoungsong.jpg},
+  url      = {https://smk2295.github.io/},
+  aliases  = {Minkyung Song},
+}
+
+@member{hyeondojang,
+  name     = {Hyeondo Jang},
+  position = {MS Student},
+  photo    = {group_profile/hyeondojang.jpg},
+  url      = {https://hyeondo-jang.github.io/},
+}
+
+@member{jiyunpark,
+  name     = {Jiyun Park},
+  position = {MS Student},
+  photo    = {group_profile/jiyunpark.jpg},
+}
+
+@member{doyoonkim,
+  name     = {Doyoon Kim},
+  position = {MS Student},
+  photo    = {group_profile/doyoonkim.jpg},
+  url      = {https://cosmos1030.github.io/},
+}
+
+@member{yuchankim,
+  name     = {Yuchan Kim},
+  position = {MS Student},
+  photo    = {group_profile/yuchankim.jpg},
+}
+
+@intern{minsungkang,
+  name        = {Minsung Kang},
+  affiliation = {POSTECH},
+}
+
+@intern{junkyupark,
+  name        = {Junkyu Park},
+  affiliation = {POSTECH},
+}
+
+@intern{wuvinan,
+  name        = {Wuvin An},
+  affiliation = {POSTECH},
+}
+
+@alumnus{dahunshin-alumni,
+  name = {Dahun Shin},
+  note = {MS 2025 → NHN},
+}
+
+@alumnus{seonghwanpark-alumni,
+  name = {Seonghwan Park},
+  url  = {https://shpark97.github.io/},
+  note = {MS 2025 → KETI},
+}
+
+@alumnus{dongyeoplee-alumni,
+  name = {Dongyeop Lee},
+  url  = {https://dongyeoplee2.github.io},
+  note = {MS 2025, continuing as PhD},
+}
+
+@alumnus{jaehyeonjeong-alumni,
+  name = {Jaehyeon Jeong},
+  note = {MS 2026 → ETRI},
+}

@@ -29,6 +29,25 @@ if git diff --cached --name-only --diff-filter=ACMR | grep -qx 'news.html'; then
     fi
 fi
 
+# data/members.bib and data/papers.bib are the source of truth for the member
+# and paper lists. Rebuild the generated pages whenever the data, the builder,
+# or one of those pages is being committed, so a hand edit to a generated list
+# never lands.
+if git diff --cached --name-only --diff-filter=ACMR \
+    | grep -qE '^(data/.*\.bib|tools/build-db\.py|group\.html|publications\.html)$'; then
+    if tools/build-db.py >/dev/null; then
+        for out in group.html publications.html data/db.json; do
+            if ! git diff --quiet -- "$out"; then
+                git add -- "$out"
+                echo "pre-commit: rebuilt $out from data/*.bib"
+            fi
+        done
+    else
+        echo "pre-commit: tools/build-db.py failed (see above); fix data/*.bib" >&2
+        exit 1
+    fi
+fi
+
 # Staged images in the directories the optimizer manages.
 mapfile -t STAGED < <(
     git diff --cached --name-only --diff-filter=ACMR \

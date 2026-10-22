@@ -1,0 +1,52 @@
+# Rebuild group.html, publications.html and data/db.json from data/*.bib.
+#
+# The pre-commit hook does the same locally, but edits made in the GitHub web
+# editor never run it. This catches those: after any push to main that touches
+# the data or a generated page, it rebuilds and commits the result.
+
+name: Build lab database
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'data/*.bib'
+      - 'tools/build-db.py'
+      - 'group.html'
+      - 'publications.html'
+  pull_request:
+    paths:
+      - 'data/*.bib'
+      - 'tools/build-db.py'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # On a pull request this only proves the bib files are valid (the build
+      # fails on a bad entry); the push to main commits the rebuilt pages.
+      - name: Rebuild
+        run: python3 tools/build-db.py
+
+      - name: Commit rebuilt pages
+        if: github.event_name != 'pull_request'
+        run: |
+          if git diff --quiet; then
+            echo "Pages already match data/*.bib."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add group.html publications.html data/db.json
+          git commit -m "REFACTOR: rebuild pages from data/*.bib"
+          git push

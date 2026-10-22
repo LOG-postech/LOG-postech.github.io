@@ -1,0 +1,637 @@
+{
+ "members": [
+  {
+   "key": "namhoonlee",
+   "name": "Namhoon Lee",
+   "aliases": [],
+   "photo": "group_profile/namhoonlee.jpg",
+   "url": "https://namhoonlee.github.io/"
+  },
+  {
+   "key": "damiso",
+   "name": "Dami So",
+   "aliases": [],
+   "photo": "group_profile/damiso.jpg",
+   "url": null
+  },
+  {
+   "key": "jinseokchung",
+   "name": "Jinseok Chung",
+   "aliases": [],
+   "photo": "group_profile/jinseokchung.jpg",
+   "url": null
+  },
+  {
+   "key": "donghyunoh",
+   "name": "Donghyun Oh",
+   "aliases": [],
+   "photo": "group_profile/donghyunoh.jpg",
+   "url": null
+  },
+  {
+   "key": "sungbinshin",
+   "name": "Sungbin Shin",
+   "aliases": [],
+   "photo": "group_profile/sungbinshin.jpg",
+   "url": "https://ssbin4.github.io"
+  },
+  {
+   "key": "dongyeoplee",
+   "name": "Dongyeop Lee",
+   "aliases": [],
+   "photo": "group_profile/dongyeoplee.jpg",
+   "url": "https://dongyeoplee2.github.io"
+  },
+  {
+   "key": "jihunkim",
+   "name": "Jihun Kim",
+   "aliases": [],
+   "photo": "group_profile/jihunkim.jpg",
+   "url": null
+  },
+  {
+   "key": "kwanheelee",
+   "name": "Kwanhee Lee",
+   "aliases": [],
+   "photo": "group_profile/kwanheelee.jpg",
+   "url": "https://kwanhee-lee.github.io"
+  },
+  {
+   "key": "hyunjijung",
+   "name": "Hyunji Jung",
+   "aliases": [],
+   "photo": "group_profile/hyunjijung.jpg",
+   "url": "https://www.linkedin.com/in/hyunji-jung-1121b5276/?locale=en"
+  },
+  {
+   "key": "minkyoungsong",
+   "name": "Minkyoung Song",
+   "aliases": [
+    "Minkyung Song"
+   ],
+   "photo": "group_profile/minkyoungsong.jpg",
+   "url": "https://smk2295.github.io/"
+  },
+  {
+   "key": "hyeondojang",
+   "name": "Hyeondo Jang",
+   "aliases": [],
+   "photo": "group_profile/hyeondojang.jpg",
+   "url": "https://hyeondo-jang.github.io/"
+  },
+  {
+   "key": "jiyunpark",
+   "name": "Jiyun Park",
+   "aliases": [],
+   "photo": "group_profile/jiyunpark.jpg",
+   "url": null
+  },
+  {
+   "key": "doyoonkim",
+   "name": "Doyoon Kim",
+   "aliases": [],
+   "photo": "group_profile/doyoonkim.jpg",
+   "url": "https://cosmos1030.github.io/"
+  },
+  {
+   "key": "yuchankim",
+   "name": "Yuchan Kim",
+   "aliases": [],
+   "photo": "group_profile/yuchankim.jpg",
+   "url": null
+  }
+ ],
+ "papers": [
+  {
+   "key": "lee2026hardware",
+   "title": "Hardware-Native Joint Sparse-Quantization for Trillion-Scale Mixture-of-Experts",
+   "authors": [
+    "Kwanhee Lee",
+    "Namhoon Lee",
+    "Dan Alistarh"
+   ],
+   "links": [
+    "https://arxiv.org/abs/2610.02241",
+    "https://github.com/IST-DASLab/MoESQ",
+    "https://huggingface.co/collections/ISTA-DASLab/moesq"
+   ]
+  },
+  {
+   "key": "park2026comparing",
+   "title": "Comparing Synchronous and Asynchronous Pipeline Parallelism Across Training Configurations",
+   "authors": [
+    "Junkyu Park",
+    "Dongyeop Lee",
+    "Namhoon Lee"
+   ],
+   "links": []
+  },
+  {
+   "key": "kim2026seedflood",
+   "title": "SeedFlood: A Step Toward Scalable Decentralized Fine-Tuning of LLMs",
+   "authors": [
+    "Jihun Kim",
+    "Dongyeop Lee",
+    "Namhoon Lee"
+   ],
+   "links": [
+    "https://arxiv.org/abs/2602.18181"
+   ]
+  },
+  {
+   "key": "lee2026fresco",
+   "title": "FRESCO: A Novel Consistency Control for Asynchronous Pipeline Parallel Training",
+   "authors": [
+    "Dongyeop Lee",
+    "Namhoon Lee"
+   ],
+   "links": []
+  },
+  {
+   "key": "jang2026hidden",
+   "title": "Hidden in Plain Sight: The Overlooked Significance of Canonical Elements for Extreme LLM Sparsity",
+   "authors": [
+    "Hyeondo Jang",
+    "Kwanhee Lee",
+    "Dongyeop Lee",
+    "Namhoon Lee"
+   ],
+   "links": [
+    "https://arxiv.org/abs/2609.06557"
+   ]
+  },
+  {
+   "key": "jeong2026advancing",
+   "title": "Advancing Semiconductor Inspection: A New Dataset and Approach for Robust Anomaly Detection with Large Vision Language Models",
+   "authors": [
+    "Jaehyeon Jeong",
+    "Hyeondo Jang",
+    "Donghyun Oh",
+    "Seongeun Kim",
+    "Namhoon Lee"
+   ],
+   "links": []
+  },
+  {
+   "key": "park2026exploiting",
+   "title": "Exploiting Local Flatness for Efficient Out-of-Distribution Detection",
+   "authors": [
+    "Seonghwan Park",
+    "Hyunji Jung",
+    "Dongyeop Lee",
+    "Namhoon Lee"
+   ],
+   "links": [
+    "https://arxiv.org/abs/2606.29952v1",
+    "https://github.com/shpark97/Fold"
+   ]
+  },
+  {
+   "key": "kim2026policy",
+   "title": "On-Policy Adaptation Mitigates Hyperparameter-Sensitive Forgetting in Vision-Language Models",
+   "authors": [
+    "Doyoon Kim",
+    "Ziyang Wu",
+    "Jingfeng Yang",
+    "Yi Ma"
+   ],
+   "links": [
+    "https://openreview.net/forum?id=hSugVMRCLK"
+   ]
+  },
+  {
+   "key": "jung2026mitigating",
+   "title": "Mitigating Staleness in Asynchronous Pipeline Parallelism via Basis Rotation",
+   "authors": [
+    "Hyunji Jung",
+    "Sungbin Shin",
+    "Namhoon Lee"
+   ],
+   "links": [
+    "https://www.arxiv.org/abs/2602.03515v2",
+    "https://github.com/LOG-postech/basis-rotation"
+   ]
+  },
+  {
+   "key": "chung2026quantifying",
+   "title": "Quantifying Aleatoric Uncertainty of In-Context Learning for Robust Measure of LLM Prediction Confidence",
+   "authors": [
+    "Jinseok Chung",
+    "Minkyoung Song",
+    "Hyunji Jung",
+    "Namhoon Lee"
+   ],
+   "links": [
+    "https://arxiv.org/abs/2606.19353",
+    "https://github.com/LOG-postech/self-fv-icl"
+   ]
+  },
+  {
+   "key": "lee2026dynamic",
+   "title": "Dynamic Network Compression via Probabilistic Channel Pruning",
+   "authors": [
+    "Kwanhee Lee",
+    "Hyang Won Lee"
+   ],
+   "links": [
+    "https://www.sciencedirect.com/science/article/pii/S0893608025009608"
+   ]
+  },
+  {
+   "key": "lee2026unseen",
+   "title": "The Unseen Frontier: Pushing the Limits of LLM Sparsity with Surrogate-Free ADMM",
+   "authors": [
+    "Kwanhee Lee",
+    "Hyeondo Jang",
+    "Dongyeop Lee",
+    "Dan Alistarh",
+    "Namhoon Lee"
+   ],
+   "links": [
+    "https://arxiv.org/abs/2510.01650",
+    "https://github.com/LOG-postech/elsa"
+   ]
+  },
+  {
+   "key": "seong2025memeic",
+   "title": "MemEIC: A Step Toward Continual and Compositional Knowledge Editing",
+   "authors": [
+    "Jin Seong",
+    "Jiyun Park",
+    "Wencke Liermann",
+    "Hongseok Choi",
+    "Yoonji Nam",
+    "Hyun Kim",
+    "Soojong Lim",
+    "Namhoon Lee"
+   ],
+   "links": [
+    "https://arxiv.org/abs/2510.25798",
+    "https://github.com/MemEIC/MemEIC"
+   ]
+  },
+  {
+   "key": "park2025analysis",
+   "title": "An Analysis of Concept Bottleneck Models: Measuring, Understanding, and Mitigating the Impact of Noisy Annotations",
+   "authors": [
+    "Seonghwan Park",
+    "Jueun Mun",
+    "Donghyun Oh",
+    "Namhoon Lee"
+   ],
+   "links": [
+    "https://arxiv.org/abs/2505.16705",
+    "https://github.com/LOG-postech/CBM-Noise"
+   ]
+  },
+  {
+   "key": "shin2025critical",
+   "title": "Critical Influence of Overparameterization on Sharpness-aware Minimization",
+   "authors": [
+    "Sungbin Shin",
+    "Dongyeop Lee",
+    "Maksym Andriushchenko",
+    "Namhoon Lee"
+   ],
+   "links": [
+    "https://arxiv.org/abs/2311.17539",
+    "https://github.com/LOG-postech/SAM-overparam"
+   ]
+  },
+  {
+   "key": "lee2025safe",
+   "title": "SAFE: Finding Sparse and Flat Minima to Improve Pruning",
+   "authors": [
+    "Dongyeop Lee",
+    "Kwanhee Lee",
+    "Jinseok Chung",
+    "Namhoon Lee"
+   ],
+   "links": [
+    "https://arxiv.org/abs/2506.06866",
+    "https://github.com/log-postech/safe-torch",
+    "https://github.com/LOG-postech/safe-jax"
+   ]
+  },
+  {
+   "key": "shin2025sassha",
+   "title": "SASSHA: Sharpness-aware Adaptive Second-order Optimization with Stable Hessian Approximation",
+   "authors": [
+    "Dahun Shin",
+    "Dongyeop Lee",
+    "Jinseok Chung",
+    "Namhoon Lee"
+   ],
+   "links": [
+    "https://arxiv.org/abs/2502.18153",
+    "https://github.com/LOG-postech/Sassha"
+   ]
+  },
+  {
+   "key": "park2025zip",
+   "title": "ZIP: An Efficient Zeroth-order Prompt Tuning for Black-box Vision-Language Models",
+   "authors": [
+    "Seonghwan Park",
+    "Jaehyeon Jeong",
+    "Yongjun Kim",
+    "Jaeho Lee",
+    "Namhoon Lee"
+   ],
+   "links": [
+    "https://arxiv.org/abs/2504.06838",
+    "https://github.com/LOG-postech/ZIP"
+   ]
+  },
+  {
+   "key": "jung2025convergence",
+   "title": "Convergence and Implicit Bias of Gradient Descent on Continual Linear Classification",
+   "authors": [
+    "Hyunji Jung",
+    "Hanseul Cho",
+    "Chulhee Yun"
+   ],
+   "links": [
+    "https://arxiv.org/abs/2504.12712"
+   ]
+  },
+  {
+   "key": "shin2024rethinking",
+   "title": "Rethinking Pruning Large Language Models: Benefits and Pitfalls of Reconstruction Error Minimization",
+   "authors": [
+    "Sungbin Shin",
+    "Wonpyo Park",
+    "Jaeho Lee",
+    "Namhoon Lee"
+   ],
+   "links": [
+    "https://arxiv.org/abs/2406.15524",
+    "https://github.com/LOG-postech/rethinking-LLM-pruning"
+   ]
+  },
+  {
+   "key": "son2024role",
+   "title": "The Role of Masking for Efficient Supervised Knowledge Distillation of Vision Transformers",
+   "authors": [
+    "Seungwoo Son",
+    "Jegwang Ryu",
+    "Namhoon Lee",
+    "Jaeho Lee"
+   ],
+   "links": [
+    "https://arxiv.org/abs/2302.10494"
+   ]
+  },
+  {
+   "key": "lee2024jaxpruner",
+   "title": "JaxPruner: A Concise Library for Sparsity Research",
+   "authors": [
+    "Joo Hyung Lee",
+    "Wonpyo Park",
+    "Nicole Mitchell",
+    "Jonathan Pilault",
+    "Johan Obando-Ceron",
+    "Han-Byul Kim",
+    "Namhoon Lee",
+    "Elias Frantar",
+    "Yun Long",
+    "Amir Yazdanbakhsh",
+    "Shivani Agrawal",
+    "Suvinay Subramanian",
+    "Xin Wang",
+    "Sheng-Chun Kao",
+    "Xingyao Zhang",
+    "Trevor Gale",
+    "Aart Bik",
+    "Woohyun Han",
+    "Milen Ferez",
+    "Zhonglin Han",
+    "Hong-Seok Kim",
+    "Yann Dauphin",
+    "Gintare Karolina Dziugaite",
+    "Pablo Samuel Castro",
+    "Utku Evci"
+   ],
+   "links": [
+    "https://arxiv.org/abs/2304.14082"
+   ]
+  },
+  {
+   "key": "oh2023pruning",
+   "title": "Pruning Neural Networks with Velocity-Constrained Optimization",
+   "authors": [
+    "Donghyun Oh",
+    "Jinseok Chung",
+    "Namhoon Lee"
+   ],
+   "links": [
+    "https://opt-ml.org/papers.html"
+   ]
+  },
+  {
+   "key": "shin2023closer",
+   "title": "A Closer Look at the Intervention Procedure of Concept Bottleneck Models",
+   "authors": [
+    "Sungbin Shin",
+    "Yohan Jo",
+    "Sungsoo Ahn",
+    "Namhoon Lee"
+   ],
+   "links": [
+    "https://arxiv.org/abs/2302.14260",
+    "https://github.com/ssbin4/Closer-Intervention-CBM"
+   ]
+  },
+  {
+   "key": "chung2023effectiveness",
+   "title": "On the Effectiveness of Sharpness-Aware Minimization with Large Mini-batches",
+   "authors": [
+    "Jinseok Chung",
+    "Seonghwan Park",
+    "Jaeho Lee",
+    "Namhoon Lee"
+   ],
+   "links": [
+    "https://sites.google.com/view/hidimlearning/papers"
+   ]
+  },
+  {
+   "key": "park2023fedfwd",
+   "title": "FedFwd: Federated Learning without Backpropagation",
+   "authors": [
+    "Seonghwan Park",
+    "Dahun Shin",
+    "Jinseok Chung",
+    "Namhoon Lee"
+   ],
+   "links": [
+    "https://fl-icml2023.github.io/"
+   ]
+  },
+  {
+   "key": "bae2023semi",
+   "title": "Semi-Supervised Concept Bottleneck Models",
+   "authors": [
+    "Jeeon Bae",
+    "Sungbin Shin",
+    "Namhoon Lee"
+   ],
+   "links": [
+    "https://sites.google.com/view/aihci/papers"
+   ]
+  },
+  {
+   "key": "nam2023almost",
+   "title": "Almost Sure Last Iterate Convergence of Sharpness-Aware Minimization",
+   "authors": [
+    "Kyungchun Nam",
+    "Jinseok Chung",
+    "Namhoon Lee"
+   ],
+   "links": [
+    "https://openreview.net/forum?id=IcDTYTI0Nx"
+   ]
+  },
+  {
+   "key": "lee2021meta",
+   "title": "Meta-Learning Sparse Implicit Neural Representations",
+   "authors": [
+    "Jaeho Lee",
+    "Jihoon Tack",
+    "Namhoon Lee",
+    "Jinwoo Shin"
+   ],
+   "links": [
+    "https://arxiv.org/abs/2110.14678"
+   ]
+  },
+  {
+   "key": "lee2021understanding",
+   "title": "Understanding the Effects of Data Parallelism and Sparsity on Neural Network Training",
+   "authors": [
+    "Namhoon Lee",
+    "Thalaiyasingam Ajanthan",
+    "Philip H. S. Torr",
+    "Martin Jaggi"
+   ],
+   "links": [
+    "https://arxiv.org/abs/2003.11316"
+   ]
+  },
+  {
+   "key": "lee2021optimal",
+   "title": "Optimal Mini-Batch Size for Stochastic Gradient Methods",
+   "authors": [
+    "Namhoon Lee",
+    "Philip H. S. Torr",
+    "Richard Hartley"
+   ],
+   "links": [
+    "https://sites.google.com/view/sedl-workshop"
+   ]
+  },
+  {
+   "key": "lee2020signal",
+   "title": "A Signal Propagation Perspective for Pruning Neural Networks at Initialization",
+   "authors": [
+    "Namhoon Lee",
+    "Thalaiyasingam Ajanthan",
+    "Stephen Gould",
+    "Philip H. S. Torr"
+   ],
+   "links": [
+    "https://arxiv.org/abs/1906.06307"
+   ]
+  },
+  {
+   "key": "lee2020data",
+   "title": "Data Parallelism in Training Sparse Neural Networks",
+   "authors": [
+    "Namhoon Lee",
+    "Philip H. S. Torr",
+    "Martin Jaggi"
+   ],
+   "links": [
+    "https://arxiv.org/abs/2003.11316"
+   ]
+  },
+  {
+   "key": "lee2019snip",
+   "title": "SNIP: Single-shot Network Pruning based on Connection Sensitivity",
+   "authors": [
+    "Namhoon Lee",
+    "Thalaiyasingam Ajanthan",
+    "Philip H. S. Torr"
+   ],
+   "links": [
+    "https://arxiv.org/abs/1810.02340"
+   ]
+  },
+  {
+   "key": "jetley2018learn",
+   "title": "Learn to Pay Attention",
+   "authors": [
+    "Saumya Jetley",
+    "Nicholas Lord",
+    "Namhoon Lee",
+    "Philip H. S. Torr"
+   ],
+   "links": [
+    "https://arxiv.org/abs/1804.02391"
+   ]
+  },
+  {
+   "key": "hattori2018synthesizing",
+   "title": "Synthesizing a Scene-Specific Pedestrian Detector and Pose Estimator for Static Video Surveillance",
+   "authors": [
+    "Hironori Hattori",
+    "Namhoon Lee",
+    "Vishnu N. Boddeti",
+    "Fares Beainy",
+    "Kris M. Kitani",
+    "Takeo Kanade"
+   ],
+   "links": [
+    "https://link.springer.com/article/10.1007/s11263-018-1077-3"
+   ]
+  },
+  {
+   "key": "lee2017desire",
+   "title": "DESIRE: Distant Future Prediction in Dynamic Scenes with Interacting Agents",
+   "authors": [
+    "Namhoon Lee",
+    "Wongun Choi",
+    "Paul Vernaza",
+    "Christopher B. Choy",
+    "Philip H. S. Torr",
+    "Manmohan Chandraker"
+   ],
+   "links": [
+    "https://arxiv.org/abs/1704.04394"
+   ]
+  },
+  {
+   "key": "ma2017forecasting",
+   "title": "Forecasting Interactive Dynamics of Pedestrians with Fictitious Play",
+   "authors": [
+    "Wei-Chiu Ma",
+    "De-An Huang",
+    "Namhoon Lee",
+    "Kris M. Kitani"
+   ],
+   "links": [
+    "https://arxiv.org/abs/1604.01431"
+   ]
+  },
+  {
+   "key": "lee2016predicting",
+   "title": "Predicting Wide Receiver Trajectories in American Football",
+   "authors": [
+    "Namhoon Lee",
+    "Kris M. Kitani"
+   ],
+   "links": [
+    "https://namhoonlee.github.io/doc/LK_WACV2016.pdf"
+   ]
+  }
+ ]
+}

@@ -542,98 +542,104 @@
     <main>
         <h2>Members</h2>
         <ul class="member-list">
-
-            <li class="member-item">
+            <!-- db:members -->
+        <!-- Generated from data/members.bib by tools/build-db.py. Edit that file, not this list. -->
+            <li class="member-item" id="namhoonlee">
                 <img src="group_profile/namhoonlee.jpg" alt="Namhoon Lee">
                 <a href="https://namhoonlee.github.io/">Namhoon Lee</a>
                 <span class="member-position">Principal Investigator</span>
             </li>
 
-            <li class="member-item">
+            <li class="member-item" id="damiso">
                 <img src="group_profile/damiso.jpg" alt="Dami So">
                 <span>Dami So</span>
                 <span class="member-position">Administrator</span>
             </li>
 
-            <li class="member-item">
+            <li class="member-item" id="jinseokchung">
                 <img src="group_profile/jinseokchung.jpg" alt="Jinseok Chung">
                 <span>Jinseok Chung</span>
                 <span class="member-position">MS/PhD Student</span>
             </li>
 
-            <li class="member-item">
+            <li class="member-item" id="donghyunoh">
                 <img src="group_profile/donghyunoh.jpg" alt="Donghyun Oh">
                 <span>Donghyun Oh</span>
                 <span class="member-position">MS/PhD Student</span>
             </li>
 
-            <li class="member-item">
+            <li class="member-item" id="sungbinshin">
                 <img src="group_profile/sungbinshin.jpg" alt="Sungbin Shin">
                 <a href="https://ssbin4.github.io">Sungbin Shin</a>
                 <span class="member-position">MS/PhD Student</span>
             </li>
 
-            <li class="member-item">
+            <li class="member-item" id="dongyeoplee">
                 <img src="group_profile/dongyeoplee.jpg" alt="Dongyeop Lee">
                 <a href="https://dongyeoplee2.github.io">Dongyeop Lee</a>
                 <span class="member-position">PhD Student</span>
             </li>
 
-            <li class="member-item">
+            <li class="member-item" id="jihunkim">
                 <img src="group_profile/jihunkim.jpg" alt="Jihun Kim">
                 <span>Jihun Kim</span>
                 <span class="member-position">MS/PhD Student</span>
             </li>
 
-            <li class="member-item">
+            <li class="member-item" id="kwanheelee">
                 <img src="group_profile/kwanheelee.jpg" alt="Kwanhee Lee">
                 <a href="https://kwanhee-lee.github.io">Kwanhee Lee</a>
                 <span class="member-position">MS Student</span>
             </li>
 
-            <li class="member-item">
+            <li class="member-item" id="hyunjijung">
                 <img src="group_profile/hyunjijung.jpg" alt="Hyunji Jung">
                 <a href="https://www.linkedin.com/in/hyunji-jung-1121b5276/?locale=en">Hyunji Jung</a>
                 <span class="member-position">MS Student</span>
             </li>
 
-            <li class="member-item">
-                <img src="group_profile/minkyoungsong.jpg" alt="Minkyung Song">
+            <li class="member-item" id="minkyoungsong">
+                <img src="group_profile/minkyoungsong.jpg" alt="Minkyoung Song">
                 <a href="https://smk2295.github.io/">Minkyoung Song</a>
                 <span class="member-position">MS Student</span>
             </li>
 
-            <li class="member-item">
+            <li class="member-item" id="hyeondojang">
                 <img src="group_profile/hyeondojang.jpg" alt="Hyeondo Jang">
                 <a href="https://hyeondo-jang.github.io/">Hyeondo Jang</a>
                 <span class="member-position">MS Student</span>
             </li>
 
-            <li class="member-item">
+            <li class="member-item" id="jiyunpark">
                 <img src="group_profile/jiyunpark.jpg" alt="Jiyun Park">
                 <span>Jiyun Park</span>
                 <span class="member-position">MS Student</span>
             </li>
 
-            <li class="member-item">
+            <li class="member-item" id="doyoonkim">
                 <img src="group_profile/doyoonkim.jpg" alt="Doyoon Kim">
                 <a href="https://cosmos1030.github.io/">Doyoon Kim</a>
                 <span class="member-position">MS Student</span>
             </li>
 
-            <li class="member-item">
+            <li class="member-item" id="yuchankim">
                 <img src="group_profile/yuchankim.jpg" alt="Yuchan Kim">
                 <span>Yuchan Kim</span>
                 <span class="member-position">MS Student</span>
             </li>
 
+<!-- /db:members -->
+
         </ul>
 
         <h3>Interns</h3>
         <ul class="intern-list">
+            <!-- db:interns -->
+        <!-- Generated from data/members.bib by tools/build-db.py. Edit that file, not this list. -->
             <li>Minsung Kang (POSTECH)</li>
             <li>Junkyu Park (POSTECH)</li>
             <li>Wuvin An (POSTECH)</li>
+        <!-- /db:interns -->
         </ul>
 
         <h3>Gallery</h3>
@@ -684,10 +690,13 @@
 
         <h3>Alumni</h3>
         <ul class="alumni-list">
+            <!-- db:alumni -->
+        <!-- Generated from data/members.bib by tools/build-db.py. Edit that file, not this list. -->
             <li>Dahun Shin (MS 2025 → NHN)</li>
             <li><a href="https://shpark97.github.io/">Seonghwan Park</a> (MS 2025 → KETI)</li>
             <li><a href="https://dongyeoplee2.github.io">Dongyeop Lee</a> (MS 2025, continuing as PhD)</li>
             <li>Jaehyeon Jeong (MS 2026 → ETRI)</li>
+        <!-- /db:alumni -->
         </ul>
     </main>
 
@@ -716,12 +725,8 @@
     </div>
 
 <script>
-    // Faces on the news and publication pages link here as #<photo file name>
-    // (same rule as memberSlug in js/people.js), so new members need no id.
+    // Faces on the news and publication pages link to #<member key>.
     (function () {
-        Array.prototype.forEach.call(document.querySelectorAll('.member-item img'), function (img) {
-            img.closest('.member-item').id = img.getAttribute('src').split('/').pop().replace(/\.[^.]*$/, '');
-        });
         var target = location.hash && document.getElementById(decodeURIComponent(location.hash.slice(1)));
         if (target && target.classList.contains('member-item')) {
             target.scrollIntoView({ block: 'center' });
