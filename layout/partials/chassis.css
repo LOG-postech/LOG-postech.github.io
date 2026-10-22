@@ -1,0 +1,131 @@
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        /* ------------------------------------------------------------------
+           Layout tokens — single source of truth for spacing on this page.
+           This block is identical on every page; keep all pages in sync.
+           ------------------------------------------------------------------ */
+        :root {
+            /* page frame */
+            --content-max: 800px;
+            --page-pad-top: clamp(24px, 5vw, 48px);
+            --page-pad-x: clamp(16px, 4vw, 32px);
+            --page-pad-bottom: clamp(36px, 5vw, 60px);
+
+            /* header / nav */
+            --header-pad-bottom: 28px;
+            --header-gap: 40px;
+            --lab-name-gap: 18px;
+            --nav-gap: clamp(10px, 3vw, 24px);
+
+            /* vertical rhythm */
+            --section-gap: 40px;   /* space above a section heading */
+            --heading-gap: 14px;   /* space below a section heading */
+            --para-gap: 14px;      /* space between stacked paragraphs */
+
+            /* footer */
+            --footer-gap: 52px;
+            --footer-pad-top: 20px;
+            --footer-logo-gap: 14px;
+            --footer-logo-h: 28px;
+
+            /* body type */
+            --text-body: 0.93em;
+            --leading-body: 1.85;
+
+            /* rules & lines */
+            --rule-color: #e2e6f0;
+
+            /* colour palette */
+            --color-bg: #ffffff;
+            --color-heading: #111;
+            --color-body: #374151;
+            --color-muted: #6b7280;
+            --color-primary: #1B3A8A;
+            --color-accent: #3B6FD4;
+            --color-emphasis: #d6423a;
+            --color-highlight-bg: #f7f1dc;
+
+            /* surfaces & borders */
+            --img-border: #b8bec8;
+            --control-border: #d3d9e6;
+            --surface-subtle: #f4f6fa;
+            --surface-hover: #e6ecf9;
+
+            /* research area categories */
+            --cat-compression: #d6423a;
+            --cat-distributed: #27ae60;
+            --cat-applications: #2e6bd9;
+            --cat-optimization: #f39c12;
+        }
+
+        html {
+            overflow-y: scroll;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            color: var(--color-heading);
+            background: var(--color-bg);
+            min-height: 100vh;
+        }
+
+        .inner {
+            max-width: var(--content-max);
+            margin: 0 auto;
+            padding: var(--page-pad-top) var(--page-pad-x) var(--page-pad-bottom);
+        }
+
+        header {
+            padding-bottom: var(--header-pad-bottom);
+            margin-bottom: var(--header-gap);
+            border-bottom: 1px solid var(--rule-color);
+        }
+
+        .lab-name {
+            font-family: 'EB Garamond', Georgia, serif;
+            font-size: 2.8em;
+            font-weight: 500;
+            color: var(--color-heading);
+            letter-spacing: 0;
+            line-height: 0.96;
+            display: block;
+            margin-bottom: var(--lab-name-gap);
+            text-decoration: none;
+        }
+
+        .lab-name:hover {
+            text-decoration: none;
+            color: var(--color-heading);
+        }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: var(--nav-gap);
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--color-muted);
+            font-size: 1em;
+            font-weight: 400;
+            letter-spacing: 0.01em;
+            padding-bottom: 2px;
+            border-bottom: 1.5px dashed transparent;
+            transition: color 0.15s, border-color 0.15s;
+        }
+
+        nav a:hover {
+            color: var(--color-primary);
+            border-bottom: 1.5px solid var(--color-primary);
+            text-decoration: none;
+        }
+
+        nav a.active {
+            color: var(--color-heading);
+            font-weight: 600;
+            border-bottom: 1.5px solid var(--color-heading);
+        }
+
+        .nav-drawer a.active { color: var(--color-heading); font-weight: 600; }

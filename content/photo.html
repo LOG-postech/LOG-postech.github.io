@@ -1,0 +1,31 @@
+---
+title: Gallery Photo
+permalink: /photo.html
+data: true
+script: true
+---
+<h2>Gallery Photo</h2>
+
+<div class="photo-meta">
+    <a href="gallery.html" class="photo-back">&larr; Back to Gallery</a>
+    <span class="photo-status" id="photoStatus"></span>
+</div>
+
+<div class="photo-stage" id="photoStage">
+    <a class="photo-nav prev is-disabled" id="photoPrev" aria-label="Previous photo"></a>
+
+    <figure class="photo-panel">
+        <a class="photo-image-link" id="photoImageLink">
+            <img class="photo-image" id="photoImage" alt="" loading="eager">
+        </a>
+        <figcaption class="photo-caption">
+            <p id="photoCaption">Loading photo...</p>
+        </figcaption>
+    </figure>
+
+    <a class="photo-nav next is-disabled" id="photoNext" aria-label="Next photo"></a>
+</div>
+
+<div class="photo-error" id="photoError" hidden>
+    <p>We could not find that gallery photo. Please return to <a href="gallery.html">the gallery</a>.</p>
+</div>
