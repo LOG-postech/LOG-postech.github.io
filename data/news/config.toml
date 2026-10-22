@@ -1,20 +1,18 @@
-# Presentation settings for news. Entries are the *.md files in this directory.
+# News settings. Details: README.md.
 
-# How the date under each item is written (Python strftime). "%b %Y" -> "Oct 2026".
-date_format = "%b %Y"
+date_format = "%b %Y"   # date under each item → "Oct 2026"
+
 
 [home]
-# Number of newest items shown under "Recent News" on the home page.
-count = 5
+count = 5               # items in Recent News on the home page
+
 
 [page]
-# Oldest month listed on the News page (YYYY-MM). Older entries stay in this
-# directory as the archive but are not shown anywhere. Remove to list everything.
-since = "2026-01"
-# Items shown when the News page opens, and how many each "Show more" click adds.
-initial = 10
-step = 5
+since = "2026-01"       # oldest month on the News page; older items are kept but hidden
+
+initial = 10            # items shown at first
+step = 5                # items added per "Show more"
+
 
 [faces]
-# Member faces under a news item's date: at most this many, then "+N".
-max = 3
+max = 3                 # faces under a date before "+N"

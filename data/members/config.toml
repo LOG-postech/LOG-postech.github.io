@@ -1,6 +1,5 @@
-# Presentation settings for the Members page. People are in members.yaml.
+# Members page settings. Details: README.md.
 
 [alumni]
-# Show the Alumni list below the gallery preview.
-show = true
+show = true             # show the Alumni list
 heading = "Alumni"

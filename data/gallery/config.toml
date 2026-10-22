@@ -1,11 +1,9 @@
-# Presentation settings for the gallery. Photos are listed in gallery.yaml.
+# Gallery settings. Details: README.md.
 
 [thumbnail]
-# Square tiles generated from each photo at build time (center crop).
-# Shown at 112-180px in the grid; 600px keeps them sharp on retina screens.
-size = 600
-quality = 80
+size = 600              # px, square center crop made at build time
+quality = 80            # JPEG quality
+
 
 [preview]
-# Photos per page in the gallery preview on the Members page.
-count = 5
+count = 5               # photos per page in the Members page preview

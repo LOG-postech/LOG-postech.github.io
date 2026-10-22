@@ -1,14 +1,10 @@
-# Presentation settings for the Research page. Topics are in topics.yaml.
+# Research page settings. Details: README.md.
 
 [icons]
-# Every topic icon is one square size: this fraction of the shortest topic
-# paragraph's height, clamped to [min, max] px and to max_fraction of the
-# column width (narrow screens).
-scale = 0.9
-min = 80
-max = 200
-max_fraction = 0.4
-# Inner padding between an icon and its frame. Round icons (icon_class:
-# icon-round) get less, because round shapes read smaller than square ones.
-padding = "12px"
-round_padding = "7px"
+scale = 0.9             # icon size = scale × shortest topic paragraph height
+min = 80                # px
+max = 200               # px
+max_fraction = 0.4      # at most this share of the column width
+
+padding = "12px"        # space between icon and frame
+round_padding = "7px"   # same, for icon_class: icon-round
