@@ -1,0 +1,73 @@
+# News from 2025, newest first. How to add an item: README.md.
+#
+# Every field of an item:
+#
+# - idx: 39                   # required. Unique across all years; higher = newer (sets the order)
+#   date: "2025-10"           # required. "YYYY-MM" or "YYYY-MM-DD", within this file's year
+#   paper: lee26fresco        # optional. papers.bib key(s) the item is about but does not link:
+#                             #   lee26fresco  or  [lee26fresco, jang26hidden]
+#   text: >-                  # required. One paragraph of Markdown, starting with its emoji:
+#     🎓 Our [paper](shin23closer) ... @hyunjijung ...
+#                             #   [text](paperkey) links a paper, [text](https://...) any page,
+#                             #   @tag names a lab member (data/members/members.yaml)
+
+- idx: 16
+  date: "2025-11"
+  text: >-
+    🏆 @dongyeoplee received the [Qualcomm Innovation Fellowship Korea
+    2025](https://www.qualcomm.com/research/university-relations/innovation-fellowship/2025-south-korea).
+
+- idx: 15
+  date: "2025-11"
+  text: >-
+    🏆 Our [paper](lee26unseen) on extreme LLM sparsity (ELSA) received the Best Paper
+    Award at JKAIA 2025.
+
+- idx: 14
+  date: "2025-11"
+  text: >-
+    🏆 @hyunjijung received the NRF Fellowship.
+
+- idx: 13
+  date: "2025-09"
+  text: >-
+    🎓 We have 2 papers ([MemEIC](seong25memeic) and [An Analysis of Concept Bottleneck
+    Models](park25analysis)) accepted to NeurIPS 2025.
+
+- idx: 12
+  date: "2025-08"
+  text: >-
+    🤝 Our lab has been selected for the 2025 High-Performance Computing Support Program,
+    providing cloud access to four NVIDIA H200 GPUs for approximately six months.
+
+- idx: 11
+  date: "2025-05"
+  text: >-
+    🤝 Our lab has been selected for the [2025 Global Basic Research Laboratory
+    program](https://www.msit.go.kr/bbs/view.do?bbsSeqNo=100&mId=311&mPid=121&nttSeqNo=3179520&sCode=user)
+    (NRF), with up to *KRW 1.5B* in funding over three years.
+
+- idx: 10
+  date: "2025-05"
+  text: >-
+    🎓 Our [paper](shin25critical) on overparameterization on SAM has been accepted to
+    UAI 2025.
+
+- idx: 9
+  date: "2025-05"
+  text: >-
+    🎓 Our works on second-order optimization ([SASSHA](shin25sassha)) and pruning
+    ([SAFE](lee25safe)) have been accepted to ICML 2025. SAFE is also selected as a
+    spotlight poster.
+
+- idx: 8
+  date: "2025-05"
+  text: >-
+    🎓 Our [paper](park25zip) on zeroth-order prompt tuning for black-box VLM (ZIP) has
+    been accepted to ICLR 2025.
+
+- idx: 7
+  date: "2025-04"
+  text: >-
+    🏆 @hyeondojang has been selected for the Kwanjeong Educational Foundation Graduate
+    Scholarship.

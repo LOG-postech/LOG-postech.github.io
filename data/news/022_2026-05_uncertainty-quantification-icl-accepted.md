@@ -1,1 +1,0 @@
-🏆 Our [paper](chung26quantifying) on uncertainty quantification in ICL, accepted to ACL 2026, has been selected as an Oral presentation. In this work, we introduce self-function vectors to directly decompose uncertainty, and propose a novel framework to evaluate these disentangled sources.

@@ -1,1 +1,0 @@
-🎓 Our [paper](park26exploiting) on flatness-based out-of-distribution detection has been accepted to ECCV 2026. In this work, we propose FOLD, a lightweight detector that leverages feature-Hessian curvature and partial feature normalization to improve ID-OOD separability.

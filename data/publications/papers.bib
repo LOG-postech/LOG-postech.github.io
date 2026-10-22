@@ -1,10 +1,28 @@
-% Lab publications, shown on the Publications page.
+% Lab publications, shown on the Publications page. How to add one: README.md.
 %
-% One entry per paper. Papers are grouped under "Preprint", then each year
-% (newest first), then "Previous"; within a group they appear in the order
-% written here. The "% =====" lines are only for reading: the heading comes
-% from each entry's year / is_preprint / is_previous fields. See README.md.
-
+% Headings: is_preprint papers first, then one per `year` (newest first), then
+% is_previous papers. Within a heading, papers keep the order written here; the
+% "% =====" lines below are only for reading.
+%
+% Every field of an entry:
+%
+% @inproceedings{jang26hidden,          key: first author's last name + yy + first title word
+%   title        = {...},               required. \& for &
+%   author       = {@hyeondojang and @kwanheelee and Dan Alistarh},
+%                                       required. Lab people as @tag (members.yaml), others by
+%                                       name; * after a name marks equal contribution
+%   venue        = {EMNLP 2026},        required. As printed
+%   year         = {2026},              required. Sets the year heading
+%   oral         = {true},              optional. Adds "(Oral)" after the venue
+%   spotlight    = {true},              optional. Adds "(Spotlight)" after the venue
+%   also         = {ICLR 2023 Workshop on ...},   optional. Another venue of the same paper
+%   award        = {CKAIA 2026 Best Paper Award}, optional. Highlighted at the end
+%   is_preprint  = {true},              optional. Under "Preprint"
+%   is_previous  = {true},              optional. Under "Previous" (work before the lab)
+%   spaced_links = {true},              optional. Space between this paper's links
+%   paper        = {https://...},       any other field is a link, labelled with its name,
+%   code         = {https://...},       in this order; news links [text](key) go to `paper`
+% }
 
 % ===== Preprint =====
 

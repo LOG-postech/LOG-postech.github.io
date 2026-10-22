@@ -213,90 +213,92 @@ def author_list(field, people, where):
 
 # --------------------------------------------------------------------- news
 
-NEWS_NAME = re.compile(r"^(\d+)_(\d{4})-(\d{2})(?:-(\d{2}))?_([a-z0-9][a-z0-9-]*)\.md$")
-NEWS_KEYS = {"paper"}
+NEWS_KEYS = {"idx", "date", "paper", "text"}
+NEWS_DATE = re.compile(r"^(\d{4})-(\d{2})(?:-(\d{2}))?$")
 # A Markdown link whose target is a bare word is a paper key: [paper](shin23closer).
 PAPER_LINK = re.compile(r"\]\(([a-z][a-z0-9_]*)\)")
 
 
-def split_front_matter(text, where):
-    if not text.startswith("---\n"):
-        return {}, text
-    try:
-        _, head, body = text.split("---\n", 2)
-    except ValueError:
-        raise DataError("%s: front matter has no closing ---" % where)
-    return yaml.safe_load(head) or {}, body
-
-
 def load_news(papers_by_key, people):
+    """News items from data/news/<year>.yaml, ordered by idx (higher = newer)."""
     cfg = load_config("news")
     entries, seen = [], {}
-    for path in sorted((DATA / "news").glob("*.md")):
-        if path.name == "README.md":
+    for path in sorted((DATA / "news").glob("*.yaml")):
+        if not re.fullmatch(r"\d{4}", path.stem):
+            fail("news/%s: news files are named by year, like 2026.yaml" % path.name)
             continue
-        m = NEWS_NAME.match(path.name)
-        if not m:
-            fail("news/%s: name must be {idx}_{YYYY-MM or YYYY-MM-DD}_{simple-title}.md" % path.name)
-            continue
-        idx = int(m.group(1))
-        if idx in seen:
-            fail("news/%s: index %d is already used by %s" % (path.name, idx, seen[idx]))
-        seen[idx] = path.name
-        try:
-            date = dt.date(int(m.group(2)), int(m.group(3)), int(m.group(4) or 1))
-        except ValueError:
-            fail("news/%s: invalid date in file name" % path.name)
-            continue
-        try:
-            front, body = split_front_matter(path.read_text(encoding="utf-8"), "news/" + path.name)
-        except DataError as e:
-            fail(str(e))
-            continue
-        unknown = set(front) - NEWS_KEYS
-        if unknown:
-            fail("news/%s: unknown field(s) %s (allowed: %s)" % (path.name, ", ".join(sorted(unknown)), ", ".join(sorted(NEWS_KEYS))))
-        if not body.strip():
-            fail("news/%s: empty body" % path.name)
-        # Papers: named in front matter (paper: key), or linked in the text as
-        # [paper](key), which links to the paper's own `paper` URL.
-        keys = front.get("paper") or []
-        keys = [str(k) for k in ([keys] if isinstance(keys, str) else keys)]
-
-        def link_paper(m):
-            key = m.group(1)
-            paper = papers_by_key.get(key)
-            if paper is None:
-                fail("news/%s: link target %r is not a key in publications/papers.bib" % (path.name, key))
-                return m.group(0)
-            if not paper["url"]:
-                fail("news/%s: %s has no `paper` link in papers.bib to link to" % (path.name, key))
-                return m.group(0)
-            if key not in keys:
-                keys.append(key)
-            return "](%s)" % paper["url"]
-
-        body = PAPER_LINK.sub(link_paper, body)
-
-        # Faces: the in-lab authors of those papers, then the members @tagged in
-        # the text, in that order.
-        faces = []
-        for key in keys:
-            paper = papers_by_key.get(str(key))
-            if paper is None:
-                fail("news/%s: paper %r is not a key in publications/papers.bib" % (path.name, key))
+        for n, item in enumerate(load_yaml(path) or [], 1):
+            where = "news/%s item %d" % (path.name, n)
+            if not isinstance(item, dict):
+                fail("%s: each item needs idx, date and text" % where)
                 continue
-            faces += [p for p in paper["members"] if p not in faces]
-        body, tagged = people.resolve(body, "news/" + path.name, "short")
-        faces += [p for p in tagged if p not in faces]
-        entries.append({
-            "idx": idx,
-            "date": date,
-            "date_label": date.strftime(cfg["date_format"]),
-            "html": render_inline(body),
-            "faces": news_faces(faces, cfg["faces"]["max"]),
-            "file": path.name,
-        })
+            unknown = set(item) - NEWS_KEYS
+            if unknown:
+                fail("%s: unknown field(s) %s (allowed: %s)" % (where, ", ".join(sorted(unknown)), ", ".join(sorted(NEWS_KEYS))))
+            idx = item.get("idx")
+            if not isinstance(idx, int):
+                fail("%s: idx must be a number" % where)
+                continue
+            where = "news/%s idx %d" % (path.name, idx)
+            if idx in seen:
+                fail("%s: idx %d is already used in %s" % (where, idx, seen[idx]))
+            seen[idx] = path.name
+            raw_date = item.get("date")
+            m = NEWS_DATE.match(str(raw_date or ""))
+            if not m:
+                fail('%s: date must be "YYYY-MM" or "YYYY-MM-DD", not %r' % (where, raw_date))
+                continue
+            try:
+                date = dt.date(int(m.group(1)), int(m.group(2)), int(m.group(3) or 1))
+            except ValueError:
+                fail("%s: %r is not a real date" % (where, raw_date))
+                continue
+            if m.group(1) != path.stem:
+                fail("%s: dated %s but filed in %s" % (where, raw_date, path.name))
+            body = " ".join(str(item.get("text") or "").split())
+            if not body:
+                fail("%s: text is empty" % where)
+                continue
+            front = item
+            # Papers: named in front matter (paper: key), or linked in the text as
+            # [paper](key), which links to the paper's own `paper` URL.
+            keys = front.get("paper") or []
+            keys = [str(k) for k in ([keys] if isinstance(keys, str) else keys)]
+
+            def link_paper(m):
+                key = m.group(1)
+                paper = papers_by_key.get(key)
+                if paper is None:
+                    fail("%s: link target %r is not a key in publications/papers.bib" % (where, key))
+                    return m.group(0)
+                if not paper["url"]:
+                    fail("%s: %s has no `paper` link in papers.bib to link to" % (where, key))
+                    return m.group(0)
+                if key not in keys:
+                    keys.append(key)
+                return "](%s)" % paper["url"]
+
+            body = PAPER_LINK.sub(link_paper, body)
+
+            # Faces: the in-lab authors of those papers, then the members @tagged in
+            # the text, in that order.
+            faces = []
+            for key in keys:
+                paper = papers_by_key.get(str(key))
+                if paper is None:
+                    fail("%s: paper %r is not a key in publications/papers.bib" % (where, key))
+                    continue
+                faces += [p for p in paper["members"] if p not in faces]
+            body, tagged = people.resolve(body, where, "short")
+            faces += [p for p in tagged if p not in faces]
+            entries.append({
+                "idx": idx,
+                "date": date,
+                "date_label": date.strftime(cfg["date_format"]),
+                "html": render_inline(body),
+                "faces": news_faces(faces, cfg["faces"]["max"]),
+                "file": path.name,
+            })
     entries.sort(key=lambda e: e["idx"], reverse=True)
 
     since = cfg["page"].get("since")

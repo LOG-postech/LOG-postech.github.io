@@ -1,4 +1,21 @@
 # Research topics on the Research page, in display order. See README.md.
+#
+# Every field of a topic:
+#
+# - key: distributed          # required. Unique id, letters only
+#   title: Distributed Training   # required. Coloured heading of the paragraph
+#   color: green              # required. red | green | blue | orange
+#   icon: opt-distributed.png # required. File in icons/
+#   icon_class: icon-round    # optional. Less padding, for round pictures
+#   alt: ...                  # optional. Icon description (default: title)
+#   hidden: true              # optional. Keep the topic here but off the page
+#   summary: >-               # required. The paragraph
+#     ...
+#   details:                  # optional. Sub-topics shown under "more"
+#   - title: Asynchronous Training     # required
+#     papers: NeurIPS '26, [ICML '26](https://...)   # optional. Shown in brackets after the title
+#     text: >-                # required
+#       ...
 
 - key: compression
   title: Model Compression

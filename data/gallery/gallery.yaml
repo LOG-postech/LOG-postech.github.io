@@ -1,4 +1,10 @@
 # Gallery photos, in display order (newest first). How to add one: README.md.
+#
+# Every field of a photo:
+#
+# - file: 26_acl.jpg          # required. File in photos/
+#   caption: ACL 2026 presentation   # required. Hover text and caption in the photo viewer
+#   alt: ...                  # optional. Description for screen readers (default: caption)
 
 - file: 26_aiconnect.jpg
   caption: AI Connect Korea 2026 - IITP President's Award

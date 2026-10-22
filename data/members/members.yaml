@@ -1,5 +1,21 @@
 # Lab members and alumni, in display order. How to add someone: README.md.
-# `tag` is how news and papers refer to a person: @hyunjijung.
+#
+# Every field of a person:
+#
+# members:
+# - tag: hyunjijung           # required. Id used as @hyunjijung in news and papers.bib; never reuse
+#   name: Hyunji Jung         # required. Shown under the photo and in author lists
+#   short: Hyunji             # optional. Name for @tag in news (default: first word of name)
+#   photo: hyunjijung.jpg     # required. File in photos/; also the card anchor group.html#hyunjijung
+#   position: MS Student      # required. Shown under the name
+#   url: https://...          # optional. Personal site; name and faces link here
+#   alt: Hyunji Jung          # optional. Photo description (default: name)
+#
+# alumni:
+# - tag: jaehyeonjeong        # required. Keep the tag they had as a member
+#   name: Jaehyeon Jeong      # required
+#   url: https://...          # optional
+#   note: (MS 2026 → ETRI)    # optional. Shown after the name
 
 members:
 - tag: namhoonlee

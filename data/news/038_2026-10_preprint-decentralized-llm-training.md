@@ -1,1 +1,0 @@
-🎓 Our [preprint](kim26seedflood) on decentralized LLM training, SeedFlood, has received a major update, with substantial improvements to its overall presentation, analysis, and experimental evaluation.
