@@ -55,17 +55,17 @@ fi
 #   data/gallery/photos/   click-through "full size" view      -> 2560px
 #   static/lab_photo/      home page hero, <=800px wide        -> 1600px
 #   data/members/photos/   member avatars, 140px square        ->  512px
-#   data/research/icons/   research cards, ~124px square       ->  500px
+#   static/research_focus/ research cards, ~124px square       ->  500px
 #   static/logo/           left alone; small already, and logos need to stay crisp
 # ---------------------------------------------------------------------------
-IMAGE_DIRS="data/gallery/photos static/lab_photo data/members/photos data/research/icons"
+IMAGE_DIRS="data/gallery/photos static/lab_photo data/members/photos static/research_focus"
 
 rule_for() {
     case "$1" in
         data/gallery/photos/*)  echo "2560 82 jpg fit" ;;
         static/lab_photo/*)     echo "1600 85 jpg fit" ;;
         data/members/photos/*)  echo "512 85 jpg fit" ;;
-        data/research/icons/*)  echo "500 85 keep fit" ;;
+        static/research_focus/*) echo "500 85 keep fit" ;;
         *)                      echo "" ;;
     esac
 }
@@ -75,7 +75,7 @@ references_for() {
     case "$1" in
         data/gallery/photos/*)  echo "data/gallery/gallery.yaml" ;;
         data/members/photos/*)  echo "data/members/members.yaml" ;;
-        data/research/icons/*)  echo "data/research/topics.yaml" ;;
+        static/research_focus/*) echo "layout/research.html" ;;
         static/lab_photo/*)     echo "layout/index.html" ;;
     esac
 }

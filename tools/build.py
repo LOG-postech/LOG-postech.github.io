@@ -43,7 +43,6 @@ PAGES = ["index", "news", "research", "publications", "group", "gallery", "photo
 PUBLISH = {
     DATA / "gallery" / "photos": "stories",
     DATA / "members" / "photos": "group_profile",
-    DATA / "research" / "icons": "research_focus",
 }
 THUMBS = "stories/thumbs"
 
@@ -573,27 +572,6 @@ def load_gallery():
     return {"config": cfg, "photos": photos, "preview": photos[: cfg["preview"]["count"]]}
 
 
-# ----------------------------------------------------------------- research
-
-def load_research():
-    cfg = load_config("research")
-    topics = []
-    for t in load_yaml(DATA / "research" / "topics.yaml") or []:
-        if not (DATA / "research" / "icons" / t["icon"]).exists():
-            fail("research/topics.yaml: icon %s is not in data/research/icons/" % t["icon"])
-        if t.get("hidden"):
-            continue
-        topics.append(dict(
-            t,
-            alt=t.get("alt", t["title"]),
-            icon_class=t.get("icon_class", ""),
-            summary=Markup(t["summary"]),
-            details=[dict(d, papers=render_inline(d["papers"]) if d.get("papers") else None, text=d.get("text", ""))
-                     for d in t.get("details", [])],
-        ))
-    return {"config": cfg, "topics": topics}
-
-
 # ------------------------------------------------------------------- output
 
 def thumbnail(src, dest, cfg):
@@ -633,7 +611,6 @@ def build(check_only=False):
         "publications": publications,
         "members": members,
         "gallery": load_gallery(),
-        "research": load_research(),
     }
     if errors:
         print("Data errors:", file=sys.stderr)

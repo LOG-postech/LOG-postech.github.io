@@ -12,14 +12,13 @@ data/                  content — one directory per kind, each with a README
   publications/        papers.bib (one BibTeX file, all papers)
   members/             members.yaml + photos/  (@tags for people)
   gallery/             gallery.yaml + photos/  (thumbnails are generated)
-  research/            topics.yaml + icons/
   site.toml            lab name, navigation, footer logos
     */config.toml      presentation settings for that kind of content
 layout/                page design (Jinja + HTML/CSS)
   base.html            the frame every page shares: head, header, nav, footer
   partials/*.css       CSS shared by every page, incl. the layout tokens
   <page>.html          one per page: its own CSS, layout and scripts
-static/                copied to the site as is (logos, lab photo, redirect)
+static/                copied to the site as is (logos, lab photo, research icons)
 tools/build.py         renders data + layout into _site/
 ```
 
@@ -27,7 +26,8 @@ tools/build.py         renders data + layout into _site/
 
 | I want to… | Edit |
 |---|---|
-| add news, a paper, a member, a photo, a research topic | an entry in `data/<kind>/`; its `README.md` explains how |
+| add news, a paper, a member, a photo | an entry in `data/<kind>/`; its `README.md` explains how |
+| change the research topics, hiring or contact text | `layout/research.html`, `layout/hiring.html`, `layout/contact.html` |
 | change how many items show, date format, thumbnail size, … | `data/<kind>/config.toml` |
 | change the nav, footer or lab name everywhere | `data/site.toml` |
 | change the design of every page (spacing, fonts, colours) | `layout/partials/chassis.css` (layout tokens) or `layout/base.html` |
