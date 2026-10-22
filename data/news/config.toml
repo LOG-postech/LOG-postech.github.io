@@ -1,0 +1,16 @@
+# Presentation settings for news. Entries are the *.md files in this directory.
+
+# How the date under each item is written (Python strftime). "%b %Y" -> "Oct 2026".
+date_format = "%b %Y"
+
+[home]
+# Number of newest items shown under "Recent News" on the home page.
+count = 5
+
+[page]
+# Oldest month listed on the News page (YYYY-MM). Older entries stay in this
+# directory as the archive but are not shown anywhere. Remove to list everything.
+since = "2026-01"
+# Items shown when the News page opens, and how many each "Show more" click adds.
+initial = 10
+step = 5

@@ -1,0 +1,8 @@
+- title: Hardware-Native Joint Sparse-Quantization for Trillion-Scale Mixture-of-Experts
+  authors: Kwanhee Lee, Namhoon Lee, Dan Alistarh
+  venue: arXiv 2026
+  links:
+    paper: https://arxiv.org/abs/2610.02241
+    code: https://github.com/IST-DASLab/MoESQ
+    model: https://huggingface.co/collections/ISTA-DASLab/moesq
+  link_separator: ' '

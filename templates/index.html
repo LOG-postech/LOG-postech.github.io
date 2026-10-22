@@ -513,31 +513,13 @@
         <h3>Recent News</h3>
         <div class="news-list">
 
-        <div class="news-item">
-          <span class="news-date">Oct 2026</span>
-          <span class="news-content">&#127891; Our <a href="https://arxiv.org/abs/2602.18181" target="_blank" rel="noopener">preprint</a> on decentralized LLM training, SeedFlood, has received a major update, with substantial improvements to its overall presentation, analysis, and experimental evaluation.</span>
+{% for n in news.home %}
+        <div class="news-item"{{ n.attrs }}>
+            <span class="news-date">{{ n.date_label }}</span>
+            <span class="news-content">{{ n.html }}</span>
         </div>
 
-        <div class="news-item">
-          <span class="news-date">Oct 2026</span>
-          <span class="news-content">&#129489;&#8205;&#128187; Minkyoung has started a research internship at <a href="https://www.nota.ai/" target="_blank" rel="noopener">Nota AI</a>.</span>
-        </div>
-
-        <div class="news-item">
-          <span class="news-date">Oct 2026</span>
-          <span class="news-content">&#127891; Our <a href="https://arxiv.org/abs/2610.02241" target="_blank" rel="noopener">paper</a> on hardware-native sparse-quantization for trillion-scale MoEs is out on arXiv. In this work, we introduce MoESQ, which jointly learns semi-structured sparsity and low-precision quantization for MoE experts and executes them on Sparse Tensor Cores with a custom grouped sparse GEMM kernel. The <a href="https://github.com/IST-DASLab/MoESQ" target="_blank" rel="noopener">code</a> and <a href="https://huggingface.co/collections/ISTA-DASLab/moesq" target="_blank" rel="noopener">models</a> are publicly available.</span>
-        </div>
-
-        <div class="news-item">
-          <span class="news-date">Sep 2026</span>
-          <span class="news-content">&#127891; Our <a href="https://arxiv.org/abs/2602.18181" target="_blank" rel="noopener">paper</a> on decentralized training has been accepted to NeurIPS 2026 Workshop on Collaborative, Open, and Decentralized Training of Foundation Models, selected as an oral presentation. In this work, we introduce a novel decentralized LLM fine-tuning framework that achieves extreme communiation efficiency and global consensus.</span>
-        </div>
-
-        <div class="news-item" data-paper="FRESCO">
-          <span class="news-date">Sep 2026</span>
-          <span class="news-content">&#127891; Our paper on asynchronous pipeline parallelism has been accepted to NeurIPS 2026. In this work, we introduce FRESCO, a new principle for consistency control in asynchronous pipelines, which consistently outperforms standard baselines while being extremely efficient and theoretically sound.</span>
-        </div>
-
+{% endfor %}
           <!-- <div class="news-item">
             <span class="news-date">Apr 2026</span>
             <span class="news-content"
@@ -718,7 +700,7 @@
 
       /* Keep Recent News in sync with news.html, which is the single source of
          truth. The markup above is the no-JS fallback; this replaces it with the
-         newest 5 items whenever fetch works, so links added on the News page can
+         newest {{ news.config.home.count }} items whenever fetch works, so links added on the News page can
          never go missing here. */
       (function () {
         var box = document.querySelector(".news-list");
@@ -736,7 +718,7 @@
             var items = doc.querySelectorAll("#news-list .news-item");
             var frag = document.createDocumentFragment();
 
-            Array.prototype.slice.call(items, 0, 5).forEach(function (item) {
+            Array.prototype.slice.call(items, 0, {{ news.config.home.count }}).forEach(function (item) {
               var date = item.querySelector(".news-date");
               var body = item.querySelector(".news-content");
               if (!date || !body) return;

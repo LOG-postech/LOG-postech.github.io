@@ -1,0 +1,1 @@
+🤝 Our lab has been selected for the IITP Efficient AI National R&D Program (2026–2029), a national research program with *KRW 7.5B* in total funding, together with leading partners including [SqueezeBits](https://squeezebits.com/).

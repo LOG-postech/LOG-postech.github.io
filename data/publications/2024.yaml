@@ -1,0 +1,22 @@
+- title: 'Rethinking Pruning Large Language Models: Benefits and Pitfalls of Reconstruction
+    Error Minimization'
+  authors: Sungbin Shin, Wonpyo Park, Jaeho Lee, Namhoon Lee
+  venue: EMNLP 2024
+  links:
+    paper: https://arxiv.org/abs/2406.15524
+    code: https://github.com/LOG-postech/rethinking-LLM-pruning
+- title: The Role of Masking for Efficient Supervised Knowledge Distillation of Vision Transformers
+  authors: Seungwoo Son, Jegwang Ryu, Namhoon Lee, Jaeho Lee
+  venue: ECCV 2024; ICLR 2023 Workshop
+  links:
+    paper: https://arxiv.org/abs/2302.10494
+- title: 'JaxPruner: A Concise Library for Sparsity Research'
+  authors: >-
+    Joo Hyung Lee, Wonpyo Park, Nicole Mitchell, Jonathan Pilault, Johan Obando-Ceron, Han-Byul
+    Kim, Namhoon Lee, Elias Frantar, Yun Long, Amir Yazdanbakhsh, Shivani Agrawal, Suvinay
+    Subramanian, Xin Wang, Sheng-Chun Kao, Xingyao Zhang, Trevor Gale, Aart Bik, Woohyun Han,
+    Milen Ferez, Zhonglin Han, Hong-Seok Kim, Yann Dauphin, Gintare Karolina Dziugaite, Pablo
+    Samuel Castro, Utku Evci
+  venue: CPAL 2024 **(Oral)**; ICLR 2023 Workshop on Sparsity in Neural Networks
+  links:
+    paper: https://arxiv.org/abs/2304.14082

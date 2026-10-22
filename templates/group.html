@@ -543,90 +543,18 @@
         <h2>Members</h2>
         <ul class="member-list">
 
+{% for m in members.members %}
             <li class="member-item">
-                <img src="group_profile/namhoonlee.jpg" alt="Namhoon Lee">
-                <a href="https://namhoonlee.github.io/">Namhoon Lee</a>
-                <span class="member-position">Principal Investigator</span>
+                <img src="group_profile/{{ m.photo }}" alt="{{ m.alt }}">
+{% if m.url %}
+                <a href="{{ m.url }}">{{ m.name }}</a>
+{% else %}
+                <span>{{ m.name }}</span>
+{% endif %}
+                <span class="member-position">{{ m.position }}</span>
             </li>
 
-            <li class="member-item">
-                <img src="group_profile/damiso.jpg" alt="Dami So">
-                <span>Dami So</span>
-                <span class="member-position">Administrator</span>
-            </li>
-
-            <li class="member-item">
-                <img src="group_profile/jinseokchung.jpg" alt="Jinseok Chung">
-                <span>Jinseok Chung</span>
-                <span class="member-position">MS/PhD Student</span>
-            </li>
-
-            <li class="member-item">
-                <img src="group_profile/donghyunoh.jpg" alt="Donghyun Oh">
-                <span>Donghyun Oh</span>
-                <span class="member-position">MS/PhD Student</span>
-            </li>
-
-            <li class="member-item">
-                <img src="group_profile/sungbinshin.jpg" alt="Sungbin Shin">
-                <a href="https://ssbin4.github.io">Sungbin Shin</a>
-                <span class="member-position">MS/PhD Student</span>
-            </li>
-
-            <li class="member-item">
-                <img src="group_profile/dongyeoplee.jpg" alt="Dongyeop Lee">
-                <a href="https://dongyeoplee2.github.io">Dongyeop Lee</a>
-                <span class="member-position">PhD Student</span>
-            </li>
-
-            <li class="member-item">
-                <img src="group_profile/jihunkim.jpg" alt="Jihun Kim">
-                <span>Jihun Kim</span>
-                <span class="member-position">MS/PhD Student</span>
-            </li>
-
-            <li class="member-item">
-                <img src="group_profile/kwanheelee.jpg" alt="Kwanhee Lee">
-                <a href="https://kwanhee-lee.github.io">Kwanhee Lee</a>
-                <span class="member-position">MS Student</span>
-            </li>
-
-            <li class="member-item">
-                <img src="group_profile/hyunjijung.jpg" alt="Hyunji Jung">
-                <a href="https://www.linkedin.com/in/hyunji-jung-1121b5276/?locale=en">Hyunji Jung</a>
-                <span class="member-position">MS Student</span>
-            </li>
-
-            <li class="member-item">
-                <img src="group_profile/minkyoungsong.jpg" alt="Minkyung Song">
-                <a href="https://smk2295.github.io/">Minkyoung Song</a>
-                <span class="member-position">MS Student</span>
-            </li>
-
-            <li class="member-item">
-                <img src="group_profile/hyeondojang.jpg" alt="Hyeondo Jang">
-                <a href="https://hyeondo-jang.github.io/">Hyeondo Jang</a>
-                <span class="member-position">MS Student</span>
-            </li>
-
-            <li class="member-item">
-                <img src="group_profile/jiyunpark.jpg" alt="Jiyun Park">
-                <span>Jiyun Park</span>
-                <span class="member-position">MS Student</span>
-            </li>
-
-            <li class="member-item">
-                <img src="group_profile/doyoonkim.jpg" alt="Doyoon Kim">
-                <a href="https://cosmos1030.github.io/">Doyoon Kim</a>
-                <span class="member-position">MS Student</span>
-            </li>
-
-            <li class="member-item">
-                <img src="group_profile/yuchankim.jpg" alt="Yuchan Kim">
-                <span>Yuchan Kim</span>
-                <span class="member-position">MS Student</span>
-            </li>
-
+{% endfor %}
         </ul>
 
         <h3>Interns</h3>
@@ -640,55 +568,31 @@
         <p>We also spend time together on various occasions. For more stories, check out <a href="gallery.html">here</a>!</p>
         <div class="gallery-preview-shell">
             <div class="gallery-preview-frame" aria-label="Gallery preview navigation">
-                <button class="gallery-preview-nav" type="button" data-gallery-dir="prev" aria-label="Show previous 5 gallery photos" disabled>&lt;</button>
+                <button class="gallery-preview-nav" type="button" data-gallery-dir="prev" aria-label="Show previous {{ gallery.config.preview.count }} gallery photos" disabled>&lt;</button>
                 <div class="gallery-preview">
 
+{% for p in gallery.preview %}
                     <div class="gallery-preview-item">
-                        <a href="photo.html?image=stories/26_aiconnect.jpg">
-                            <img src="stories/thumbs/26_aiconnect.jpg" alt="Kwanhee receiving the IITP President's Award at AI Connect Korea 2026" loading="lazy">
-                            <span class="tooltip">AI Connect Korea 2026 - IITP President's Award</span>
+                        <a href="photo.html?image={{ p.full }}">
+                            <img src="{{ p.thumb }}" alt="{{ p.alt }}" loading="lazy">
+                            <span class="tooltip">{{ p.caption }}</span>
                         </a>
                     </div>
 
-                    <div class="gallery-preview-item">
-                        <a href="photo.html?image=stories/26_ckaia.jpg">
-                            <img src="stories/thumbs/26_ckaia.jpg" alt="Presenting our work at CKAIA 2026" loading="lazy">
-                            <span class="tooltip">CKAIA 2026 - Presentation</span>
-                        </a>
-                    </div>
-
-                    <div class="gallery-preview-item">
-                        <a href="photo.html?image=stories/26_pl_workshop.jpg">
-                            <img src="stories/thumbs/26_pl_workshop.jpg" alt="Protocol learning workshop" loading="lazy">
-                            <span class="tooltip">Protocol learning workshop</span>
-                        </a>
-                    </div>
-
-                    <div class="gallery-preview-item">
-                        <a href="photo.html?image=stories/26_pl_workshop2.jpg">
-                            <img src="stories/thumbs/26_pl_workshop2.jpg" alt="Protocol learning workshop" loading="lazy">
-                            <span class="tooltip">Protocol learning workshop</span>
-                        </a>
-                    </div>
-
-                    <div class="gallery-preview-item">
-                        <a href="photo.html?image=stories/26_das_dinner.jpg">
-                            <img src="stories/thumbs/26_das_dinner.jpg" alt="LOG-DASLab group dinner" loading="lazy">
-                            <span class="tooltip">LOG-DASLab group dinner</span>
-                        </a>
-                    </div>
+{% endfor %}
                 </div>
-                <button class="gallery-preview-nav" type="button" data-gallery-dir="next" aria-label="Show next 5 gallery photos" disabled>&gt;</button>
+                <button class="gallery-preview-nav" type="button" data-gallery-dir="next" aria-label="Show next {{ gallery.config.preview.count }} gallery photos" disabled>&gt;</button>
             </div>
         </div>
 
-        <h3>Alumni</h3>
+{% if members.config.alumni.show %}
+        <h3>{{ members.config.alumni.heading }}</h3>
         <ul class="alumni-list">
-            <li>Dahun Shin (MS 2025 → NHN)</li>
-            <li><a href="https://shpark97.github.io/">Seonghwan Park</a> (MS 2025 → KETI)</li>
-            <li><a href="https://dongyeoplee2.github.io">Dongyeop Lee</a> (MS 2025, continuing as PhD)</li>
-            <li>Jaehyeon Jeong (MS 2026 → ETRI)</li>
+{% for a in members.alumni %}
+            <li>{% if a.url %}<a href="{{ a.url }}">{{ a.name }}</a>{% else %}{{ a.name }}{% endif %} {{ a.note }}</li>
+{% endfor %}
         </ul>
+{% endif %}
     </main>
 
     <footer>
@@ -754,7 +658,7 @@
         var box = document.querySelector('.gallery-preview');
         var prevButton = document.querySelector('[data-gallery-dir="prev"]');
         var nextButton = document.querySelector('[data-gallery-dir="next"]');
-        var pageSize = 5;
+        var pageSize = {{ gallery.config.preview.count }};
         var currentPage = 0;
         var items = [];
 

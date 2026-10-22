@@ -1,0 +1,64 @@
+- title: Comparing Synchronous and Asynchronous Pipeline Parallelism Across Training Configurations
+  authors: Junkyu Park, Dongyeop Lee, Namhoon Lee
+  venue: NeurIPS 2026 Workshop on Collaborative, Open, and Decentralized Training of Foundation
+    Models
+- title: 'SeedFlood: A Step Toward Scalable Decentralized Fine-Tuning of LLMs'
+  authors: Jihun Kim, Dongyeop Lee, Namhoon Lee
+  venue: >-
+    NeurIPS 2026 Workshop on Collaborative, Open, and Decentralized Training of Foundation
+    Models **(Oral)**
+  links:
+    paper: https://arxiv.org/abs/2602.18181
+- title: 'FRESCO: A Novel Consistency Control for Asynchronous Pipeline Parallel Training'
+  authors: Dongyeop Lee, Namhoon Lee
+  venue: NeurIPS 2026
+- title: 'Hidden in Plain Sight: The Overlooked Significance of Canonical Elements for Extreme
+    LLM Sparsity'
+  authors: Hyeondo Jang, Kwanhee Lee, Dongyeop Lee, Namhoon Lee
+  venue: EMNLP 2026; **CKAIA 2026 Best Paper Award**
+  links:
+    paper: https://arxiv.org/abs/2609.06557
+- title: >-
+    Advancing Semiconductor Inspection: A New Dataset and Approach for Robust Anomaly Detection
+    with Large Vision Language Models
+  authors: Jaehyeon Jeong*, Hyeondo Jang*, Donghyun Oh, Seongeun Kim, Namhoon Lee
+  venue: BMVC 2026
+- title: Exploiting Local Flatness for Efficient Out-of-Distribution Detection
+  authors: Seonghwan Park, Hyunji Jung, Dongyeop Lee, Namhoon Lee
+  venue: ECCV 2026
+  links:
+    paper: https://arxiv.org/abs/2606.29952v1
+    code: https://github.com/shpark97/Fold
+  link_separator: ' '
+- title: On-Policy Adaptation Mitigates Hyperparameter-Sensitive Forgetting in Vision-Language
+    Models
+  authors: Doyoon Kim*, Ziyang Wu*, Jingfeng Yang, Yi Ma
+  venue: 'ICML 2026 Workshop on Continual Adaptation at Scale: Towards Sustainable AI'
+  links:
+    paper: https://openreview.net/forum?id=hSugVMRCLK
+- title: Mitigating Staleness in Asynchronous Pipeline Parallelism via Basis Rotation
+  authors: Hyunji Jung*, Sungbin Shin*, Namhoon Lee
+  venue: ICML 2026
+  links:
+    paper: https://www.arxiv.org/abs/2602.03515v2
+    code: https://github.com/LOG-postech/basis-rotation
+- title: >-
+    Quantifying Aleatoric Uncertainty of In-Context Learning for Robust Measure of LLM Prediction
+    Confidence
+  authors: Jinseok Chung, Minkyoung Song*, Hyunji Jung*, Namhoon Lee
+  venue: ACL 2026 **(Oral)**; **KCC 2026 Workshop Outstanding Paper Award**
+  links:
+    paper: https://arxiv.org/abs/2606.19353
+    code: https://github.com/LOG-postech/self-fv-icl
+  link_separator: ' '
+- title: Dynamic Network Compression via Probabilistic Channel Pruning
+  authors: Kwanhee Lee, Hyang Won Lee
+  venue: Neural Networks 2026
+  links:
+    paper: https://www.sciencedirect.com/science/article/pii/S0893608025009608
+- title: 'The Unseen Frontier: Pushing the Limits of LLM Sparsity with Surrogate-Free ADMM'
+  authors: Kwanhee Lee, Hyeondo Jang, Dongyeop Lee, Dan Alistarh, Namhoon Lee
+  venue: ICLR 2026; **JKAIA 2025 Best Paper Award**
+  links:
+    paper: https://arxiv.org/abs/2510.01650
+    code: https://github.com/LOG-postech/elsa

@@ -1,0 +1,31 @@
+- title: Pruning Neural Networks with Velocity-Constrained Optimization
+  authors: Donghyun Oh*, Jinseok Chung*, Namhoon Lee
+  venue: NeurIPS 2023 Workshop on Optimization for Machine Learning
+  links:
+    paper: https://opt-ml.org/papers.html
+- title: A Closer Look at the Intervention Procedure of Concept Bottleneck Models
+  authors: Sungbin Shin, Yohan Jo, Sungsoo Ahn, Namhoon Lee
+  venue: ICML 2023; NeurIPS 2022 Workshop on Trustworthy and Socially Responsible ML
+  links:
+    paper: https://arxiv.org/abs/2302.14260
+    code: https://github.com/ssbin4/Closer-Intervention-CBM
+- title: On the Effectiveness of Sharpness-Aware Minimization with Large Mini-batches
+  authors: Jinseok Chung, Seonghwan Park, Jaeho Lee, Namhoon Lee
+  venue: ICML 2023 Workshop on High-dimensional Learning Dynamics
+  links:
+    paper: https://sites.google.com/view/hidimlearning/papers
+- title: 'FedFwd: Federated Learning without Backpropagation'
+  authors: Seonghwan Park, Dahun Shin, Jinseok Chung, Namhoon Lee
+  venue: ICML 2023 Workshop on Federated Learning and Analytics in Practice
+  links:
+    paper: https://fl-icml2023.github.io/
+- title: Semi-Supervised Concept Bottleneck Models
+  authors: Jeeon Bae, Sungbin Shin, Namhoon Lee
+  venue: ICML 2023 Workshop on Artificial Intelligence and Human-Computer Interaction
+  links:
+    paper: https://sites.google.com/view/aihci/papers
+- title: Almost Sure Last Iterate Convergence of Sharpness-Aware Minimization
+  authors: Kyungchun Nam, Jinseok Chung, Namhoon Lee
+  venue: ICLR 2023 Tiny Papers
+  links:
+    OpenReview: https://openreview.net/forum?id=IcDTYTI0Nx

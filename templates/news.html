@@ -403,118 +403,15 @@
     </header>
 
     <main>
-        <div class="news-list" id="news-list">            
-            
-            <div class="news-item">
-			    <span class="news-date">Oct 2026</span>
-			    <span class="news-content">&#127891; Our <a href="https://arxiv.org/abs/2602.18181" target="_blank" rel="noopener">preprint</a> on decentralized LLM training, SeedFlood, has received a major update, with substantial improvements to its overall presentation, analysis, and experimental evaluation.</span>
-			</div>
-            
-            
-            <div class="news-item">
-                <span class="news-date">Oct 2026</span>
-                <span class="news-content">&#129489;&#8205;&#128187; Minkyoung has started a research internship at <a href="https://www.nota.ai/" target="_blank" rel="noopener">Nota AI</a>.</span>
+        <div class="news-list" id="news-list">
+
+{% for n in news.listed %}
+            <div class="news-item"{{ n.attrs }}>
+                <span class="news-date">{{ n.date_label }}</span>
+                <span class="news-content">{{ n.html }}</span>
             </div>
 
-            <div class="news-item">
-                <span class="news-date">Oct 2026</span>
-                <span class="news-content">&#127891; Our <a href="https://arxiv.org/abs/2610.02241" target="_blank" rel="noopener">paper</a> on hardware-native sparse-quantization for trillion-scale MoEs is out on arXiv. In this work, we introduce MoESQ, which jointly learns semi-structured sparsity and low-precision quantization for MoE experts and executes them on Sparse Tensor Cores with a custom grouped sparse GEMM kernel. The <a href="https://github.com/IST-DASLab/MoESQ" target="_blank" rel="noopener">code</a> and <a href="https://huggingface.co/collections/ISTA-DASLab/moesq" target="_blank" rel="noopener">models</a> are publicly available.</span>
-            </div>
-
-            <div class="news-item">
-                <span class="news-date">Sep 2026</span>
-                <span class="news-content">&#127891; Our <a href="https://arxiv.org/abs/2602.18181" target="_blank" rel="noopener">paper</a> on decentralized training has been accepted to NeurIPS 2026 Workshop on Collaborative, Open, and Decentralized Training of Foundation Models, selected as an oral presentation. In this work, we introduce a novel decentralized LLM fine-tuning framework that achieves extreme communiation efficiency and global consensus.</span>
-            </div>
-
-            <div class="news-item" data-paper="FRESCO">
-                <span class="news-date">Sep 2026</span>
-                <span class="news-content">&#127891; Our paper on asynchronous pipeline parallelism has been accepted to NeurIPS 2026. In this work, we introduce FRESCO, a new principle for consistency control in asynchronous pipelines, which consistently outperforms standard baselines while being extremely efficient and theoretically sound.</span>
-            </div>
-
-			<div class="news-item">
-                <span class="news-date">Sep 2026</span>
-                <span class="news-content">&#127891; Namhoon is serving as an area chair for ICLR 2027.</span>
-            </div>
-            
-            <div class="news-item">
-                <span class="news-date">Aug 2026</span>
-                <span class="news-content">&#127942; Hyunji, Hyeondo, and Jinseok have been selected for the NRF Research Grant for Master&rsquo;s and PhD Students.</span>
-            </div>
-
-            <div class="news-item">
-                <span class="news-date">Aug 2026</span>
-                <span class="news-content">&#127963; We are co-organizing the <a href="https://let-workshop.github.io/2026/" target="_blank" rel="noopener">LeT Workshop</a> on October 7~8 at POSTECH. The workshop aims to bring together researchers interested in machine learning theory.</span>
-            </div>
-
-            <div class="news-item">
-                <span class="news-date">Aug 2026</span>
-                <span class="news-content">&#127891; Our <a href="https://arxiv.org/abs/2609.06557" target="_blank" rel="noopener">paper</a> on extreme LLM sparsity has been accepted to EMNLP 2026. In this work, we show that carefully handling the elementary components of pruning can already substantially outperform existing pruning methods, even at extreme sparsity.</span>
-            </div>
-
-            <div class="news-item" data-paper="Advancing Semiconductor Inspection">
-                <span class="news-date">Aug 2026</span>
-                <span class="news-content">&#127891; Our paper on semiconductor anomaly detection has been accepted to BMVC 2026. In this work, we introduce a semiconductor defect dataset (OASIS) along with vision-guided instruction tuning method.</span>
-            </div>
-
-            <div class="news-item">
-                <span class="news-date">Jul 2026</span>
-                <span class="news-content">&#129309; Our lab has been selected for the 2026 NRF Next-Generation AI for Mathematics program.</span>
-            </div>
-
-            <div class="news-item">
-                <span class="news-date">Jul 2026</span>
-                <span class="news-content">&#127942; Kwanhee received the IITP President&rsquo;s Award in the Graduate Student Outstanding Research Achievement Competition at <a href="https://www.aiconnectkorea.kr/" target="_blank" rel="noopener">AI Connect Korea 2026</a>.</span>
-            </div>
-
-            <div class="news-item" data-paper="Hidden in Plain Sight">
-                <span class="news-date">Jul 2026</span>
-                <span class="news-content">&#127942; Our new paper on extreme LLM sparsity has received the Best Paper Award at CKAIA 2026. The preprint will be available on arXiv soon.</span>
-            </div>
-
-            <div class="news-item">
-                <span class="news-date">Jul 2026</span>
-                <span class="news-content">&#127942; Sungbin has been selected for the 2026 PhD Excellence Scholarship in Science and Engineering.</span>
-            </div>
-
-            <div class="news-item">
-                <span class="news-date">Jul 2026</span>
-                <span class="news-content">&#129309; Our lab joined the <a href="https://nairl.kr/academic-ko/" target="_blank" rel="noopener">National AI Research Lab (NAIRL)</a> academic consortium on July 1, 2026.</span>
-            </div>
-
-            <div class="news-item">
-                <span class="news-date">Jun 2026</span>
-                <span class="news-content">&#127891; Our <a href="https://arxiv.org/abs/2606.29952" target="_blank" rel="noopener">paper</a> on flatness-based out-of-distribution detection has been accepted to ECCV 2026. In this work, we propose FOLD, a lightweight detector that leverages feature-Hessian curvature and partial feature normalization to improve ID-OOD separability.</span>
-            </div>
-
-            <div class="news-item">
-                <span class="news-date">May 2026</span>
-                <span class="news-content">&#127942; Our <a href="https://arxiv.org/abs/2606.19353" target="_blank" rel="noopener">paper</a> on uncertainty quantification in ICL, accepted to ACL 2026, has been selected as an Oral presentation. In this work, we introduce self-function vectors to directly decompose uncertainty, and propose a novel framework to evaluate these disentangled sources.</span>
-            </div>
-
-            <div class="news-item">
-                <span class="news-date">May 2026</span>
-                <span class="news-content">&#127891; Our <a href="https://arxiv.org/abs/2602.03515" target="_blank" rel="noopener">paper</a> on asynchronous pipeline parallelism has been accepted to ICML 2026. In this work, we propose a basis rotation approach to effectively address the associated gradient staleness problem.</span>
-            </div>
-
-            <div class="news-item">
-                <span class="news-date">Apr 2026</span>
-                <span class="news-content">&#129309; Our lab has been selected for the IITP Efficient AI National R&amp;D Program (2026&ndash;2029), a national research program with <em>KRW 7.5B</em> in total funding, together with leading partners including <a href="https://squeezebits.com/" target="_blank" rel="noopener">SqueezeBits</a>.</span>
-            </div>
-
-            <div class="news-item">
-                <span class="news-date">Feb 2026</span>
-                <span class="news-content">&#129309; Our lab has been selected for the "Early-Career Researcher Infrastructure Support Program" (NRF) &mdash; one of the most competitive grants in Korea. With <em>500M KRW</em> in funding, we will build a high-performance compute infrastructure to power our research on extreme compression of hyperscale AI foundation models.</span>
-            </div>
-
-            <div class="news-item">
-                <span class="news-date">Feb 2026</span>
-                <span class="news-content">&#9992;&#65039; Kwanhee started as a visiting student researcher in the <a href="https://daslab.pages.ista.ac.at/" target="_blank" rel="noopener">Dan Alistarh Group</a> at <a href="https://ist.ac.at/en/home/" target="_blank" rel="noopener">ISTA</a>.</span>
-            </div>
-
-            <div class="news-item">
-                <span class="news-date">Jan 2026</span>
-                <span class="news-content">&#127891; Our <a href="https://arxiv.org/abs/2510.01650" target="_blank" rel="noopener">paper</a> on extreme LLM sparsity (ELSA) has been accepted to ICLR 2026.</span>
-            </div>
+{% endfor %}
         </div>
         <button class="news-more" id="news-more" type="button" aria-controls="news-list" hidden>Show more</button>
     </main>
@@ -548,7 +445,7 @@
     (function () {
         var items = document.querySelectorAll('#news-list .news-item');
         var more = document.getElementById('news-more');
-        var visibleCount = Math.min(10, items.length);
+        var visibleCount = Math.min({{ news.config.page.initial }}, items.length);
 
         function updateVisibility() {
             Array.prototype.forEach.call(items, function (item, index) {
@@ -559,7 +456,7 @@
 
         more.addEventListener('click', function () {
             var firstNewItem = items[visibleCount];
-            visibleCount = Math.min(visibleCount + 5, items.length);
+            visibleCount = Math.min(visibleCount + {{ news.config.page.step }}, items.length);
             updateVisibility();
             // Continue reading at the newly revealed news, even on the final batch.
             if (firstNewItem) {

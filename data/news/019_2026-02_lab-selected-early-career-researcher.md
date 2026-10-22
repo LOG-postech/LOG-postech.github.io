@@ -1,0 +1,1 @@
+🤝 Our lab has been selected for the "Early-Career Researcher Infrastructure Support Program" (NRF) — one of the most competitive grants in Korea. With *500M KRW* in funding, we will build a high-performance compute infrastructure to power our research on extreme compression of hyperscale AI foundation models.

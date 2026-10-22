@@ -1,0 +1,63 @@
+members:
+- name: Namhoon Lee
+  photo: namhoonlee.jpg
+  position: Principal Investigator
+  url: https://namhoonlee.github.io/
+- name: Dami So
+  photo: damiso.jpg
+  position: Administrator
+- name: Jinseok Chung
+  photo: jinseokchung.jpg
+  position: MS/PhD Student
+- name: Donghyun Oh
+  photo: donghyunoh.jpg
+  position: MS/PhD Student
+- name: Sungbin Shin
+  photo: sungbinshin.jpg
+  position: MS/PhD Student
+  url: https://ssbin4.github.io
+- name: Dongyeop Lee
+  photo: dongyeoplee.jpg
+  position: PhD Student
+  url: https://dongyeoplee2.github.io
+- name: Jihun Kim
+  photo: jihunkim.jpg
+  position: MS/PhD Student
+- name: Kwanhee Lee
+  photo: kwanheelee.jpg
+  position: MS Student
+  url: https://kwanhee-lee.github.io
+- name: Hyunji Jung
+  photo: hyunjijung.jpg
+  position: MS Student
+  url: https://www.linkedin.com/in/hyunji-jung-1121b5276/?locale=en
+- name: Minkyoung Song
+  photo: minkyoungsong.jpg
+  position: MS Student
+  url: https://smk2295.github.io/
+  alt: Minkyung Song
+- name: Hyeondo Jang
+  photo: hyeondojang.jpg
+  position: MS Student
+  url: https://hyeondo-jang.github.io/
+- name: Jiyun Park
+  photo: jiyunpark.jpg
+  position: MS Student
+- name: Doyoon Kim
+  photo: doyoonkim.jpg
+  position: MS Student
+  url: https://cosmos1030.github.io/
+- name: Yuchan Kim
+  photo: yuchankim.jpg
+  position: MS Student
+alumni:
+- name: Dahun Shin
+  note: (MS 2025 → NHN)
+- name: Seonghwan Park
+  url: https://shpark97.github.io/
+  note: (MS 2025 → KETI)
+- name: Dongyeop Lee
+  url: https://dongyeoplee2.github.io
+  note: (MS 2025, continuing as PhD)
+- name: Jaehyeon Jeong
+  note: (MS 2026 → ETRI)

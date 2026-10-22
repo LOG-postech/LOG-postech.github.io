@@ -1,0 +1,1 @@
+🤝 Our lab has been selected for the [2025 Global Basic Research Laboratory program](https://www.msit.go.kr/bbs/view.do?bbsSeqNo=100&mId=311&mPid=121&nttSeqNo=3179520&sCode=user) (NRF), with up to *KRW 1.5B* in funding over three years.

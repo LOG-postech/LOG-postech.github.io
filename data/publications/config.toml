@@ -1,0 +1,17 @@
+# Presentation settings for publications. Papers are in the *.yaml files here,
+# one file per group, each a list in display order.
+
+[groups]
+# Which group files are shown, top to bottom. A file not listed here is an error,
+# so a new year can't be forgotten: add "2027" here when you create 2027.yaml.
+order = ["preprint", "2026", "2025", "2024", "2023", "previous"]
+
+[groups.labels]
+# Heading shown for a group. Groups not listed use their file name ("2026").
+preprint = "Preprint"
+previous = "Previous"
+
+[links]
+# Text between the [paper] [code] ... links of one paper. A paper can override
+# it with its own link_separator.
+separator = ""
