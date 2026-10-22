@@ -1,8 +1,8 @@
 # News from 2026, newest first. How to add an item: README.md.
 #
-# Every field of an item:
+# Every field of an item (the item's key is its idx):
 #
-# - idx: 39                   # required. Unique across all years; higher = newer (sets the order)
+# 39:                         # idx, required. Unique across all years; higher = newer (sets the order)
 #   date: "2026-10"           # required. "YYYY-MM" or "YYYY-MM-DD", within this file's year
 #   paper: "@lee26fresco"     # optional. papers.bib key(s) the item is about but does not link:
 #                             #   "@lee26fresco"  or  ["@lee26fresco", "@jang26hidden"]
@@ -11,20 +11,20 @@
 #                             #   [text](@paperkey) links a paper, [text](https://...) any page,
 #                             #   @tag names a lab member (data/members/members.yaml)
 
-- idx: 38
+38:
   date: "2026-10"
   text: >-
     🎓 Our [preprint](@kim26seedflood) on decentralized LLM training, SeedFlood, has
     received a major update, with substantial improvements to its overall presentation,
     analysis, and experimental evaluation.
 
-- idx: 37
+37:
   date: "2026-10"
   text: >-
     🧑‍💻 @minkyoungsong has started a research internship at [Nota
     AI](https://www.nota.ai/).
 
-- idx: 36
+36:
   date: "2026-10"
   text: >-
     🎓 Our [paper](@lee26hardware) on hardware-native sparse-quantization for
@@ -35,7 +35,7 @@
     [models](https://huggingface.co/collections/ISTA-DASLab/moesq) are publicly
     available.
 
-- idx: 35
+35:
   date: "2026-09"
   text: >-
     🎓 Our [paper](@kim26seedflood) on decentralized training has been accepted to NeurIPS
@@ -44,7 +44,7 @@
     decentralized LLM fine-tuning framework that achieves extreme communiation
     efficiency and global consensus.
 
-- idx: 34
+34:
   date: "2026-09"
   paper: "@lee26fresco"
   text: >-
@@ -53,25 +53,25 @@
     asynchronous pipelines, which consistently outperforms standard baselines while
     being extremely efficient and theoretically sound.
 
-- idx: 33
+33:
   date: "2026-09"
   text: >-
     🎓 @namhoonlee is serving as an area chair for ICLR 2027.
 
-- idx: 32
+32:
   date: "2026-08"
   text: >-
     🏆 @hyunjijung, @hyeondojang, and @jinseokchung have been selected for the NRF
     Research Grant for Master’s and PhD Students.
 
-- idx: 31
+31:
   date: "2026-08"
   text: >-
     🏛 We are co-organizing the [LeT Workshop](https://let-workshop.github.io/2026/) on
     October 7~8 at POSTECH. The workshop aims to bring together researchers interested
     in machine learning theory.
 
-- idx: 30
+30:
   date: "2026-08"
   text: >-
     🎓 Our [paper](@jang26hidden) on extreme LLM sparsity has been accepted to EMNLP 2026.
@@ -79,7 +79,7 @@
     can already substantially outperform existing pruning methods, even at extreme
     sparsity.
 
-- idx: 29
+29:
   date: "2026-08"
   paper: "@jeong26advancing"
   text: >-
@@ -87,39 +87,39 @@
     this work, we introduce a semiconductor defect dataset (OASIS) along with
     vision-guided instruction tuning method.
 
-- idx: 28
+28:
   date: "2026-07"
   text: >-
     🤝 Our lab has been selected for the 2026 NRF Next-Generation AI for Mathematics
     program.
 
-- idx: 27
+27:
   date: "2026-07"
   text: >-
     🏆 @kwanheelee received the IITP President’s Award in the Graduate Student
     Outstanding Research Achievement Competition at [AI Connect Korea
     2026](https://www.aiconnectkorea.kr/).
 
-- idx: 26
+26:
   date: "2026-07"
   paper: "@jang26hidden"
   text: >-
     🏆 Our new paper on extreme LLM sparsity has received the Best Paper Award at CKAIA
     2026. The preprint will be available on arXiv soon.
 
-- idx: 25
+25:
   date: "2026-07"
   text: >-
     🏆 @sungbinshin has been selected for the 2026 PhD Excellence Scholarship in Science
     and Engineering.
 
-- idx: 24
+24:
   date: "2026-07"
   text: >-
     🤝 Our lab joined the [National AI Research Lab
     (NAIRL)](https://nairl.kr/academic-ko/) academic consortium on July 1, 2026.
 
-- idx: 23
+23:
   date: "2026-06"
   text: >-
     🎓 Our [paper](@park26exploiting) on flatness-based out-of-distribution detection has
@@ -127,7 +127,7 @@
     that leverages feature-Hessian curvature and partial feature normalization to
     improve ID-OOD separability.
 
-- idx: 22
+22:
   date: "2026-05"
   text: >-
     🏆 Our [paper](@chung26quantifying) on uncertainty quantification in ICL, accepted to
@@ -135,21 +135,21 @@
     self-function vectors to directly decompose uncertainty, and propose a novel
     framework to evaluate these disentangled sources.
 
-- idx: 21
+21:
   date: "2026-05"
   text: >-
     🎓 Our [paper](@jung26mitigating) on asynchronous pipeline parallelism has been
     accepted to ICML 2026. In this work, we propose a basis rotation approach to
     effectively address the associated gradient staleness problem.
 
-- idx: 20
+20:
   date: "2026-04"
   text: >-
     🤝 Our lab has been selected for the IITP Efficient AI National R&D Program
     (2026–2029), a national research program with *KRW 7.5B* in total funding, together
     with leading partners including [SqueezeBits](https://squeezebits.com/).
 
-- idx: 19
+19:
   date: "2026-02"
   text: >-
     🤝 Our lab has been selected for the "Early-Career Researcher Infrastructure Support
@@ -157,13 +157,13 @@
     funding, we will build a high-performance compute infrastructure to power our
     research on extreme compression of hyperscale AI foundation models.
 
-- idx: 18
+18:
   date: "2026-02"
   text: >-
     ✈️ @kwanheelee started as a visiting student researcher in the [Dan Alistarh
     Group](https://daslab.pages.ista.ac.at/) at [ISTA](https://ist.ac.at/en/home/).
 
-- idx: 17
+17:
   date: "2026-01"
   text: >-
     🎓 Our [paper](@lee26unseen) on extreme LLM sparsity (ELSA) has been accepted to ICLR

@@ -67,9 +67,23 @@ def load_config(db):
         return tomllib.load(f)
 
 
+class _UniqueKeyLoader(yaml.SafeLoader):
+    """yaml.safe_load, except a key given twice in one mapping is an error
+    (plain YAML silently keeps the last one, which would drop an entry)."""
+
+    def construct_mapping(self, node, deep=False):
+        seen = set()
+        for key_node, _ in node.value:
+            key = self.construct_object(key_node, deep=deep)
+            if key in seen:
+                raise DataError("line %d: %r is given twice" % (key_node.start_mark.line + 1, key))
+            seen.add(key)
+        return super().construct_mapping(node, deep=deep)
+
+
 def load_yaml(path):
     with path.open(encoding="utf-8") as f:
-        return yaml.safe_load(f)
+        return yaml.load(f, Loader=_UniqueKeyLoader)
 
 
 _md = markdown.Markdown()
@@ -213,7 +227,7 @@ def author_list(field, people, where):
 
 # --------------------------------------------------------------------- news
 
-NEWS_KEYS = {"idx", "date", "paper", "text"}
+NEWS_KEYS = {"date", "paper", "text"}
 NEWS_DATE = re.compile(r"^(\d{4})-(\d{2})(?:-(\d{2}))?$")
 # A Markdown link to a paper by its papers.bib key: [paper](@shin23closer).
 PAPER_LINK = re.compile(r"\]\(@([a-z][a-z0-9_]*)\)")
@@ -229,19 +243,25 @@ def load_news(papers_by_key, people):
         if not re.fullmatch(r"\d{4}", path.stem):
             fail("news/%s: news files are named by year, like 2026.yaml" % path.name)
             continue
-        for n, item in enumerate(load_yaml(path) or [], 1):
-            where = "news/%s item %d" % (path.name, n)
+        try:
+            items = load_yaml(path) or {}
+        except DataError as e:
+            fail("news/%s %s" % (path.name, e))
+            continue
+        if not isinstance(items, dict):
+            fail("news/%s: items are keyed by idx (39:, 38:, ...)" % path.name)
+            continue
+        for idx, item in items.items():
+            if not isinstance(idx, int):
+                fail("news/%s: %r is not an idx; each item starts with its number, like 39:" % (path.name, idx))
+                continue
+            where = "news/%s idx %d" % (path.name, idx)
             if not isinstance(item, dict):
-                fail("%s: each item needs idx, date and text" % where)
+                fail("%s: needs date and text" % where)
                 continue
             unknown = set(item) - NEWS_KEYS
             if unknown:
                 fail("%s: unknown field(s) %s (allowed: %s)" % (where, ", ".join(sorted(unknown)), ", ".join(sorted(NEWS_KEYS))))
-            idx = item.get("idx")
-            if not isinstance(idx, int):
-                fail("%s: idx must be a number" % where)
-                continue
-            where = "news/%s idx %d" % (path.name, idx)
             if idx in seen:
                 fail("%s: idx %d is already used in %s" % (where, idx, seen[idx]))
             seen[idx] = path.name

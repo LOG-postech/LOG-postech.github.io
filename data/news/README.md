@@ -7,10 +7,10 @@ newest few, both generated from these files. Nothing is copied by hand.
 ## Add a news item
 
 Add it at the top of its year's file (create `2027.yaml` for a new year), with a
-blank line between items:
+blank line between items. Each item starts with its idx:
 
 ```yaml
-- idx: 39
+39:
   date: "2026-10"
   text: >-
     🏆 @kwanheelee received the IITP President's Award at
@@ -19,7 +19,7 @@ blank line between items:
 
 | Field | Required | Rule |
 |---|---|---|
-| `idx` | yes | The highest `idx` in any year + 1. Sets the order: higher is newer. Never reuse one. |
+| `39:` (the key) | yes | The item's idx: the highest idx in any year + 1. Sets the order: higher is newer. Never reuse one. |
 | `date` | yes | `"YYYY-MM"`, or `"YYYY-MM-DD"` if you know the day, in quotes. Shown as `Oct 2026`. Must be in the file's year. |
 | `text` | yes | One paragraph of Markdown, after `>-` on the next lines, indented. Line breaks inside it are just spaces. |
 | `paper` | no | `"@key"` (in quotes) of papers the item is about but does not link (see below). |
@@ -70,7 +70,7 @@ the build fills in the paper's `paper` URL from papers.bib:
 For a paper mentioned without a link (no `paper` URL yet), name it in `paper`:
 
 ```yaml
-- idx: 34
+34:
   date: "2026-09"
   paper: "@lee26fresco"               # or a list: ["@lee26fresco", "@jang26hidden"]
   text: >-
@@ -85,8 +85,8 @@ paper key stops the build with an error.
 
 ## Edit or remove an item
 
-Edit it in place. To remove an item, delete its entry. Gaps in `idx` are fine.
-To reorder two items, swap their `idx`.
+Edit it in place. To remove an item, delete its entry. Gaps in the numbering are
+fine. To reorder two items, swap their numbers.
 
 ## Presentation settings (`config.toml`)
 

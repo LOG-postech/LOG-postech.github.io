@@ -1,8 +1,8 @@
 # News from 2023, newest first. How to add an item: README.md.
 #
-# Every field of an item:
+# Every field of an item (the item's key is its idx):
 #
-# - idx: 39                   # required. Unique across all years; higher = newer (sets the order)
+# 39:                         # idx, required. Unique across all years; higher = newer (sets the order)
 #   date: "2023-10"           # required. "YYYY-MM" or "YYYY-MM-DD", within this file's year
 #   paper: "@lee26fresco"     # optional. papers.bib key(s) the item is about but does not link:
 #                             #   "@lee26fresco"  or  ["@lee26fresco", "@jang26hidden"]
@@ -11,25 +11,25 @@
 #                             #   [text](@paperkey) links a paper, [text](https://...) any page,
 #                             #   @tag names a lab member (data/members/members.yaml)
 
-- idx: 4
+4:
   date: "2023-11"
   text: >-
     🏆 Our [paper](@shin25critical) on overparameterization on SAM received the Best Paper
     Award at JKAIA 2023.
 
-- idx: 3
+3:
   date: "2023-04"
   text: >-
     🏆 @sungbinshin has been selected for the Kwanjeong Educational Foundation Graduate
     Scholarship.
 
-- idx: 2
+2:
   date: "2023-04"
   text: >-
     🎓 Our [paper](@shin23closer) on concept bottleneck models has been accepted to ICML
     2023.
 
-- idx: 1
+1:
   date: "2023-02"
   text: >-
     🧑‍💻 @sungbinshin joined Google as a Student Researcher.
