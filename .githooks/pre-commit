@@ -1,38 +1,37 @@
 #!/usr/bin/env bash
 #
-# Optimize any image being committed, and generate its gallery thumbnail.
+# Check data/ and optimize any image being committed.
 #
 # Enable with:  tools/setup-hooks.sh
 # Bypass once:  git commit --no-verify
 #
-# Photos are resized, re-encoded and stripped of EXIF before they enter git
-# history, so the repository never stores a 10MB camera original. Rules live in
-# tools/optimize-images.sh.
+# 1. tools/build.py --check validates every database in data/ (file names,
+#    required fields, missing photos), so a broken entry never reaches main.
+# 2. Photos are resized, re-encoded and stripped of EXIF before they enter git
+#    history, so the repository never stores a 10MB camera original. Rules live
+#    in tools/optimize-images.sh. Gallery thumbnails are made by the build and
+#    are not committed.
+#
+# Written for the bash 3.2 that ships with macOS.
 
 set -euo pipefail
 
 REPO="$(git rev-parse --show-toplevel)"
 cd "$REPO"
 
-# news.html is the source of truth for Recent News on the home page. If it is
-# being committed, regenerate the home page's copy so links added on the News
-# page never go missing there.
-if git diff --cached --name-only --diff-filter=ACMR | grep -qx 'news.html'; then
-    if tools/sync-home-news.py >/dev/null; then
-        if ! git diff --quiet -- index.html; then
-            git add -- index.html
-            echo "pre-commit: synced Recent News on index.html from news.html"
-        fi
-    else
-        echo "pre-commit: tools/sync-home-news.py failed; commit anyway with --no-verify" >&2
-        exit 1
-    fi
+if ! python3 tools/build.py --check >/dev/null; then
+    python3 tools/build.py --check || true
+    echo "pre-commit: fix the data errors above, or commit anyway with --no-verify" >&2
+    exit 1
 fi
 
 # Staged images in the directories the optimizer manages.
-mapfile -t STAGED < <(
+STAGED=()
+while IFS= read -r path; do
+    STAGED+=("$path")
+done < <(
     git diff --cached --name-only --diff-filter=ACMR \
-    | grep -Ei '^(stories|lab_photo|group_profile|research_focus)/.*\.(jpe?g|png)$' || true
+    | grep -Ei '^(data/gallery/photos|data/members/photos|data/research/icons|static/lab_photo)/.*\.(jpe?g|png)$' || true
 )
 
 [ "${#STAGED[@]}" -gt 0 ] || exit 0
@@ -52,12 +51,10 @@ EOF
     exit 1
 fi
 
-# Remember the HTML files' state so we can stage only the ones the optimizer
-# actually rewrites (when a file changes extension).
-declare -A HTML_BEFORE
-for page in *.html; do
-    [ -f "$page" ] && HTML_BEFORE["$page"]="$(git hash-object "$page")"
-done
+# Files that name images. Remember their state so we stage only the ones the
+# optimizer rewrites (when an image changes extension), not unrelated edits.
+REFS="data/gallery/gallery.yaml data/members/members.yaml data/research/topics.yaml templates/index.html"
+BEFORE="$(for f in $REFS; do [ -f "$f" ] && echo "$f $(git hash-object "$f")"; done)"
 
 echo "pre-commit: optimizing ${#STAGED[@]} image(s)..."
 tools/optimize-images.sh "${STAGED[@]}"
@@ -75,32 +72,10 @@ for path in "${STAGED[@]}"; do
     fi
 done
 
-# A new photo in stories/ needs its gallery thumbnail generated and staged.
-for path in "${STAGED[@]}"; do
-    case "$path" in
-        stories/thumbs/*) continue ;;
-        stories/*) ;;
-        *) continue ;;
-    esac
-    base="$(basename "${path%.*}")"
-    thumb="stories/thumbs/${base}.jpg"
-    if [ ! -f "$thumb" ]; then
-        source_file="$path"
-        [ -f "$source_file" ] || source_file="${path%.*}.jpg"
-        convert "$source_file" -auto-orient -resize "600x600^" -gravity center \
-            -extent 600x600 -strip -interlace Plane -sampling-factor 4:2:0 \
-            -quality 80 -set comment "log-opt-v1" "$thumb"
-        chmod 644 "$thumb"
-        echo "  generated thumbnail  $thumb"
-    fi
-    git add -- "$thumb"
-done
-
-# Stage HTML only where a path reference was rewritten.
-for page in "${!HTML_BEFORE[@]}"; do
-    [ -f "$page" ] || continue
-    if [ "$(git hash-object "$page")" != "${HTML_BEFORE[$page]}" ]; then
-        git add -- "$page"
-        echo "  staged rewritten references in $page"
+for f in $REFS; do
+    [ -f "$f" ] || continue
+    if [ "$(echo "$BEFORE" | awk -v f="$f" '$1 == f { print $2 }')" != "$(git hash-object "$f")" ]; then
+        git add -- "$f"
+        echo "  staged rewritten references in $f"
     fi
 done
