@@ -495,7 +495,26 @@ def load_publications(people):
 
 def load_members():
     cfg = load_config("members")
-    raw = load_yaml(DATA / "members" / "members.yaml")
+    try:
+        data = load_yaml(DATA / "members" / "members.yaml") or {}
+    except DataError as e:
+        fail("members.yaml %s" % e)
+        data = {}
+    # Each section maps tag -> person, in display order; flatten to lists.
+    raw = {}
+    for group in ("members", "alumni"):
+        section = data.get(group) or {}
+        if not isinstance(section, dict):
+            fail("members.yaml: %s is keyed by tag (hyunjijung:, ...)" % group)
+            section = {}
+        raw[group] = []
+        for tag, person in section.items():
+            if not isinstance(person, dict):
+                fail("members.yaml: %s: %s needs name and the other fields below it" % (group, tag))
+                continue
+            if "tag" in person:
+                fail("members.yaml: %s: the tag is the key, so remove the tag field" % tag)
+            raw[group].append(dict(person, tag=str(tag)))
     photos = DATA / "members" / "photos"
     members = []
     for m in raw.get("members", []):

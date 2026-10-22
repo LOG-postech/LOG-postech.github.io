@@ -8,19 +8,20 @@ headshots.
 1. Put their photo in `photos/`, named after them without spaces:
    `photos/hyeondojang.jpg`. Any size is fine; the pre-commit hook shrinks
    it to 512px (see the repository README).
-2. Add them to `members:` in `members.yaml`, at the position they should appear:
+2. Add them under `members:` in `members.yaml`, at the position they should
+   appear, keyed by their tag:
 
    ```yaml
-   - tag: hyeondojang
-     name: Hyeondo Jang
-     photo: hyeondojang.jpg
-     position: MS Student
-     url: https://hyeondo-jang.github.io/   # optional: name links here
+     hyeondojang:
+       name: Hyeondo Jang
+       photo: hyeondojang.jpg
+       position: MS Student
+       url: https://hyeondo-jang.github.io/   # optional: name links here
    ```
 
 | Field | Required | Notes |
 |---|---|---|
-| `tag` | yes | How news and papers refer to them: `@hyeondojang`. Lowercase, no spaces; use the photo's name. Never reuse a tag. |
+| `hyeondojang:` (the key) | yes | Their tag: how news and papers refer to them, `@hyeondojang`. Lowercase, no spaces; use the photo's name. Never reuse one. |
 | `name` | yes | As shown under the photo and in author lists. |
 | `short` | no | Name used for `@tag` in news. Defaults to the first word of `name`. |
 | `photo` | yes | File name in `photos/`. Also the anchor of their card: `group.html#hyeondojang`. |
@@ -30,13 +31,13 @@ headshots.
 
 ## When someone graduates
 
-Remove them from `members:`, and add them to `alumni:`:
+Remove them from `members:`, and add them under `alumni:`:
 
 ```yaml
-- tag: jaehyeonjeong        # keep the same tag, so old news and papers still work
-  name: Jaehyeon Jeong
-  url: https://...          # optional
-  note: (MS 2026 → ETRI)
+  jaehyeonjeong:            # keep the same tag, so old news and papers still work
+    name: Jaehyeon Jeong
+    url: https://...        # optional
+    note: (MS 2026 → ETRI)
 ```
 
 Their `@tag` keeps working in news and papers, showing the name without a face.

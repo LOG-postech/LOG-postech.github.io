@@ -1,117 +1,120 @@
 # Lab members and alumni, in display order. How to add someone: README.md.
 #
-# Every field of a person:
+# Every field of a person (the person's key is their tag, used as @hyunjijung
+# in news and papers.bib; never reuse one):
 #
 # members:
-# - tag: hyunjijung           # required. Id used as @hyunjijung in news and papers.bib; never reuse
-#   name: Hyunji Jung         # required. Shown under the photo and in author lists
-#   short: Hyunji             # optional. Name for @tag in news (default: first word of name)
-#   photo: hyunjijung.jpg     # required. File in photos/; also the card anchor group.html#hyunjijung
-#   position: MS Student      # required. Shown under the name
-#   url: https://...          # optional. Personal site; name and faces link here
-#   alt: Hyunji Jung          # optional. Photo description (default: name)
+#   hyunjijung:
+#     name: Hyunji Jung         # required. Shown under the photo and in author lists
+#     short: Hyunji             # optional. Name for @tag in news (default: first word of name)
+#     photo: hyunjijung.jpg     # required. File in photos/; also the card anchor group.html#hyunjijung
+#     position: MS Student      # required. Shown under the name
+#     url: https://...          # optional. Personal site; name and faces link here
+#     alt: Hyunji Jung          # optional. Photo description (default: name)
 #
 # alumni:
-# - tag: jaehyeonjeong        # required. Keep the tag they had as a member
-#   name: Jaehyeon Jeong      # required
-#   url: https://...          # optional
-#   note: (MS 2026 → ETRI)    # optional. Shown after the name
+#   jaehyeonjeong:              # keep the tag they had as a member
+#     name: Jaehyeon Jeong      # required
+#     url: https://...          # optional
+#     note: (MS 2026 → ETRI)    # optional. Shown after the name
 
 members:
-- tag: namhoonlee
-  name: Namhoon Lee
-  photo: namhoonlee.jpg
-  position: Principal Investigator
-  url: https://namhoonlee.github.io/
 
-- tag: damiso
-  name: Dami So
-  photo: damiso.jpg
-  position: Administrator
+  namhoonlee:
+    name: Namhoon Lee
+    photo: namhoonlee.jpg
+    position: Principal Investigator
+    url: https://namhoonlee.github.io/
 
-- tag: jinseokchung
-  name: Jinseok Chung
-  photo: jinseokchung.jpg
-  position: MS/PhD Student
+  damiso:
+    name: Dami So
+    photo: damiso.jpg
+    position: Administrator
 
-- tag: donghyunoh
-  name: Donghyun Oh
-  photo: donghyunoh.jpg
-  position: MS/PhD Student
+  jinseokchung:
+    name: Jinseok Chung
+    photo: jinseokchung.jpg
+    position: MS/PhD Student
 
-- tag: sungbinshin
-  name: Sungbin Shin
-  photo: sungbinshin.jpg
-  position: MS/PhD Student
-  url: https://ssbin4.github.io
+  donghyunoh:
+    name: Donghyun Oh
+    photo: donghyunoh.jpg
+    position: MS/PhD Student
 
-- tag: dongyeoplee
-  name: Dongyeop Lee
-  photo: dongyeoplee.jpg
-  position: PhD Student
-  url: https://dongyeoplee2.github.io
+  sungbinshin:
+    name: Sungbin Shin
+    photo: sungbinshin.jpg
+    position: MS/PhD Student
+    url: https://ssbin4.github.io
 
-- tag: jihunkim
-  name: Jihun Kim
-  photo: jihunkim.jpg
-  position: MS/PhD Student
+  dongyeoplee:
+    name: Dongyeop Lee
+    photo: dongyeoplee.jpg
+    position: PhD Student
+    url: https://dongyeoplee2.github.io
 
-- tag: kwanheelee
-  name: Kwanhee Lee
-  photo: kwanheelee.jpg
-  position: MS Student
-  url: https://kwanhee-lee.github.io
+  jihunkim:
+    name: Jihun Kim
+    photo: jihunkim.jpg
+    position: MS/PhD Student
 
-- tag: hyunjijung
-  name: Hyunji Jung
-  photo: hyunjijung.jpg
-  position: MS Student
-  url: https://www.linkedin.com/in/hyunji-jung-1121b5276/?locale=en
+  kwanheelee:
+    name: Kwanhee Lee
+    photo: kwanheelee.jpg
+    position: MS Student
+    url: https://kwanhee-lee.github.io
 
-- tag: minkyoungsong
-  name: Minkyoung Song
-  photo: minkyoungsong.jpg
-  position: MS Student
-  url: https://smk2295.github.io/
-  alt: Minkyung Song
+  hyunjijung:
+    name: Hyunji Jung
+    photo: hyunjijung.jpg
+    position: MS Student
+    url: https://www.linkedin.com/in/hyunji-jung-1121b5276/?locale=en
 
-- tag: hyeondojang
-  name: Hyeondo Jang
-  photo: hyeondojang.jpg
-  position: MS Student
-  url: https://hyeondo-jang.github.io/
+  minkyoungsong:
+    name: Minkyoung Song
+    photo: minkyoungsong.jpg
+    position: MS Student
+    url: https://smk2295.github.io/
+    alt: Minkyung Song
 
-- tag: jiyunpark
-  name: Jiyun Park
-  photo: jiyunpark.jpg
-  position: MS Student
+  hyeondojang:
+    name: Hyeondo Jang
+    photo: hyeondojang.jpg
+    position: MS Student
+    url: https://hyeondo-jang.github.io/
 
-- tag: doyoonkim
-  name: Doyoon Kim
-  photo: doyoonkim.jpg
-  position: MS Student
-  url: https://cosmos1030.github.io/
+  jiyunpark:
+    name: Jiyun Park
+    photo: jiyunpark.jpg
+    position: MS Student
 
-- tag: yuchankim
-  name: Yuchan Kim
-  photo: yuchankim.jpg
-  position: MS Student
+  doyoonkim:
+    name: Doyoon Kim
+    photo: doyoonkim.jpg
+    position: MS Student
+    url: https://cosmos1030.github.io/
+
+  yuchankim:
+    name: Yuchan Kim
+    photo: yuchankim.jpg
+    position: MS Student
 
 alumni:
-- tag: dahunshin
-  name: Dahun Shin
-  note: (MS 2025 → NHN)
 
-- tag: seonghwanpark
-  name: Seonghwan Park
-  url: https://shpark97.github.io/
-  note: (MS 2025 → KETI)
+  dahunshin:
+    name: Dahun Shin
+    note: (MS 2025 → NHN)
 
-- tag: dongyeoplee
-  name: Dongyeop Lee
-  url: https://dongyeoplee2.github.io
-  note: (MS 2025, continuing as PhD)
+  seonghwanpark:
+    name: Seonghwan Park
+    url: https://shpark97.github.io/
+    note: (MS 2025 → KETI)
 
-- tag: jaehyeonjeong
-  name: Jaehyeon Jeong
-  note: (MS 2026 → ETRI)
+  dongyeoplee:
+    name: Dongyeop Lee
+    url: https://dongyeoplee2.github.io
+    note: (MS 2025, continuing as PhD)
+
+  jaehyeonjeong:
+    name: Jaehyeon Jeong
+    note: (MS 2026 → ETRI)
