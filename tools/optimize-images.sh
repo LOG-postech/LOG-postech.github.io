@@ -11,8 +11,8 @@
 # multiple of its display size, re-encodes it, and strips EXIF (which also drops
 # GPS coordinates from lab photos).
 #
-# Gallery thumbnails under stories/thumbs/ are generated automatically from the
-# originals in stories/ — never create them by hand.
+# Gallery thumbnails are not stored at all: tools/build.py makes them from the
+# photos at build time (settings in data/gallery/config.toml).
 #
 # Every processed file is stamped with a marker in its image comment, so running
 # this repeatedly is safe: already-optimized files are skipped rather than
@@ -52,26 +52,36 @@ fi
 #
 # Sizes are ~3x the CSS display size so the images stay sharp on retina screens
 # and when the layout grows:
-#   stories/          click-through "full size" view          -> 2560px
-#   stories/thumbs/   gallery grid tiles, 112-180px square    ->  600px square
-#   lab_photo/        home page hero, <=800px wide            -> 1600px
-#   group_profile/    member avatars, 140px square            ->  512px
-#   research_focus/   research cards, 165px wide              ->  500px
-#   logo/             left alone; small already, and logos need to stay crisp
+#   data/gallery/photos/   click-through "full size" view      -> 2560px
+#   static/lab_photo/      home page hero, <=800px wide        -> 1600px
+#   data/members/photos/   member avatars, 140px square        ->  512px
+#   static/research_focus/ research cards, ~124px square       ->  500px
+#   static/logo/           left alone; small already, and logos need to stay crisp
 # ---------------------------------------------------------------------------
+IMAGE_DIRS="data/gallery/photos static/lab_photo data/members/photos static/research_focus"
+
 rule_for() {
     case "$1" in
-        stories/thumbs/*)  echo "600 80 jpg square" ;;
-        stories/*)         echo "2560 82 jpg fit" ;;
-        lab_photo/*)       echo "1600 85 jpg fit" ;;
-        group_profile/*)   echo "512 85 jpg fit" ;;
-        research_focus/*)  echo "500 85 keep fit" ;;
-        *)                 echo "" ;;
+        data/gallery/photos/*)  echo "2560 82 jpg fit" ;;
+        static/lab_photo/*)     echo "1600 85 jpg fit" ;;
+        data/members/photos/*)  echo "512 85 jpg fit" ;;
+        static/research_focus/*) echo "500 85 keep fit" ;;
+        *)                      echo "" ;;
+    esac
+}
+
+# The file that refers to images in a directory, by file name.
+references_for() {
+    case "$1" in
+        data/gallery/photos/*)  echo "data/gallery/gallery.yaml" ;;
+        data/members/photos/*)  echo "data/members/members.yaml" ;;
+        static/research_focus/*) echo "content/research.html" ;;
+        static/lab_photo/*)     echo "layout/index.html" ;;
     esac
 }
 
 is_raster() {
-    case "${1,,}" in
+    case "$(printf '%s' "$1" | tr '[:upper:]' '[:lower:]')" in
         *.jpg|*.jpeg|*.png) return 0 ;;
         *) return 1 ;;
     esac
@@ -165,80 +175,31 @@ optimize_one() {
     printf "  %-46s %8s -> %8s\n" "$dst" "$(human "$before")" "$(human "$after")"
 }
 
-# Generate stories/thumbs/<name>.jpg for any original that has no thumbnail.
-#
-# With no arguments, scans every original in stories/. With arguments, only the
-# given paths are considered, so an explicit run still produces thumbnails —
-# passing files used to skip thumbnail generation entirely.
-generate_thumbs() {
-    mkdir -p stories/thumbs
-    local made=0
-    local orig base thumb
-    local sources=()
-
-    if [ "$#" -gt 0 ]; then
-        for orig in "$@"; do
-            orig="${orig#./}"
-            # optimize_one may have renamed the file to .jpg.
-            [ -f "$orig" ] || orig="${orig%.*}.jpg"
-            sources+=("$orig")
-        done
-    else
-        sources=(stories/*)
-    fi
-
-    for orig in ${sources[@]+"${sources[@]}"}; do
-        [ -f "$orig" ] || continue
-        # Only originals directly under stories/ get a gallery thumbnail.
-        case "$orig" in
-            stories/thumbs/*) continue ;;
-            stories/*) ;;
-            *) continue ;;
-        esac
-        is_raster "$orig" || continue
-        base="$(basename "${orig%.*}")"
-        thumb="stories/thumbs/${base}.jpg"
-        # A thumbnail under any extension counts as present.
-        if compgen -G "stories/thumbs/${base}."* >/dev/null; then
-            continue
-        fi
-        if [ "$CHECK_ONLY" = 1 ]; then
-            echo "  would generate  $thumb"
-        else
-            convert "$orig" -auto-orient -resize "600x600^" -gravity center \
-                -extent 600x600 -strip -interlace Plane -sampling-factor 4:2:0 \
-                -quality 80 -set comment "$MARKER" "$thumb"
-            chmod 644 "$thumb"
-            echo "  generated thumbnail  $thumb"
-        fi
-        made=$((made + 1))
-    done
-    [ "$made" -gt 0 ] || return 0
-}
-
-# When a file changes extension, keep the HTML pointing at it.
+# When a file changes extension (photo.png -> photo.jpg), update the data file
+# that names it, so the build still finds it.
 rewrite_references() {
-    [ "${#RENAMES[@]}" -gt 0 ] || return 0
-    local pair old new page
+    [ "${#RENAMES[@]}" -gt 0 ] 2>/dev/null || return 0
+    local pair old new ref
     for pair in "${RENAMES[@]}"; do
         old="${pair%%=>*}"
         new="${pair#*=>}"
-        for page in *.html; do
-            [ -f "$page" ] || continue
-            if grep -qF "$old" "$page"; then
-                # Match the path inside an attribute so a shorter name cannot
-                # partially match a longer one.
-                python3 - "$page" "$old" "$new" <<'PY'
-import sys
-page, old, new = sys.argv[1], sys.argv[2], sys.argv[3]
-text = open(page, encoding="utf-8").read()
-for quote in ('"', "'"):
-    text = text.replace(f"{quote}{old}{quote}", f"{quote}{new}{quote}")
-open(page, "w", encoding="utf-8").write(text)
+        ref="$(references_for "$old")"
+        [ -n "$ref" ] && [ -f "$ref" ] || continue
+        python3 - "$ref" "$old" "$new" <<'PY'
+import os, re, sys
+ref, old, new = sys.argv[1], sys.argv[2], sys.argv[3]
+text = open(ref, encoding="utf-8").read()
+if ref.endswith(".html"):
+    # Templates refer to static files by their published path (lab_photo/x.jpg).
+    pairs = [(old.split("/", 1)[1], new.split("/", 1)[1])]
+else:
+    pairs = [(os.path.basename(old), os.path.basename(new))]
+for a, b in pairs:
+    # Whole values only, so a.png cannot match inside another name.
+    text = re.sub(r"(?<![\w./-])%s(?![\w.-])" % re.escape(a), b, text)
+open(ref, "w", encoding="utf-8").write(text)
 PY
-                echo "  updated reference in $page: $old -> $new"
-            fi
-        done
+        echo "  updated reference in $ref: $(basename "$old") -> $(basename "$new")"
     done
 }
 
@@ -248,13 +209,11 @@ if [ "${#TARGETS[@]}" -gt 0 ]; then
     for t in "${TARGETS[@]}"; do
         optimize_one "$t"
     done
-    generate_thumbs "${TARGETS[@]}"
 else
-    # Originals first, so generated thumbnails come from the optimized source.
+    # shellcheck disable=SC2086  # IMAGE_DIRS is a word list on purpose
     while IFS= read -r f; do
         optimize_one "$f"
-    done < <(find stories lab_photo group_profile research_focus -type f 2>/dev/null | LC_ALL=C sort)
-    generate_thumbs
+    done < <(find $IMAGE_DIRS -type f 2>/dev/null | LC_ALL=C sort)
 fi
 
 rewrite_references

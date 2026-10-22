@@ -1,0 +1,223 @@
+        a { color: var(--color-primary); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+
+        h2 {
+            font-family: 'Inter', system-ui, sans-serif;
+            font-size: 1.20em;
+            font-weight: 700;
+            letter-spacing: 0.01em;
+            text-transform: none;
+            color: var(--color-heading);
+            margin-top: var(--section-gap);
+            margin-bottom: var(--heading-gap);
+        }
+
+        h2:first-of-type {
+            margin-top: 0;
+        }
+
+        .research-intro {
+            margin-bottom: 26px;
+        }
+
+        p {
+            font-size: var(--text-body);
+            line-height: var(--leading-body);
+            color: var(--color-body);
+            margin-bottom: 0;
+        }
+
+        .fold-trigger {
+            align-items: baseline;
+            background: none;
+            border: none;
+            color: var(--color-muted);
+            cursor: pointer;
+            display: inline-flex;
+            font-size: 0.82em;
+            font-weight: 500;
+            gap: 6px;
+            margin-left: 4px;
+            padding: 0;
+        }
+
+        .fold-trigger:hover {
+            color: var(--color-primary);
+        }
+
+        .fold-trigger:hover .fold-label {
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .fold-trigger:focus {
+            outline: none;
+        }
+
+        .fold-trigger:focus-visible {
+            outline: 1px solid currentColor;
+            outline-offset: 3px;
+        }
+
+        .fold-caret {
+            font-size: 0.85em;
+            transition: transform 0.15s ease;
+        }
+
+        .fold-trigger[aria-expanded="true"] .fold-caret {
+            transform: rotate(90deg);
+        }
+
+        .fold-detail {
+            border-left: 2px solid var(--rule-color);
+            color: var(--color-body);
+            display: none;
+            font-size: 0.9em;
+            line-height: 1.68;
+            margin-top: 10px;
+            padding-left: 12px;
+        }
+
+        .fold-detail.open {
+            display: block;
+        }
+
+        .fold-item {
+            margin-bottom: 9px;
+        }
+
+        .fold-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .fold-item-title {
+            color: var(--color-heading);
+            display: block;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .paper-tag {
+            color: var(--color-muted);
+            font-size: 0.82em;
+            font-weight: 400;
+        }
+
+        .paper-tag a {
+            color: inherit;
+            font-weight: 500;
+            position: relative;
+            text-decoration: none;
+            transition: color 0.15s ease;
+        }
+
+        .paper-tag a::after {
+            border-bottom: 1px dotted currentColor;
+            bottom: -2px;
+            content: "";
+            left: 0;
+            position: absolute;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.18s ease;
+            width: 100%;
+        }
+
+        .paper-tag a:hover,
+        .paper-tag a:focus {
+            color: var(--color-primary);
+            outline: none;
+            text-decoration: none;
+        }
+
+        .paper-tag a:hover::after,
+        .paper-tag a:focus::after {
+            transform: scaleX(1);
+            transition-duration: 0s;
+        }
+
+        .section {
+            display: grid;
+            grid-template-columns: auto minmax(0, 1fr);
+            align-items: start;
+            column-gap: 22px;
+            row-gap: 10px;
+            margin-bottom: 40px;
+        }
+
+        .section .section-text {
+            min-width: 0;
+        }
+
+        .section img {
+            width: 165px;
+            max-width: none;
+            height: auto;
+            aspect-ratio: 1 / 1;
+            box-sizing: border-box;
+            padding: 12px;
+            object-fit: contain;
+            border: 1.5px solid var(--img-border);
+            border-radius: 6px;
+        }
+
+        /* Round shapes read smaller than square ones at the same size, so
+           these icons get less inset inside the same frame. */
+        .section img.icon-round {
+            padding: 7px;
+        }
+
+        .section.wrap-flow {
+            display: block;
+        }
+
+        .section.wrap-flow::after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+
+        .section.wrap-flow img {
+            float: left;
+            margin: 0 22px 10px 0;
+        }
+
+        .section.wrap-flow .section-text {
+            display: block;
+        }
+
+        .section-title { font-weight: 700; }
+        .red    { color: var(--cat-compression); font-weight: 600; }
+        .orange { color: var(--cat-optimization); font-weight: 600; }
+        .green  { color: var(--cat-distributed); font-weight: 600; }
+        .blue   { color: var(--cat-applications); font-weight: 600; }
+
+        @media (max-width: 900px) {
+            :root {
+                --page-pad-top: 28px;
+                --page-pad-x: 18px;
+                --page-pad-bottom: 40px;
+                --header-pad-bottom: 4px;
+                --header-gap: 16px;
+                --footer-logo-h: 18px;
+            }
+
+            header {
+                display: grid;
+                grid-template-columns: minmax(0, 1fr) auto;
+                align-items: start;
+                column-gap: 10px;
+            }
+
+            .lab-name {
+                min-width: 0;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            nav {
+                display: none;
+            }
+        }

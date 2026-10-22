@@ -1,0 +1,5 @@
+# Members page settings. Details: README.md.
+
+[alumni]
+show = true             # show the Alumni list
+heading = "Alumni"

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="logo/log_logo.png" type="image/png">
+    <title>{% block title %}{% endblock %} | {{ site.lab_name }}</title>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+{#- The shared CSS sits in three runs with each page's own rules between them,
+    in the order the pages always had, so no rule changes which one wins. #}
+{% include "partials/chassis.css" %}
+{% block style_page %}{% endblock %}
+{% include "partials/footer.css" %}
+{% block style_after_footer %}{% endblock %}
+{% include "partials/drawer.css" %}
+{% block style_after_drawer %}{% endblock %}
+    </style>
+</head>
+<body>
+<div class="inner">
+    <header>
+{% if page == "index" %}
+        <span class="lab-name">{{ site.lab_name }}</span>
+{% else %}
+        <a href="index.html" class="lab-name">{{ site.lab_name }}</a>
+{% endif %}
+        <button class="menu-toggle" aria-label="Menu">&#9776;</button>
+        <nav>
+{% for item in site.nav %}
+            <a href="{{ item.page }}.html"{% if item.page == page %} class="active"{% endif %}>{{ item.label }}</a>
+{% endfor %}
+        </nav>
+    </header>
+
+    <main>
+{% block main %}{% endblock %}
+    </main>
+
+    <footer>
+        <span>{{ site.copyright }}</span>
+        <div class="footer-logos">
+{% for logo in site.footer_logos %}
+            <a href="{{ logo.url }}" target="_blank" rel="noopener"><img src="{{ logo.image }}" alt="{{ logo.alt }}"></a>
+{% endfor %}
+        </div>
+    </footer>
+
+</div>
+
+<div class="nav-overlay" id="navOverlay"></div>
+<div class="nav-drawer" id="navDrawer">
+    <button class="drawer-close" id="drawerClose">&#x2715;</button>
+{% for item in site.nav %}
+    <a href="{{ item.page }}.html"{% if item.page == page %} class="active"{% endif %}>{{ item.label }}</a>
+{% endfor %}
+</div>
+
+{% block scripts %}{% endblock %}
+</body>
+</html>
