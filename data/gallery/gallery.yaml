@@ -1,147 +1,193 @@
-# Gallery photos, in display order (newest first). How to add one: README.md.
+# Gallery photos, shown highest number first (newest). How to add one: README.md.
 #
-# Every field of a photo:
+# Every field of a photo (the photo's key is its idx):
 #
-# - file: 26_acl.jpg          # required. File in photos/
+# 46:                         # idx, required. Unique; higher = newer (sets the order)
+#   file: 26_acl.jpg          # required. File in photos/
 #   caption: ACL 2026 presentation   # required. Hover text and caption in the photo viewer
 #   alt: ...                  # optional. Description for screen readers (default: caption)
 
-- file: 26_aiconnect.jpg
+45:
+  file: 26_aiconnect.jpg
   caption: AI Connect Korea 2026 - IITP President's Award
   alt: Kwanhee receiving the IITP President's Award at AI Connect Korea 2026
 
-- file: 26_ckaia.jpg
+44:
+  file: 26_ckaia.jpg
   caption: CKAIA 2026 - Presentation
   alt: Presenting our work at CKAIA 2026
 
-- file: 26_pl_workshop.jpg
+43:
+  file: 26_pl_workshop.jpg
   caption: Protocol learning workshop
 
-- file: 26_pl_workshop2.jpg
+42:
+  file: 26_pl_workshop2.jpg
   caption: Protocol learning workshop
 
-- file: 26_das_dinner.jpg
+41:
+  file: 26_das_dinner.jpg
   caption: LOG-DASLab group dinner
 
-- file: 26_icml_poster.jpg
+40:
+  file: 26_icml_poster.jpg
   caption: ICML 2026 poster
 
-- file: 26_icml.jpg
+39:
+  file: 26_icml.jpg
   caption: ICML 2026
 
-- file: 26_acl.jpg
+38:
+  file: 26_acl.jpg
   caption: ACL 2026 presentation
 
-- file: 26_kcc_conference.jpg
+37:
+  file: 26_kcc_conference.jpg
   caption: KCC 2026
 
-- file: 26_kcc_cliff.jpg
+36:
+  file: 26_kcc_cliff.jpg
   caption: KCC 2026 - Jeju
   alt: KCC 2026 Jeju coast
 
-- file: 26_kcc_yaut.jpg
+35:
+  file: 26_kcc_yaut.jpg
   caption: KCC 2026 - Yacht Tour
   alt: KCC 2026 yacht tour
 
-- file: 26_lovelog.jpg
+34:
+  file: 26_lovelog.jpg
   caption: Love LOG
 
-- file: 26_iclrdinner.jpg
+33:
+  file: 26_iclrdinner.jpg
   caption: ICLR Dinner
 
-- file: 26_iclr.jpg
+32:
+  file: 26_iclr.jpg
   caption: ICLR 2026
 
-- file: 26_logdinner.jpg
+31:
+  file: 26_logdinner.jpg
   caption: LOG Dinner
 
-- file: 26_bowling.jpg
+30:
+  file: 26_bowling.jpg
   caption: Bowling Night
 
-- file: 26_post-icml.jpg
+29:
+  file: 26_post-icml.jpg
   caption: post-ICML 2026
   alt: Post-ICML 2026
 
-- file: 25_yearendparty.jpg
+28:
+  file: 25_yearendparty.jpg
   caption: Year-end Party
 
-- file: 25_boardgame.jpg
+27:
+  file: 25_boardgame.jpg
   caption: Board Game Night
 
-- file: 25_openday.jpg
+26:
+  file: 25_openday.jpg
   caption: LOG Open Day
 
-- file: 25_readinggroup.jpg
+25:
+  file: 25_readinggroup.jpg
   caption: Reading Group
 
-- file: 25_icml.jpg
+24:
+  file: 25_icml.jpg
   caption: ICML 2025
 
-- file: 25_postech.jpg
+23:
+  file: 25_postech.jpg
   caption: POSTECH
 
-- file: 25_noscreenday.jpg
+22:
+  file: 25_noscreenday.jpg
   caption: No Screen Day
 
-- file: 25_iclr.jpg
+21:
+  file: 25_iclr.jpg
   caption: ICLR 2025
 
-- file: 24_effl-log.jpg
+20:
+  file: 24_effl-log.jpg
   caption: EFFL and LOG Day
 
-- file: 24_logspringouting.jpg
+19:
+  file: 24_logspringouting.jpg
   caption: LOG Spring Outing
 
-- file: 24_logspring.jpg
+18:
+  file: 24_logspring.jpg
   caption: LOG Spring Outing
 
-- file: 24_logesports3.jpg
+17:
+  file: 24_logesports3.jpg
   caption: LOG e-sports
 
-- file: 24_logesports2.jpg
+16:
+  file: 24_logesports2.jpg
   caption: LOG e-sports
 
-- file: 24_logesports.jpg
+15:
+  file: 24_logesports.jpg
   caption: LOG e-sports
 
-- file: 23_christmasparty.jpg
+14:
+  file: 23_christmasparty.jpg
   caption: Christmas Party
 
-- file: 23_cake.jpg
+13:
+  file: 23_cake.jpg
   caption: LOG Cake
 
-- file: 23_santa.jpg
+12:
+  file: 23_santa.jpg
   caption: Santa Dongyeop
 
-- file: 23_jkaia.jpg
+11:
+  file: 23_jkaia.jpg
   caption: JKAIA Best Paper Award
 
-- file: 23_postech.jpg
+10:
+  file: 23_postech.jpg
   caption: POSTECH
 
-- file: 23_movienight.jpg
+9:
+  file: 23_movienight.jpg
   caption: Movie Night
 
-- file: 23_halonabeachcove.jpg
+8:
+  file: 23_halonabeachcove.jpg
   caption: Halona Beach Cove, Hawaii
 
-- file: 23_icml3.jpg
+7:
+  file: 23_icml3.jpg
   caption: Makapu'u Lookout, Hawaii
 
-- file: 23_icml2.jpg
+6:
+  file: 23_icml2.jpg
   caption: ICML 2023
 
-- file: 23_icml.jpg
+5:
+  file: 23_icml.jpg
   caption: ICML 2023
 
-- file: 23_boardgame.jpg
+4:
+  file: 23_boardgame.jpg
   caption: Board Game Night
 
-- file: 23_teachersday.jpg
+3:
+  file: 23_teachersday.jpg
   caption: Teacher's Day
 
-- file: 23_logday.jpg
+2:
+  file: 23_logday.jpg
   caption: LOG Day
 
-- file: 23_noscreenday.jpg
+1:
+  file: 23_noscreenday.jpg
   caption: No Screen Day

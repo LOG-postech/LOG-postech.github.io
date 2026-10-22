@@ -515,11 +515,29 @@ def load_gallery():
     cfg = load_config("gallery")
     photos_dir = DATA / "gallery" / "photos"
     photos, listed = [], set()
-    for i, p in enumerate(load_yaml(DATA / "gallery" / "gallery.yaml") or [], 1):
-        name = p.get("file")
-        if not name or not p.get("caption"):
-            fail("gallery.yaml entry #%d: needs file and caption" % i)
+    try:
+        items = load_yaml(DATA / "gallery" / "gallery.yaml") or {}
+    except DataError as e:
+        fail("gallery.yaml %s" % e)
+        items = {}
+    if not isinstance(items, dict):
+        fail("gallery.yaml: photos are keyed by idx (46:, 45:, ...)")
+        items = {}
+    # Highest idx first: newest photos lead the grid and the Members preview.
+    for k in items:
+        if not isinstance(k, int):
+            fail("gallery.yaml: %r is not an idx; each photo starts with its number, like 46:" % (k,))
+    for i in sorted((k for k in items if isinstance(k, int)), reverse=True):
+        p = items[i]
+        if not isinstance(p, dict) or not p.get("file") or not p.get("caption"):
+            fail("gallery.yaml %d: needs file and caption" % i)
             continue
+        unknown = set(p) - {"file", "caption", "alt"}
+        if unknown:
+            fail("gallery.yaml %d: unknown field(s) %s (allowed: alt, caption, file)" % (i, ", ".join(sorted(unknown))))
+        name = p["file"]
+        if name in listed:
+            fail("gallery.yaml %d: %s is already listed under another number" % (i, name))
         if not (photos_dir / name).exists():
             fail("gallery.yaml: %s is not in data/gallery/photos/" % name)
         listed.add(name)
