@@ -176,8 +176,9 @@
     }
 
     /* BibTeX author field -> [HTML author list, current members in order].
-       "@hyunjijung* and Ziyang Wu": face and name for the member (marks such as
-       * kept), plain text for everyone else. */
+       "@hyunjijung* and Ziyang Wu": the member's name (marks such as * kept)
+       linked to their page, with their face if authors.faces is on; plain text
+       for everyone else. The members also give news items their faces. */
     function authorList(field, where) {
         var out = [], members = [];
         field.trim().split(/\s+and\s+/).forEach(function (raw) {
@@ -188,8 +189,10 @@
             var label = p.name + m[2];
             if (!p.current) { out.push(esc(label)); return; }
             members.push(p);
-            out.push('<a class="paper-member" title="' + esc(p.name) + '"' + profileLink(p) +
-                     '><span class="member-face">' + faceImg(p) + "</span>" + esc(label) + "</a>");
+            // The face before the name is optional (data/publications/config.toml).
+            var face = config.publications.authors.faces ? '<span class="member-face">' + faceImg(p) + "</span>" : "";
+            out.push('<a class="paper-member" title="' + esc(p.name) + '"' + profileLink(p) + ">" +
+                     face + esc(label) + "</a>");
         });
         return [out.join(", "), members];
     }

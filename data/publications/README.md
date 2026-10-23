@@ -26,7 +26,7 @@ chosen.
 | Field | Kind | Meaning |
 |---|---|---|
 | `title` | text | Required. Write `\&` for &. |
-| `author` | text | Required. Names joined by `and`. Lab members and alumni by **tag**: `@hyunjijung`; current members get their face. Others by name: `Dan Alistarh`. Mark equal contribution with `*`: `@hyunjijung*`. |
+| `author` | text | Required. Names joined by `and`. Lab members and alumni by **tag**: `@hyunjijung`; current members' names link to their page (with their photo if `authors.faces` is on). Others by name: `Dan Alistarh`. Mark equal contribution with `*`: `@hyunjijung*`. |
 | `venue` | text | Required. As printed: `NeurIPS 2026`, `ICML 2026 Workshop on ...`, `arXiv 2026`. |
 | `year` | text | Required. Decides the year heading. |
 | `oral` / `spotlight` | true/false | Adds a highlighted `(Oral)` / `(Spotlight)` after the venue. |
@@ -46,6 +46,7 @@ Fields left out are false or empty. When a preprint is accepted, remove
 |---|---|
 | `groups.preprint` / `groups.previous` | The two special headings |
 | `links.separator` | Text between a paper's links |
+| `authors.faces` | Show members' photos before their names in author lists (`true`/`false`) |
 
 > `spaced_links = {true}` reproduces the page as it was: until now, some papers
 > had a space between `paper` and `code` and most did not. Delete those lines to
