@@ -5,9 +5,5 @@ preprint = "Preprint"   # heading for is_preprint papers (first)
 previous = "Previous"   # heading for is_previous papers (last)
 
 
-[authors]
-faces = false           # member photos before their names in author lists
-
-
 [links]
 separator = ""          # between a paper's links; spaced_links = {true} uses a space

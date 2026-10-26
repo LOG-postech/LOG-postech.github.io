@@ -1,3 +1,6 @@
+{% extends "base.html" %}
+{% block title %}Publications{% endblock %}
+{% block style_page %}
         a { color: var(--color-primary); text-decoration: none; }
         a:hover { text-decoration: underline; }
 
@@ -91,7 +94,8 @@
         .spotlight {
             color: var(--color-emphasis);
         }
-
+{% endblock %}
+{% block style_after_footer %}
         @media (max-width: 900px) {
             :root {
                 --page-pad-top: 28px;
@@ -121,3 +125,44 @@
                 display: none;
             }
         }
+{% endblock %}
+{% block main %}
+{% for g in publications.groups %}
+        <div class="year-divider">{{ g.label }}</div>
+
+{% for p in g.papers %}
+        <div class="paper">
+            <div class="paper-title">{{ p.title }}</div>
+            <div class="paper-authors">{{ p.authors }}</div>
+            <div class="paper-venue">{{ p.venue }}</div>
+{% if p.links %}
+            <div class="paper-links">{{ p.links }}</div>
+{% endif %}
+        </div>
+
+{% endfor %}
+{% endfor %}
+    
+{% endblock %}
+{% block scripts %}
+<script>
+    var toggle = document.querySelector('.menu-toggle');
+    var drawer = document.getElementById('navDrawer');
+    var overlay = document.getElementById('navOverlay');
+    var close = document.getElementById('drawerClose');
+
+    function openDrawer() {
+        drawer.classList.add('open');
+        overlay.classList.add('open');
+    }
+    function closeDrawer() {
+        drawer.classList.remove('open');
+        overlay.classList.remove('open');
+    }
+
+    toggle.addEventListener('click', function() { drawer.classList.contains('open') ? closeDrawer() : openDrawer(); });
+    close.addEventListener('click', closeDrawer);
+    overlay.addEventListener('click', closeDrawer);
+
+</script>
+{% endblock %}

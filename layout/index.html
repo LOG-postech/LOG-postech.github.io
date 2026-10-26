@@ -1,0 +1,419 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block style_page %}
+      main img.lab-photo {
+        width: 100%;
+        height: auto;
+        display: block;
+        margin-bottom: 24px;
+        border-radius: 0;
+      }
+
+      .intro {
+        font-size: var(--text-body);
+        font-weight: 300;
+        line-height: var(--leading-body);
+        color: var(--color-body);
+        margin-bottom: var(--section-gap);
+      }
+
+      .intro a {
+        color: var(--color-primary);
+        text-decoration: none;
+      }
+      .intro a:hover {
+        text-decoration: underline;
+      }
+
+      h3 {
+        font-family: "Inter", system-ui, sans-serif;
+        font-size: 1.20em;
+        font-weight: 700;
+        letter-spacing: 0.01em;
+        text-transform: none;
+        color: var(--color-heading);
+        margin-top: var(--section-gap);
+        margin-bottom: var(--heading-gap);
+      }
+
+      h3:first-of-type {
+        margin-top: 0;
+      }
+
+      .news-list {
+        margin: 0;
+        padding: 0;
+      }
+
+      .news-item {
+        display: flex;
+        gap: 20px;
+        align-items: baseline;
+        padding: 10px 0;
+      }
+
+      .news-item:last-child {
+        margin-bottom: 0;
+      }
+
+      .news-date {
+        font-size: 0.78em;
+        font-weight: 400;
+        font-variant-numeric: tabular-nums;
+        font-feature-settings: "tnum";
+        color: var(--color-heading);
+        min-width: 64px;
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .news-content {
+        font-size: var(--text-body);
+        font-weight: 300;
+        color: var(--color-body);
+        line-height: var(--leading-body);
+      }
+
+      /* Member faces under a news item's date (rendered by tools/build.py) */
+      .news-people {
+        display: flex;
+        gap: 2px;
+      }
+
+      .member-face {
+        width: 20px;
+        height: 20px;
+        border-radius: 5px;
+        box-shadow: 0 0 0 0.5px var(--img-border);
+        overflow: hidden;
+        background: var(--color-bg);
+      }
+
+      a.member-face:hover {
+        box-shadow: 0 0 0 1.5px var(--color-accent);
+      }
+
+      /* Headshots have room above and around the face; zoom in on it. */
+      .member-face img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transform: scale(1.25);
+        transform-origin: 50% 30%;
+      }
+
+      .member-face-more {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 9px;
+        font-weight: 500;
+        color: var(--color-muted);
+        background: var(--rule-color);
+      }
+
+      p.news-note {
+        font-size: var(--text-body);
+        font-weight: 300;
+        color: var(--color-body);
+        line-height: var(--leading-body);
+        margin-top: var(--para-gap);
+      }
+
+      .news-note a {
+        color: var(--color-primary);
+        text-decoration: none;
+      }
+
+      .news-note a:hover {
+        text-decoration: underline;
+      }
+
+      .news-content a {
+        color: var(--color-primary);
+        text-decoration: none;
+      }
+      .news-content a:hover {
+        text-decoration: underline;
+      }
+      .news-content em {
+        font-style: normal;
+        font-weight: 600;
+        color: inherit;
+      }
+
+      p.ack {
+        font-size: var(--text-body);
+        font-weight: 300;
+        color: var(--color-body);
+        line-height: var(--leading-body);
+        margin-top: 0;
+      }
+
+      .sponsor-logos {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        column-gap: 20px;
+        row-gap: 10px;
+        margin-top: 20px;
+        background: var(--color-bg);
+        border-radius: 6px;
+        border: 1px solid var(--rule-color);
+        padding: 10px 16px;
+        width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .sponsor-card {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .sponsor-card img {
+        display: block;
+        width: auto;
+        height: 34px;
+        object-fit: contain;
+      }
+
+      .sponsor-card img.compact-logo {
+        height: 30px;
+      }
+
+      .sponsor-card img.funding-mark {
+        height: 28px;
+      }
+
+      .sponsor-card img.google-logo {
+        height: 28px;
+      }
+
+      .sponsor-card img.etri-logo {
+        height: 26px;
+      }
+
+      .sponsor-card img.epfl-logo {
+        height: 20px;
+      }
+{% endblock %}
+{% block style_after_footer %}
+      @media (max-width: 900px) {
+        :root {
+          --page-pad-top: 28px;
+          --page-pad-x: 18px;
+          --page-pad-bottom: 40px;
+          --header-pad-bottom: 4px;
+          --header-gap: 16px;
+          --footer-logo-h: 18px;
+        }
+
+        header {
+          display: grid;
+          grid-template-columns: minmax(0, 1fr) auto;
+          align-items: start;
+          column-gap: 10px;
+        }
+
+        .lab-name {
+          min-width: 0;
+        }
+
+        .menu-toggle {
+          display: block;
+        }
+
+        nav {
+          display: none;
+        }
+      }
+{% endblock %}
+{% block main %}
+        <img
+          src="lab_photo/lab_photo.jpg"
+          alt="Lee Optimization Group members together outdoors by a lake in autumn"
+          class="lab-photo"
+        />
+
+        <p class="intro">
+          We pursue research in machine learning and optimization. To this end,
+          we develop theories and algorithms using computational and
+          mathematical tools. Our ultimate goal is to provide robust and
+          provable solutions to challenging problems in artificial intelligence,
+          particularly those in large-scale settings. We are passionate about
+          translating our findings into practical applications that can benefit
+          society. For further details on our research directions and ongoing
+          projects, please refer to the
+          <a href="research.html">Research</a>.
+        </p>
+
+        <h3>Recent News</h3>
+        <div class="news-list">
+
+{% for n in news.home %}
+        <div class="news-item">
+            <span class="news-date">{{ n.date_label }}{{ n.faces }}</span>
+            <span class="news-content">{{ n.html }}</span>
+        </div>
+
+{% endfor %}
+          <!-- <div class="news-item">
+            <span class="news-date">Apr 2026</span>
+            <span class="news-content"
+              >🎓 Our paper on uncertainty quantification in ICL has been
+              accepted to ACL 2026. In this work, we introduce self-function
+              vectors to directly decompose uncertainty, and propose a novel
+              framework to evaluate these disentangled sources.</span
+            >
+          </div> -->
+
+          <!--
+          <div class="news-item">
+            <span class="news-date">Feb 2026</span>
+            <span class="news-content"
+              >🤝 Our lab has been selected for the "Early-Career Researcher
+              Infrastructure Support Program" (NRF) — one of the most
+              competitive grants in Korea. With <em>500M KRW</em> in funding, we
+              will build a high-performance compute infrastructure to power our
+              research on extreme compression of hyperscale AI foundation
+              models.</span
+            >
+          </div>
+          -->
+
+          <!--
+          <div class="news-item">
+            <span class="news-date">Feb 2026</span>
+            <span class="news-content"
+              >📃 Our new paper is now available on
+              <a href="https://arxiv.org/abs/2602.18181v1" target="_blank"
+                >arXiv</a
+              >! In this work, We introduce SeedFlood, a decentralized LLM
+              training framework that enables model-size–independent
+              communication cost and perfect consensus.</span
+            >
+          </div>
+          -->
+
+          <!--
+          <div class="news-item">
+            <span class="news-date">Feb 2026</span>
+            <span class="news-content"
+              >📃 Our new paper is now available on
+              <a href="https://www.arxiv.org/abs/2602.03515" target="_blank"
+                >arXiv</a
+              >! In this work, we propose a basis rotation approach to
+              effectively address the gradient staleness problem in asynchronous
+              pipeline parallelism.</span
+            >
+          </div>
+
+          <div class="news-item">
+            <span class="news-date">Feb 2026</span>
+            <span class="news-content"
+              >✈️ Kwanhee started as a visiting student researcher in the
+              <a href="https://daslab.pages.ista.ac.at/" target="_blank"
+                >Dan Alistarh Group</a
+              >
+              at
+              <a href="https://ist.ac.at/en/home/" target="_blank">ISTA</a
+              >.</span
+            >
+          </div>
+          -->
+
+        </div>
+
+        <p class="news-note">If you want to see our earlier news, check out <a href="news.html">here</a>!</p>
+
+        <!-- Acknowledgements temporarily hidden (details need verification)
+        <h3>Acknowledgements</h3>
+        <p class="ack">
+          Our research is generously supported by multiple organizations
+          including government agencies and national initiatives (NRF, IITP,
+          National AI Research Lab). We also collaborate with researchers at
+          Seoul National University, ISTA, EPFL, Google, and ETRI.
+        </p>
+        <div class="sponsor-logos">
+          <div class="sponsor-card">
+            <img
+              class="compact-logo funding-mark"
+              src="logo/nrf_mark.png"
+              alt="NRF"
+            />
+          </div>
+          <div class="sponsor-card">
+            <img
+              class="compact-logo funding-mark"
+              src="logo/iitp_mark.png"
+              alt="IITP"
+            />
+          </div>
+          <div class="sponsor-card">
+            <a
+              href="https://nairl.kr/ko/"
+              target="_blank"
+              rel="noopener"
+              aria-label="National AI Research Lab"
+            >
+              <img src="logo/nairl_logo.png" alt="National AI Research Lab" />
+            </a>
+          </div>
+          <div class="sponsor-card">
+            <img src="logo/snu_logo.png" alt="Seoul National University" />
+          </div>
+          <div class="sponsor-card">
+            <img src="logo/ista_logo.png" alt="ISTA" />
+          </div>
+          <div class="sponsor-card">
+            <img class="epfl-logo" src="logo/epfl_logo.png" alt="EPFL" />
+          </div>
+          <div class="sponsor-card">
+            <img
+              class="compact-logo google-logo"
+              src="logo/google_logo.svg"
+              alt="Google"
+            />
+          </div>
+          <div class="sponsor-card">
+            <img
+              class="compact-logo etri-logo"
+              src="logo/etri_mark.png"
+              alt="ETRI"
+            />
+          </div>
+        </div>
+        -->
+      
+{% endblock %}
+{% block scripts %}
+    <script>
+      var toggle = document.querySelector(".menu-toggle");
+      var drawer = document.getElementById("navDrawer");
+      var overlay = document.getElementById("navOverlay");
+      var close = document.getElementById("drawerClose");
+
+      function openDrawer() {
+        drawer.classList.add("open");
+        overlay.classList.add("open");
+      }
+      function closeDrawer() {
+        drawer.classList.remove("open");
+        overlay.classList.remove("open");
+      }
+
+      toggle.addEventListener("click", function () {
+        drawer.classList.contains("open") ? closeDrawer() : openDrawer();
+      });
+      close.addEventListener("click", closeDrawer);
+      overlay.addEventListener("click", closeDrawer);
+
+    </script>
+  
+{% endblock %}

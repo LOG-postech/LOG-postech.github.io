@@ -9,8 +9,8 @@
 #    required fields, missing photos), so a broken entry never reaches main.
 # 2. Photos are resized, re-encoded and stripped of EXIF before they enter git
 #    history, so the repository never stores a 10MB camera original. Rules live
-#    in tools/optimize-images.sh. New gallery photos get a thumbnail in
-#    data/gallery/thumbs/ (made by tools/build.py; never by hand).
+#    in tools/optimize-images.sh. Gallery thumbnails are made by the build and
+#    are not committed.
 #
 # Written for the bash 3.2 that ships with macOS.
 
@@ -53,7 +53,7 @@ fi
 
 # Files that name images. Remember their state so we stage only the ones the
 # optimizer rewrites (when an image changes extension), not unrelated edits.
-REFS="data/gallery/gallery.yaml data/members/members.yaml content/index.html content/research.html"
+REFS="data/gallery/gallery.yaml data/members/members.yaml layout/index.html content/research.html"
 BEFORE="$(for f in $REFS; do [ -f "$f" ] && echo "$f $(git hash-object "$f")"; done)"
 
 echo "pre-commit: optimizing ${#STAGED[@]} image(s)..."
@@ -71,17 +71,6 @@ for path in "${STAGED[@]}"; do
         fi
     fi
 done
-
-# New or replaced gallery photos get their thumbnail (re)made and staged.
-PHOTOS=()
-for path in "${STAGED[@]}"; do
-    case "$path" in data/gallery/photos/*) PHOTOS+=("$(basename "${path%.*}").jpg") ;; esac
-done
-if [ "${#PHOTOS[@]}" -gt 0 ]; then
-    python3 tools/build.py --remake "${PHOTOS[@]}" >/dev/null
-    git add -- data/gallery/thumbs
-    echo "  made thumbnails for ${#PHOTOS[@]} photo(s)"
-fi
 
 for f in $REFS; do
     [ -f "$f" ] || continue

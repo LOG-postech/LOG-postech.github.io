@@ -5,50 +5,40 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Overview
 
 Academic lab website for the **Lee Optimization Group (LOG)** at POSTECH, served by
-GitHub Pages at `opt.postech.ac.kr` (domain from the root `CNAME` file). **Content and
-design are separate**: lists are data in `data/`, page bodies are in `content/`, design
-is in `layout/`. GitHub Pages builds the repo with its standard Jekyll ("Deploy from a
-branch", `main`) — **no custom build, no plugins**: Jekyll only wraps each `content/`
-page in `layout/base.html` and embeds `data/` into data pages
-(`layout/partials/data.html`), and **`static/js/site.js` renders the data in the
-browser** (BibTeX, TOML, @tags, faces, ordering). The root `README.md` maps every kind
-of edit to its file.
+GitHub Pages at `opt.postech.ac.kr`. **Content and design are separate**: content is
+data in `data/`, design is Jinja templates in `layout/`, and `tools/build.py`
+renders them into `_site/`. `.github/workflows/deploy.yml` builds and deploys on every
+push to `main` (Pages source must be "GitHub Actions"). `_site/` is output — never edit
+it, never commit it. The root `README.md` maps every kind of edit to its file.
 
 ```bash
-python3 tools/build.py --check    # validate data/ (same rules as site.js); exit 1 on errors
-python3 tools/build.py            # validate + make missing gallery thumbnails
-bundle exec jekyll serve          # local preview with GitHub's Jekyll (Gemfile)
+python3 tools/build.py            # build into _site/
+python3 tools/build.py --check    # validate data/ only (exit 1 on errors)
+python3 tools/build.py --serve    # build and serve on http://localhost:8000
 ```
-
-Jekyll settings, lab name, nav and footer logos are in `_config.yml`
-(`data_dir: data`, `layouts_dir: layout`, `includes_dir: .`). Nothing in `data/` or
-`content/` may contain Liquid syntax (`{{`, `{%`).
 
 ## Pages
 
-Every page is `content/<page>.html`: front matter (`title`, `permalink`, `data: true`
-for data pages, `script: true` if `layout/scripts/<page>.js` exists) plus the body of
-`<main>`. Its CSS is `layout/styles/<page>.css`, included after the shared footer CSS
-(no page rule overlaps the footer or drawer rules, so the cascade is unchanged).
-
-| Page | Purpose | Rendered from |
+| Template | Purpose | Data |
 |---|---|---|
-| `content/index.html` | Home — lab intro, recent news | `data/news/` |
-| `content/news.html` | News list | `data/news/` |
-| `content/publications.html` | Paper list | `data/publications/` |
-| `content/group.html` | Members, interns, gallery preview, alumni | `data/members/`, `data/gallery/` |
-| `content/gallery.html` | Lab photos | `data/gallery/` |
-| `content/photo.html` | Single-photo viewer (`photo.html?image=data/gallery/photos/…`; old `stories/…` links still work) | `data/gallery/` |
-| `content/research.html` | Research areas (text) | — |
-| `content/hiring.html` | Open positions (text) | — |
-| `content/contact.html` | Contact info (text) | — |
+| `layout/index.html` | Home — lab intro, recent news | `data/news/` |
+| `layout/news.html` | News list (linked from the home page) | `data/news/` |
+| `content/research.html` | Research areas | — |
+| `layout/publications.html` | Paper list | `data/publications/` |
+| `layout/group.html` | Members, gallery preview, alumni | `data/members/`, `data/gallery/` |
+| `layout/gallery.html` | Lab photos | `data/gallery/` |
+| `layout/photo.html` | Single-photo viewer (`photo.html?image=stories/…`) | — |
+| `content/hiring.html` | Open positions | — |
+| `content/contact.html` | Contact info | — |
 
-Data pages keep static parts (headings, intro, interns) in `content/` and leave the
-lists as empty containers that `site.js` fills (`.news-list`, `#news-list`, `main` of
-publications, `.member-list`, `.gallery-preview`, `.alumni-list`, `.gallery-grid`).
-Page scripts run after `site.js` and read `LOG.config` / `LOG.gallery`.
+Pages built from data have their own layout in `layout/`. Pages that are just text
+(`content/*.html`) are plain HTML for inside `<main>` — no template code — wrapped by
+`layout/page.html`; their CSS is `layout/styles/<page>.css` and any extra script
+`layout/scripts/<page>.js` (after the shared `layout/scripts/drawer.js`). Their title
+is their nav label in `data/site.toml`. Every page extends `layout/base.html`, which
+holds the head, header/nav, footer and mobile drawer. Nav items, footer logos and the lab name come from `data/site.toml`.
 
-## Lists live in `data/` — never in `content/` or `layout/`
+## Content lives in `data/` — never in templates
 
 Each directory in `data/` is one database: its entries, a `config.toml` of
 presentation settings, and a `README.md` on how to add an entry. **Read that README
@@ -59,24 +49,24 @@ before adding or changing content.**
 | `data/news/` | `<year>.yaml`: items keyed by idx (`39:`) with `date`, `text` (one paragraph of Markdown), optional `paper` | Higher idx = newer, unique across years; a repeated key is an error. Home page shows the newest `home.count`. |
 | `data/publications/` | one `papers.bib`; entry order = display order within a heading | Headings: `is_preprint`, then `year` (newest first), then `is_previous`. News refers to entries as `@key` (`@lee26fresco`). |
 | `data/members/` | `members.yaml` (`members:` and `alumni:`, each person keyed by tag) + `photos/` | The tag is the person's id everywhere (`@tag`). |
-| `data/gallery/` | `gallery.yaml` (photos keyed by idx, highest first) + `photos/` + `thumbs/` | Thumbnails are generated by `tools/build.py` (hook); never make them by hand. |
+| `data/gallery/` | `gallery.yaml` (photos keyed by idx, highest first) + `photos/` | Thumbnails are generated by the build; never commit thumbnails. |
 
-`tools/build.py --check` validates all of it (file names, required fields, unknown
-fields, @tags, paper keys, missing photos); the pre-commit hook runs it. In the browser,
-`site.js` logs data errors to the console.
+The build validates all of it (file names, required fields, unknown fields, missing
+photos) and refuses to build on errors.
 
 Numbers that used to be hard-coded in page scripts (news shown/added per click, home
 news count, gallery preview page size) come from the
 `config.toml` files — change them there, not in the template.
 
-Rendering rules (`site.js`, mirrored by `tools/build.py`):
+Rendering rules applied by the build:
 - Markdown links to `http(s)://` get `target="_blank" rel="noopener"`; relative links
   stay in the same tab. The same holds for paper links.
 - Text is HTML-escaped.
 
-Files are published at their repository paths (`data/gallery/photos/…`,
-`data/members/photos/…`, `static/logo/…`). `_config.yml` excludes `layout/`, `tools/`
-and the READMEs from the published site.
+Published paths are stable public URLs and must not change: gallery photos are served
+at `stories/`, thumbnails at `stories/thumbs/`, member photos at `group_profile/`
+(see `PUBLISH` in `tools/build.py`). `static/` is copied to the site root as is, so
+`static/research_focus/` is served at `research_focus/`.
 
 ### People (`@tags`) and member faces
 
@@ -102,37 +92,34 @@ ids at load time.
 
 ## Architecture
 
-**CSS** is inline in each page's `<style>`, assembled by `layout/base.html` from:
+**CSS** is inline in each page's `<style>`, assembled by `base.html` from:
 
 1. `layout/partials/chassis.css` — reset, **layout tokens** (`:root`), body, header, nav
-2. `layout/partials/footer.css` — footer, footer logos, menu button
-3. `layout/styles/<page>.css` — the page's own rules, incl. its `@media (max-width: 900px)`
-4. `layout/partials/drawer.css` — mobile drawer
+2. the page's `{% block style_page %}`
+3. `layout/partials/footer.css` — footer, footer logos, menu button
+4. the page's `{% block style_after_footer %}` (holds the page's `@media (max-width: 900px)`)
+5. `layout/partials/drawer.css` — mobile drawer
+6. the page's `{% block style_after_drawer %}`
 
-No page rule shares a selector with the footer or drawer partials, so this order
-renders exactly like the old per-page order. Keep it that way: a page rule that
-targets footer/drawer selectors would now win where it used to lose. A site-wide
-visual change goes in a partial or `base.html`, once; a one-page change goes in
-`layout/styles/<page>.css`.
-
-**Scripts**: `layout/partials/data.html` (data pages) embeds `LOG` and loads
-`static/js/site.js`; then `base.html` runs `layout/scripts/drawer.js` and the page's
-`layout/scripts/<page>.js`.
+This order is the order the pages always had their rules in, so cascade behaviour is
+unchanged. A visual change that applies site-wide goes in a partial or in
+`base.html`, once. A change to one page goes in that page's template.
 
 **Asset directories:**
-- `static/logo/` — logos (PNG/SVG); footer logos are listed in `_config.yml`
+- `static/logo/` — logos (PNG/SVG); footer logos are listed in `data/site.toml`
 - `static/lab_photo/` — home page hero photo
+- `data/gallery/photos/` — gallery photos, published at `stories/`
+- `data/members/photos/` — member headshots (filename = person's name slug), published at `group_profile/`
 - `static/research_focus/` — research topic icons, used by `content/research.html`
-- `data/gallery/photos/`, `data/gallery/thumbs/` — gallery photos and their generated thumbnails
-- `data/members/photos/` — member headshots (filename = person's name slug)
 
 ## Images
 
 **Do not resize or compress images by hand.** Drop the original in, commit, and the
 pre-commit hook does it — resizing, re-encoding, stripping EXIF (which also removes
 GPS coordinates from lab photos), and updating the data file that names the image if
-the extension changes — and making the gallery thumbnail in `data/gallery/thumbs/`
-(center crop, `data/gallery/config.toml`).
+the extension changes. Gallery thumbnails are not stored: the build crops them from
+the photos (`data/gallery/config.toml`), with the same ImageMagick command the hook
+used to run.
 
 ```bash
 tools/setup-hooks.sh              # once per clone — enables the hook
@@ -150,7 +137,7 @@ Targets are ~3x the CSS display size, so images stay sharp on retina screens:
 | Directory | Max long edge | Format | Displayed at |
 |---|---|---|---|
 | `data/gallery/photos/` | 2560px | JPEG q82 | click-through full view |
-| `data/gallery/thumbs/` (generated) | 600px square | JPEG q80 | 112–180px grid tiles |
+| thumbnails (build) | 600px square | JPEG q80 | 112–180px grid tiles |
 | `static/lab_photo/` | 1600px | JPEG q85 | ≤800px hero |
 | `data/members/photos/` | 512px | JPEG q85 | 140px avatar |
 | `static/research_focus/` | 500px | keep (PNG stays PNG — line art) | ~124px card |
@@ -214,7 +201,7 @@ reference it via `var(...)` instead of literal pixel values.
 When adding or modifying any page, verify all of the following:
 
 ### Consistency
-- [ ] Navigation comes from `_config.yml` (`nav`) via `layout/base.html` — never hand-write nav in a page
+- [ ] Navigation comes from `data/site.toml` via `base.html` — never hand-write nav in a page template
 - [ ] Drawer nav has both `nav a.active` and `.nav-drawer a.active` styling
 - [ ] Lab name / logo links back to `index.html` on all inner pages
 - [ ] Favicon (`logo/log_logo.png`) is referenced in `<head>`
@@ -241,13 +228,13 @@ When adding or modifying any page, verify all of the following:
 - [ ] Images have descriptive `alt` text
 - [ ] Large images use `loading="lazy"`
 - [ ] **Images were never hand-resized** — the pre-commit hook handles it; see Images above
-- [ ] **Thumbnails are generated** — `tools/build.py` makes `data/gallery/thumbs/` from the photos; never by hand
-- [ ] **No content in `layout/`** — news, papers, members and photos are entries in `data/`; page text is in `content/`
+- [ ] **No thumbnails committed** — the build generates them from `data/gallery/photos/`
+- [ ] **No content in `layout/`** — news, papers, members and photos are entries in `data/`; the text of research, hiring and contact is in `content/`
 - [ ] Dates are written consistently: `MMM YYYY` (e.g., `Mar 2025`)
 - [ ] Paper/thesis links use lowercase labels: `[paper]`, `[thesis]`, `[code]`, `[slides]`
 
 ### Code Quality
-- [ ] No JavaScript frameworks or Jekyll plugins — plain HTML/CSS/JS; GitHub's Jekyll only assembles pages, `static/js/site.js` renders data
+- [ ] No JavaScript frameworks — plain HTML/CSS/JS; the only build step is `tools/build.py` (Python + Jinja)
 - [ ] No unused CSS rules left behind after edits
 - [ ] HTML is valid and properly nested
 - [ ] No hardcoded absolute URLs for internal pages (use relative paths)

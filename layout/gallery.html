@@ -1,3 +1,6 @@
+{% extends "base.html" %}
+{% block title %}Gallery{% endblock %}
+{% block style_page %}
         a { color: var(--color-primary); text-decoration: none; }
         a:hover { text-decoration: underline; }
 
@@ -70,7 +73,8 @@
         }
 
         .gallery-item:hover .tooltip { opacity: 1; }
-
+{% endblock %}
+{% block style_after_footer %}
         @media (max-width: 900px) {
             :root {
                 --page-pad-top: 28px;
@@ -100,3 +104,45 @@
                 display: none;
             }
         }
+{% endblock %}
+{% block main %}
+        <h2>Gallery</h2>
+
+        <div class="gallery-grid">
+
+{% for p in gallery.photos %}
+            <div class="gallery-item">
+                <a href="photo.html?image={{ p.full }}">
+                    <img src="{{ p.thumb }}" alt="{{ p.alt }}" loading="lazy">
+                    <span class="tooltip">{{ p.caption }}</span>
+                </a>
+            </div>
+
+{% endfor %}
+        </div>
+    
+{% endblock %}
+{% block scripts %}
+<script>
+    var toggle = document.querySelector(".menu-toggle");
+    var drawer = document.getElementById("navDrawer");
+    var overlay = document.getElementById("navOverlay");
+    var close = document.getElementById("drawerClose");
+
+    function openDrawer() {
+        drawer.classList.add("open");
+        overlay.classList.add("open");
+    }
+
+    function closeDrawer() {
+        drawer.classList.remove("open");
+        overlay.classList.remove("open");
+    }
+
+    toggle.addEventListener("click", function() {
+        drawer.classList.contains("open") ? closeDrawer() : openDrawer();
+    });
+    close.addEventListener("click", closeDrawer);
+    overlay.addEventListener("click", closeDrawer);
+</script>
+{% endblock %}
