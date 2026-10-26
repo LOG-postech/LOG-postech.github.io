@@ -204,11 +204,12 @@ def news_faces(people, max_faces):
     return html + Markup("</span>")
 
 
-def author_list(field, people, where):
+def author_list(field, people, where, faces=True):
     """BibTeX author field -> (HTML author list, current members in order).
 
-    "@hyunjijung* and Ziyang Wu" -> a face and name for the member (marks such
-    as * kept), plain text for everyone else.
+    "@hyunjijung* and Ziyang Wu" -> the member's name (marks such as * kept)
+    linked to their page, with their face if `faces`; plain text for everyone
+    else. The members also give news items their faces.
     """
     out, members = [], []
     for raw in re.split(r"\s+and\s+", field.strip()):
@@ -223,8 +224,9 @@ def author_list(field, people, where):
             out.append(escape(label))
             continue
         members.append(person)
-        out.append(Markup('<a class="paper-member" title="%s"%s><span class="member-face">%s</span>%s</a>')
-                   % (person["name"], _profile_link(person), _face_img(person), label))
+        face = Markup('<span class="member-face">%s</span>') % _face_img(person) if faces else Markup("")
+        out.append(Markup('<a class="paper-member" title="%s"%s>%s%s</a>')
+                   % (person["name"], _profile_link(person), face, label))
     return Markup(", ").join(out), members
 
 
@@ -466,7 +468,7 @@ def load_publications(people):
                 fail("%s: %s is not a known field, so it is read as a link, but %r is not a URL" % (here, name, url))
             links.append((name, url))
         sep = " " if p["spaced_links"] else cfg["links"]["separator"]
-        authors, members = author_list(p["author"], people, here)
+        authors, members = author_list(p["author"], people, here, faces=cfg.get("authors", {}).get("faces", True))
         papers.append({
             "title": p["title"],
             "authors": authors,
