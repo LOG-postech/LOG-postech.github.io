@@ -34,6 +34,7 @@ Start `text` with the emoji for the item's kind:
 | 🧑‍💻 | internship, joining a company |
 | ✈️ | visit, research stay |
 | 🏛 | workshop or event we organize |
+| 📢 | announcement: hiring, internship, open day |
 
 Links use Markdown: `[text](https://...)`, or `[text](@paperkey)` for a paper.
 External links open in a new tab automatically. Use `*italic*` and `**bold**` if
