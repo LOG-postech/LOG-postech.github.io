@@ -23,6 +23,9 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    # A normal build takes about a minute. Fail fast instead of hanging for
+    # most of an hour when the runner's network is down.
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
 
@@ -31,11 +34,24 @@ jobs:
           python-version: "3.12"
           cache: pip
 
-      - name: Install dependencies
+      # ImageMagick makes the gallery thumbnails. Skip apt when the runner
+      # image already has it; otherwise retry, since the Ubuntu mirrors are
+      # occasionally unreachable from the runners for a few minutes.
+      - name: Install ImageMagick
         run: |
-          sudo apt-get update -q
-          sudo apt-get install -y -q imagemagick
-          pip install -r requirements.txt
+          if command -v magick >/dev/null || command -v convert >/dev/null; then
+            echo "ImageMagick already installed"; exit 0
+          fi
+          for attempt in 1 2 3; do
+            sudo apt-get update -q -o Acquire::Retries=3 -o Acquire::http::Timeout=20 &&
+            sudo apt-get install -y -q --no-install-recommends -o Acquire::Retries=3 -o Acquire::http::Timeout=20 imagemagick &&
+            exit 0
+            echo "apt failed (attempt $attempt), retrying in 30s"; sleep 30
+          done
+          exit 1
+
+      - name: Install Python packages
+        run: pip install -r requirements.txt
 
       - name: Build
         run: python tools/build.py
