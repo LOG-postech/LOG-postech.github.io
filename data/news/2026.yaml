@@ -11,6 +11,14 @@
 #                             #   [text](@paperkey) links a paper, [text](https://...) any page,
 #                             #   @tag names a lab member (data/members/members.yaml)
 
+40:
+  date: "2026-11"
+  paper: ["@lee26hardware", "@liter26token"]
+  text: >-
+    🏆 Our papers on [hardware-native sparse-quantization for trillion-scale MoEs](@lee26hardware)
+    and LITER: Token-Gated Replay for Continual LLM Fine-Tuning have been selected
+    for Outstanding Paper Awards by the Korean Artificial Intelligence Association (KAIA).
+
 39:
   date: "2026-11"
   text: >-
