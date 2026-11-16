@@ -13,7 +13,7 @@
 
 40:
   date: "2026-11"
-  paper: ["@lee26hardware", "@liter26token"]
+  paper: "@lee26hardware"
   text: >-
     🏆 Our papers on [hardware-native sparse-quantization for trillion-scale MoEs](@lee26hardware)
     and LITER: Token-Gated Replay for Continual LLM Fine-Tuning have been selected
