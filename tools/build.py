@@ -192,7 +192,7 @@ def _face_img(person):
 def news_faces(people, max_faces):
     """Faces under a news item's date: a few, then "+N" (like Slack)."""
     # News portraits always put Namhoon last, without changing author order or
-    # the relative order of other members. Apply before the existing +N limit.
+    # the relative order of other members.
     people = sorted(
         (p for p in people if p["current"]),
         key=lambda p: p["tag"] == "namhoonlee",
@@ -200,12 +200,23 @@ def news_faces(people, max_faces):
     if not people:
         return Markup("")
     names = ", ".join(p["name"] for p in people)
-    shown = people[: max_faces - 1] if len(people) > max_faces else people
+    overflow = len(people) > max_faces
+    trailing = people[-1] if overflow and people[-1]["tag"] == "namhoonlee" else None
+    # Reserve the final visible slot for Namhoon, and one slot for +N when
+    # there is room. The other visible members retain their original order.
+    shown = people[:max(0, max_faces - 2)] if trailing else (
+        people[: max_faces - 1] if overflow else people
+    )
     html = Markup('<span class="news-people" aria-label="%s" title="%s">') % (names, names)
     for p in shown:
         html += Markup('<a class="member-face" title="%s"%s>%s</a>') % (p["name"], _profile_link(p), _face_img(p))
-    if len(shown) < len(people):
-        html += Markup('<span class="member-face member-face-more">+%d</span>') % (len(people) - len(shown))
+    hidden = len(people) - len(shown) - bool(trailing)
+    if hidden and (not trailing or max_faces > 1):
+        html += Markup('<span class="member-face member-face-more">+%d</span>') % hidden
+    if trailing:
+        html += Markup('<a class="member-face" title="%s"%s>%s</a>') % (
+            trailing["name"], _profile_link(trailing), _face_img(trailing)
+        )
     return html + Markup("</span>")
 
 

@@ -30,13 +30,25 @@ class NewsFaceOrderTests(unittest.TestCase):
     def test_other_people_keep_order(self):
         self.assertIn('aria-label="Beta, Alpha"', str(build.news_faces([self.b, self.a], 3)))
 
-    def test_overflow_and_alumni_keep_existing_behavior(self):
+    def test_overflow_keeps_namhoon_visible_last_and_filters_alumni(self):
         old = person("alumnus", "Alumnus", current=False)
         result = str(build.news_faces([self.a, self.n, old, self.b, self.c], 3))
         self.assertIn('aria-label="Alpha, Beta, Gamma, Namhoon Lee"', result)
         self.assertIn('>+2</span>', result)
         self.assertNotIn('Alumnus', result)
-        self.assertNotIn('src="group_profile/namhoonlee.jpg"', result)
+        self.assertIn('src="group_profile/namhoonlee.jpg"', result)
+        self.assertLess(result.index('>+2</span>'), result.index('title="Namhoon Lee"'))
+        self.assertEqual(result.count('class="member-face'), 3)
+
+    def test_single_slot_keeps_namhoon_visible(self):
+        result = str(build.news_faces([self.a, self.n, self.b], 1))
+        self.assertIn('src="group_profile/namhoonlee.jpg"', result)
+        self.assertEqual(result.count('class="member-face'), 1)
+
+    def test_overflow_without_namhoon_unchanged(self):
+        result = str(build.news_faces([self.a, self.b, self.c], 2))
+        self.assertIn('title="Alpha"', result)
+        self.assertIn('>+2</span>', result)
 
     def test_only_namhoon_or_no_people(self):
         self.assertIn('title="Namhoon Lee"', str(build.news_faces([self.n], 3)))
