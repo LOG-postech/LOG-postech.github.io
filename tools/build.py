@@ -191,7 +191,12 @@ def _face_img(person):
 
 def news_faces(people, max_faces):
     """Faces under a news item's date: a few, then "+N" (like Slack)."""
-    people = [p for p in people if p["current"]]
+    # News portraits always put Namhoon last, without changing author order or
+    # the relative order of other members. Apply before the existing +N limit.
+    people = sorted(
+        (p for p in people if p["current"]),
+        key=lambda p: p["tag"] == "namhoonlee",
+    )
     if not people:
         return Markup("")
     names = ", ".join(p["name"] for p in people)

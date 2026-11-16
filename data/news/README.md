@@ -80,7 +80,9 @@ For a paper mentioned without a link (no `paper` URL yet), name it in `paper`:
 
 Faces appear only from these: the authors of the papers (`paper` first, then
 linked ones in text order), then people `@tagged` in the text, and only for
-current members. Alumni tags show the name
+current members. Namhoon's portrait is always ordered last; all other members
+keep their relative order. This applies before the existing `faces.max` / `+N`
+limit and does not change publication author order. Alumni tags show the name
 without a face. Nothing is guessed from plain names or links. An unknown tag or
 paper key stops the build with an error.
 
