@@ -79,7 +79,9 @@
       /* Member faces under a news item's date (rendered by tools/build.py) */
       .news-people {
         display: flex;
+        flex-wrap: wrap;
         gap: 2px;
+        max-width: 64px; /* three faces per row, more stack below */
       }
 
       .member-face {

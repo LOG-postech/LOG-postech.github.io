@@ -83,7 +83,7 @@ time (alumni tags give the name without a face):
 - **News** (news page, home page): under each item's date — the in-lab authors of the
   papers it refers to — its `paper` field, then links written `[paper](@shin23closer)`, which the
   build points at the entry's `paper` URL — then members
-  `@tagged` in the text; up to `faces.max` (3), then `+N`.
+  `@tagged` in the text; up to `faces.max` (6, three per row), then `+N`.
 - **Publications**: before each tagged current member in `.paper-authors`.
 
 Nothing is inferred from names or links. Each face links to the member's `url` (new

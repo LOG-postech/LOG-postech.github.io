@@ -15,4 +15,4 @@ step = 5                # items added per "Show more"
 
 
 [faces]
-max = 3                 # faces under a date before "+N"
+max = 6                 # faces under a date before "+N" (3 per row)
