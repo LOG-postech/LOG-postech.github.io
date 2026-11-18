@@ -252,6 +252,8 @@ NEWS_KEYS = {"date", "members", "paper", "pinned", "text"}
 NEWS_DATE = re.compile(r"^(\d{4})-(\d{2})(?:-(\d{2}))?$")
 # A Markdown link to a paper by its papers.bib key: [paper](@shin23closer).
 PAPER_LINK = re.compile(r"\]\(@([a-z][a-z0-9_]*)\)")
+# The emoji an item's text starts with: a first word with no letters, digits or markup.
+LEAD_EMOJI = re.compile(r"^([^\x00-\x7f\s]+)\s+")
 # A link target that is a bare word is a key missing its @.
 BARE_LINK = re.compile(r"\]\(([a-z][a-z0-9_]*)\)")
 
@@ -358,6 +360,10 @@ def load_news(papers_by_key, people):
                 "date": date,
                 "date_label": date.strftime(cfg["date_format"]),
                 "html": render_inline(body),
+                # The leading emoji apart from the rest, so a pinned item can
+                # highlight its text without the emoji.
+                "emoji": LEAD_EMOJI.match(body).group(1) if LEAD_EMOJI.match(body) else "",
+                "rest": render_inline(LEAD_EMOJI.sub("", body, 1)),
                 "faces": news_faces(faces, cfg["faces"]["max"]),
                 "file": path.name,
             })

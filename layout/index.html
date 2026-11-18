@@ -92,7 +92,6 @@
       .news-mark {
         background-color: var(--color-highlight-bg);
         padding: 2px 5px;
-        margin: 0 -5px; /* text stays aligned with the other items */
         border-radius: 6px;
       }
 
@@ -278,7 +277,7 @@
 {% for n in news.home %}
         <div class="news-item{% if n.pinned %} pinned{% endif %}">
             <span class="news-date">{{ n.date_label }}{{ n.faces }}</span>
-            <span class="news-content">{% if n.pinned %}<span class="news-mark">{{ n.html }}</span>{% else %}{{ n.html }}{% endif %}</span>
+            <span class="news-content">{% if n.pinned %}{{ n.emoji }} <span class="news-mark">{{ n.rest }}</span>{% else %}{{ n.html }}{% endif %}</span>
         </div>
 
 {% endfor %}
