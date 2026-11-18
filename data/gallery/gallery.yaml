@@ -7,6 +7,11 @@
 #   caption: ACL 2026 presentation   # required. Hover text and caption in the photo viewer
 #   alt: ...                  # optional. Description for screen readers (default: caption)
 
+46:
+  file: 26_emnlp.jpg
+  caption: EMNLP 2026
+  alt: Two lab members in front of the EMNLP 2026 sponsor wall in Budapest
+
 45:
   file: 26_aiconnect.jpg
   caption: AI Connect Korea 2026 - IITP President's Award
