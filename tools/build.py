@@ -248,7 +248,7 @@ def author_list(field, people, where, faces=True):
 
 # --------------------------------------------------------------------- news
 
-NEWS_KEYS = {"date", "paper", "text"}
+NEWS_KEYS = {"date", "members", "paper", "text"}
 NEWS_DATE = re.compile(r"^(\d{4})-(\d{2})(?:-(\d{2}))?$")
 # A Markdown link to a paper by its papers.bib key: [paper](@shin23closer).
 PAPER_LINK = re.compile(r"\]\(@([a-z][a-z0-9_]*)\)")
@@ -340,6 +340,14 @@ def load_news(papers_by_key, people):
                 faces += [p for p in paper["members"] if p not in faces]
             body, tagged = people.resolve(body, where, "short")
             faces += [p for p in tagged if p not in faces]
+            # Members the item is about but does not name in the text: faces only.
+            named = front.get("members") or []
+            for t in [named] if isinstance(named, str) else named:
+                if not str(t).startswith("@"):
+                    fail('%s: member tags start with @, in quotes: members: "@%s"' % (where, t))
+                    continue
+                _, extra = people.resolve(str(t), where, "short")
+                faces += [p for p in extra if p not in faces]
             entries.append({
                 "idx": idx,
                 "date": date,

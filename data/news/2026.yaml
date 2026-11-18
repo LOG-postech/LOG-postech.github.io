@@ -6,6 +6,8 @@
 #   date: "2026-10"           # required. "YYYY-MM" or "YYYY-MM-DD", within this file's year
 #   paper: "@lee26fresco"     # optional. papers.bib key(s) the item is about but does not link:
 #                             #   "@lee26fresco"  or  ["@lee26fresco", "@jang26hidden"]
+#   members: "@hyunjijung"    # optional. tag(s) of members the item is about but does not name:
+#                             #   faces under the date only, nothing in the text
 #   text: >-                  # required. One paragraph of Markdown, starting with its emoji:
 #     🎓 Our [paper](@shin23closer) ... @hyunjijung ...
 #                             #   [text](@paperkey) links a paper, [text](https://...) any page,
@@ -14,9 +16,10 @@
 40:
   date: "2026-11"
   paper: "@lee26hardware"
+  members: ["@jiyunpark", "@jihunkim"]
   text: >-
     🏆 Our papers on [hardware-native sparse-quantization for trillion-scale MoEs](@lee26hardware)
-    and LITER: Token-Gated Replay for Continual LLM Fine-Tuning by @jiyunpark and @jihunkim have been selected
+    and LITER: Token-Gated Replay for Continual LLM Fine-Tuning have been selected
     for Outstanding Paper Awards by the Journal of Korean Artificial Intelligence Association (JKAIA).
 
 39:

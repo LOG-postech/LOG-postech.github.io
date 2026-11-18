@@ -23,6 +23,7 @@ blank line between items. Each item starts with its idx:
 | `date` | yes | `"YYYY-MM"`, or `"YYYY-MM-DD"` if you know the day, in quotes. Shown as `Oct 2026`. Must be in the file's year. |
 | `text` | yes | One paragraph of Markdown, after `>-` on the next lines, indented. Line breaks inside it are just spaces. |
 | `paper` | no | `"@key"` (in quotes) of papers the item is about but does not link (see below). |
+| `members` | no | `"@tag"` or `["@tag", "@tag"]` of members the item is about but does not name in the text: their faces appear under the date, nothing is added to the text. |
 
 Start `text` with the emoji for the item's kind:
 
@@ -79,7 +80,8 @@ For a paper mentioned without a link (no `paper` URL yet), name it in `paper`:
 ```
 
 Faces appear only from these: the authors of the papers (`paper` first, then
-linked ones in text order), then people `@tagged` in the text, and only for
+linked ones in text order), then people `@tagged` in the text, then the `members`
+field, and only for
 current members. Namhoon's portrait is always ordered last; all other members
 keep their relative order. When the group exceeds `faces.max`, reserve the last visible slot for Namhoon
 and place `+N` before him. This does not change publication author order. Alumni tags show the name
