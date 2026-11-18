@@ -46,11 +46,12 @@
 
         /* A pinned news item: shaded, kept at the top of the list */
         .news-item.pinned {
-          background: #edf1fb;
+          /* shading inset 5px from the dashed lines */
+          background: linear-gradient(#edf1fb, #edf1fb) center / 100% calc(100% - 10px) no-repeat;
           border-top: 1px dashed #d5def3;
           border-bottom: 1px dashed #d5def3;
           margin: 0 -12px 6px;
-          padding: 6px 12px;
+          padding: 8px 12px;
         }
 
         .news-item.pinned .news-content {
