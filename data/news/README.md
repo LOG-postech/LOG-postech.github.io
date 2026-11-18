@@ -23,6 +23,7 @@ blank line between items. Each item starts with its idx:
 | `date` | yes | `"YYYY-MM"`, or `"YYYY-MM-DD"` if you know the day, in quotes. Shown as `Oct 2026`. Must be in the file's year. |
 | `text` | yes | One paragraph of Markdown, after `>-` on the next lines, indented. Line breaks inside it are just spaces. |
 | `paper` | no | `"@key"` (in quotes) of papers the item is about but does not link (see below). |
+| `pinned` | no | `true` keeps the item at the top of Recent News and the News page, on a shaded background. For open calls and deadlines; remove it once the item is no longer current. |
 | `members` | no | `"@tag"` or `["@tag", "@tag"]` of members the item is about but does not name in the text: their faces appear under the date, nothing is added to the text. |
 
 Start `text` with the emoji for the item's kind:

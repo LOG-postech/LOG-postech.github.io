@@ -44,6 +44,20 @@
             line-height: var(--leading-body);
         }
 
+        /* A pinned news item: shaded, kept at the top of the list */
+        .news-item.pinned {
+          background: #edf1fb;
+          border-bottom: 1px dashed #d5def3;
+          border-radius: 6px 6px 0 0;
+          margin: 0 -12px 6px;
+          padding: 12px;
+        }
+
+        .news-item.pinned .news-content {
+          font-weight: 400;
+          color: var(--color-heading);
+        }
+
         /* Member faces under a news item's date (rendered by tools/build.py) */
         .news-people {
             display: flex;
@@ -158,7 +172,7 @@
         <div class="news-list" id="news-list">
 
 {% for n in news.listed %}
-            <div class="news-item">
+            <div class="news-item{% if n.pinned %} pinned{% endif %}">
                 <span class="news-date">{{ n.date_label }}{{ n.faces }}</span>
                 <span class="news-content">{{ n.html }}</span>
             </div>

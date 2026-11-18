@@ -6,6 +6,8 @@
 #   date: "2026-10"           # required. "YYYY-MM" or "YYYY-MM-DD", within this file's year
 #   paper: "@lee26fresco"     # optional. papers.bib key(s) the item is about but does not link:
 #                             #   "@lee26fresco"  or  ["@lee26fresco", "@jang26hidden"]
+#   pinned: true              # optional. Keep at the top of the news, shaded (deadlines, open calls).
+#                             #   Remove it when the item is no longer current.
 #   members: "@hyunjijung"    # optional. tag(s) of members the item is about but does not name:
 #                             #   faces under the date only, nothing in the text
 #   text: >-                  # required. One paragraph of Markdown, starting with its emoji:
@@ -24,6 +26,7 @@
 
 39:
   date: "2026-11"
+  pinned: true
   text: >-
     📢 Applications for our [27 Winter internship](https://docs.google.com/document/d/1gDUwKogeNtrX3gcdqqKSvzPu0R846OsqG2mT-3X6Gzs/edit?tab=t.e7155rauq0j6)
     are open until 25 Nov 2026. Come meet us at our [Lab Open Day](https://docs.google.com/document/d/18Niioou_o1_qwtAS-aXcUEJ3_QQACH_w6KZJgc59DFA/edit?tab=t.p3to8yux42g2)

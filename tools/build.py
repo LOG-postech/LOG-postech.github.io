@@ -248,7 +248,7 @@ def author_list(field, people, where, faces=True):
 
 # --------------------------------------------------------------------- news
 
-NEWS_KEYS = {"date", "members", "paper", "text"}
+NEWS_KEYS = {"date", "members", "paper", "pinned", "text"}
 NEWS_DATE = re.compile(r"^(\d{4})-(\d{2})(?:-(\d{2}))?$")
 # A Markdown link to a paper by its papers.bib key: [paper](@shin23closer).
 PAPER_LINK = re.compile(r"\]\(@([a-z][a-z0-9_]*)\)")
@@ -348,15 +348,21 @@ def load_news(papers_by_key, people):
                     continue
                 _, extra = people.resolve(str(t), where, "short")
                 faces += [p for p in extra if p not in faces]
+            pinned = item.get("pinned", False)
+            if not isinstance(pinned, bool):
+                fail("%s: pinned is true or false, not %r" % (where, pinned))
+                pinned = False
             entries.append({
                 "idx": idx,
+                "pinned": pinned,
                 "date": date,
                 "date_label": date.strftime(cfg["date_format"]),
                 "html": render_inline(body),
                 "faces": news_faces(faces, cfg["faces"]["max"]),
                 "file": path.name,
             })
-    entries.sort(key=lambda e: e["idx"], reverse=True)
+    # Pinned items come first (shaded), then the rest, newest first.
+    entries.sort(key=lambda e: (e["pinned"], e["idx"]), reverse=True)
 
     since = cfg["page"].get("since")
     if since:
