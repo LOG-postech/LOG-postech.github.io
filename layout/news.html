@@ -44,19 +44,24 @@
             line-height: var(--leading-body);
         }
 
-        /* A pinned news item: shaded, kept at the top of the list */
+        /* A pinned news item: kept at the top of the list, set off by dashed
+           lines, its text highlighted like the notice on the Hiring page */
         .news-item.pinned {
-          /* shading inset 5px from the dashed lines */
-          background: linear-gradient(#edf1fb, #edf1fb) center / 100% calc(100% - 10px) no-repeat;
           border-top: 1px dashed var(--rule-color);
           border-bottom: 1px dashed var(--rule-color);
-          margin: 0 -12px 6px;
-          padding: 8px 12px;
+          margin-bottom: 6px;
         }
 
         .news-item.pinned .news-content {
           font-weight: 400;
           color: var(--color-heading);
+        }
+
+        .news-mark {
+          background-color: var(--color-highlight-bg);
+          padding: 2px 5px;
+          margin: 0 -5px; /* text stays aligned with the other items */
+          border-radius: 6px;
         }
 
         /* Member faces under a news item's date (rendered by tools/build.py) */
@@ -175,7 +180,7 @@
 {% for n in news.listed %}
             <div class="news-item{% if n.pinned %} pinned{% endif %}">
                 <span class="news-date">{{ n.date_label }}{{ n.faces }}</span>
-                <span class="news-content">{{ n.html }}</span>
+                <span class="news-content">{% if n.pinned %}<span class="news-mark">{{ n.html }}</span>{% else %}{{ n.html }}{% endif %}</span>
             </div>
 
 {% endfor %}
