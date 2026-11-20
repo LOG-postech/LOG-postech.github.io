@@ -15,6 +15,11 @@
 #                             #   [text](@paperkey) links a paper, [text](https://...) any page,
 #                             #   @tag names a lab member (data/members/members.yaml)
 
+41:
+  date: "2026-11"
+  text: >-
+    🤝 Our lab has been selected for the 2026 KISTI National Supercomputer Innovation Support Program.
+
 40:
   date: "2026-11"
   paper: "@lee26hardware"
