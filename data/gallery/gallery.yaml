@@ -7,6 +7,16 @@
 #   caption: ACL 2026 presentation   # required. Hover text and caption in the photo viewer
 #   alt: ...                  # optional. Description for screen readers (default: caption)
 
+48:
+  file: 26_icomp2.jpg
+  caption: ICOMP 2026 - Q&A
+  alt: Namhoon asking a question from the audience at ICOMP 2026
+
+47:
+  file: 26_icomp.jpg
+  caption: ICOMP 2026
+  alt: Dongyeop and Sungbin in front of the ICOMP 2026 banner in Casablanca
+
 46:
   file: 26_emnlp.jpg
   caption: EMNLP 2026
