@@ -7,6 +7,16 @@
 #   caption: ACL 2026 presentation   # required. Hover text and caption in the photo viewer
 #   alt: ...                  # optional. Description for screen readers (default: caption)
 
+50:
+  file: 26_jkaia2.jpg
+  caption: JKAIA 2026
+  alt: Kwanhee receiving the outstanding paper award at JKAIA 2026
+
+49:
+  file: 26_jkaia.jpg
+  caption: JKAIA 2026
+  alt: Jiyun receiving the outstanding paper award at JKAIA 2026
+
 48:
   file: 26_icomp2.jpg
   caption: ICOMP 2026
